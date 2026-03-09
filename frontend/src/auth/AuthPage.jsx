@@ -33,7 +33,8 @@ function AuthPage() {
     setError("");
     setLoading(true);
 
-    const endpoint = authType === "signup" ? "/api/auth/signup" : "/api/auth/login";
+    const BASE = import.meta.env.VITE_API_URL || "";
+    const endpoint = authType === "signup" ? `${BASE}/api/auth/signup` : `${BASE}/api/auth/login`;
     const body =
       authType === "signup"
         ? { name: formData.name, email: formData.email, password: formData.password }
