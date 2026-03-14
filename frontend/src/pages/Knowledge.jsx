@@ -108,26 +108,18 @@ function Knowledge() {
 
       {/* ── Hero Section ── */}
       <div className={styles.knowledgeHeroesSection}>
-        <div className={styles.heroesBackgroundsLayer}>
-          <img src="/bhakti.png" alt="Temple Background" className={styles.heroesBgImages} />
-          <div className={styles.heroesBgBlurEdge} />
-        </div>
-        <div className={styles.knowledgeContainersMain}>
-          <div className={styles.heroesTextCenters}>
-            <h1 className={styles.knowledgeMainTitles}>
-              Enter the Path of
-              <br />
-              <div className="innerStyle" style={{color: "#E07B39"}}>Inner Illumination</div>
-            </h1>
-            {/* <p className={styles.knowledgeDescriptionsText}>
-              Ancient wisdom. Sacred discipline.
-              <br />
-              <em>The Divine walks with you.</em>
-            </p> */}
-            <div className={styles.heroBtns}>
-              <button className={styles.btnPrimary}>Begin Your Journey</button>
-            </div>
+        <div className={styles.heroesLeft}>
+          <h1 className={styles.knowledgeMainTitles}>
+            Enter the Path of
+            <br />
+            <span style={{ color: "#E07B39" }}>Inner Illumination</span>
+          </h1>
+          <div className={styles.heroBtns}>
+            <button className={styles.btnPrimary}>Begin Your Journey</button>
           </div>
+        </div>
+        <div className={styles.heroesRight}>
+          <img src="/bhakti.png" alt="Bhakti" className={styles.heroesBhaktiImg} />
         </div>
       </div>
 

@@ -3,7 +3,6 @@ import styles from "./LatestTeachings.module.css";
 
 const teachings = [
   {
-    tag: "#WISDOM",
     title: "Karma & Dharma",
     category: "Philosophy",
     image: "/Latest%20Teachings/Karma%20Dharma.png",
@@ -11,7 +10,6 @@ const teachings = [
     color: "#1a1a3a",
   },
   {
-    tag: "#BHAKTI",
     title: "Divine Grace",
     category: "Devotion",
     image: "/Latest%20Teachings/Divine%20Grace.png",
@@ -19,7 +17,6 @@ const teachings = [
     color: "#3a1a2a",
   },
   {
-    tag: "#DHYANA",
     title: "Inner Peace",
     category: "Meditation",
     image: "/Latest%20Teachings/Inner%20Peace.png",
@@ -27,7 +24,6 @@ const teachings = [
     color: "#1a2a3a",
   },
   {
-    tag: "#KARMANDA",
     title: "Sacred Traditions",
     category: "Rituals",
     image: "/Latest%20Teachings/Sacred%20Traditions.png",
@@ -35,7 +31,6 @@ const teachings = [
     color: "#2a1a0a",
   },
   {
-    tag: "#YOGA",
     title: "Path of Union",
     category: "Yoga Sutras",
     image: "/Latest%20Teachings/Path%20of%20Union.png",
@@ -43,7 +38,6 @@ const teachings = [
     color: "#0a2a1a",
   },
   {
-    tag: "#VEDANTA",
     title: "Non-Dual Wisdom",
     category: "Advaita",
     image: "/Latest%20Teachings/Non%20Dual%20Wisdom.png",

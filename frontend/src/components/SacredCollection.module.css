@@ -25,6 +25,51 @@
   /* font-weight: 100; */
 }
 
+/* ── Grid wrapper — needed for arrow positioning ── */
+.gridWrapper {
+  position: relative;
+}
+
+/* ── Arrows — exact match to GitaSlider ── */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(15, 15, 15, 0.72);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease;
+  line-height: 1;
+  z-index: 10;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28);
+}
+
+.arrowLeft {
+  left: -26px;
+}
+
+.arrowRight {
+  right: -26px;
+}
+
+.arrowHidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%) scale(0.88);
+}
+
+.arrow:hover {
+  background: rgba(30, 30, 30, 0.9);
+}
+
 .productsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

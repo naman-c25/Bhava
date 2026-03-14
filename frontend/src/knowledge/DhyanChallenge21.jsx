@@ -173,21 +173,20 @@ function DhyanChallenge21() {
               alt="21-Day Dhyān Challenge"
               className={styles.heroImg}
             />
-          </div>
-
-          <div className={styles.controls}>
-            <button className={styles.controlBtn}>
-              <span className="material-symbols-outlined">play_arrow</span>
-              <span className={styles.controlLabel}>Play</span>
-            </button>
-            <button className={styles.controlBtn}>
-              <span className="material-symbols-outlined">add_circle</span>
-              <span className={styles.controlLabel}>Save</span>
-            </button>
-            <button className={styles.controlBtn}>
-              <span className="material-symbols-outlined">share</span>
-              <span className={styles.controlLabel}>Share</span>
-            </button>
+            <div className={styles.controls}>
+              <button className={styles.controlBtn}>
+                <span className="material-symbols-outlined">play_arrow</span>
+                <span className={styles.controlLabel}>Play</span>
+              </button>
+              <button className={styles.controlBtn}>
+                <span className="material-symbols-outlined">add_circle</span>
+                <span className={styles.controlLabel}>Save</span>
+              </button>
+              <button className={styles.controlBtn}>
+                <span className="material-symbols-outlined">share</span>
+                <span className={styles.controlLabel}>Share</span>
+              </button>
+            </div>
           </div>
 
           <p className={styles.description}>
@@ -197,10 +196,11 @@ function DhyanChallenge21() {
           </p>
         </div>
 
-        {/* Right Panel */}
-        <div className={styles.rightPanel}>
+        {/* Right Side */}
+        <div className={styles.rightWrapper}>
           <p className={styles.sessionsCount}>3 Phases</p>
 
+          <div className={styles.rightPanel}>
           {phases.map((phase) => (
             <div key={phase.name} className={styles.sessionBlock}>
               <p className={styles.phaseHeader}>
@@ -219,6 +219,7 @@ function DhyanChallenge21() {
               </div>
             </div>
           ))}
+          </div>
         </div>
 
       </div>

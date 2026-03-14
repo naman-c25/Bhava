@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./SacredCollection.module.css";
 
+const CARDS_PER_PAGE = 3;
+
 function SacredCollection() {
   const [activeSlide, setActiveSlide] = useState({});
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [page, setPage] = useState(0);
   const intervalRefs = useRef({});
 
   useEffect(() => {
@@ -106,6 +109,9 @@ function SacredCollection() {
     }
   ];
 
+  const totalPages = Math.ceil(cards.length / CARDS_PER_PAGE);
+  const visibleCards = cards.slice(page * CARDS_PER_PAGE, (page + 1) * CARDS_PER_PAGE);
+
   return (
     <div className={styles.sacredCollectionSection}>
       <div className={styles.container}>
@@ -113,59 +119,79 @@ function SacredCollection() {
           Our Sacred <span className={styles.highlight}>Collections</span>
         </h1>
 
-        <div className={styles.productsGrid}>
-          {cards.map((card) => (
-            <div
-              key={card.id}
-              className={styles.productCard}
-              onMouseEnter={() => handleMouseEnter(card.id)}
-              onMouseLeave={() => handleMouseLeave(card.id)}
-            >
-              <div className={styles.productImageWrapper}>
-                <div
-                  className={styles.productImageSlider}
-                  style={{
-                    transform: `translateX(-${(activeSlide[card.id] || 0) * 100}%)`,
-                  }}
-                >
-                  <div className={`${styles.productImage} ${card.imageClass}`}>
-                    <img src={card.image} alt={`${card.title} - View 1`} />
+        <div className={styles.gridWrapper}>
+          <div className={styles.productsGrid}>
+            {visibleCards.map((card) => (
+              <div
+                key={card.id}
+                className={styles.productCard}
+                onMouseEnter={() => handleMouseEnter(card.id)}
+                onMouseLeave={() => handleMouseLeave(card.id)}
+              >
+                <div className={styles.productImageWrapper}>
+                  <div
+                    className={styles.productImageSlider}
+                    style={{
+                      transform: `translateX(-${(activeSlide[card.id] || 0) * 100}%)`,
+                    }}
+                  >
+                    <div className={`${styles.productImage} ${card.imageClass}`}>
+                      <img src={card.image} alt={`${card.title} - View 1`} />
+                    </div>
+                    <div className={`${styles.productImage} ${card.imageClass}`}>
+                      <img src={card.image} alt={`${card.title} - View 2`} />
+                    </div>
+                    <div className={`${styles.productImage} ${card.imageClass}`}>
+                      <img src={card.image} alt={`${card.title} - View 3`} />
+                    </div>
                   </div>
-                  <div className={`${styles.productImage} ${card.imageClass}`}>
-                    <img src={card.image} alt={`${card.title} - View 2`} />
-                  </div>
-                  <div className={`${styles.productImage} ${card.imageClass}`}>
-                    <img src={card.image} alt={`${card.title} - View 3`} />
+                  <button className={styles.btnAddCart}>Add to Cart</button>
+                  <div className={styles.carouselDots}>
+                    <span
+                      className={`${styles.dot} ${(activeSlide[card.id] || 0) === 0 ? styles.active : ""}`}
+                      onClick={() => handleDotClick(card.id, 0)}
+                    />
+                    <span
+                      className={`${styles.dot} ${(activeSlide[card.id] || 0) === 1 ? styles.active : ""}`}
+                      onClick={() => handleDotClick(card.id, 1)}
+                    />
+                    <span
+                      className={`${styles.dot} ${(activeSlide[card.id] || 0) === 2 ? styles.active : ""}`}
+                      onClick={() => handleDotClick(card.id, 2)}
+                    />
                   </div>
                 </div>
-                <button className={styles.btnAddCart}>Add to Cart</button>
-                <div className={styles.carouselDots}>
-                  <span
-                    className={`${styles.dot} ${(activeSlide[card.id] || 0) === 0 ? styles.active : ""}`}
-                    onClick={() => handleDotClick(card.id, 0)}
-                  />
-                  <span
-                    className={`${styles.dot} ${(activeSlide[card.id] || 0) === 1 ? styles.active : ""}`}
-                    onClick={() => handleDotClick(card.id, 1)}
-                  />
-                  <span
-                    className={`${styles.dot} ${(activeSlide[card.id] || 0) === 2 ? styles.active : ""}`}
-                    onClick={() => handleDotClick(card.id, 2)}
-                  />
+                <div className={styles.productContent}>
+                  <p className={styles.productCategory}>{card.category}</p>
+                  <div className={styles.productHeader}>
+                    <h3 className={styles.productTitle}>{card.title}</h3>
+                    <div className={styles.productPriceContainer}>
+                      <span className={styles.productPrice}>{card.price}</span>
+                    </div>
+                  </div>
+                  <p className={styles.productDescription}>{card.description}</p>
                 </div>
               </div>
-              <div className={styles.productContent}>
-                <p className={styles.productCategory}>{card.category}</p>
-                <div className={styles.productHeader}>
-                  <h3 className={styles.productTitle}>{card.title}</h3>
-                  <div className={styles.productPriceContainer}>
-                    <span className={styles.productPrice}>{card.price}</span>
-                  </div>
-                </div>
-                <p className={styles.productDescription}>{card.description}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Left arrow */}
+          <button
+            className={`${styles.arrow} ${styles.arrowLeft} ${page === 0 ? styles.arrowHidden : ""}`}
+            onClick={() => setPage((p) => p - 1)}
+            aria-label="Previous products"
+          >
+            ‹
+          </button>
+
+          {/* Right arrow */}
+          <button
+            className={`${styles.arrow} ${styles.arrowRight} ${page === totalPages - 1 ? styles.arrowHidden : ""}`}
+            onClick={() => setPage((p) => p + 1)}
+            aria-label="Next products"
+          >
+            ›
+          </button>
         </div>
       </div>
     </div>

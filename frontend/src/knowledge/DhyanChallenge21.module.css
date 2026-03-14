@@ -13,10 +13,14 @@
 
 /* ── Split layout ── */
 .layout {
-  display: flex;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 72px 80px 80px;
+  gap: 52px;
+  box-sizing: border-box;
   min-height: 100vh;
-  align-items: stretch;
 }
 
 /* ══════════════════════════════
@@ -25,11 +29,9 @@
 .leftPanel {
   flex: 0 0 380px;
   width: 380px;
-  background: #F4EFE6;
-  padding: 56px 40px 48px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .title {
@@ -47,6 +49,8 @@
   overflow: hidden;
   background: #2A1845;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .progressRow {
@@ -90,14 +94,13 @@
   display: block;
 }
 
-/* ── Controls ── */
+/* ── Controls (inside imageCard) ── */
 .controls {
   display: flex;
-  gap: 36px;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
   background: #1B0F30;
-  border-radius: 14px;
-  padding: 18px 24px;
+  padding: 16px 28px 18px;
 }
 
 .controlBtn {
@@ -136,37 +139,44 @@
 }
 
 /* ══════════════════════════════
-   RIGHT PANEL — dark purple
+   RIGHT SIDE WRAPPER
+   ══════════════════════════════ */
+.rightWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sessionsCount {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2A1845;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.2px;
+}
+
+/* ══════════════════════════════
+   RIGHT PANEL — dark purple card
    ══════════════════════════════ */
 .rightPanel {
   flex: 1;
   background: #2A1845;
-  padding: 52px 80px 56px;
+  border-radius: 16px;
+  padding: 36px 44px 44px;
   display: flex;
   flex-direction: column;
 }
 
-.sessionsCount {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #fff;
-  margin: 0 0 40px;
-  font-family: 'Inter', sans-serif;
-  letter-spacing: 0.3px;
-}
-
 /* ── Single session block ── */
 .sessionBlock {
-  padding: 32px 0;
-  border-bottom: none;
-}
-
-.sessionBlock:first-of-type {
-  padding-top: 0;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .sessionBlock:last-child {
-  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .phaseHeader {
@@ -691,15 +701,26 @@
 /* ══════════════════════════════
    RESPONSIVE
    ══════════════════════════════ */
+@media (max-width: 1200px) {
+  .layout {
+    padding: 64px 60px 72px;
+    gap: 44px;
+  }
+}
+
 @media (max-width: 1024px) {
+  .layout {
+    padding: 52px 40px 64px;
+    gap: 36px;
+  }
+
   .leftPanel {
     flex: 0 0 320px;
     width: 320px;
-    padding: 44px 32px 40px;
   }
 
   .rightPanel {
-    padding: 44px 48px 48px;
+    padding: 28px 32px 36px;
   }
 
   .container {
@@ -710,16 +731,13 @@
 @media (max-width: 900px) {
   .layout {
     flex-direction: column;
+    padding: 40px 32px 56px;
+    gap: 28px;
   }
 
   .leftPanel {
     flex: none;
     width: 100%;
-    padding: 36px 28px 32px;
-  }
-
-  .rightPanel {
-    padding: 36px 28px 40px;
   }
 
   .benefitsGrid {
@@ -762,36 +780,21 @@
   }
 }
 
-@media (max-width: 600px) {
-  .rightPanel {
-    padding: 28px 20px 36px;
-  }
-
-  .sessionBlock {
-    padding: 22px 0;
-  }
-}
-
 @media (max-width: 480px) {
-  .title {
-    font-size: 1.3rem;
+  .layout {
+    padding: 32px 20px 48px;
   }
 
-  .controls {
-    gap: 24px;
-    padding: 16px 20px;
+  .title {
+    font-size: 1.4rem;
   }
 
   .rightPanel {
-    padding: 24px 16px 32px;
-  }
-
-  .sessionsCount {
-    margin-bottom: 24px;
+    padding: 24px 20px 28px;
   }
 
   .sessionBlock {
-    padding: 18px 0;
+    padding: 16px 0;
   }
 
   .benefitsGrid {

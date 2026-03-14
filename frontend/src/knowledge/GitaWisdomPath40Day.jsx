@@ -179,21 +179,20 @@ function GitaWisdomPath40Day() {
               alt="40-Day Gita Wisdom Path"
               className={styles.heroImg}
             />
-          </div>
-
-          <div className={styles.controls}>
-            <button className={styles.controlBtn}>
-              <span className="material-symbols-outlined">play_arrow</span>
-              <span className={styles.controlLabel}>Play</span>
-            </button>
-            <button className={styles.controlBtn}>
-              <span className="material-symbols-outlined">add_circle</span>
-              <span className={styles.controlLabel}>Save</span>
-            </button>
-            <button className={styles.controlBtn}>
-              <span className="material-symbols-outlined">share</span>
-              <span className={styles.controlLabel}>Share</span>
-            </button>
+            <div className={styles.controls}>
+              <button className={styles.controlBtn}>
+                <span className="material-symbols-outlined">play_arrow</span>
+                <span className={styles.controlLabel}>Play</span>
+              </button>
+              <button className={styles.controlBtn}>
+                <span className="material-symbols-outlined">add_circle</span>
+                <span className={styles.controlLabel}>Save</span>
+              </button>
+              <button className={styles.controlBtn}>
+                <span className="material-symbols-outlined">share</span>
+                <span className={styles.controlLabel}>Share</span>
+              </button>
+            </div>
           </div>
 
           <p className={styles.description}>
@@ -203,10 +202,11 @@ function GitaWisdomPath40Day() {
           </p>
         </div>
 
-        {/* Right Panel */}
-        <div className={styles.rightPanel}>
+        {/* Right Side */}
+        <div className={styles.rightWrapper}>
           <p className={styles.sessionsCount}>4 Stages</p>
 
+          <div className={styles.rightPanel}>
           {stages.map((stage, idx) => (
             <div key={stage.name} className={styles.sessionBlock}>
               <p className={styles.phaseHeader}>
@@ -225,6 +225,7 @@ function GitaWisdomPath40Day() {
               </div>
             </div>
           ))}
+          </div>
         </div>
 
       </div>

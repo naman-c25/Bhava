@@ -137,21 +137,20 @@ function MantraSadhana108() {
               alt="108-Day Mantra Sādhana"
               className={styles.heroImg}
             />
-          </div>
-
-          <div className={styles.controls}>
-            <button className={styles.controlBtn}>
-              <span className="material-symbols-outlined">play_arrow</span>
-              <span className={styles.controlLabel}>Play</span>
-            </button>
-            <button className={styles.controlBtn}>
-              <span className="material-symbols-outlined">add_circle</span>
-              <span className={styles.controlLabel}>Save</span>
-            </button>
-            <button className={styles.controlBtn}>
-              <span className="material-symbols-outlined">share</span>
-              <span className={styles.controlLabel}>Share</span>
-            </button>
+            <div className={styles.controls}>
+              <button className={styles.controlBtn}>
+                <span className="material-symbols-outlined">play_arrow</span>
+                <span className={styles.controlLabel}>Play</span>
+              </button>
+              <button className={styles.controlBtn}>
+                <span className="material-symbols-outlined">add_circle</span>
+                <span className={styles.controlLabel}>Save</span>
+              </button>
+              <button className={styles.controlBtn}>
+                <span className="material-symbols-outlined">share</span>
+                <span className={styles.controlLabel}>Share</span>
+              </button>
+            </div>
           </div>
 
           <p className={styles.description}>
@@ -161,10 +160,11 @@ function MantraSadhana108() {
           </p>
         </div>
 
-        {/* ── Right Panel ── */}
-        <div className={styles.rightPanel}>
+        {/* ── Right Side ── */}
+        <div className={styles.rightWrapper}>
           <p className={styles.sessionsCount}>4 Sessions</p>
 
+          <div className={styles.rightPanel}>
           {phases.map((item) => (
             <div key={item.number} className={styles.sessionBlock}>
               <p className={styles.phaseHeader}>
@@ -183,6 +183,7 @@ function MantraSadhana108() {
               </div>
             </div>
           ))}
+          </div>
         </div>
 
       </div>
@@ -190,7 +191,6 @@ function MantraSadhana108() {
       {/* ── Why 108 is Sacred ── */}
       <section className={styles.sacredSection}>
         <div className={styles.sacredContainer}>
-          <p className={styles.sacredEyebrow}>The Number 108</p>
           <h2 className={styles.sacredTitle}>Why 108 is Sacred in Hinduism</h2>
           <p className={styles.sacredSubtitle}>
             108 represents the wholeness of existence — the connection between
@@ -222,7 +222,6 @@ function MantraSadhana108() {
       {/* ── After 108 Days — Benefits ── */}
       <section className={styles.benefitsSection}>
         <div className={styles.benefitsContainer}>
-          <p className={styles.benefitsEyebrow}>What You Gain</p>
           <h2 className={styles.benefitsTitle}>
             After <span className={styles.maroon}>108 Days</span>
           </h2>

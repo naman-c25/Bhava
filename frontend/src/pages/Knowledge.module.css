@@ -33,124 +33,42 @@
    Background: #F4EFE6 → #E6C19C gradient
    ══════════════════════════════════════ */
 .knowledgeHeroesSection {
-  position: relative;
-  padding: 120px 20px 120px;
-  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   background: linear-gradient(135deg, var(--temple-ivory) 0%, #EDD9BC 55%, var(--warm-beige) 100%);
   min-height: 600px;
-  display: flex;
-  align-items: center;
-}
-
-.heroesBackgroundsLayer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
   overflow: hidden;
 }
 
-/* ── Hero background image — copied from HomeMain ── */
-.heroesBgImages {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: auto;
-  object-fit: cover;
-  object-position: top center;
-  filter: brightness(1.05) saturate(0.92);
-  mask-image:
-    linear-gradient(
-      to left,
-      rgba(0, 0, 0, 1)     0%,
-      rgba(0, 0, 0, 1)     28%,
-      rgba(0, 0, 0, 0.92)  36%,
-      rgba(0, 0, 0, 0.76)  44%,
-      rgba(0, 0, 0, 0.55)  52%,
-      rgba(0, 0, 0, 0.30)  60%,
-      rgba(0, 0, 0, 0.10)  68%,
-      rgba(0, 0, 0, 0.02)  74%,
-      rgba(0, 0, 0, 0)     80%
-    ),
-    linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0)     0%,
-      rgba(0, 0, 0, 0.35)  7%,
-      rgba(0, 0, 0, 1)     18%
-    );
-  mask-composite: intersect;
-  -webkit-mask-image:
-    linear-gradient(
-      to left,
-      rgba(0, 0, 0, 1)     0%,
-      rgba(0, 0, 0, 1)     28%,
-      rgba(0, 0, 0, 0.92)  36%,
-      rgba(0, 0, 0, 0.76)  44%,
-      rgba(0, 0, 0, 0.55)  52%,
-      rgba(0, 0, 0, 0.30)  60%,
-      rgba(0, 0, 0, 0.10)  68%,
-      rgba(0, 0, 0, 0.02)  74%,
-      rgba(0, 0, 0, 0)     80%
-    ),
-    linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0)     0%,
-      rgba(0, 0, 0, 0.35)  7%,
-      rgba(0, 0, 0, 1)     18%
-    );
-  -webkit-mask-composite: source-in;
-}
-
-/* ── Blur ONLY in the transition zone ── */
-.heroesBgBlurEdge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
+/* ── Left: text content ── */
+.heroesLeft {
+  flex: 1;
+  padding: 100px 60px 100px 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   z-index: 1;
-  pointer-events: none;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  mask-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0)    0%,
-    rgba(0, 0, 0, 0)    28%,
-    rgba(0, 0, 0, 0.5)  40%,
-    rgba(0, 0, 0, 0.75) 50%,
-    rgba(0, 0, 0, 0.4)  58%,
-    rgba(0, 0, 0, 0)    66%,
-    rgba(0, 0, 0, 0)    100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0)    0%,
-    rgba(0, 0, 0, 0)    28%,
-    rgba(0, 0, 0, 0.5)  40%,
-    rgba(0, 0, 0, 0.75) 50%,
-    rgba(0, 0, 0, 0.4)  58%,
-    rgba(0, 0, 0, 0)    66%,
-    rgba(0, 0, 0, 0)    100%
-  );
 }
 
+/* ── Right: bhakti image ── */
+.heroesRight {
+  flex: 0 0 50%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px 60px 40px;
+}
 
-
-.knowledgeContainersMain {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 80px;
-  position: relative;
-  z-index: 1;
+.heroesBhaktiImg {
   width: 100%;
-}
-
-.heroesTextCenters {
-  text-align: left;
-  max-width: 600px;
+  max-width: 620px;
+  height: auto;
+  max-height: 580px;
+  object-fit: contain;
+  border-radius: 20px;
+  display: block;
 }
 
 .knowledgeSubtitlesText {
@@ -1000,8 +918,15 @@
 }
 
 @media (max-width: 1024px) {
-  .knowledgeContainersMain {
-    padding: 0 60px;
+  .heroesLeft {
+    padding: 80px 40px 80px 80px;
+  }
+  .heroesRight {
+    padding: 40px 40px 40px 20px;
+  }
+  .heroesBhaktiImg {
+    max-width: 500px;
+    max-height: 480px;
   }
   .knowledgeMainTitles {
     font-size: 50px !important;
@@ -1041,21 +966,22 @@
 
 @media (max-width: 768px) {
   .knowledgeHeroesSection {
-    padding: 80px 20px;
-    min-height: 500px;
+    flex-direction: column;
+    min-height: auto;
   }
-  .knowledgeContainersMain {
-    padding: 0 40px;
-  }
-  .heroesTextCenters {
+  .heroesLeft {
+    padding: 64px 32px 32px;
     text-align: center;
+  }
+  .heroesRight {
+    flex: none;
+    width: 100%;
+    padding: 0 32px 56px;
+  }
+  .heroesBhaktiImg {
     max-width: 100%;
-  }
-  .knowledgeMainTitles {
-    font-size: 40px !important;
-  }
-  .knowledgeDescriptionsText {
-    margin: 0 auto 36px auto;
+    max-height: 320px;
+    border-radius: 16px;
   }
   .heroBtns {
     flex-direction: column;
@@ -1063,9 +989,8 @@
     max-width: 320px;
     margin: 0 auto;
   }
-  .btnPrimary,
-  .btnSecondary {
-    width: 100%;
+  .knowledgeMainTitles {
+    font-size: 40px !important;
   }
   .commitmentsSection {
     padding: 72px 20px;
@@ -1124,14 +1049,14 @@
 }
 
 @media (max-width: 480px) {
-  .knowledgeContainersMain {
-    padding: 0 20px;
+  .heroesLeft {
+    padding: 48px 20px 24px;
+  }
+  .heroesRight {
+    padding: 0 20px 48px;
   }
   .knowledgeMainTitles {
     font-size: 34px !important;
-  }
-  .knowledgeDescriptionsText {
-    font-size: 16px;
   }
   .tigerKnowledgeTitle {
     font-size: 22px;
