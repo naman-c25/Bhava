@@ -1,748 +1,556 @@
-.templePage {
-  background-color: #faf8f5;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+/* ============================================================
+   BHAVA — Sacred Wisdom Page (shared layout)
+   Theme: warm cream + maroon / adapt accent per page
+   ============================================================ */
+
+/* ── Base ── */
+.page {
+  background: #F4EFE6;
+  min-height: 100vh;
+  font-family: 'Inter', 'Work Sans', sans-serif;
 }
 
-/* ── Layout Utilities ── */
+/* ── Container ── */
 .container {
-  max-width: 1400px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 240px;
+  padding: 0 80px;
+}
+
+/* ══════════════════════════════
+   HERO — split layout
+   ══════════════════════════════ */
+.hero {
   position: relative;
-  z-index: 1;
-}
-
-.containerNarrow {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.textCenter {
-  text-align: center;
-}
-
-/* ── Common Section Titles ── */
-.sectionTitle {
-  font-size: 42px;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 16px;
-  color: #255c3f;
-  font-family: 'Canela', Cormorant, serif;
-}
-
-.sectionSubtitle {
-  font-size: 16px;
-  color: #6b7280;
-  text-align: center;
-  margin-bottom: 50px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.highlight {
-  color: #E27B3F;
-}
-
-.highlight em {
-  font-family: 'Canela', Cormorant, serif;
-  font-style: italic;
-  font-weight: 700;
-}
-
-/* ── Hero Section ── */
-.templeHero {
-  background: linear-gradient(to top left, #e8dcc8 0%, #f5f1e8 50%, #faf8f4 100%);
-  min-height: 80vh;
+  min-height: 88vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 100px 20px 80px;
-  position: relative;
+  align-items: stretch;
   overflow: hidden;
 }
 
-.heroBackground {
+.heroOverlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  opacity: 0.08;
+  inset: 0;
+  background: linear-gradient(to right, #3D0A10 0%, #3D0A10cc 30%, transparent 65%);
+  z-index: 1;
+  pointer-events: none;
 }
 
-.heroBgImage {
+.heroSplit {
+  display: flex;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.heroLeft {
+  flex: 0 0 52%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 72px 100px 80px;
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.heroTitle {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: clamp(2.8rem, 5vw, 4.4rem);
+  font-weight: 400;
+  color: #F7F3EC;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.heroSubtitle {
+  font-size: 1.05rem;
+  color: rgba(247, 243, 236, 0.78);
+  line-height: 1.75;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  max-width: 500px;
+}
+
+.heroSubtitle em {
+  font-style: italic;
+  color: #C6A14A;
+}
+
+.btnJoinHero {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #C6A14A, #A8852E);
+  color: #0F1413;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.4px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  align-self: flex-start;
+  margin-top: 8px;
+  font-family: 'Inter', sans-serif;
+}
+
+.btnJoinHero:hover {
+  opacity: 0.88;
+  transform: translateY(-2px);
+}
+
+.heroRight {
+  flex: 1;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.heroImageOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.heroImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: blur(2px);
-}
-
-.templeSubtitle {
-  color: #C65C3A;
-  font-size: 13px;
-  letter-spacing: 2.5px;
-  font-weight: 600;
-  margin-bottom: 24px;
-  text-transform: uppercase;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.templeTitle {
-  font-size: 64px;
-  font-weight: 400;
-  margin-bottom: 28px;
-  line-height: 1.15;
-  font-family: 'Canela', Cormorant, serif;
-}
-
-.elevateText {
-  color: #2D5F3F;
+  object-position: center top;
   display: block;
 }
 
-.templeDescription {
-  font-size: 18px;
-  color: #3d4d42;
-  margin-bottom: 50px;
-  line-height: 1.7;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+/* ══════════════════════════════
+   SHARED SECTION ELEMENTS
+   ══════════════════════════════ */
+.eyebrowCenter {
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: #C6A14A;
+  font-weight: 600;
+  margin: 0 0 12px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
 }
 
-.heroStats {
+.sectionTitle {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  font-weight: 400;
+  color: #1E1E1E;
+  text-align: center;
+  margin: 0 0 14px;
+  line-height: 1.2;
+}
+
+.maroon { color: #6E1B21; }
+
+.sectionSubtitle {
+  font-size: 0.95rem;
+  color: #6A625A;
+  text-align: center;
+  line-height: 1.75;
+  margin: 0 auto 52px;
+  max-width: 620px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ══════════════════════════════
+   4 PILLARS OVERVIEW
+   ══════════════════════════════ */
+.phasesSection {
+  background: #F4EFE6;
+  padding: 88px 20px 80px;
+}
+
+.phasesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.phaseCard {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 26px;
+  box-shadow: 0 2px 12px rgba(30, 30, 30, 0.06);
+  border: 1px solid rgba(110, 27, 33, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.phaseCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(30, 30, 30, 0.12);
+}
+
+.phaseDays {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 10px;
+}
+
+.phaseTitle {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1E1E1E;
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.phaseTagline {
+  font-size: 0.82rem;
+  color: #C6A14A;
+  font-style: italic;
+  margin: 0 0 14px;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.4;
+}
+
+.phaseDesc {
+  font-size: 0.85rem;
+  color: #6A625A;
+  line-height: 1.7;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ══════════════════════════════
+   DETAILED BREAKDOWN (accordion)
+   ══════════════════════════════ */
+.detailSection {
+  background: #fff;
+  padding: 80px 20px;
+  border-top: 1px solid rgba(110, 27, 33, 0.08);
+}
+
+.phaseDetailList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.phaseDetailRow {
+  border-bottom: 1px solid rgba(110, 27, 33, 0.1);
+  transition: background 0.2s ease;
+}
+
+.phaseDetailRow:first-child {
+  border-top: 1px solid rgba(110, 27, 33, 0.1);
+}
+
+.phaseDetailRowOpen {
+  background: #FBF8F3;
+}
+
+.phaseDetailHeader {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 40px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(8px);
-  border-radius: 16px;
-  padding: 24px 48px;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  max-width: 600px;
+  gap: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 22px 0;
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+  transition: opacity 0.2s;
+}
+
+.phaseDetailHeader:hover { opacity: 0.8; }
+
+.phaseNumber {
+  flex-shrink: 0;
+  min-width: 68px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+}
+
+.phaseDetailName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1E1E1E;
+  font-family: 'Inter', sans-serif;
+  flex: 0 0 auto;
+}
+
+.phaseDetailDays {
+  font-size: 0.82rem;
+  color: #9A8F8A;
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+.phaseDetailTagline {
+  font-size: 0.85rem;
+  color: #C6A14A;
+  font-style: italic;
+  font-family: 'Inter', sans-serif;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.phaseChevron {
+  font-size: 0.65rem;
+  color: #9A8F8A;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* ── Expanded body ── */
+.phaseDetailBody {
+  padding: 8px 0 28px;
+}
+
+.phaseDetailGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.phaseDetailBlock {
+  background: #F9F6F0;
+  border-radius: 12px;
+  padding: 22px 20px;
+  border: 1px solid rgba(110, 27, 33, 0.07);
+}
+
+.phaseDetailLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #6E1B21;
+  margin: 0 0 12px;
+  font-family: 'Inter', sans-serif;
+}
+
+.mantraLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #9A8F8A;
+  margin: 10px 0 6px;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.phaseDetailUl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.phaseDetailUl li {
+  font-size: 0.85rem;
+  color: #3D2A2C;
+  line-height: 1.55;
+  font-family: 'Inter', sans-serif;
+  padding-left: 14px;
+  position: relative;
+}
+
+.phaseDetailUl li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #C6A14A;
+}
+
+.phaseDetailNote {
+  font-size: 0.82rem;
+  color: #6A625A;
+  font-style: italic;
+  margin: 14px 0 0;
+  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+  border-top: 1px solid rgba(110, 27, 33, 0.08);
+  padding-top: 12px;
+}
+
+/* ══════════════════════════════
+   BENEFITS SECTION
+   ══════════════════════════════ */
+.completionSection {
+  background: #F4EFE6;
+  padding: 80px 20px;
+  border-top: 1px solid rgba(110, 27, 33, 0.08);
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
+.benefitCard {
+  background: #fff;
+  border-radius: 14px;
+  padding: 28px 20px;
+  text-align: center;
+  border: 1px solid rgba(110, 27, 33, 0.08);
+  box-shadow: 0 2px 8px rgba(30, 30, 30, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.benefitCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(110, 27, 33, 0.12);
+}
+
+.benefitIcon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.benefitTitle {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1E1E1E;
+  margin: 0 0 8px;
+}
+
+.benefitDesc {
+  font-size: 0.82rem;
+  color: #6A625A;
+  line-height: 1.65;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ══════════════════════════════
+   CTA SECTION
+   ══════════════════════════════ */
+.ctaSection {
+  background: linear-gradient(135deg, #3D0A10 0%, #6E1B21 60%, #4A0E18 100%);
+  padding: 100px 20px;
+}
+
+.ctaInner {
+  text-align: center;
+  max-width: 640px;
   margin: 0 auto;
 }
 
-.heroStat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.heroStatNumber {
-  font-size: 28px;
-  font-weight: 700;
-  color: #255c3f;
-  font-family: 'Canela', Cormorant, serif;
-}
-
-.heroStatLabel {
-  font-size: 12px;
-  color: #6b7280;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-  margin-top: 4px;
-}
-
-.heroStatDivider {
-  width: 1px;
-  height: 40px;
-  background-color: #d1d5db;
-}
-
-/* ── Intro Section ── */
-.templeIntroSection {
-  padding: 100px 20px;
-  background: white;
-}
-
-.introText {
-  font-size: 17px;
-  color: #3d4d42;
-  line-height: 1.9;
-  margin-bottom: 24px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.introQuote {
-  margin-top: 50px;
-  padding: 40px;
-  background: linear-gradient(135deg, #faf8f5 0%, #f5f1e8 100%);
-  border-radius: 16px;
-  border-left: 4px solid #E07B39;
-  position: relative;
-}
-
-.quoteIcon {
-  font-size: 80px;
-  color: #E07B39;
-  opacity: 0.3;
-  position: absolute;
-  top: -10px;
-  left: 20px;
-  font-family: 'Canela', Cormorant, serif;
-  line-height: 1;
-}
-
-.quoteText {
-  font-size: 20px;
-  font-style: italic;
-  color: #255c3f;
-  line-height: 1.7;
-  font-family: 'Canela', Cormorant, serif;
-  margin-bottom: 16px;
-  padding-top: 20px;
-}
-
-.quoteSource {
-  font-size: 13px;
-  color: #C65C3A;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-/* ── Temple Styles Section ── */
-.templeStylesSection {
-  padding: 100px 20px;
-  background: #faf8f5;
-}
-
-.tabButtons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 40px;
-}
-
-.tabBtn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 16px;
-  border: 2px solid #e5e7eb;
-  border-radius: 999px;
-  background: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.tabBtn:hover {
-  border-color: #E07B39;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(224, 123, 57, 0.15);
-}
-
-.tabBtnActive {
-  border-color: #E07B39;
-  background: linear-gradient(135deg, #fff9f0 0%, #fef3e2 100%);
-  box-shadow: 0 8px 20px rgba(224, 123, 57, 0.2);
-}
-
-.tabIcon {
-  font-size: 32px;
-  margin-bottom: 8px;
-}
-
-.tabName {
-  font-size: 15px;
-  font-weight: 700;
-  color: #255c3f;
-  margin-bottom: 4px;
-}
-
-.tabRegion {
-  font-size: 12px;
-  color: #6b7280;
-}
-
-.tabContent {
-  background: white;
-  border-radius: 20px;
-  padding: 50px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  border: 1px solid #f0ebe3;
-}
-
-.tabContentInner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: start;
-}
-
-/* .tabLeft {} */
-
-.tabIconLarge {
-  font-size: 64px;
-  margin-bottom: 16px;
-}
-
-.tabTitle {
-  font-size: 32px;
-  font-weight: 700;
-  color: #255c3f;
-  margin-bottom: 8px;
-  font-family: 'Canela', Cormorant, serif;
-}
-
-.tabRegionBadge {
-  display: inline-block;
-  background: #fef3e2;
-  color: #C65C3A;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 4px 14px;
-  border-radius: 20px;
-  margin-bottom: 20px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.tabDescription {
-  font-size: 15px;
-  color: #6b7280;
-  line-height: 1.8;
-  margin-bottom: 30px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.tabFeaturesTitle {
-  font-size: 14px;
-  font-weight: 700;
-  color: #255c3f;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.tabFeaturesList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.tabFeatureItem {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  color: #374151;
-  padding: 8px 0;
-  border-bottom: 1px solid #f0f0f0;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.tabFeatureItem:last-child {
-  border-bottom: none;
-}
-
-.tabFeatureDot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #E07B39;
-  flex-shrink: 0;
-}
-
-.tabExamplesBox {
-  background: linear-gradient(135deg, #faf8f5 0%, #f5f1e8 100%);
-  border-radius: 16px;
-  padding: 36px;
-  border: 1px solid #e8dcc8;
-}
-
-.tabExamplesTitle {
-  font-size: 14px;
-  font-weight: 700;
-  color: #255c3f;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.tabExampleItem {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 0;
-  border-bottom: 1px solid #e8dcc8;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.tabExampleItem:last-child {
-  border-bottom: none;
-}
-
-.tabExampleNumber {
-  font-size: 20px;
-  font-weight: 700;
-  color: #E07B39;
-  font-family: 'Canela', Cormorant, serif;
-  flex-shrink: 0;
-}
-
-.tabExampleName {
-  font-size: 15px;
-  color: #374151;
-  font-weight: 500;
-}
-
-/* ── Sacred Elements Section ── */
-.sacredElementsSection {
-  padding: 100px 20px;
-  background: white;
-}
-
-.elementsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.elementCard {
-  background: #faf8f5;
-  border-radius: 16px;
-  padding: 32px 24px;
-  text-align: center;
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
-  position: relative;
-  overflow: hidden;
-}
-
-.elementCard::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #E07B39, #C65C3A);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.elementCard:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-  border-color: #f0ebe3;
-  background: white;
-}
-
-.elementCard:hover::before {
-  transform: scaleX(1);
-}
-
-.elementIcon {
-  font-size: 36px;
-  margin-bottom: 8px;
-}
-
-.elementNumber {
-  font-size: 13px;
-  font-weight: 700;
-  color: #E07B39;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.elementName {
-  font-size: 17px;
-  font-weight: 700;
-  color: #255c3f;
-  margin-bottom: 10px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.elementDescription {
-  font-size: 13px;
-  color: #6b7280;
-  line-height: 1.6;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-/* ── Daily Rituals Timeline ── */
-.dailyRitualsSection {
-  padding: 100px 20px;
-  background: #faf8f5;
-}
-
-.ritualsTimeline {
-  display: flex;
-  flex-direction: column;
-}
-
-.ritualItem {
-  display: grid;
-  grid-template-columns: 120px 40px 1fr;
-  gap: 0;
-  align-items: start;
-}
-
-.ritualLeft {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding-right: 16px;
-  padding-top: 6px;
-}
-
-.ritualTime {
-  font-size: 13px;
-  font-weight: 700;
-  color: #C65C3A;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-  margin-bottom: 4px;
-}
-
-.ritualIcon {
-  font-size: 22px;
-}
-
-.ritualConnector {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 8px;
-}
-
-.ritualDot {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #E07B39, #C65C3A);
-  flex-shrink: 0;
-  box-shadow: 0 0 0 4px rgba(224, 123, 57, 0.15);
-}
-
-.ritualLine {
-  width: 2px;
-  flex: 1;
-  min-height: 40px;
-  background: linear-gradient(to bottom, #E07B39, rgba(224, 123, 57, 0.2));
-  margin-top: 4px;
-}
-
-.ritualRight {
-  padding: 0 0 40px 20px;
-}
-
-.ritualName {
-  font-size: 19px;
-  font-weight: 700;
-  color: #255c3f;
-  margin-bottom: 8px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.ritualDescription {
-  font-size: 14px;
-  color: #6b7280;
-  line-height: 1.7;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-/* ── Visiting Guide Section ── */
-.visitingGuideSection {
-  padding: 100px 20px;
-  background: white;
-}
-
-.guideGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.guideCard {
-  background: #faf8f5;
-  border-radius: 16px;
-  padding: 32px 28px;
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
-  display: flex;
-  flex-direction: column;
-}
-
-.guideCard:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-  background: white;
-  border-color: #f0ebe3;
-}
-
-.guideStepBadge {
-  display: inline-block;
-  background: linear-gradient(135deg, #E07B39, #C65C3A);
-  color: white;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 4px 12px;
-  border-radius: 20px;
-  margin-bottom: 16px;
-  align-self: flex-start;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.guideTitle {
-  font-size: 18px;
-  font-weight: 700;
-  color: #255c3f;
-  margin-bottom: 12px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.guideDescription {
-  font-size: 14px;
-  color: #6b7280;
-  line-height: 1.7;
-  margin-bottom: 20px;
-  flex-grow: 1;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.guideTip {
-  background: linear-gradient(135deg, #fff9f0, #fef3e2);
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-size: 13px;
-  color: #C65C3A;
-  line-height: 1.5;
-  border-left: 3px solid #E07B39;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-/* ── CTA Section ── */
-.templeCtaSection {
-  padding: 120px 20px;
-  background: linear-gradient(135deg, #255c3f 0%, #173927 100%);
-  color: white;
-  position: relative;
-  overflow: hidden;
-}
-
-.templeCtaSection::before {
-  content: '🛕';
-  position: absolute;
-  font-size: 300px;
-  opacity: 0.04;
-  right: -40px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 .ctaTitle {
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 20px;
   font-family: 'Canela', Cormorant, serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  color: #F7F3EC;
+  margin: 0 0 18px;
+  line-height: 1.2;
 }
 
-.ctaDescription {
-  font-size: 18px;
-  margin-bottom: 48px;
-  opacity: 0.85;
-  line-height: 1.7;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 48px;
+.ctaSubtext {
+  font-size: 1rem;
+  color: rgba(247, 243, 236, 0.72);
+  line-height: 1.75;
+  margin: 0 0 40px;
+  font-family: 'Inter', sans-serif;
 }
 
 .ctaButtons {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.btnPrimaryCta,
-.btnSecondaryCta {
-  padding: 16px 40px;
+.btnPrimary {
+  background: linear-gradient(135deg, #C6A14A, #A8852E);
+  color: #0F1413;
+  border: none;
+  padding: 14px 36px;
   border-radius: 999px;
-  font-size: 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.4px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.btnPrimary:hover {
+  opacity: 0.88;
+  transform: translateY(-2px);
+}
+
+.btnSecondary {
+  background: transparent;
+  color: rgba(247, 243, 236, 0.85);
+  border: 1.5px solid rgba(247, 243, 236, 0.35);
+  padding: 14px 36px;
+  border-radius: 999px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
 }
 
-.btnPrimaryCta {
-  background: white;
-  color: #255c3f;
-  border: 2px solid white;
+.btnSecondary:hover {
+  background: rgba(247, 243, 236, 0.1);
+  border-color: rgba(247, 243, 236, 0.65);
+  transform: translateY(-2px);
 }
 
-.btnPrimaryCta:hover {
-  background: transparent;
-  color: white;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.btnSecondaryCta {
-  background: transparent;
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.6);
-}
-
-.btnSecondaryCta:hover {
-  background: white;
-  color: #255c3f;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* ── Responsive Design ── */
-@media (max-width: 1400px) {
-  .container { padding: 0 180px; }
-}
-
+/* ══════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════ */
 @media (max-width: 1200px) {
-  .container { padding: 0 120px; }
+  .container { padding: 0 60px; }
+  .phasesGrid { grid-template-columns: repeat(2, 1fr); }
+  .benefitsGrid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 1024px) {
-  .container { padding: 0 80px; }
-  .templeTitle { font-size: 52px; }
-  .tabButtons { grid-template-columns: repeat(2, 1fr); }
-  .tabContentInner { grid-template-columns: 1fr; gap: 30px; }
-  .elementsGrid { grid-template-columns: repeat(2, 1fr); }
-  .guideGrid { grid-template-columns: repeat(2, 1fr); }
-  .sectionTitle { font-size: 36px; }
+  .container { padding: 0 40px; }
+  .heroLeft { padding: 80px 48px 80px 40px; }
+  .phaseDetailGrid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
-  .container { padding: 0 40px; }
-  .templeTitle { font-size: 40px; }
-  .heroStats { flex-direction: column; gap: 20px; padding: 24px; }
-  .heroStatDivider { width: 60px; height: 1px; }
-  .tabButtons { grid-template-columns: repeat(2, 1fr); }
-  .elementsGrid { grid-template-columns: 1fr; }
-  .guideGrid { grid-template-columns: 1fr; }
-  .ctaTitle { font-size: 36px; }
-  .ritualItem { grid-template-columns: 90px 30px 1fr; }
-  .ctaButtons { flex-direction: column; align-items: center; }
-  .btnPrimaryCta, .btnSecondaryCta { width: 260px; }
+  .container { padding: 0 24px; }
+  .hero { min-height: 100svh; }
+  .heroLeft { flex: none; width: 100%; padding: 80px 24px 60px; }
+  .heroSplit { flex-direction: column; }
+  .heroRight { position: absolute; inset: 0; z-index: 0; }
+  .heroOverlay { background: linear-gradient(to bottom, #3D0A10cc 0%, #3D0A10 55%, transparent 100%); }
+  .phasesGrid { grid-template-columns: 1fr; }
+  .benefitsGrid { grid-template-columns: repeat(2, 1fr); }
+  .phaseDetailHeader { flex-wrap: wrap; gap: 10px; }
+  .phaseDetailTagline { display: none; }
 }
 
 @media (max-width: 480px) {
-  .container { padding: 0 20px; }
-  .templeTitle { font-size: 32px; }
-  .tabButtons { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .tabContent { padding: 24px; }
-  .sectionTitle { font-size: 28px; }
-  .ctaTitle { font-size: 28px; }
+  .container { padding: 0 16px; }
+  .benefitsGrid { grid-template-columns: 1fr; }
+  .ctaButtons { flex-direction: column; align-items: center; }
+  .btnPrimary, .btnSecondary { width: 240px; }
 }

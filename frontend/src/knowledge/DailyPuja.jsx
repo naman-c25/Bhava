@@ -152,24 +152,24 @@ function DailyPuja() {
 
   const overviewCards = [
     {
-      icon: "🕐",
+      icon: "",
       title: "Total Duration",
       description: "15–20 minutes of focused spiritual practice each morning.",
     },
     {
-      icon: "📿",
+      icon: "",
       title: "8 Sacred Steps",
       description:
         "From opening Om chant to closing Shanti Mantra — a complete worship sequence.",
     },
     {
-      icon: "🙏",
+      icon: "",
       title: "For Everyone",
       description:
         "Suitable for all devotees — beginners and advanced practitioners alike.",
     },
     {
-      icon: "🌅",
+      icon: "",
       title: "Best Time",
       description:
         "Brahma Muhurta (4–6 AM) or any fixed morning time before starting your day.",
@@ -178,31 +178,31 @@ function DailyPuja() {
 
   const benefits = [
     {
-      icon: "☮️",
+      icon: "",
       title: "Inner Peace",
       description:
         "Begin each day rooted in calmness and divine connection.",
     },
     {
-      icon: "🛡️",
+      icon: "",
       title: "Spiritual Protection",
       description:
         "Mahamrityunjaya and Hanuman Chalisa create a protective shield.",
     },
     {
-      icon: "🧠",
+      icon: "",
       title: "Mental Clarity",
       description:
         "Gayatri Mantra sharpens intellect and guides decision-making.",
     },
     {
-      icon: "❤️",
+      icon: "",
       title: "Emotional Balance",
       description:
         "Gratitude prayer and sankalp cultivate emotional stability.",
     },
     {
-      icon: "🌱",
+      icon: "",
       title: "Spiritual Growth",
       description:
         "Consistent daily practice deepens your connection with the divine.",
@@ -320,7 +320,7 @@ function DailyPuja() {
                           ))}
                         </ul>
                         <p className={styles.chantTimes}>
-                          🔁 {s.chantTimes}
+                           {s.chantTimes}
                         </p>
                       </div>
 

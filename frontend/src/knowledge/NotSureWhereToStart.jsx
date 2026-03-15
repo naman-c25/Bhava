@@ -3,7 +3,7 @@ import styles from "./NotSureWhereToStart.module.css";
 
 const plans = [
   {
-    icon: "🪔",
+    icon: "",
     iconBg: "#c0671e",
     title: "14 Days of Prayer",
     sub: "How to Pray",
@@ -13,7 +13,7 @@ const plans = [
     gradient: "linear-gradient(135deg, #2a1a5a 0%, #6a1a4a 100%)",
   },
   {
-    icon: "🧘",
+    icon: "",
     iconBg: "#255c3f",
     title: "7-Day Meditation Reset",
     sub: "Stillness Practice",
@@ -23,7 +23,7 @@ const plans = [
     gradient: "linear-gradient(135deg, #1a3a2a 0%, #0a2a3a 100%)",
   },
   {
-    icon: "📿",
+    icon: "",
     iconBg: "#8B5E1a",
     title: "21-Day Mantra Initiation",
     sub: "Sacred Sound",
@@ -33,7 +33,7 @@ const plans = [
     gradient: "linear-gradient(135deg, #3a2a0a 0%, #5a1a0a 100%)",
   },
   {
-    icon: "🌺",
+    icon: "",
     iconBg: "#9c2a3a",
     title: "Daily Puja Foundations",
     sub: "Ritual Basics",

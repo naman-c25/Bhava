@@ -74,12 +74,12 @@ const morningPractices = [
 
 /* ─── Spiritual Seekers Data ─── */
 const seekerTopics = [
-  { icon: "👥", title: "Understanding Brahman", sub: "Ultimate Reality",   sessions: "8 sessions" },
-  { icon: "👥", title: "Stories from Puranas",  sub: "Ancient Narratives", sessions: "12 sessions" },
-  { icon: "👥", title: "Ayurveda Basics",        sub: "Life Science",       sessions: "6 sessions" },
-  { icon: "👥", title: "Sanskrit Prayers",       sub: "Sacred Language",    sessions: "10 sessions" },
-  { icon: "👥", title: "Karma & Rebirth",        sub: "Vedic Philosophy",   sessions: "9 sessions" },
-  { icon: "👥", title: "Deity Worship",          sub: "Puja Practices",     sessions: "14 sessions" },
+  { icon: "", title: "Understanding Brahman", sub: "Ultimate Reality",   sessions: "8 sessions" },
+  { icon: "", title: "Stories from Puranas",  sub: "Ancient Narratives", sessions: "12 sessions" },
+  { icon: "", title: "Ayurveda Basics",        sub: "Life Science",       sessions: "6 sessions" },
+  { icon: "", title: "Sanskrit Prayers",       sub: "Sacred Language",    sessions: "10 sessions" },
+  { icon: "", title: "Karma & Rebirth",        sub: "Vedic Philosophy",   sessions: "9 sessions" },
+  { icon: "", title: "Deity Worship",          sub: "Puja Practices",     sessions: "14 sessions" },
 ];
 
 const UsersIcon = () => (

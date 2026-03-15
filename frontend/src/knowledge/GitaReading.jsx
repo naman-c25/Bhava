@@ -176,31 +176,31 @@ function GitaReading() {
 
   const completionBenefits = [
     {
-      icon: "📖",
+      icon: "",
       title: "Daily Wisdom",
       description:
         "Each verse offers practical spiritual guidance that brings clarity and direction to the challenges of daily life.",
     },
     {
-      icon: "🧘",
+      icon: "",
       title: "Inner Peace",
       description:
         "The Gita's teachings on non-attachment and dharma create a lasting inner calm that is unshaken by external circumstances.",
     },
     {
-      icon: "🔥",
+      icon: "",
       title: "Right Action",
       description:
         "Karma Yoga teaches how to act with full effort and zero attachment to outcomes — the foundation of a meaningful life.",
     },
     {
-      icon: "🙏",
+      icon: "",
       title: "Divine Devotion",
       description:
         "Bhakti Yoga opens the heart to genuine love and surrender, transforming every action into an offering to the divine.",
     },
     {
-      icon: "✨",
+      icon: "",
       title: "Self-Knowledge",
       description:
         "Jnana Yoga illuminates the true nature of the Self, dissolving false identification and revealing the eternal within.",

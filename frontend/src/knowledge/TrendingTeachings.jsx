@@ -179,13 +179,6 @@ function TrendingTeachings() {
         </button>
       </div>
 
-      {/* Progress bar */}
-      <div className={styles.progressBar}>
-        <div
-          className={styles.progressFill}
-          style={{ width: `${Math.max(scrollPos * 100, 12)}%` }}
-        />
-      </div>
     </section>
   );
 }

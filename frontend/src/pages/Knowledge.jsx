@@ -1,12 +1,61 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Knowledge.module.css";
 import KnowledgeExtra from "../knowledge/KnowledgeExtra";
+import { motion } from "framer-motion";
+
+const WISDOM_VISIBLE = 4;
+const WISDOM_STEP = 2;
+const WISDOM_GAP = 20;
+
+function WisdomFlipCard({ category, width, navigate }) {
+  const [flipped, setFlipped] = useState(false);
+  return (
+    <div
+      className={styles.wisdomCardOuter}
+      style={width ? { flex: `0 0 ${width}px`, width } : {}}
+      onMouseEnter={() => setFlipped(true)}
+      onMouseLeave={() => setFlipped(false)}
+    >
+      <motion.div
+        className={styles.wisdomCardInner}
+        animate={{ rotateY: flipped ? 180 : 0 }}
+        transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        {/* Back — image visible by default */}
+        <div className={styles.wisdomCardBack}>
+          <img src={category.image} alt={category.title} className={styles.wisdomCardBackImg} />
+          <div className={styles.wisdomCardBackOverlay}>
+            <h3 className={styles.wisdomCardBackTitle}>{category.title}</h3>
+          </div>
+        </div>
+
+        {/* Front — details revealed on hover */}
+        <div className={styles.wisdomCardFront}>
+          <div className={styles.wisdomCardFrontContent}>
+            <h3 className={styles.wisdomFrontTitle}>{category.title}</h3>
+            <p className={styles.wisdomFrontDesc}>{category.description}</p>
+            <button
+              className={styles.wisdomFrontBtn}
+              onClick={() => navigate(category.route)}
+            >
+              Explore More
+            </button>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
 
 function Knowledge() {
   const navigate = useNavigate();
   const [activeSlide, setActiveSlide] = useState(0);
   const [commitHovered, setCommitHovered] = useState(false);
+  const [wisdomIndex, setWisdomIndex] = useState(0);
+  const [wisdomCardW, setWisdomCardW] = useState(0);
+  const wisdomRef = useRef(null);
 
   const knowledgeCategories = [
     {
@@ -102,6 +151,22 @@ function Knowledge() {
 
   const prevSlide = () => setActiveSlide((p) => Math.max(0, p - 1));
   const nextSlide = () => setActiveSlide((p) => Math.min(commitments.length - 1, p + 1));
+
+  useLayoutEffect(() => {
+    const el = wisdomRef.current;
+    if (!el) return;
+    const measure = () => {
+      const w = el.clientWidth;
+      if (w > 0) setWisdomCardW((w - WISDOM_GAP * (WISDOM_VISIBLE - 1)) / WISDOM_VISIBLE);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const prevWisdom = () => setWisdomIndex((p) => Math.max(0, p - WISDOM_STEP));
+  const nextWisdom = () => setWisdomIndex((p) => Math.min(knowledgeCategories.length - WISDOM_VISIBLE, p + WISDOM_STEP));
 
   return (
     <div className={styles.knowledgePagesWrapper}>
@@ -229,44 +294,40 @@ function Knowledge() {
           <h1 className={styles.sectionTitle}>
             Explore <span className={styles.highlight}>Sacred Wisdom</span>
           </h1>
-
-          <div className={styles.productsGrid}>
-            {knowledgeCategories.map((category) => (
-              <div
-                key={category.id}
-                className={styles.productCard}
-                onClick={() => navigate(category.route)}
-                style={{ cursor: "pointer" }}
-              >
-                <div
-                  className={styles.productImageWrapper}
-                  style={{ cursor: "pointer" }}
-                  onClick={(e) => { e.stopPropagation(); navigate(category.route); }}
-                >
-                  <div className={`${styles.productImage} ${styles.productImageEmoji}`}>
-                    <img src={category.image} alt={category.title} style={{ cursor: "pointer" }} />
-                  </div>
-                  <button
-                    className={styles.btnAddCart}
-                    onClick={(e) => { e.stopPropagation(); navigate(category.route); }}
-                  >
-                    Explore More
-                  </button>
-                </div>
-                <div
-                  className={styles.productContent}
-                  style={{ cursor: "pointer" }}
-                  onClick={(e) => { e.stopPropagation(); navigate(category.route); }}
-                >
-                  <div className={styles.productHeader}>
-                    <h3 className={styles.productTitle}>{category.title}</h3>
-                  </div>
-                  <p className={styles.productDescription}>{category.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
+
+        <div className={styles.wisdomSliderWrapper}>
+            <button
+              className={styles.wisdomArrow}
+              onClick={prevWisdom}
+              disabled={wisdomIndex === 0}
+              aria-label="Previous"
+            >‹</button>
+
+            <div className={styles.wisdomTrackOuter} ref={wisdomRef}>
+              <motion.div
+                className={styles.wisdomTrack}
+                animate={{ x: -wisdomIndex * (wisdomCardW + WISDOM_GAP) }}
+                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+              >
+                {knowledgeCategories.map((category) => (
+                  <WisdomFlipCard
+                    key={category.id}
+                    category={category}
+                    width={wisdomCardW}
+                    navigate={navigate}
+                  />
+                ))}
+              </motion.div>
+            </div>
+
+            <button
+              className={styles.wisdomArrow}
+              onClick={nextWisdom}
+              disabled={wisdomIndex >= knowledgeCategories.length - WISDOM_VISIBLE}
+              aria-label="Next"
+            >›</button>
+          </div>
       </div>
 
       {/* ── 108 & Tiger Eye — Featured Section ── */}

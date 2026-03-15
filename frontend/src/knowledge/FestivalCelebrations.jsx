@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./MantraSadhana108.module.css";
+import styles from "./FestivalCelebrations.module.css";
 
 function FestivalCelebrations() {
   const navigate = useNavigate();
@@ -176,31 +176,31 @@ function FestivalCelebrations() {
 
   const completionBenefits = [
     {
-      icon: "🪔",
+      icon: "",
       title: "Strengthened Faith",
       description:
         "Each festival renews and deepens faith through devotion, sacred stories, and the experience of divine presence in celebration.",
     },
     {
-      icon: "🙏",
+      icon: "",
       title: "Gratitude & Humility",
       description:
         "Festival practices cultivate genuine gratitude for life's blessings and humility before the divine order.",
     },
     {
-      icon: "❤️",
+      icon: "",
       title: "Community & Unity",
       description:
         "Shared celebration strengthens family bonds and community unity, creating a sense of belonging to a living spiritual tradition.",
     },
     {
-      icon: "🌿",
+      icon: "",
       title: "Spiritual Values",
       description:
         "Festivals teach righteousness, compassion, devotion, and harmony as lived values rather than abstract ideals.",
     },
     {
-      icon: "✨",
+      icon: "",
       title: "Joy & Renewal",
       description:
         "Hindu festivals inspire joy, happiness, and spiritual renewal in the lives of millions of people around the world.",

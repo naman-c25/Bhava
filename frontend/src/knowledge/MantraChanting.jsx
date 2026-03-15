@@ -176,31 +176,31 @@ function MantraChanting() {
 
   const completionBenefits = [
     {
-      icon: "📿",
+      icon: "",
       title: "Focused Mind",
       description:
         "Regular mantra chanting trains the mind to concentrate deeply, reducing mental scatter and building powerful inner focus.",
     },
     {
-      icon: "🕉️",
+      icon: "",
       title: "Spiritual Awareness",
       description:
         "Consistent practice awakens a natural awareness of the divine presence within and around all things.",
     },
     {
-      icon: "🌿",
+      icon: "",
       title: "Stress Reduction",
       description:
         "Sacred sound vibrations calm the nervous system, dissolve mental tension, and create lasting emotional peace.",
     },
     {
-      icon: "🔥",
+      icon: "",
       title: "Inner Discipline",
       description:
         "The commitment to daily chanting builds the spiritual discipline that supports every other area of sadhana.",
     },
     {
-      icon: "🙏",
+      icon: "",
       title: "Devotional Heart",
       description:
         "Mantra chanting naturally deepens devotion, opening the heart to the experience of divine love and grace.",

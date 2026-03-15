@@ -176,31 +176,31 @@ function Aarti() {
 
   const completionBenefits = [
     {
-      icon: "🪔",
+      icon: "",
       title: "Sacred Home",
       description:
         "Regular Aarti creates a sanctified atmosphere in the home, filling it with positive energy, peace, and divine presence.",
     },
     {
-      icon: "🙏",
+      icon: "",
       title: "Deepened Devotion",
       description:
         "The daily act of offering light to the divine strengthens faith and cultivates genuine love and devotion.",
     },
     {
-      icon: "🔔",
+      icon: "",
       title: "Purified Environment",
       description:
         "The bell, incense, and sacred chanting of Aarti purify the home's energy and create a space for spiritual growth.",
     },
     {
-      icon: "❤️",
+      icon: "",
       title: "Family Unity",
       description:
         "Evening Aarti brings families together in shared devotion, creating bonds of love rooted in spiritual practice.",
     },
     {
-      icon: "✨",
+      icon: "",
       title: "Inner Peace",
       description:
         "The ritual of Aarti calms the mind, dissolves the stress of the day, and fills the heart with gratitude and peace.",

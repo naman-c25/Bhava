@@ -2,154 +2,90 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./DhyanChallenge21.module.css";
 
-const days = [
-  {
-    day: 1, title: "Sankalpa (Sacred Intention)", phase: "Foundation",
-    practices: ["5 min deep breathing", "10 min guided body awareness", "Write your 21-day intention", "Practice: Sit still without movement"],
-    mantra: "Om Tat Sat", mantraNote: "",
-  },
-  {
-    day: 2, title: "Breath Awareness", phase: "Foundation",
-    practices: ["5 min diaphragmatic breathing", "12 min observing natural breath", "Notice inhale/exhale length"],
-    mantra: "So Hum", mantraNote: "Inhale: So — Exhale: Hum",
-  },
-  {
-    day: 3, title: "Posture & Stillness", phase: "Foundation",
-    practices: ["Learn stable seated posture", "15 min still sitting", "Avoid adjusting body"],
-    mantra: "Om Shanti Shanti Shanti", mantraNote: "",
-  },
-  {
-    day: 4, title: "Counting the Breath", phase: "Foundation",
-    practices: ["Count inhale–exhale cycles up to 21", "Restart if distracted"],
-    mantra: "Om", mantraNote: "",
-  },
-  {
-    day: 5, title: "Introduction to Pranayama", phase: "Foundation",
-    practices: ["5 min Anulom Vilom", "10 min silent meditation"],
-    mantra: "Om Pranaya Namah", mantraNote: "",
-  },
-  {
-    day: 6, title: "Observing Thoughts", phase: "Foundation",
-    practices: ["Sit quietly", "Watch thoughts without reacting", "Label them gently"],
-    mantra: "Om Sakshi Bhavaya Namah", mantraNote: "",
-  },
-  {
-    day: 7, title: "Silence Integration", phase: "Foundation",
-    practices: ["20 min combined practice", "Evening reflection journaling"],
-    mantra: "Silent Meditation", mantraNote: "No mantra today — rest in pure silence",
-  },
-  {
-    day: 8, title: "Mantra Introduction", phase: "Deepening",
-    practices: ["Soft chanting of Om", "15 min mantra meditation"],
-    mantra: "Om Namah Shivaya", mantraNote: "",
-  },
-  {
-    day: 9, title: "Chakra Awareness", phase: "Deepening",
-    practices: ["Visualize light in heart center", "Slow conscious breathing"],
-    mantra: "Om Hreem Namah", mantraNote: "",
-  },
-  {
-    day: 10, title: "Extended Stillness", phase: "Deepening",
-    practices: ["20 min seated meditation", "No counting or mantra"],
-    mantra: "Mental OM Awareness", mantraNote: "Silently feel the vibration of OM within",
-  },
-  {
-    day: 11, title: "Trataka (Candle Gazing)", phase: "Deepening",
-    practices: ["5 min candle gazing", "10 min closed-eye focus"],
-    mantra: "Om Jyotir Namah", mantraNote: "",
-  },
-  {
-    day: 12, title: "Emotional Observation", phase: "Deepening",
-    practices: ["Sit with one emotion", "Observe without resistance"],
-    mantra: "Om Shreem", mantraNote: "",
-  },
-  {
-    day: 13, title: "Gratitude Awareness", phase: "Deepening",
-    practices: ["5 min gratitude breathing", "15 min silent sitting"],
-    mantra: "Om Krutagyaya Namah", mantraNote: "",
-  },
-  {
-    day: 14, title: "Deep Pranayama", phase: "Deepening",
-    practices: ["5 min Nadi Shodhana", "15 min meditation"],
-    mantra: "Om Namo Bhagavate Vasudevaya", mantraNote: "",
-  },
-  {
-    day: 15, title: "Longer Silence", phase: "Mastery",
-    practices: ["25 min meditation", "Self-led discipline"],
-    mantra: "Om (Long Chant)", mantraNote: "Sustain the OM for as long as each breath allows",
-  },
-  {
-    day: 16, title: "Witness Consciousness", phase: "Mastery",
-    practices: ["Observe body, breath, and thoughts", "Remain neutral observer"],
-    mantra: "Om Sakshi", mantraNote: "",
-  },
-  {
-    day: 17, title: "Inner Sound Awareness", phase: "Mastery",
-    practices: ["Listen to subtle inner sounds", "Stay in deep silence"],
-    mantra: "Silent Inner OM Listening", mantraNote: "No chanting — only listening to the inner vibration",
-  },
-  {
-    day: 18, title: "Kundalini Awareness", phase: "Mastery",
-    practices: ["Spine awareness breathing", "Visualize rising energy gently"],
-    mantra: "Om Aim Hreem Kleem", mantraNote: "",
-  },
-  {
-    day: 19, title: "Non-Attachment Practice", phase: "Mastery",
-    practices: ["Watch thoughts come and go", "No judgment"],
-    mantra: "Om Vairagyaya Namah", mantraNote: "",
-  },
-  {
-    day: 20, title: "Extended Stillness (30 Minutes)", phase: "Mastery",
-    practices: ["Deep uninterrupted silence", "Avoid checking time"],
-    mantra: "Om Param Shantaye Namah", mantraNote: "",
-  },
-  {
-    day: 21, title: "Integration & Commitment", phase: "Mastery",
-    practices: ["30 min full practice", "Reflect on transformation", "Write future daily meditation plan"],
-    mantra: "Om Purnamadah Purnamidam", mantraNote: "Purnat Purnamudachyate · Purnasya Purnamadaya · Purnamevavashishyate",
-  },
-];
-
 const phases = [
   {
     name: "Foundation",
-    days: "Days 1–7",
+    dayRange: "Days 1–7",
     number: 1,
-    description: "Build the seat, the breath, and the intention. Learn to sit still and observe without reacting.",
-    color: "#6E1B21",
-    music: "Soft tanpura drone",
+    color: "#2A1845",
+    tagline: "Build the Seat, the Breath, the Intention",
+    description:
+      "Learn to sit still and observe without reacting. Establish the daily ritual and plant the seed of inner discipline.",
+    universalMessage:
+      "Every great practice begins with a single, honest moment of stillness.",
+    days: [
+      { day: 1,  theme: "Sankalpa — Sacred Intention",  mantra: "Om Tat Sat",                  duration: "15:00" },
+      { day: 2,  theme: "Breath Awareness",              mantra: "So Hum",                      duration: "17:00" },
+      { day: 3,  theme: "Posture & Stillness",           mantra: "Om Shanti Shanti Shanti",     duration: "15:00" },
+      { day: 4,  theme: "Counting the Breath",           mantra: "Om",                          duration: "21:00" },
+      { day: 5,  theme: "Introduction to Pranayama",     mantra: "Om Pranaya Namah",            duration: "15:00" },
+      { day: 6,  theme: "Observing Thoughts",            mantra: "Om Sakshi Bhavaya Namah",     duration: "15:00" },
+      { day: 7,  theme: "Silence Integration",           mantra: "Silent Meditation",           duration: "20:00" },
+    ],
   },
   {
     name: "Deepening",
-    days: "Days 8–14",
+    dayRange: "Days 8–14",
     number: 2,
-    description: "Introduce mantra, chakra awareness, and emotional observation. Extend stillness to 20 minutes.",
-    color: "#1B4430",
-    music: "Drone + light bowl sound",
+    color: "#2A1845",
+    tagline: "Mantra, Chakra & Emotional Observation",
+    description:
+      "Introduce mantra and chakra awareness. Extend stillness to 20 minutes. Observe emotions without resistance.",
+    universalMessage:
+      "The mantra is a rope that leads the wandering mind back to the divine.",
+    days: [
+      { day: 8,  theme: "Mantra Introduction",           mantra: "Om Namah Shivaya",                 duration: "15:00" },
+      { day: 9,  theme: "Chakra Awareness",              mantra: "Om Hreem Namah",                   duration: "20:00" },
+      { day: 10, theme: "Extended Stillness",            mantra: "Mental OM Awareness",              duration: "20:00" },
+      { day: 11, theme: "Trataka — Candle Gazing",       mantra: "Om Jyotir Namah",                  duration: "15:00" },
+      { day: 12, theme: "Emotional Observation",         mantra: "Om Shreem",                        duration: "15:00" },
+      { day: 13, theme: "Gratitude Awareness",           mantra: "Om Krutagyaya Namah",              duration: "20:00" },
+      { day: 14, theme: "Deep Pranayama",                mantra: "Om Namo Bhagavate Vasudevaya",     duration: "20:00" },
+    ],
   },
   {
     name: "Mastery",
-    days: "Days 15–21",
+    dayRange: "Days 15–21",
     number: 3,
-    description: "Self-led practice. Longer silence, witness consciousness, and final integration at 30 minutes.",
-    color: "#422868",
-    music: "Deep low OM drone only",
+    color: "#2A1845",
+    tagline: "Self-Led Practice and Final Integration",
+    description:
+      "Longer silence, witness consciousness, and complete integration at 30 minutes. The practice becomes your own.",
+    universalMessage:
+      "When the student becomes still enough, the teacher within speaks.",
+    days: [
+      { day: 15, theme: "Longer Silence",                mantra: "Om (Long Chant)",             duration: "25:00" },
+      { day: 16, theme: "Witness Consciousness",         mantra: "Om Sakshi",                   duration: "25:00" },
+      { day: 17, theme: "Inner Sound Awareness",         mantra: "Silent Inner OM Listening",   duration: "25:00" },
+      { day: 18, theme: "Kundalini Awareness",           mantra: "Om Aim Hreem Kleem",          duration: "25:00" },
+      { day: 19, theme: "Non-Attachment Practice",       mantra: "Om Vairagyaya Namah",         duration: "25:00" },
+      { day: 20, theme: "Extended Stillness (30 Min)",   mantra: "Om Param Shantaye Namah",     duration: "30:00" },
+      { day: 21, theme: "Integration & Commitment",      mantra: "Om Purnamadah Purnamidam",    duration: "30:00" },
+    ],
   },
 ];
 
 const completionBenefits = [
-  { title: "Strong Meditation Habit", description: "A daily practice rooted in discipline, not motivation." },
-  { title: "Improved Concentration", description: "The mind trained to rest, not wander." },
-  { title: "Emotional Balance", description: "Feelings observed, not controlled by." },
-  { title: "Breath Control", description: "Pranayama as a daily tool for nervous system regulation." },
-  { title: "Spiritual Grounding", description: "A deeper, lived connection to your inner self." },
+  { title: "Strong Meditation Habit",  description: "A daily practice rooted in discipline, not motivation." },
+  { title: "Improved Concentration",   description: "The mind trained to rest, not wander." },
+  { title: "Emotional Balance",        description: "Feelings observed, not controlled by." },
+  { title: "Breath Control",           description: "Pranayama as a daily tool for nervous system regulation." },
+  { title: "Spiritual Grounding",      description: "A deeper, lived connection to your inner self." },
 ];
-
-const phaseColor = { Foundation: "#6E1B21", Deepening: "#1B4430", Mastery: "#422868" };
 
 function DhyanChallenge21() {
   const navigate = useNavigate();
-  const [expandedDay, setExpandedDay] = useState(null);
+  const [expandedPhase, setExpandedPhase] = useState(null);
+  const [playingDay, setPlayingDay] = useState(null);
+
+  const togglePhase = (idx) => {
+    setExpandedPhase(expandedPhase === idx ? null : idx);
+  };
+
+  const togglePlay = (dayKey, e) => {
+    e.stopPropagation();
+    setPlayingDay(playingDay === dayKey ? null : dayKey);
+  };
 
   return (
     <div className={styles.page}>
@@ -198,145 +134,89 @@ function DhyanChallenge21() {
 
         {/* Right Side */}
         <div className={styles.rightWrapper}>
-          <p className={styles.sessionsCount}>3 Phases</p>
+          <p className={styles.sessionsCount}>3 Phases · 21 Days</p>
 
           <div className={styles.rightPanel}>
-          {phases.map((phase) => (
-            <div key={phase.name} className={styles.sessionBlock}>
-              <p className={styles.phaseHeader}>
-                {phase.name} ({phase.days})
-              </p>
-              <div className={styles.sessionRow}>
-                <span className={styles.sessionNumber}>{phase.number}</span>
-                <div className={styles.sessionContent}>
-                  <h3 className={styles.sessionTitle}>{phase.name}</h3>
-                  <p className={styles.sessionDesc}>{phase.description}</p>
-                  <span className={styles.duration}>{phase.days}</span>
-                </div>
-                <button className={styles.playCircle}>
-                  <span className="material-symbols-outlined">play_arrow</span>
-                </button>
-              </div>
-            </div>
-          ))}
-          </div>
-        </div>
+            {phases.map((phase, idx) => (
+              <div key={phase.name} className={styles.sessionBlock}>
 
-      </div>
-
-      {/* ── 21-Day Schedule ── */}
-      <section className={styles.scheduleSection} id="schedule">
-        <div className={styles.container}>
-          <p className={styles.eyebrowCenter}>Daily Practice Guide</p>
-          <h2 className={styles.sectionTitle}>
-            The Complete <span className={styles.accent}>21-Day Schedule</span>
-          </h2>
-          <p className={styles.sectionSubtitle}>
-            Each day includes the full practice guide and the mantra for that session.
-            Click any day to expand its details.
-          </p>
-
-          <div className={styles.daysList}>
-            {days.map((d) => (
-              <div
-                key={d.day}
-                className={`${styles.dayRow} ${expandedDay === d.day ? styles.dayRowOpen : ""}`}
-                style={{ "--phase-color": phaseColor[d.phase] }}
-              >
+                {/* Phase Header — clickable */}
                 <button
-                  className={styles.dayHeader}
-                  onClick={() => setExpandedDay(expandedDay === d.day ? null : d.day)}
+                  className={styles.stageHeader}
+                  onClick={() => togglePhase(idx)}
                 >
-                  <span className={styles.dayNumber} style={{ background: phaseColor[d.phase] }}>
-                    Day {d.day}
+                  <span
+                    className={styles.stageBadge}
+                    style={{ background: phase.color }}
+                  >
+                    Phase {phase.number}
                   </span>
-                  <span className={styles.dayTitleText}>{d.title}</span>
-                  <span className={styles.dayPhase}>{d.phase}</span>
-                  <span className={styles.dayMantraPreview}>{d.mantra}</span>
-                  <span className={styles.dayChevron}>{expandedDay === d.day ? "▲" : "▼"}</span>
+                  <div className={styles.stageHeaderInfo}>
+                    <span className={styles.stageHeaderName}>{phase.name}</span>
+                    <span className={styles.stageHeaderDays}>{phase.dayRange}</span>
+                  </div>
+                  <span className={styles.stageHeaderTagline}>
+                    "{phase.tagline}"
+                  </span>
+                  <span className={styles.chevron}>
+                    {expandedPhase === idx ? "▲" : "▼"}
+                  </span>
                 </button>
 
-                {expandedDay === d.day && (
-                  <div className={styles.dayBody}>
-                    <div className={styles.dayBodyGrid}>
-                      <div className={styles.dayPractices}>
-                        <p className={styles.dayBodyLabel}>Practice</p>
-                        <ul className={styles.practiceList}>
-                          {d.practices.map((p, i) => (
-                            <li key={i}>{p}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className={styles.dayMantra}>
-                        <p className={styles.dayBodyLabel}>Mantra</p>
-                        <p className={styles.mantraText}>{d.mantra}</p>
-                        {d.mantraNote && <p className={styles.mantraNote}>{d.mantraNote}</p>}
-                      </div>
+                {/* Expanded Day-wise Audio List */}
+                {expandedPhase === idx && (
+                  <div className={styles.dayListWrapper}>
+                    <p className={styles.stagePurposeInline}>{phase.description}</p>
+
+                    <div className={styles.dayList}>
+                      {phase.days.map((d) => {
+                        const key = `${phase.number}-${d.day}`;
+                        const isPlaying = playingDay === key;
+                        return (
+                          <div
+                            key={d.day}
+                            className={`${styles.dayRow} ${isPlaying ? styles.dayRowActive : ""}`}
+                          >
+                            <span className={styles.dayBadge}>Day {d.day}</span>
+
+                            <div className={styles.dayInfo}>
+                              <p className={styles.dayTheme}>{d.theme}</p>
+                              <p className={styles.dayVerse}>{d.mantra}</p>
+                            </div>
+
+                            <div className={styles.audioRight}>
+                              {isPlaying && (
+                                <div className={styles.waveBar}>
+                                  <span /><span /><span /><span /><span />
+                                </div>
+                              )}
+                              <span className={styles.dayDuration}>{d.duration}</span>
+                              <button
+                                className={`${styles.playCircleDay} ${isPlaying ? styles.playCircleDayActive : ""}`}
+                                onClick={(e) => togglePlay(key, e)}
+                              >
+                                <span className="material-symbols-outlined">
+                                  {isPlaying ? "pause" : "play_arrow"}
+                                </span>
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
+
+                    <p className={styles.universalMsgInline}>
+                      "{phase.universalMessage}"
+                    </p>
                   </div>
                 )}
+
               </div>
             ))}
           </div>
         </div>
-      </section>
 
-      {/* ── Background Music Section ── */}
-      <section className={styles.musicSection}>
-        <div className={styles.container}>
-          <p className={styles.eyebrowCenter}>Sound Environment</p>
-          <h2 className={styles.sectionTitle}>
-            Background Music <span className={styles.accent}>Structure</span>
-          </h2>
-          <p className={styles.sectionSubtitle}>
-            The recommended sonic layers for each phase of the 21-day practice.
-            Music is not included — this is the structural guide.
-          </p>
-
-          <div className={styles.musicLayersGrid}>
-            <div className={styles.musicLayerCard}>
-              <span className={styles.musicLayerNum}>Layer 1</span>
-              <h3 className={styles.musicLayerTitle}>Base Ambient Sound</h3>
-              <p className={styles.musicLayerDesc}>
-                Tanpura drone, low OM humming, or Himalayan singing bowl sustain.
-                This is the unbroken sonic foundation beneath the entire session.
-              </p>
-            </div>
-            <div className={styles.musicLayerCard}>
-              <span className={styles.musicLayerNum}>Layer 2</span>
-              <h3 className={styles.musicLayerTitle}>Soft Rhythm <span className={styles.optional}>(Optional)</span></h3>
-              <p className={styles.musicLayerDesc}>
-                Slow 60 BPM heartbeat rhythm or a subtle temple bell every few minutes.
-                Only add this layer if silence feels too abrupt for the practitioner.
-              </p>
-            </div>
-            <div className={styles.musicLayerCard}>
-              <span className={styles.musicLayerNum}>Layer 3</span>
-              <h3 className={styles.musicLayerTitle}>Mantra Layer</h3>
-              <p className={styles.musicLayerDesc}>
-                Single calm voice chant with minimal echo.
-                This layer carries the assigned mantra at low volume beneath the breath.
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.musicPhaseGuide}>
-            <h3 className={styles.musicPhaseHeading}>Phase-by-Phase Music Progression</h3>
-            <div className={styles.musicPhaseGrid}>
-              {phases.map((phase) => (
-                <div key={phase.name} className={styles.musicPhaseCard} style={{ borderLeft: `3px solid ${phase.color}` }}>
-                  <span className={styles.musicPhaseName} style={{ color: phase.color }}>{phase.days} — {phase.name}</span>
-                  <p className={styles.musicPhaseRec}>{phase.music}</p>
-                </div>
-              ))}
-            </div>
-            <p className={styles.musicNote}>
-              No audio files are included. Use the above structure as a guide when sourcing or composing
-              background music for in-app meditation sessions.
-            </p>
-          </div>
-        </div>
-      </section>
+      </div>
 
       {/* ── Completion Benefits ── */}
       <section className={styles.completionSection}>

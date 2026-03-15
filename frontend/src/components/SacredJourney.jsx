@@ -19,7 +19,7 @@ function SacredJourney() {
       
       <div className={styles.sacredBanner}>
         <p className={styles.bannerText}>
-          🕉️ Early Bird Pre-Orders Close in 15 Days | Founding Members Get 30% Off + Free Shipping |{' '}
+          Early Bird Pre-Orders Close in 15 Days | Founding Members Get 30% Off + Free Shipping |{' '}
           <span className={styles.bannerLink}>Claim Your Spot</span>
         </p>
       </div>

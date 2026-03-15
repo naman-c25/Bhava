@@ -36,8 +36,7 @@ function Navbar() {
                   <span className={styles.dotName}></span>
                   <span className={styles.dotName}></span>
                 </span>
-                <span className={styles.betaTag}>(beta)</span>
-              </h2>
+                              </h2>
             </div>
           </div>
           <div className={styles.col9}>

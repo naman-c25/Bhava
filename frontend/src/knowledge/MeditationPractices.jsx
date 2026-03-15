@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./MantraSadhana108.module.css";
+import styles from "./MeditationPractices.module.css";
 
 function MeditationPractices() {
   const navigate = useNavigate();
@@ -171,31 +171,31 @@ function MeditationPractices() {
 
   const completionBenefits = [
     {
-      icon: "🧠",
+      icon: "",
       title: "Calm and Focused Mind",
       description:
         "Meditation dissolves mental noise and scattered thinking, cultivating a steady, clear awareness that carries through the day.",
     },
     {
-      icon: "🌿",
+      icon: "",
       title: "Reduced Stress",
       description:
         "Regular practice activates deep inner stillness, providing lasting relief from chronic stress, worry, and anxiety.",
     },
     {
-      icon: "❤️",
+      icon: "",
       title: "Emotional Stability",
       description:
         "Meditation cultivates equanimity and inner balance, reducing emotional reactivity and developing compassion for self and others.",
     },
     {
-      icon: "🎯",
+      icon: "",
       title: "Improved Concentration",
       description:
         "Consistent practice sharpens the mind's ability to focus, improving performance and presence in all areas of life.",
     },
     {
-      icon: "✨",
+      icon: "",
       title: "Spiritual Awareness",
       description:
         "Through meditation, consciousness naturally expands beyond ego identification, revealing the deeper Self and its unity with universal awareness.",

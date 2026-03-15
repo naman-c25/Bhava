@@ -175,31 +175,31 @@ function SuryaNamaskar() {
 
   const completionBenefits = [
     {
-      icon: "☀️",
+      icon: "",
       title: "Vital Energy",
       description:
         "Daily Surya Namaskar awakens and sustains vital energy throughout the day, replacing fatigue with natural vitality.",
     },
     {
-      icon: "🧘",
+      icon: "",
       title: "Body & Flexibility",
       description:
         "The 12 postures strengthen muscles, improve joint health, and develop full-body flexibility over time.",
     },
     {
-      icon: "🌬️",
+      icon: "",
       title: "Breath Mastery",
       description:
         "Synchronizing breath with movement develops pranayama awareness and improves overall respiratory health.",
     },
     {
-      icon: "🙏",
+      icon: "",
       title: "Morning Devotion",
       description:
         "Starting each day with Surya Namaskar creates a sacred morning ritual that sets a spiritual tone for all activities.",
     },
     {
-      icon: "🌅",
+      icon: "",
       title: "Mental Clarity",
       description:
         "The meditative rhythm of Surya Namaskar calms the mind, reducing stress and building lasting mental clarity.",

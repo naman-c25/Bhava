@@ -76,8 +76,8 @@ function KnowledgeExtra() {
       {/* <NotSureStartBanner /> */}
       <LatestTeachings />
       {/* <MorningPracticesAndSeekers /> */}
-      <CommunityVoicesAndAncientVerses />
-      <WisdomJourneyCTA />
+      {/* <CommunityVoicesAndAncientVerses /> */}
+      {/* <WisdomJourneyCTA /> */}
     </>
   );
 }

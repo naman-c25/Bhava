@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./MantraSadhana108.module.css";
+import styles from "./VedicScriptures.module.css";
 
 function VedicScriptures() {
   const navigate = useNavigate();
@@ -173,31 +173,31 @@ function VedicScriptures() {
 
   const completionBenefits = [
     {
-      icon: "📖",
+      icon: "",
       title: "Deeper Philosophy",
       description:
         "Gain a profound understanding of Hindu philosophy — Brahman, Atman, Dharma, Karma, and Moksha — as living truths.",
     },
     {
-      icon: "🧭",
+      icon: "",
       title: "Clarity of Purpose",
       description:
         "Greater clarity about dharma and life purpose, guiding ethical decisions and meaningful living.",
     },
     {
-      icon: "🧠",
+      icon: "",
       title: "Mental Discipline",
       description:
         "Improved mental focus and self-discipline through the rigorous and contemplative practice of scriptural study.",
     },
     {
-      icon: "🌿",
+      icon: "",
       title: "Spiritual Heritage",
       description:
         "A living connection to thousands of years of accumulated wisdom passed down through an unbroken lineage of sages.",
     },
     {
-      icon: "☮️",
+      icon: "",
       title: "Inner Peace",
       description:
         "The wisdom of the Vedas, Upanishads, and Puranas continues to illuminate the path toward truth, harmony, and inner peace.",

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./MantraSadhana108.module.css";
+import styles from "./MantrasPrayers.module.css";
 
 function MantrasPrayers() {
   const navigate = useNavigate();
@@ -169,31 +169,31 @@ function MantrasPrayers() {
 
   const completionBenefits = [
     {
-      icon: "🧠",
+      icon: "",
       title: "Improved Focus",
       description:
         "Regular mantra chanting sharpens mental clarity, focus, and the ability to concentrate without distraction.",
     },
     {
-      icon: "🌿",
+      icon: "",
       title: "Stress Reduction",
       description:
         "The rhythmic repetition of sacred sounds calms the nervous system, reducing stress, anxiety, and emotional tension.",
     },
     {
-      icon: "❤️",
+      icon: "",
       title: "Emotional Balance",
       description:
         "Chanting creates positive vibrations in the mind, cultivating greater emotional stability and inner harmony.",
     },
     {
-      icon: "✨",
+      icon: "",
       title: "Spiritual Awareness",
       description:
         "Mantra practice deepens the connection with divine energy, expanding spiritual awareness and inner sensitivity.",
     },
     {
-      icon: "🙏",
+      icon: "",
       title: "Divine Connection",
       description:
         "Through mantra, devotees establish a living vibrational connection with the divine presence within and around them.",

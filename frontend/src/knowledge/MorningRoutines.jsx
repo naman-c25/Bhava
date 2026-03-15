@@ -2,11 +2,11 @@ import React, { useRef, useState } from "react";
 import styles from "./MorningRoutines.module.css";
 
 const routines = [
-  { icon: "📖", title: "Gītā Dhyāna",   sub: "Gita Contemplation", duration: "10 min", color: "#1e3a5f" },
-  { icon: "🪔", title: "Dainika Pūjā",  sub: "Daily Worship",       duration: "20 min", color: "#5f1e2a" },
-  { icon: "🔔", title: "Śānti Pāṭha",   sub: "Peace Mantras",        duration: "5 min",  color: "#2b1e5f" },
-  { icon: "✨", title: "Guru Vandana",   sub: "Salutations to the Teacher", duration: "8 min", color: "#3b1e5f" },
-  { icon: "🙏", title: "Iṣṭa Devatā",   sub: "Deity Meditation",     duration: "15 min", color: "#1e4a3a" },
+  { icon: "", title: "Gītā Dhyāna",   sub: "Gita Contemplation", duration: "10 min", color: "#1e3a5f" },
+  { icon: "", title: "Dainika Pūjā",  sub: "Daily Worship",       duration: "20 min", color: "#5f1e2a" },
+  { icon: "", title: "Śānti Pāṭha",   sub: "Peace Mantras",        duration: "5 min",  color: "#2b1e5f" },
+  { icon: "", title: "Guru Vandana",   sub: "Salutations to the Teacher", duration: "8 min", color: "#3b1e5f" },
+  { icon: "", title: "Iṣṭa Devatā",   sub: "Deity Meditation",     duration: "15 min", color: "#1e4a3a" },
 ];
 
 const playlists = [

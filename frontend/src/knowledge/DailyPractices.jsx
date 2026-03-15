@@ -95,12 +95,6 @@ function DailyPractices() {
         </button>
       </div>
 
-      <div className={styles.progressBar}>
-        <div
-          className={styles.progressFill}
-          style={{ width: `${Math.max(scrollPos * 100, 14)}%` }}
-        />
-      </div>
     </section>
   );
 }

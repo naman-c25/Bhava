@@ -18,8 +18,8 @@ function Home() {
       <ProductSpecification />
       <OurMission />
       <Community />
-      <AppSection />
-      <FAQ />
+      {/* <AppSection /> */}
+      {/* <FAQ /> */}
       <SacredJourney />
     </>
   );

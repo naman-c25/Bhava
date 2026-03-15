@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./MantraSadhana108.module.css";
+import styles from "./TempleTraditions.module.css";
 
 function TempleTraditions() {
   const navigate = useNavigate();
@@ -174,31 +174,31 @@ function TempleTraditions() {
 
   const completionBenefits = [
     {
-      icon: "🛕",
+      icon: "",
       title: "Respect for Wisdom",
       description:
         "Temple traditions cultivate deep respect for divine wisdom and the sacred knowledge preserved across thousands of years.",
     },
     {
-      icon: "🧘",
+      icon: "",
       title: "Spiritual Discipline",
       description:
         "Regular temple visits build lasting spiritual discipline and a life aligned with the rhythms of devotion and worship.",
     },
     {
-      icon: "❤️",
+      icon: "",
       title: "Compassion & Service",
       description:
         "The spirit of the temple teaches compassion, humility, and selfless service as expressions of living dharma.",
     },
     {
-      icon: "🪔",
+      icon: "",
       title: "Faith and Devotion",
       description:
         "Through witnessing sacred rituals and receiving prasad, faith deepens into a living, personal devotion.",
     },
     {
-      icon: "☮️",
+      icon: "",
       title: "Inner Peace",
       description:
         "The sacred atmosphere of a temple — bells, incense, lamps, and chanting — creates a profound and lasting inner stillness.",

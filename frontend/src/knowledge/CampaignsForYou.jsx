@@ -4,9 +4,9 @@ import styles from "./CampaignsForYou.module.css";
 const campaigns = [
   {
     creator: "Swami @VedantaPath",
-    creatorIcon: "🕉️",
+    creatorIcon: "",
     creatorBg: "#3a2a6a",
-    contentIcon: "🕉️",
+    contentIcon: "",
     contentBg: "#3a2a6a",
     title: "For Peace in Troubled Lands",
     day: "Day 4 of 7",
@@ -16,9 +16,9 @@ const campaigns = [
   },
   {
     creator: "Pandit @SanskritWisdom",
-    creatorIcon: "🪔",
+    creatorIcon: "",
     creatorBg: "#6a2a1a",
-    contentIcon: "🪔",
+    contentIcon: "",
     contentBg: "#6a2a1a",
     title: "For Those Suffering Illness",
     day: "Day 6 of 9",
@@ -28,9 +28,9 @@ const campaigns = [
   },
   {
     creator: "Guru @DharmicLife",
-    creatorIcon: "🌸",
+    creatorIcon: "",
     creatorBg: "#1a4a3a",
-    contentIcon: "🌸",
+    contentIcon: "",
     contentBg: "#1a4a3a",
     title: "For Environmental Healing",
     day: "Day 2 of 5",
@@ -40,9 +40,9 @@ const campaigns = [
   },
   {
     creator: "Swami @KrishnaPath",
-    creatorIcon: "🪷",
+    creatorIcon: "",
     creatorBg: "#4a2a5a",
-    contentIcon: "🪷",
+    contentIcon: "",
     contentBg: "#4a2a5a",
     title: "For World Peace & Unity",
     day: "Day 1 of 10",

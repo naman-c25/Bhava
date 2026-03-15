@@ -100,7 +100,7 @@ function Meditation() {
   const meditationTypes = [
     {
       title: "Mantra Meditation",
-      icon: "🕉️",
+      icon: "",
       phase: "Mantra",
       description: "Repeating sacred sounds like Om or Om Namah Shivaya to focus and elevate the mind.",
       practice: "Silently or softly repeat your chosen mantra in rhythm with your breath. Allow the vibration to fill your awareness.",
@@ -109,7 +109,7 @@ function Meditation() {
     },
     {
       title: "Breath Meditation",
-      icon: "🌬️",
+      icon: "",
       phase: "Breath",
       description: "Focusing undivided attention on the natural flow of breathing to cultivate presence.",
       practice: "Observe the breath entering and leaving without controlling it. Notice the pauses between breaths.",
@@ -118,7 +118,7 @@ function Meditation() {
     },
     {
       title: "Visualization Meditation",
-      icon: "🪷",
+      icon: "",
       phase: "Visualization",
       description: "Visualizing divine symbols, inner light, or a chosen deity to awaken devotion and focus.",
       practice: "Close your eyes and hold a clear mental image of a flame, lotus, or divine form. Let it grow vivid and steady.",
@@ -127,7 +127,7 @@ function Meditation() {
     },
     {
       title: "Silent Awareness Meditation",
-      icon: "🌌",
+      icon: "",
       phase: "Awareness",
       description: "Simply observing all thoughts, sensations, and feelings without judgment or reaction.",
       practice: "Sit in stillness. Observe whatever arises — thoughts, sensations, sounds — as a witness with no attachment.",
@@ -212,18 +212,18 @@ function Meditation() {
   ];
 
   const overviewCards = [
-    { icon: "🕐", title: "20 Minute Journey", description: "A complete daily dhyana session from preparation to closing peace mantra." },
-    { icon: "🧘", title: "6 Guided Steps", description: "From finding stillness to seated awareness — a structured inner journey." },
-    { icon: "🕉️", title: "Meaning of Dhyana", description: "Dhyana means deep, focused awareness — the 7th limb of Patanjali's Ashtanga Yoga." },
-    { icon: "🌅", title: "Best Time", description: "Early morning or evening when the mind is naturally still and receptive." },
+    { icon: "", title: "20 Minute Journey", description: "A complete daily dhyana session from preparation to closing peace mantra." },
+    { icon: "", title: "6 Guided Steps", description: "From finding stillness to seated awareness — a structured inner journey." },
+    { icon: "", title: "Meaning of Dhyana", description: "Dhyana means deep, focused awareness — the 7th limb of Patanjali's Ashtanga Yoga." },
+    { icon: "", title: "Best Time", description: "Early morning or evening when the mind is naturally still and receptive." },
   ];
 
   const benefits = [
-    { icon: "☮️", title: "Reduces Stress", description: "Regular meditation lowers cortisol levels and brings lasting calmness to the nervous system." },
-    { icon: "🧠", title: "Improves Concentration", description: "Trains the mind to maintain focus, sharpening clarity and decision-making." },
-    { icon: "⚖️", title: "Emotional Balance", description: "Cultivates equanimity — you respond to life rather than react to it." },
-    { icon: "🔍", title: "Self-Awareness", description: "You become the witness of your thoughts, understanding yourself at a deeper level." },
-    { icon: "✨", title: "Spiritual Connection", description: "Over time, meditation opens the door to higher consciousness and inner peace." },
+    { icon: "", title: "Reduces Stress", description: "Regular meditation lowers cortisol levels and brings lasting calmness to the nervous system." },
+    { icon: "", title: "Improves Concentration", description: "Trains the mind to maintain focus, sharpening clarity and decision-making." },
+    { icon: "", title: "Emotional Balance", description: "Cultivates equanimity — you respond to life rather than react to it." },
+    { icon: "", title: "Self-Awareness", description: "You become the witness of your thoughts, understanding yourself at a deeper level." },
+    { icon: "", title: "Spiritual Connection", description: "Over time, meditation opens the door to higher consciousness and inner peace." },
   ];
 
   const phaseColor = {
@@ -357,7 +357,7 @@ function Meditation() {
                         <ul className={styles.stepUl}>
                           {s.instructions.map((inst, i) => <li key={i}>{inst}</li>)}
                         </ul>
-                        {s.note && <p className={styles.noteText}>💡 {s.note}</p>}
+                        {s.note && <p className={styles.noteText}> {s.note}</p>}
                       </div>
                       {(s.sanskrit || s.meaning) && (
                         <div className={styles.stepBlock}>
@@ -478,7 +478,7 @@ function Meditation() {
                       <span className={styles.challengePractice}>{d.practice}</span>
                     </div>
                   ))}
-                  <p className={styles.challengeGoal}>🎯 {w.goal}</p>
+                  <p className={styles.challengeGoal}> {w.goal}</p>
                 </div>
               </div>
             ))}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./MantraSadhana108.module.css";
+import styles from "./PujaRituals.module.css";
 
 function PujaRituals() {
   const navigate = useNavigate();
@@ -164,31 +164,31 @@ function PujaRituals() {
 
   const completionBenefits = [
     {
-      icon: "🧘",
+      icon: "",
       title: "Mental Calmness",
       description:
         "Regular puja brings mental clarity, focus, and a quiet mind that is no longer scattered by daily distractions.",
     },
     {
-      icon: "❤️",
+      icon: "",
       title: "Emotional Stability",
       description:
         "Devotional practice softens emotional reactions, bringing greater balance and inner harmony to daily life.",
     },
     {
-      icon: "🪔",
+      icon: "",
       title: "Spiritual Discipline",
       description:
         "Consistency in puja builds lasting spiritual discipline, transforming worship into a natural daily rhythm.",
     },
     {
-      icon: "🏡",
+      icon: "",
       title: "Positive Energy",
       description:
         "Sacred rituals infuse the home with positive energy, creating an atmosphere of peace and divine presence.",
     },
     {
-      icon: "🙏",
+      icon: "",
       title: "Strengthened Devotion",
       description:
         "Through daily puja, faith deepens and devotion grows into a living connection with the divine.",

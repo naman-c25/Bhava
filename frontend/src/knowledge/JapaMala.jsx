@@ -86,7 +86,7 @@ function JapaMala() {
   const mantraCategories = [
     {
       category: "Universal Mantras",
-      icon: "🕉️",
+      icon: "",
       phase: "Universal",
       description: "Foundation mantras of the Hindu tradition, used across all lineages and purposes.",
       mantras: ["Om", "Om Shanti Shanti Shanti", "Soham"],
@@ -94,7 +94,7 @@ function JapaMala() {
     },
     {
       category: "Shiva Mantras",
-      icon: "🔱",
+      icon: "",
       phase: "Shiva",
       description: "Dedicated to Lord Shiva — the destroyer of ignorance and bestower of liberation.",
       mantras: [
@@ -105,7 +105,7 @@ function JapaMala() {
     },
     {
       category: "Vishnu / Krishna Mantras",
-      icon: "🪷",
+      icon: "",
       phase: "Vishnu",
       description: "Devoted to Lord Vishnu and Krishna — the preserver and divine love incarnate.",
       mantras: [
@@ -117,7 +117,7 @@ function JapaMala() {
     },
     {
       category: "Ganesha Mantras",
-      icon: "🐘",
+      icon: "",
       phase: "Ganesha",
       description: "Honouring Lord Ganesha — the remover of obstacles and lord of new beginnings.",
       mantras: [
@@ -128,7 +128,7 @@ function JapaMala() {
     },
     {
       category: "Lakshmi Mantras",
-      icon: "🌸",
+      icon: "",
       phase: "Lakshmi",
       description: "Dedicated to Goddess Lakshmi — bestower of wealth, abundance, and auspiciousness.",
       mantras: [
@@ -139,7 +139,7 @@ function JapaMala() {
     },
     {
       category: "Saraswati & Hanuman",
-      icon: "🎵",
+      icon: "",
       phase: "Other",
       description: "Saraswati for wisdom and learning. Hanuman for courage and protection.",
       mantras: [
@@ -219,18 +219,18 @@ function JapaMala() {
   ];
 
   const overviewCards = [
-    { icon: "📿", title: "108 Sacred Beads", description: "Each bead holds one mantra repetition — completing a full circle of devotion and inner stillness." },
-    { icon: "🕉️", title: "The Power of Japa", description: "Continuous sacred sound repetition gradually moves the mind from distraction to divine focus." },
-    { icon: "🌅", title: "Best Time", description: "Early morning or evening — when the mind is naturally receptive and the environment is still." },
-    { icon: "🔄", title: "Daily Consistency", description: "Even one mala round daily builds profound spiritual discipline and mental calmness over time." },
+    { icon: "", title: "108 Sacred Beads", description: "Each bead holds one mantra repetition — completing a full circle of devotion and inner stillness." },
+    { icon: "", title: "The Power of Japa", description: "Continuous sacred sound repetition gradually moves the mind from distraction to divine focus." },
+    { icon: "", title: "Best Time", description: "Early morning or evening — when the mind is naturally receptive and the environment is still." },
+    { icon: "", title: "Daily Consistency", description: "Even one mala round daily builds profound spiritual discipline and mental calmness over time." },
   ];
 
   const benefits = [
-    { icon: "🧘", title: "Improves Concentration", description: "Trains the mind to stay anchored on a single sacred focus, building powerful attention." },
-    { icon: "☮️", title: "Calms the Mind", description: "The rhythmic repetition of mantra quiets mental chatter and brings deep stillness." },
-    { icon: "🙏", title: "Deepens Devotion", description: "Continuous devotional repetition opens the heart and strengthens the spiritual connection." },
-    { icon: "⚡", title: "Positive Energy", description: "Sacred sound vibrations create uplifting mental frequencies and spiritual clarity." },
-    { icon: "📅", title: "Builds Discipline", description: "Daily Japa practice develops the willpower and consistency needed for all spiritual growth." },
+    { icon: "", title: "Improves Concentration", description: "Trains the mind to stay anchored on a single sacred focus, building powerful attention." },
+    { icon: "", title: "Calms the Mind", description: "The rhythmic repetition of mantra quiets mental chatter and brings deep stillness." },
+    { icon: "", title: "Deepens Devotion", description: "Continuous devotional repetition opens the heart and strengthens the spiritual connection." },
+    { icon: "", title: "Positive Energy", description: "Sacred sound vibrations create uplifting mental frequencies and spiritual clarity." },
+    { icon: "", title: "Builds Discipline", description: "Daily Japa practice develops the willpower and consistency needed for all spiritual growth." },
   ];
 
   const phaseColor = {
@@ -309,17 +309,17 @@ function JapaMala() {
             </div>
             <div className={styles.beadsGrid}>
               <div className={styles.beadsCard}>
-                <span className={styles.beadsCardIcon}>📖</span>
+                <span className={styles.beadsCardIcon}></span>
                 <h4 className={styles.beadsCardTitle}>108 Upanishads</h4>
                 <p className={styles.beadsCardDesc}>Representing the complete body of Vedic spiritual wisdom.</p>
               </div>
               <div className={styles.beadsCard}>
-                <span className={styles.beadsCardIcon}>⚡</span>
+                <span className={styles.beadsCardIcon}></span>
                 <h4 className={styles.beadsCardTitle}>108 Energy Pathways</h4>
                 <p className={styles.beadsCardDesc}>The number of key nadis (energy channels) in the human body.</p>
               </div>
               <div className={styles.beadsCard}>
-                <span className={styles.beadsCardIcon}>🌸</span>
+                <span className={styles.beadsCardIcon}></span>
                 <h4 className={styles.beadsCardTitle}>108 Divine Names</h4>
                 <p className={styles.beadsCardDesc}>Most Hindu deities have 108 sacred names and attributes.</p>
               </div>
@@ -364,7 +364,7 @@ function JapaMala() {
                         <ul className={styles.stepUl}>
                           {s.instructions.map((inst, i) => <li key={i}>{inst}</li>)}
                         </ul>
-                        {s.note && <p className={styles.noteText}>💡 {s.note}</p>}
+                        {s.note && <p className={styles.noteText}> {s.note}</p>}
                       </div>
                       {(s.sanskrit || s.meaning) && (
                         <div className={styles.stepBlock}>
@@ -490,7 +490,7 @@ function JapaMala() {
                       {pr}
                     </div>
                   ))}
-                  <p className={styles.sadhanaGoal}>🎯 {ph.goal}</p>
+                  <p className={styles.sadhanaGoal}> {ph.goal}</p>
                 </div>
               </div>
             ))}

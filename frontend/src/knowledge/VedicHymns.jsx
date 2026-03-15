@@ -175,31 +175,31 @@ function VedicHymns() {
 
   const completionBenefits = [
     {
-      icon: "🕉️",
+      icon: "",
       title: "Sacred Sound Mastery",
       description:
         "Regular chanting of Vedic hymns develops proper pronunciation and understanding of sacred Sanskrit vibrations.",
     },
     {
-      icon: "🧘",
+      icon: "",
       title: "Mental Clarity",
       description:
         "The rhythmic patterns of Vedic chanting improve focus, concentration, and cognitive clarity through sound vibration.",
     },
     {
-      icon: "🌅",
+      icon: "",
       title: "Spiritual Connection",
       description:
         "Chanting hymns dedicated to divine forces strengthens the practitioner's personal connection with the sacred.",
     },
     {
-      icon: "🌿",
+      icon: "",
       title: "Emotional Balance",
       description:
         "Sanskrit vibrations calm the nervous system, reduce stress, and create deep emotional stability.",
     },
     {
-      icon: "📿",
+      icon: "",
       title: "Living Tradition",
       description:
         "Every chant preserves an unbroken lineage of wisdom stretching back thousands of years to the ancient Rishis.",

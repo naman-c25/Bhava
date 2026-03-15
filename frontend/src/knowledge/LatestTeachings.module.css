@@ -129,7 +129,7 @@
 }
 
 .card:hover .cardThumb {
-  transform: translateY(-5px);
+  transform: scale(1.08);
   box-shadow: 0 16px 36px rgba(30, 45, 30, 0.18);
 }
 

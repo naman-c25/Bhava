@@ -1,116 +1,161 @@
 import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import styles from "./SacredCollection.module.css";
 
-const CARDS_PER_PAGE = 3;
+const GAP = 20;
+const VISIBLE = 4;
+const STEP = 2;
+const INTERVAL = 3000; // ms between each slide
+
+const cards = [
+  {
+    id: 0,
+    category: "INCENSE",
+    title: "Vedic Incense Series",
+    price: "₹1,299",
+    description: "Hand-rolled using 16th-century temple recipes, infused with Himalayan herbs and sacred mantras.",
+    image: "./incense.jpeg",
+  },
+  {
+    id: 1,
+    category: "SAMBRANI",
+    title: "Sacred Sambrani Cups",
+    price: "₹899",
+    description: "Purified resin sambrani with aromatic woods, perfect for daily pujas and sacred rituals.",
+    image: "./incense.jpeg",
+  },
+  {
+    id: 2,
+    category: "DHOOP",
+    title: "Temple Dhoop Sticks",
+    price: "₹749",
+    description: "Crafted from 108 medicinal herbs, each stick carries the blessing of traditional temple practitioners.",
+    image: "./incense.jpeg",
+  },
+  {
+    id: 3,
+    category: "WELLNESS",
+    title: "Sacred Anointing Oil",
+    price: "₹1,599",
+    description: "Ayurvedic blend of coconut and sacred herbs, traditionally used for temple abhishekam.",
+    image: "./anionting.jpeg",
+  },
+  {
+    id: 4,
+    category: "MEDITATION",
+    title: "Meditation Ritual Kit",
+    price: "₹2,499",
+    description: "Complete set for daily sadhana with premium incense, oil, and guided dharma cards.",
+    image: "./anionting.jpeg",
+  },
+  {
+    id: 5,
+    category: "ULTRA PREMIUM",
+    title: "Platinum Devotion Box",
+    price: "₹4,999",
+    description: "Limited edition curated selection—offerings from 12 sacred temples across India.",
+    image: "./anionting.jpeg",
+  },
+];
+
+// Duplicate for seamless infinite loop
+// loopedCards[0..5] = original, loopedCards[6..11] = clone
+// When rawIndex reaches 6, snap back to 0 invisibly (same visual)
+const loopedCards = [...cards, ...cards];
+
+function FlipCard({ card, width, onHoverStart, onHoverEnd }) {
+  const [flipped, setFlipped] = useState(false);
+
+  return (
+    <div
+      className={styles.cardOuter}
+      style={width ? { flex: `0 0 ${width}px`, width } : {}}
+      onMouseEnter={() => { setFlipped(true); onHoverStart(); }}
+      onMouseLeave={() => { setFlipped(false); onHoverEnd(); }}
+    >
+      <motion.div
+        className={styles.cardInner}
+        animate={{ rotateY: flipped ? 180 : 0 }}
+        transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        {/* BACK — image face, visible by default */}
+        <div className={styles.cardBack}>
+          <img src={card.image} alt={card.title} className={styles.cardBackImg} />
+          <div className={styles.cardBackOverlay}>
+            <span className={styles.cardBackCategory}>{card.category}</span>
+            <p className={styles.cardBackTitle}>{card.title}</p>
+          </div>
+        </div>
+
+        {/* FRONT — details face, revealed on hover flip */}
+        <div className={styles.cardFront}>
+          <div className={styles.cardFrontContent}>
+            <div className={styles.frontTop}>
+              <span className={styles.frontCategory}>{card.category}</span>
+              <h3 className={styles.frontTitle}>{card.title}</h3>
+              <p className={styles.frontPrice}>{card.price}</p>
+            </div>
+            <div className={styles.frontBottom}>
+              <p className={styles.frontDescription}>{card.description}</p>
+              <button className={styles.frontBtn}>Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
 
 function SacredCollection() {
-  const [activeSlide, setActiveSlide] = useState({});
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const [page, setPage] = useState(0);
-  const intervalRefs = useRef({});
+  const [cardWidth, setCardWidth] = useState(0);
+  const [rawIndex, setRawIndex] = useState(0); // increases: 0 → 2 → 4 → 6, then snaps to 0
+  const [animated, setAnimated] = useState(true); // false during instant snap-back
+  const isPaused = useRef(false);
+  const wrapperRef = useRef(null);
 
+  const translateX = cardWidth ? -rawIndex * (cardWidth + GAP) : 0;
+
+  // Measure wrapper width → card width
   useEffect(() => {
-    if (hoveredCard !== null) {
-      intervalRefs.current[hoveredCard] = setInterval(() => {
-        setActiveSlide((prev) => {
-          const currentSlide = prev[hoveredCard] || 0;
-          const nextSlide = (currentSlide + 1) % 3;
-          return {
-            ...prev,
-            [hoveredCard]: nextSlide,
-          };
-        });
-      }, 1500);
-    }
-
-    return () => {
-      if (hoveredCard !== null && intervalRefs.current[hoveredCard]) {
-        clearInterval(intervalRefs.current[hoveredCard]);
+    const measure = () => {
+      if (wrapperRef.current) {
+        const w = wrapperRef.current.clientWidth;
+        setCardWidth((w - GAP * (VISIBLE - 1)) / VISIBLE);
       }
     };
-  }, [hoveredCard]);
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
-  const handleMouseEnter = (cardIndex) => {
-    setHoveredCard(cardIndex);
-  };
+  // Auto-advance — skips tick entirely when a card is hovered
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (isPaused.current) return;
+      setRawIndex((prev) => prev + STEP);
+    }, INTERVAL);
+    return () => clearInterval(timer);
+  }, []);
 
-  const handleMouseLeave = (cardIndex) => {
-    setHoveredCard(null);
-    if (intervalRefs.current[cardIndex]) {
-      clearInterval(intervalRefs.current[cardIndex]);
-    }
-    setActiveSlide((prev) => ({
-      ...prev,
-      [cardIndex]: 0,
-    }));
-  };
+  // When rawIndex reaches cards.length (6), wait for the slide animation to
+  // finish, then instantly snap back to 0 — loopedCards[6..9] visually
+  // matches loopedCards[0..3] so the jump is invisible to the user.
+  useEffect(() => {
+    if (rawIndex < cards.length) return;
+    const snapTimer = setTimeout(() => {
+      setAnimated(false);
+      setRawIndex((prev) => prev - cards.length);
+    }, 700); // slightly longer than the 0.65s slide
+    return () => clearTimeout(snapTimer);
+  }, [rawIndex]);
 
-  const handleDotClick = (cardIndex, slideIndex) => {
-    setActiveSlide((prev) => ({
-      ...prev,
-      [cardIndex]: slideIndex,
-    }));
-  };
-
-  const cards = [
-    {
-      id: 0,
-      category: "INCENSE",
-      title: "Vedic Incense Series",
-      price: "₹1,299",
-      description: "Hand-rolled using 16th-century temple recipes, infused with Himalayan herbs and sacred mantras.",
-      image: "./incense.jpeg",
-      imageClass: styles.productImageEmoji
-    },
-    {
-      id: 1,
-      category: "SAMBRANI",
-      title: "Sacred Sambrani Cups",
-      price: "₹899",
-      description: "Purified resin sambrani with aromatic woods, perfect for daily pujas and sacred rituals.",
-      image: "./incense.jpeg",
-      imageClass: styles.productImageEmoji
-    },
-    {
-      id: 2,
-      category: "DHOOP",
-      title: "Temple Dhoop Sticks",
-      price: "₹749",
-      description: "Crafted from 108 medicinal herbs, each stick carries the blessing of traditional temple practitioners.",
-      image: "./incense.jpeg",
-      imageClass: styles.productImageEmoji
-    },
-    {
-      id: 3,
-      category: "WELLNESS",
-      title: "Sacred Anointing Oil",
-      price: "₹1,599",
-      description: "Ayurvedic blend of coconut and sacred herbs, traditionally used for temple abhishekam.",
-      image: "./anionting.jpeg",
-      imageClass: styles.productImagePhoto
-    },
-    {
-      id: 4,
-      category: "MEDITATION",
-      title: "Meditation Ritual Kit",
-      price: "₹2,499",
-      description: "Complete set for daily sadhana with premium incense, oil, and guided dharma cards.",
-      image: "./anionting.jpeg",
-      imageClass: styles.productImagePhoto
-    },
-    {
-      id: 5,
-      category: "ULTRA PREMIUM",
-      title: "Platinum Devotion Box",
-      price: "₹4,999",
-      description: "Limited edition curated selection—offerings from 12 sacred temples across India.",
-      image: "./anionting.jpeg",
-      imageClass: styles.productImagePhoto
-    }
-  ];
-
-  const totalPages = Math.ceil(cards.length / CARDS_PER_PAGE);
-  const visibleCards = cards.slice(page * CARDS_PER_PAGE, (page + 1) * CARDS_PER_PAGE);
+  // Re-enable animation on the very next frame after the snap
+  useEffect(() => {
+    if (animated) return;
+    const t = setTimeout(() => setAnimated(true), 30);
+    return () => clearTimeout(t);
+  }, [animated]);
 
   return (
     <div className={styles.sacredCollectionSection}>
@@ -119,79 +164,25 @@ function SacredCollection() {
           Our Sacred <span className={styles.highlight}>Collections</span>
         </h1>
 
-        <div className={styles.gridWrapper}>
-          <div className={styles.productsGrid}>
-            {visibleCards.map((card) => (
-              <div
-                key={card.id}
-                className={styles.productCard}
-                onMouseEnter={() => handleMouseEnter(card.id)}
-                onMouseLeave={() => handleMouseLeave(card.id)}
-              >
-                <div className={styles.productImageWrapper}>
-                  <div
-                    className={styles.productImageSlider}
-                    style={{
-                      transform: `translateX(-${(activeSlide[card.id] || 0) * 100}%)`,
-                    }}
-                  >
-                    <div className={`${styles.productImage} ${card.imageClass}`}>
-                      <img src={card.image} alt={`${card.title} - View 1`} />
-                    </div>
-                    <div className={`${styles.productImage} ${card.imageClass}`}>
-                      <img src={card.image} alt={`${card.title} - View 2`} />
-                    </div>
-                    <div className={`${styles.productImage} ${card.imageClass}`}>
-                      <img src={card.image} alt={`${card.title} - View 3`} />
-                    </div>
-                  </div>
-                  <button className={styles.btnAddCart}>Add to Cart</button>
-                  <div className={styles.carouselDots}>
-                    <span
-                      className={`${styles.dot} ${(activeSlide[card.id] || 0) === 0 ? styles.active : ""}`}
-                      onClick={() => handleDotClick(card.id, 0)}
-                    />
-                    <span
-                      className={`${styles.dot} ${(activeSlide[card.id] || 0) === 1 ? styles.active : ""}`}
-                      onClick={() => handleDotClick(card.id, 1)}
-                    />
-                    <span
-                      className={`${styles.dot} ${(activeSlide[card.id] || 0) === 2 ? styles.active : ""}`}
-                      onClick={() => handleDotClick(card.id, 2)}
-                    />
-                  </div>
-                </div>
-                <div className={styles.productContent}>
-                  <p className={styles.productCategory}>{card.category}</p>
-                  <div className={styles.productHeader}>
-                    <h3 className={styles.productTitle}>{card.title}</h3>
-                    <div className={styles.productPriceContainer}>
-                      <span className={styles.productPrice}>{card.price}</span>
-                    </div>
-                  </div>
-                  <p className={styles.productDescription}>{card.description}</p>
-                </div>
-              </div>
+        <div className={styles.sliderWrapper} ref={wrapperRef}>
+          <motion.div
+            className={styles.sliderTrack}
+            animate={{ x: translateX }}
+            transition={{
+              duration: animated ? 0.65 : 0,
+              ease: [0.4, 0, 0.2, 1],
+            }}
+          >
+            {loopedCards.map((card, idx) => (
+              <FlipCard
+                key={`${card.id}-${idx}`}
+                card={card}
+                width={cardWidth}
+                onHoverStart={() => { isPaused.current = true; }}
+                onHoverEnd={() => { isPaused.current = false; }}
+              />
             ))}
-          </div>
-
-          {/* Left arrow */}
-          <button
-            className={`${styles.arrow} ${styles.arrowLeft} ${page === 0 ? styles.arrowHidden : ""}`}
-            onClick={() => setPage((p) => p - 1)}
-            aria-label="Previous products"
-          >
-            ‹
-          </button>
-
-          {/* Right arrow */}
-          <button
-            className={`${styles.arrow} ${styles.arrowRight} ${page === totalPages - 1 ? styles.arrowHidden : ""}`}
-            onClick={() => setPage((p) => p + 1)}
-            aria-label="Next products"
-          >
-            ›
-          </button>
+          </motion.div>
         </div>
       </div>
     </div>

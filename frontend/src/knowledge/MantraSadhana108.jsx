@@ -1,6 +1,89 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./MantraSadhana108.module.css";
+
+const phases = [
+  {
+    id: 1,
+    phase: "Foundation",
+    dayRange: "Day 1–21",
+    color: "#6E1B21",
+    tagline: "Discipline Begins the Journey",
+    purpose:
+      "Build consistency, correct pronunciation, and mental focus. This phase is about habit formation — the mind may wander, but discipline is more important than depth.",
+    universalMessage:
+      "Every great sadhana begins with the courage to show up, even when the mind resists.",
+    days: [
+      { day: 1,   theme: "Setting the Sankalpa",             mantra: "Om Namah Shivaya",       duration: "14:00" },
+      { day: 3,   theme: "Correct Pronunciation & Breath",   mantra: "Om Namo Narayanaya",     duration: "14:00" },
+      { day: 7,   theme: "Building the Daily Habit",         mantra: "Om Gan Ganapataye",      duration: "14:00" },
+      { day: 10,  theme: "Mind Wandering & Return",          mantra: "Mahamrityunjaya Mantra", duration: "14:00" },
+      { day: 14,  theme: "Mala & Japa Practice",             mantra: "Om Namah Shivaya",       duration: "14:00" },
+      { day: 17,  theme: "Silent Repetition Begins",         mantra: "So Hum",                 duration: "14:00" },
+      { day: 21,  theme: "Foundation Complete",              mantra: "Om Shanti Shanti Shanti", duration: "14:00" },
+    ],
+  },
+  {
+    id: 2,
+    phase: "Stabilization",
+    dayRange: "Day 22–54",
+    color: "#6E1B21",
+    tagline: "Breath and Sound Become One",
+    purpose:
+      "Connect mantra with breath and deepen awareness. The mind starts settling. Chanting becomes rhythmic. Bring mantra into motion — walking, cooking, breathing.",
+    universalMessage:
+      "Discipline is the bridge between intention and transformation. Action without ego is the secret of peace.",
+    days: [
+      { day: 22,  theme: "Mantra-Breath Union",           mantra: "So Hum",                     duration: "14:00" },
+      { day: 27,  theme: "Softening the Voice",           mantra: "Om Namo Bhagavate Vasudevaya", duration: "14:00" },
+      { day: 33,  theme: "Mantra in Motion",              mantra: "Hare Krishna Maha-Mantra",    duration: "14:00" },
+      { day: 40,  theme: "Rhythmic Consistency",          mantra: "Om Namah Shivaya",            duration: "14:00" },
+      { day: 45,  theme: "Spontaneous Mantra Arising",    mantra: "Om Hreem Namah",              duration: "14:00" },
+      { day: 50,  theme: "Gratitude & Bhakti Infuses",    mantra: "Om Sri Maha Lakshmyai Namah", duration: "14:00" },
+      { day: 54,  theme: "Stabilization Complete",        mantra: "Om Tat Sat",                  duration: "14:00" },
+    ],
+  },
+  {
+    id: 3,
+    phase: "Deepening",
+    dayRange: "Day 55–81",
+    color: "#6E1B21",
+    tagline: "Mantra Enters the Heart",
+    purpose:
+      "Move from verbal chanting to internal repetition. This phase is about internalization — the mantra travels from lips to heart, becoming a living presence.",
+    universalMessage:
+      "The mantra is a living being. When you repeat it with sincerity, it repeats itself within you.",
+    days: [
+      { day: 55,  theme: "Inner Japa Begins",             mantra: "Om Namah Shivaya (silent)",   duration: "14:00" },
+      { day: 60,  theme: "Heart-Center Awareness",        mantra: "Om Hreem Shreem Kleem",        duration: "14:00" },
+      { day: 65,  theme: "Mantra Without Effort",         mantra: "So Hum (breath-synced)",       duration: "14:00" },
+      { day: 70,  theme: "Extended Sitting",              mantra: "Om (25 min inner hold)",       duration: "14:00" },
+      { day: 74,  theme: "Nada Yoga Awareness",           mantra: "AUM — Three Sounds as One",    duration: "14:00" },
+      { day: 78,  theme: "Merging with the Mantra",       mantra: "Om Param Brahma Namah",        duration: "14:00" },
+      { day: 81,  theme: "Deepening Complete",            mantra: "Om Shanti Om",                 duration: "14:00" },
+    ],
+  },
+  {
+    id: 4,
+    phase: "Integration",
+    dayRange: "Day 82–108",
+    color: "#6E1B21",
+    tagline: "Sound Becomes Stillness",
+    purpose:
+      "Integrate mantra into daily life. Chanting is no longer practice — it becomes presence. The sound dissolves and what remains is silence, devotion, and grace.",
+    universalMessage:
+      "When the chanting stops and the silence speaks, the sadhana is complete.",
+    days: [
+      { day: 82,  theme: "Living the Mantra",             mantra: "Om Namah Shivaya",            duration: "14:00" },
+      { day: 88,  theme: "Detachment in Practice",        mantra: "Om Namo Narayanaya",          duration: "14:00" },
+      { day: 93,  theme: "Mantra as Refuge",              mantra: "Mahamrityunjaya Mantra",      duration: "14:00" },
+      { day: 99,  theme: "Witnessing the Silence",        mantra: "Silent inner OM",             duration: "14:00" },
+      { day: 103, theme: "Surrender & Bhakti",            mantra: "Om Sri Gurubhyo Namah",       duration: "14:00" },
+      { day: 106, theme: "Completing the Cycle",          mantra: "Om Purnamadah Purnamidam",    duration: "14:00" },
+      { day: 108, theme: "Purnahuti — Final Offering",    mantra: "Om Shanti Shanti Shanti",     duration: "14:00" },
+    ],
+  },
+];
 
 const completionBenefits = [
   {
@@ -41,7 +124,7 @@ const sacredFacts = [
     label: "Astronomy & Cosmos",
     heading: "The Universe Encoded in a Number",
     description:
-      "The Sun's diameter is approximately 108 times the Earth's diameter. The distance from Earth to the Sun is approximately 108 times the Sun's diameter. The distance from Earth to the Moon is approximately 108 times the Moon's diameter. Ancient Vedic sages calculated this thousands of years ago — making 108 a cosmic number connecting Earth, Sun, and Moon.",
+      "The Sun's diameter is approximately 108 times the Earth's diameter. The distance from Earth to the Sun is approximately 108 times the Sun's diameter. The distance from Earth to the Moon is approximately 108 times the Moon's diameter. Ancient Vedic sages calculated this thousands of years ago.",
   },
   {
     label: "Human Body & Chakras",
@@ -53,7 +136,7 @@ const sacredFacts = [
     label: "Sanskrit & Sacred Texts",
     heading: "The Language of the Divine",
     description:
-      "Sanskrit has 54 letters, each with masculine (Shiva) and feminine (Shakti) forms — 54 multiplied by 2 equals 108. The Rigveda is divided into 10,800 stanzas. There are 108 Upanishads, the sacred philosophical texts of Vedanta, and 108 names each for Vishnu, Shiva, Lakshmi, and Ganesha.",
+      "Sanskrit has 54 letters, each with masculine (Shiva) and feminine (Shakti) forms — 54 multiplied by 2 equals 108. The Rigveda is divided into 10,800 stanzas. There are 108 Upanishads and 108 names each for Vishnu, Shiva, Lakshmi, and Ganesha.",
   },
   {
     label: "Tantra & Yoga",
@@ -71,57 +154,31 @@ const sacredFacts = [
     label: "Across Traditions",
     heading: "A Universal Sacred Number",
     description:
-      "Beyond Hinduism, the significance of 108 resonates widely. In Buddhism, 108 bells are rung to mark the New Year and 108 defilements must be overcome. In Sikhism, 108 divine names are honored. In Jainism, 108 virtues are recognized as the path to liberation.",
-  },
-];
-
-const phases = [
-  {
-    phase: "Foundation",
-    days: "Day1-21",
-    number: 1,
-    title: "Discipline begins the journey",
-    description:
-      "To build consistency, correct pronunciation, and mental focus. This phase is about habit formation. The mind may wander. The body may resist. But discipline is more important than depth at this stage.",
-    duration: "14 Mins",
-  },
-  {
-    phase: "Stabilization",
-    days: "Day 22-54",
-    number: 2,
-    title: "Breath and Sound become one",
-    description:
-      "To connect mantra with breath and deepen awareness. Now the mind starts settling. Chanting becomes rhythmic.",
-    duration: "14 Mins",
-  },
-  {
-    phase: "Deepening",
-    days: "Day 55-81",
-    number: 3,
-    title: "Mantra enters the heart",
-    description:
-      "To move from verbal chanting to internal repetition (Japa). This phase is about internalization.",
-    duration: "14 Mins",
-  },
-  {
-    phase: "Integration",
-    days: "Day 82-108",
-    number: 4,
-    title: "Sound become stillness",
-    description:
-      "To integrate mantra into daily life. Chanting is no longer practice. It becomes presence.",
-    duration: "14 Mins",
+      "Beyond Hinduism, the significance of 108 resonates widely. In Buddhism, 108 bells are rung to mark the New Year. In Sikhism, 108 divine names are honored. In Jainism, 108 virtues are recognized as the path to liberation.",
   },
 ];
 
 function MantraSadhana108() {
   const navigate = useNavigate();
+  const [expandedPhase, setExpandedPhase] = useState(null);
+  const [playingDay, setPlayingDay] = useState(null);
+
+  const togglePhase = (idx) => {
+    setExpandedPhase(expandedPhase === idx ? null : idx);
+  };
+
+  const togglePlay = (dayKey, e) => {
+    e.stopPropagation();
+    setPlayingDay(playingDay === dayKey ? null : dayKey);
+  };
 
   return (
     <div className={styles.page}>
+
+      {/* ── Two-Panel Layout ── */}
       <div className={styles.layout}>
 
-        {/* ── Left Panel ── */}
+        {/* Left Panel */}
         <div className={styles.leftPanel}>
           <h1 className={styles.title}>108-Day Mantra Sādhana</h1>
 
@@ -160,29 +217,87 @@ function MantraSadhana108() {
           </p>
         </div>
 
-        {/* ── Right Side ── */}
+        {/* Right Side */}
         <div className={styles.rightWrapper}>
-          <p className={styles.sessionsCount}>4 Sessions</p>
+          <p className={styles.sessionsCount}>4 Phases · 108 Days</p>
 
           <div className={styles.rightPanel}>
-          {phases.map((item) => (
-            <div key={item.number} className={styles.sessionBlock}>
-              <p className={styles.phaseHeader}>
-                {item.phase} ({item.days})
-              </p>
-              <div className={styles.sessionRow}>
-                <span className={styles.sessionNumber}>{item.number}</span>
-                <div className={styles.sessionContent}>
-                  <h3 className={styles.sessionTitle}>{item.title}</h3>
-                  <p className={styles.sessionDesc}>{item.description}</p>
-                  <span className={styles.duration}>{item.duration}</span>
-                </div>
-                <button className={styles.playCircle}>
-                  <span className="material-symbols-outlined">play_arrow</span>
+            {phases.map((item, idx) => (
+              <div key={item.id} className={styles.sessionBlock}>
+
+                {/* Phase Header — clickable */}
+                <button
+                  className={styles.stageHeader}
+                  onClick={() => togglePhase(idx)}
+                >
+                  <span
+                    className={styles.stageBadge}
+                    style={{ background: item.color }}
+                  >
+                    Phase {item.id}
+                  </span>
+                  <div className={styles.stageHeaderInfo}>
+                    <span className={styles.stageHeaderName}>{item.phase}</span>
+                    <span className={styles.stageHeaderDays}>{item.dayRange}</span>
+                  </div>
+                  <span className={styles.stageHeaderTagline}>
+                    "{item.tagline}"
+                  </span>
+                  <span className={styles.chevron}>
+                    {expandedPhase === idx ? "▲" : "▼"}
+                  </span>
                 </button>
+
+                {/* Expanded Day-wise Audio List */}
+                {expandedPhase === idx && (
+                  <div className={styles.dayListWrapper}>
+                    <p className={styles.stagePurposeInline}>{item.purpose}</p>
+
+                    <div className={styles.dayList}>
+                      {item.days.map((d) => {
+                        const key = `${item.id}-${d.day}`;
+                        const isPlaying = playingDay === key;
+                        return (
+                          <div
+                            key={d.day}
+                            className={`${styles.dayRow} ${isPlaying ? styles.dayRowActive : ""}`}
+                          >
+                            <span className={styles.dayBadge}>Day {d.day}</span>
+
+                            <div className={styles.dayInfo}>
+                              <p className={styles.dayTheme}>{d.theme}</p>
+                              <p className={styles.dayVerse}>{d.mantra}</p>
+                            </div>
+
+                            <div className={styles.audioRight}>
+                              {isPlaying && (
+                                <div className={styles.waveBar}>
+                                  <span /><span /><span /><span /><span />
+                                </div>
+                              )}
+                              <span className={styles.dayDuration}>{d.duration}</span>
+                              <button
+                                className={`${styles.playCircleDay} ${isPlaying ? styles.playCircleDayActive : ""}`}
+                                onClick={(e) => togglePlay(key, e)}
+                              >
+                                <span className="material-symbols-outlined">
+                                  {isPlaying ? "pause" : "play_arrow"}
+                                </span>
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    <p className={styles.universalMsgInline}>
+                      "{item.universalMessage}"
+                    </p>
+                  </div>
+                )}
+
               </div>
-            </div>
-          ))}
+            ))}
           </div>
         </div>
 

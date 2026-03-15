@@ -1,704 +1,556 @@
-.festivalsPage {
-  background-color: #faf8f5;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+/* ============================================================
+   BHAVA — Sacred Wisdom Page (shared layout)
+   Theme: warm cream + maroon / adapt accent per page
+   ============================================================ */
+
+/* ── Base ── */
+.page {
+  background: #F4EFE6;
+  min-height: 100vh;
+  font-family: 'Inter', 'Work Sans', sans-serif;
 }
 
-/* ── Layout Utilities ── */
+/* ── Container ── */
 .container {
-  max-width: 1400px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 240px;
+  padding: 0 80px;
+}
+
+/* ══════════════════════════════
+   HERO — split layout
+   ══════════════════════════════ */
+.hero {
   position: relative;
-  z-index: 1;
-}
-
-.containerNarrow {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 0 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.textCenter { text-align: center; }
-
-/* ── Common ── */
-.sectionTitle {
-  font-size: 42px;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 16px;
-  color: #255c3f;
-  font-family: 'Canela', Cormorant, serif;
-}
-
-.sectionSubtitle {
-  font-size: 16px;
-  color: #6b7280;
-  text-align: center;
-  margin-bottom: 50px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.highlight {
-  color: #E27B3F;
-}
-
-.highlight em {
-  font-family: 'Canela', Cormorant, serif;
-  font-style: italic;
-  font-weight: 700;
-}
-
-/* ── Hero Section ── */
-.festivalsHero {
-  background: linear-gradient(to top left, #e8dcc8 0%, #f5f1e8 50%, #faf8f4 100%);
-  min-height: 80vh;
+  min-height: 88vh;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 100px 20px 80px;
-  position: relative;
+  align-items: stretch;
   overflow: hidden;
 }
 
-.heroBackground {
+.heroOverlay {
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 0;
-  opacity: 0.08;
+  inset: 0;
+  background: linear-gradient(to right, #3D0A10 0%, #3D0A10cc 30%, transparent 65%);
+  z-index: 1;
+  pointer-events: none;
 }
 
-.heroBgImage {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  filter: blur(2px);
+.heroSplit {
+  display: flex;
+  width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
-.festivalsSubtitle {
-  color: #C65C3A;
-  font-size: 13px;
-  letter-spacing: 2.5px;
-  font-weight: 600;
-  margin-bottom: 24px;
-  text-transform: uppercase;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+.heroLeft {
+  flex: 0 0 52%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 72px 100px 80px;
+  gap: 24px;
+  position: relative;
+  z-index: 2;
 }
 
-.festivalsTitle {
-  font-size: 64px;
-  font-weight: 400;
-  margin-bottom: 28px;
-  line-height: 1.15;
+.heroTitle {
   font-family: 'Canela', Cormorant, serif;
+  font-size: clamp(2.8rem, 5vw, 4.4rem);
+  font-weight: 400;
+  color: #F7F3EC;
+  line-height: 1.1;
+  margin: 0;
+  letter-spacing: -0.5px;
 }
 
-.elevateText {
-  color: #2D5F3F;
+.heroSubtitle {
+  font-size: 1.05rem;
+  color: rgba(247, 243, 236, 0.78);
+  line-height: 1.75;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  max-width: 500px;
+}
+
+.heroSubtitle em {
+  font-style: italic;
+  color: #C6A14A;
+}
+
+.btnJoinHero {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #C6A14A, #A8852E);
+  color: #0F1413;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.4px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  align-self: flex-start;
+  margin-top: 8px;
+  font-family: 'Inter', sans-serif;
+}
+
+.btnJoinHero:hover {
+  opacity: 0.88;
+  transform: translateY(-2px);
+}
+
+.heroRight {
+  flex: 1;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.heroImageOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
   display: block;
 }
 
-.festivalsDescription {
-  font-size: 18px;
-  color: #3d4d42;
-  margin-bottom: 50px;
-  line-height: 1.7;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.heroStats {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(8px);
-  border-radius: 16px;
-  padding: 24px 48px;
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.heroStat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.heroStatNumber {
-  font-size: 28px;
-  font-weight: 700;
-  color: #255c3f;
-  font-family: 'Canela', Cormorant, serif;
-}
-
-.heroStatLabel {
-  font-size: 12px;
-  color: #6b7280;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-  margin-top: 4px;
-}
-
-.heroStatDivider {
-  width: 1px;
-  height: 40px;
-  background-color: #d1d5db;
-}
-
-/* ── Intro Section ── */
-.festivalsIntroSection {
-  padding: 100px 20px;
-  background: white;
-}
-
-.introText {
-  font-size: 17px;
-  color: #3d4d42;
-  line-height: 1.9;
-  margin-bottom: 24px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.introQuote {
-  margin-top: 50px;
-  padding: 40px;
-  background: linear-gradient(135deg, #faf8f5 0%, #f5f1e8 100%);
-  border-radius: 16px;
-  border-left: 4px solid #E07B39;
-  position: relative;
-}
-
-.quoteIcon {
-  font-size: 80px;
-  color: #E07B39;
-  opacity: 0.3;
-  position: absolute;
-  top: -10px; left: 20px;
-  font-family: 'Canela', Cormorant, serif;
-  line-height: 1;
-}
-
-.quoteText {
-  font-size: 20px;
-  font-style: italic;
-  color: #255c3f;
-  line-height: 1.7;
-  font-family: 'Canela', Cormorant, serif;
-  margin-bottom: 16px;
-  padding-top: 20px;
-}
-
-.quoteSource {
-  font-size: 13px;
-  color: #C65C3A;
+/* ══════════════════════════════
+   SHARED SECTION ELEMENTS
+   ══════════════════════════════ */
+.eyebrowCenter {
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: #C6A14A;
   font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-/* ── Festival Types Section ── */
-.festivalsTypesSection {
-  padding: 100px 20px;
-  background: #faf8f5;
-}
-
-/* Filter Buttons */
-.filterButtons {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 48px;
-}
-
-.filterBtn {
-  padding: 10px 28px;
-  border-radius: 999px;
-  border: 2px solid #e5e7eb;
-  background: white;
-  font-size: 14px;
-  font-weight: 600;
-  color: #6b7280;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.filterBtn:hover {
-  border-color: #E07B39;
-  color: #E07B39;
-  transform: translateY(-2px);
-}
-
-.filterBtnActive {
-  background: linear-gradient(135deg, #E07B39, #C65C3A);
-  border-color: transparent;
-  color: white;
-  box-shadow: 0 4px 12px rgba(224, 123, 57, 0.3);
-}
-
-.filterBtnActive:hover {
-  color: white;
-}
-
-/* Festival Grid */
-.festivalsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-}
-
-.festivalCard {
-  background: white;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border: 2px solid transparent;
-}
-
-.festivalCard:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
-}
-
-.festivalCardActive {
-  border-color: var(--card-color);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
-}
-
-.festivalCardTop {
-  padding: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.festivalIconWrap {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.festivalIcon {
-  font-size: 36px;
-}
-
-.festivalSeasonBadge {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  padding: 5px 14px;
-  border-radius: 20px;
-  border: 1.5px solid;
-  background: white;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.festivalCardBody {
-  padding: 0 28px 28px;
-}
-
-.festivalTitle {
-  font-size: 24px;
-  font-weight: 700;
-  color: #255c3f;
-  margin-bottom: 4px;
-  font-family: 'Canela', Cormorant, serif;
-}
-
-.festivalSubtitle {
-  font-size: 13px;
-  color: #C65C3A;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.festivalMeta {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.festivalMetaItem {
-  font-size: 13px;
-  color: #6b7280;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.festivalDescription {
-  font-size: 14px;
-  color: #374151;
-  line-height: 1.7;
-  margin-bottom: 20px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-/* Expanded Content */
-.festivalExpanded {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease;
-}
-
-.festivalExpandedOpen {
-  max-height: 400px;
-}
-
-.festivalDeityRow {
-  display: flex;
-  gap: 12px;
-  align-items: baseline;
-  padding: 8px 0;
-  border-bottom: 1px solid #f0ebe3;
-}
-
-.festivalDeityLabel {
-  font-size: 12px;
-  font-weight: 700;
-  color: #6b7280;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  flex-shrink: 0;
-  min-width: 90px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.festivalDeityValue {
-  font-size: 14px;
-  color: #374151;
-  font-weight: 500;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.festivalRitualsSection {
-  margin-top: 20px;
-  margin-bottom: 8px;
-}
-
-.festivalRitualsTitle {
-  font-size: 12px;
-  font-weight: 700;
-  color: #255c3f;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.festivalRitualsList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.festivalRitualItem {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  color: #374151;
-  padding: 6px 0;
-  border-bottom: 1px solid #f5f5f5;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.festivalRitualItem:last-child { border-bottom: none; }
-
-.festivalRitualDot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.btnLearn {
-  background: transparent;
-  padding: 10px 24px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-  width: 100%;
-  border: 2px solid;
-  margin-top: 20px;
-}
-
-.btnLearn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* ── Calendar Section ── */
-.calendarSection {
-  padding: 100px 20px;
-  background: white;
-}
-
-.calendarGrid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-}
-
-.calendarCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 24px 16px;
-  background: #faf8f5;
-  border-radius: 14px;
-  transition: all 0.3s ease;
+  margin: 0 0 12px;
   text-align: center;
-  border: 1px solid transparent;
+  font-family: 'Inter', sans-serif;
 }
 
-.calendarCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  background: white;
-  border-color: #f0ebe3;
+.sectionTitle {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  font-weight: 400;
+  color: #1E1E1E;
+  text-align: center;
+  margin: 0 0 14px;
+  line-height: 1.2;
 }
 
-.calendarIcon {
-  font-size: 32px;
+.maroon { color: #6E1B21; }
+
+.sectionSubtitle {
+  font-size: 0.95rem;
+  color: #6A625A;
+  text-align: center;
+  line-height: 1.75;
+  margin: 0 auto 52px;
+  max-width: 620px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ══════════════════════════════
+   4 PILLARS OVERVIEW
+   ══════════════════════════════ */
+.phasesSection {
+  background: #F4EFE6;
+  padding: 88px 20px 80px;
+}
+
+.phasesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.phaseCard {
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px 26px;
+  box-shadow: 0 2px 12px rgba(30, 30, 30, 0.06);
+  border: 1px solid rgba(110, 27, 33, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.phaseCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(30, 30, 30, 0.12);
+}
+
+.phaseDays {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
   margin-bottom: 10px;
 }
 
-.calendarContent {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.calendarMonth {
-  font-size: 11px;
-  font-weight: 700;
-  color: #C65C3A;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.calendarFestival {
-  font-size: 13px;
+.phaseTitle {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: 1.25rem;
   font-weight: 600;
-  color: #255c3f;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+  color: #1E1E1E;
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.phaseTagline {
+  font-size: 0.82rem;
+  color: #C6A14A;
+  font-style: italic;
+  margin: 0 0 14px;
+  font-family: 'Inter', sans-serif;
   line-height: 1.4;
 }
 
-/* ── How to Celebrate Section ── */
-.howToCelebrateSection {
-  padding: 100px 20px;
-  background: #faf8f5;
+.phaseDesc {
+  font-size: 0.85rem;
+  color: #6A625A;
+  line-height: 1.7;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
 }
 
-.celebrateGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+/* ══════════════════════════════
+   DETAILED BREAKDOWN (accordion)
+   ══════════════════════════════ */
+.detailSection {
+  background: #fff;
+  padding: 80px 20px;
+  border-top: 1px solid rgba(110, 27, 33, 0.08);
 }
 
-.celebrateCard {
-  background: white;
-  border-radius: 16px;
-  padding: 36px 28px;
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
+.phaseDetailList {
   display: flex;
   flex-direction: column;
-  position: relative;
-  overflow: hidden;
+  gap: 0;
 }
 
-.celebrateCard::before {
+.phaseDetailRow {
+  border-bottom: 1px solid rgba(110, 27, 33, 0.1);
+  transition: background 0.2s ease;
+}
+
+.phaseDetailRow:first-child {
+  border-top: 1px solid rgba(110, 27, 33, 0.1);
+}
+
+.phaseDetailRowOpen {
+  background: #FBF8F3;
+}
+
+.phaseDetailHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 22px 0;
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+  transition: opacity 0.2s;
+}
+
+.phaseDetailHeader:hover { opacity: 0.8; }
+
+.phaseNumber {
+  flex-shrink: 0;
+  min-width: 68px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+}
+
+.phaseDetailName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1E1E1E;
+  font-family: 'Inter', sans-serif;
+  flex: 0 0 auto;
+}
+
+.phaseDetailDays {
+  font-size: 0.82rem;
+  color: #9A8F8A;
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+.phaseDetailTagline {
+  font-size: 0.85rem;
+  color: #C6A14A;
+  font-style: italic;
+  font-family: 'Inter', sans-serif;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.phaseChevron {
+  font-size: 0.65rem;
+  color: #9A8F8A;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* ── Expanded body ── */
+.phaseDetailBody {
+  padding: 8px 0 28px;
+}
+
+.phaseDetailGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.phaseDetailBlock {
+  background: #F9F6F0;
+  border-radius: 12px;
+  padding: 22px 20px;
+  border: 1px solid rgba(110, 27, 33, 0.07);
+}
+
+.phaseDetailLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #6E1B21;
+  margin: 0 0 12px;
+  font-family: 'Inter', sans-serif;
+}
+
+.mantraLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #9A8F8A;
+  margin: 10px 0 6px;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.phaseDetailUl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.phaseDetailUl li {
+  font-size: 0.85rem;
+  color: #3D2A2C;
+  line-height: 1.55;
+  font-family: 'Inter', sans-serif;
+  padding-left: 14px;
+  position: relative;
+}
+
+.phaseDetailUl li::before {
   content: '';
   position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #E07B39, #C65C3A);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+  left: 0;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #C6A14A;
 }
 
-.celebrateCard:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-  border-color: #f0ebe3;
+.phaseDetailNote {
+  font-size: 0.82rem;
+  color: #6A625A;
+  font-style: italic;
+  margin: 14px 0 0;
+  line-height: 1.6;
+  font-family: 'Inter', sans-serif;
+  border-top: 1px solid rgba(110, 27, 33, 0.08);
+  padding-top: 12px;
 }
 
-.celebrateCard:hover::before {
-  transform: scaleX(1);
+/* ══════════════════════════════
+   BENEFITS SECTION
+   ══════════════════════════════ */
+.completionSection {
+  background: #F4EFE6;
+  padding: 80px 20px;
+  border-top: 1px solid rgba(110, 27, 33, 0.08);
 }
 
-.celebrateNumber {
-  font-size: 40px;
-  font-weight: 700;
-  color: #E07B39;
-  opacity: 0.25;
-  font-family: 'Canela', Cormorant, serif;
-  margin-bottom: 8px;
-  line-height: 1;
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
 }
 
-.celebrateTitle {
-  font-size: 18px;
-  font-weight: 700;
-  color: #255c3f;
+.benefitCard {
+  background: #fff;
+  border-radius: 14px;
+  padding: 28px 20px;
+  text-align: center;
+  border: 1px solid rgba(110, 27, 33, 0.08);
+  box-shadow: 0 2px 8px rgba(30, 30, 30, 0.04);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.benefitCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(110, 27, 33, 0.12);
+}
+
+.benefitIcon {
+  font-size: 2rem;
+  display: block;
   margin-bottom: 12px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
 }
 
-.celebrateDescription {
-  font-size: 14px;
-  color: #6b7280;
-  line-height: 1.7;
-  margin-bottom: 20px;
-  flex-grow: 1;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+.benefitTitle {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1E1E1E;
+  margin: 0 0 8px;
 }
 
-.celebrateTip {
-  background: linear-gradient(135deg, #fff9f0, #fef3e2);
-  border-radius: 8px;
-  padding: 12px 16px;
-  font-size: 13px;
-  color: #C65C3A;
-  line-height: 1.5;
-  border-left: 3px solid #E07B39;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+.benefitDesc {
+  font-size: 0.82rem;
+  color: #6A625A;
+  line-height: 1.65;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
 }
 
-/* ── CTA Section ── */
-.festivalsCtaSection {
-  padding: 120px 20px;
-  background: linear-gradient(135deg, #255c3f 0%, #173927 100%);
-  color: white;
-  position: relative;
-  overflow: hidden;
+/* ══════════════════════════════
+   CTA SECTION
+   ══════════════════════════════ */
+.ctaSection {
+  background: linear-gradient(135deg, #3D0A10 0%, #6E1B21 60%, #4A0E18 100%);
+  padding: 100px 20px;
 }
 
-.festivalsCtaSection::before {
-  content: '🪔';
-  position: absolute;
-  font-size: 300px;
-  opacity: 0.04;
-  right: -40px;
-  top: 50%;
-  transform: translateY(-50%);
+.ctaInner {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 .ctaTitle {
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 20px;
   font-family: 'Canela', Cormorant, serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  color: #F7F3EC;
+  margin: 0 0 18px;
+  line-height: 1.2;
 }
 
-.ctaDescription {
-  font-size: 18px;
-  opacity: 0.85;
-  line-height: 1.7;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-  max-width: 600px;
-  margin: 0 auto 48px;
+.ctaSubtext {
+  font-size: 1rem;
+  color: rgba(247, 243, 236, 0.72);
+  line-height: 1.75;
+  margin: 0 0 40px;
+  font-family: 'Inter', sans-serif;
 }
 
 .ctaButtons {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.btnPrimaryCta,
-.btnSecondaryCta {
-  padding: 16px 40px;
+.btnPrimary {
+  background: linear-gradient(135deg, #C6A14A, #A8852E);
+  color: #0F1413;
+  border: none;
+  padding: 14px 36px;
   border-radius: 999px;
-  font-size: 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.4px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.btnPrimary:hover {
+  opacity: 0.88;
+  transform: translateY(-2px);
+}
+
+.btnSecondary {
+  background: transparent;
+  color: rgba(247, 243, 236, 0.85);
+  border: 1.5px solid rgba(247, 243, 236, 0.35);
+  padding: 14px 36px;
+  border-radius: 999px;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+  transition: all 0.2s ease;
+  font-family: 'Inter', sans-serif;
 }
 
-.btnPrimaryCta {
-  background: white;
-  color: #255c3f;
-  border: 2px solid white;
+.btnSecondary:hover {
+  background: rgba(247, 243, 236, 0.1);
+  border-color: rgba(247, 243, 236, 0.65);
+  transform: translateY(-2px);
 }
 
-.btnPrimaryCta:hover {
-  background: transparent;
-  color: white;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.btnSecondaryCta {
-  background: transparent;
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.6);
-}
-
-.btnSecondaryCta:hover {
-  background: white;
-  color: #255c3f;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* ── Responsive ── */
-@media (max-width: 1400px) {
-  .container { padding: 0 180px; }
-}
-
+/* ══════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════ */
 @media (max-width: 1200px) {
-  .container { padding: 0 120px; }
+  .container { padding: 0 60px; }
+  .phasesGrid { grid-template-columns: repeat(2, 1fr); }
+  .benefitsGrid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 1024px) {
-  .container { padding: 0 80px; }
-  .festivalsTitle { font-size: 48px; }
-  .festivalsGrid { grid-template-columns: repeat(2, 1fr); }
-  .calendarGrid { grid-template-columns: repeat(3, 1fr); }
-  .celebrateGrid { grid-template-columns: repeat(2, 1fr); }
-  .sectionTitle { font-size: 36px; }
+  .container { padding: 0 40px; }
+  .heroLeft { padding: 80px 48px 80px 40px; }
+  .phaseDetailGrid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
-  .container { padding: 0 40px; }
-  .festivalsTitle { font-size: 40px; }
-  .heroStats { flex-direction: column; gap: 20px; padding: 24px; }
-  .heroStatDivider { width: 60px; height: 1px; }
-  .festivalsGrid { grid-template-columns: 1fr; }
-  .calendarGrid { grid-template-columns: repeat(2, 1fr); }
-  .celebrateGrid { grid-template-columns: 1fr; }
-  .ctaTitle { font-size: 36px; }
-  .ctaButtons { flex-direction: column; align-items: center; }
-  .btnPrimaryCta, .btnSecondaryCta { width: 260px; }
+  .container { padding: 0 24px; }
+  .hero { min-height: 100svh; }
+  .heroLeft { flex: none; width: 100%; padding: 80px 24px 60px; }
+  .heroSplit { flex-direction: column; }
+  .heroRight { position: absolute; inset: 0; z-index: 0; }
+  .heroOverlay { background: linear-gradient(to bottom, #3D0A10cc 0%, #3D0A10 55%, transparent 100%); }
+  .phasesGrid { grid-template-columns: 1fr; }
+  .benefitsGrid { grid-template-columns: repeat(2, 1fr); }
+  .phaseDetailHeader { flex-wrap: wrap; gap: 10px; }
+  .phaseDetailTagline { display: none; }
 }
 
 @media (max-width: 480px) {
-  .container { padding: 0 20px; }
-  .festivalsTitle { font-size: 32px; }
-  .sectionTitle { font-size: 28px; }
-  .ctaTitle { font-size: 28px; }
-  .calendarGrid { grid-template-columns: repeat(2, 1fr); }
+  .container { padding: 0 16px; }
+  .benefitsGrid { grid-template-columns: 1fr; }
+  .ctaButtons { flex-direction: column; align-items: center; }
+  .btnPrimary, .btnSecondary { width: 240px; }
 }

@@ -13,7 +13,7 @@ function TigerEye108() {
       concept: "4Ps of Sacred Marketing",
       description:
         "Product: Tiger Eye mala & ritual kits as sacred tools. Price: an investment in dharma, not a cost. Place: every channel where seekers already gather. Promotion: content that teaches before it sells — education as the highest form of marketing.",
-      icon: "⚖️",
+      icon: "",
     },
     {
       number: "02",
@@ -21,7 +21,7 @@ function TigerEye108() {
       concept: "Tribe over Traffic",
       description:
         "We do not chase algorithms — we build a tribe of 10,000+ devoted seekers. A tribe connected by shared belief in sacred discipline. When the tribe moves, the market follows. The Spiritual Company is the leader of this tribe.",
-      icon: "🔥",
+      icon: "",
     },
     {
       number: "03",
@@ -29,7 +29,7 @@ function TigerEye108() {
       concept: "Category Ownership",
       description:
         "In every market, only one brand owns a position in the mind. The Spiritual Company owns 'Sacred Discipline' — the intersection of ancient Vedic practice and modern lifestyle. No competitor occupies this space.",
-      icon: "🎯",
+      icon: "",
     },
     {
       number: "04",
@@ -37,7 +37,7 @@ function TigerEye108() {
       concept: "The 108 Frequency",
       description:
         "108 is encoded in nature itself: the Earth–Sun distance is 108× the Sun's diameter. The Moon–Earth distance is 108× the Moon's diameter. 108 beads on the mala, 108 Upanishads, 108 sacred sites. It is the universe's ordering code.",
-      icon: "🕉️",
+      icon: "",
     },
     {
       number: "05",
@@ -45,7 +45,7 @@ function TigerEye108() {
       concept: "Tiger Eye's Power",
       description:
         "Tiger Eye resonates at the frequency of focused will. It activates the solar plexus (Manipura) and root chakra (Muladhara), building the stability needed for consistent sadhana. Roman soldiers carried it into battle. Vedic warriors wore it for unshakeable clarity.",
-      icon: "🐯",
+      icon: "",
     },
     {
       number: "06",
@@ -53,7 +53,7 @@ function TigerEye108() {
       concept: "Beyond Product — A Movement",
       description:
         "The Spiritual Company is not selling crystals. It is rebuilding the culture of sacred discipline in a distracted age. Every Tiger Eye mala sold is a vow taken. Every 108-second ritual practiced is a neuron rewired toward dharma.",
-      icon: "🌏",
+      icon: "",
     },
   ];
 
@@ -181,12 +181,12 @@ function TigerEye108() {
                 in every great spiritual tradition on Earth.
               </p>
               <ul className={styles.factList}>
-                <li><span className={styles.factIcon}>☀️</span> The Earth–Sun distance is exactly <strong>108×</strong> the Sun's diameter</li>
-                <li><span className={styles.factIcon}>🌙</span> The Moon–Earth distance is <strong>108×</strong> the Moon's diameter</li>
-                <li><span className={styles.factIcon}>📿</span> <strong>108 beads</strong> on the Vedic mala — one for each name of the Divine</li>
-                <li><span className={styles.factIcon}>📖</span> <strong>108 Upanishads</strong> — the complete library of Vedantic revelation</li>
-                <li><span className={styles.factIcon}>🕌</span> <strong>108 sacred sites</strong> (Shakti Peethas) across the Indian subcontinent</li>
-                <li><span className={styles.factIcon}>🏛️</span> <strong>108 energy channels</strong> meet at the heart chakra (Anahata)</li>
+                <li><span className={styles.factIcon}></span> The Earth–Sun distance is exactly <strong>108×</strong> the Sun's diameter</li>
+                <li><span className={styles.factIcon}></span> The Moon–Earth distance is <strong>108×</strong> the Moon's diameter</li>
+                <li><span className={styles.factIcon}></span> <strong>108 beads</strong> on the Vedic mala — one for each name of the Divine</li>
+                <li><span className={styles.factIcon}></span> <strong>108 Upanishads</strong> — the complete library of Vedantic revelation</li>
+                <li><span className={styles.factIcon}></span> <strong>108 sacred sites</strong> (Shakti Peethas) across the Indian subcontinent</li>
+                <li><span className={styles.factIcon}></span> <strong>108 energy channels</strong> meet at the heart chakra (Anahata)</li>
               </ul>
             </div>
 
@@ -198,12 +198,12 @@ function TigerEye108() {
                 the stone of warriors, kings, and those who build empires of the spirit.
               </p>
               <ul className={styles.factList}>
-                <li><span className={styles.factIcon}>⚔️</span> Roman soldiers wore Tiger Eye for <strong>protection in battle</strong></li>
-                <li><span className={styles.factIcon}>🌞</span> Activates <strong>Manipura</strong> (solar plexus) — the seat of willpower</li>
-                <li><span className={styles.factIcon}>🌳</span> Grounds through <strong>Muladhara</strong> (root chakra) — stability under pressure</li>
-                <li><span className={styles.factIcon}>🎯</span> Transforms <strong>scattered energy</strong> into laser-focused action</li>
-                <li><span className={styles.factIcon}>🧠</span> Calms the <strong>nervous system</strong> — clarity over anxiety</li>
-                <li><span className={styles.factIcon}>🔱</span> In Vedic tradition: the <strong>stone of disciplined sadhana</strong></li>
+                <li><span className={styles.factIcon}></span> Roman soldiers wore Tiger Eye for <strong>protection in battle</strong></li>
+                <li><span className={styles.factIcon}></span> Activates <strong>Manipura</strong> (solar plexus) — the seat of willpower</li>
+                <li><span className={styles.factIcon}></span> Grounds through <strong>Muladhara</strong> (root chakra) — stability under pressure</li>
+                <li><span className={styles.factIcon}></span> Transforms <strong>scattered energy</strong> into laser-focused action</li>
+                <li><span className={styles.factIcon}></span> Calms the <strong>nervous system</strong> — clarity over anxiety</li>
+                <li><span className={styles.factIcon}></span> In Vedic tradition: the <strong>stone of disciplined sadhana</strong></li>
               </ul>
             </div>
           </div>
@@ -324,7 +324,7 @@ function TigerEye108() {
             {products.map((product, i) => (
               <div key={i} className={styles.productCard}>
                 <div className={styles.productImagePlaceholder}>
-                  <span className={styles.productStoneIcon}>🐯</span>
+                  <span className={styles.productStoneIcon}></span>
                 </div>
                 <div className={styles.productBody}>
                   <p className={styles.productTagline}>{product.tagline}</p>

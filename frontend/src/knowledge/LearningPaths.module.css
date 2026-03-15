@@ -1,7 +1,7 @@
 .section {
   position: relative;
   background: #f5f1e8;
-  padding: 48px 0 52px;
+  padding: 24px 0 20px;
   overflow: hidden;
   border-top: 1px solid rgba(198, 161, 74, 0.15);
 }
@@ -135,7 +135,7 @@
 }
 
 .card:hover .cardThumb {
-  transform: translateY(-5px);
+  transform: scale(1.08);
   box-shadow: 0 16px 36px rgba(30, 45, 30, 0.18);
 }
 

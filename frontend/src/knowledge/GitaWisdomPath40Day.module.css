@@ -162,9 +162,9 @@
    ══════════════════════════════ */
 .rightPanel {
   flex: 1;
-  background: #1A3A5C;
-  border-radius: 16px;
-  padding: 36px 44px 44px;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
 }
@@ -172,7 +172,7 @@
 /* ── Single session block ── */
 .sessionBlock {
   padding: 20px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .sessionBlock:last-child {
@@ -182,7 +182,7 @@
 .phaseHeader {
   font-size: 1rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.6);
+  color: #9A8F8A;
   margin: 0 0 16px;
   font-family: 'Inter', sans-serif;
   letter-spacing: 0.2px;
@@ -197,7 +197,7 @@
 .sessionNumber {
   font-size: 1.05rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.55);
+  color: #9A8F8A;
   flex-shrink: 0;
   padding-top: 3px;
   min-width: 20px;
@@ -214,7 +214,7 @@
 .sessionTitle {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #fff;
+  color: #0D2035;
   margin: 0;
   font-family: 'Inter', sans-serif;
   line-height: 1.3;
@@ -222,7 +222,7 @@
 
 .sessionDesc {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.72);
+  color: #6A625A;
   line-height: 1.65;
   margin: 0;
   font-family: 'Inter', sans-serif;
@@ -230,37 +230,281 @@
 
 .duration {
   font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: #9A8F8A;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
   margin-top: 2px;
 }
 
-/* ── Play circle button ── */
+/* ── Play circle — filled blue ── */
 .playCircle {
   flex-shrink: 0;
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.65);
+  border: none;
+  background: #295F8A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-top: 4px;
+  align-self: flex-start;
+}
+
+.playCircle:hover {
+  background: #1A3A5C;
+}
+
+.playCircle .material-symbols-outlined {
+  font-size: 24px;
+  color: #fff;
+}
+
+/* ══════════════════════════════
+   STAGE HEADER (inside dark panel)
+   ══════════════════════════════ */
+.stageHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  padding: 4px 0;
+  transition: opacity 0.2s ease;
+}
+
+.stageHeader:hover {
+  opacity: 0.85;
+}
+
+.stageBadge {
+  flex-shrink: 0;
+  min-width: 74px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  font-family: 'Inter', sans-serif;
+  text-align: center;
+}
+
+.stageHeaderInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.stageHeaderName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0D2035;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stageHeaderDays {
+  font-size: 0.78rem;
+  color: #6A8AAA;
+  font-family: 'Inter', sans-serif;
+}
+
+.stageHeaderTagline {
+  font-size: 0.82rem;
+  color: #C6A14A;
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+  flex: 0 0 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  font-size: 0.65rem;
+  color: #6A8AAA;
+  flex-shrink: 0;
+}
+
+/* ── Expanded Day List ── */
+.dayListWrapper {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.stagePurposeInline {
+  font-size: 0.82rem;
+  color: #2A4A6A;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  margin: 0 0 14px;
+  font-style: italic;
+}
+
+.dayList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dayRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(41, 95, 138, 0.04);
+  transition: background 0.2s ease;
+  cursor: default;
+}
+
+.dayRow:hover {
+  background: rgba(41, 95, 138, 0.07);
+}
+
+.dayRowActive {
+  background: rgba(198, 161, 74, 0.10) !important;
+  border: 1px solid rgba(198, 161, 74, 0.30);
+}
+
+.dayBadge {
+  flex-shrink: 0;
+  min-width: 52px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #6A8AAA;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.3px;
+}
+
+.dayInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.dayTheme {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #0D2035;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dayRowActive .dayTheme {
+  color: #295F8A;
+}
+
+.dayVerse {
+  font-size: 0.74rem;
+  color: #6A8AAA;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+.audioRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.dayDuration {
+  font-size: 0.74rem;
+  color: #6A8AAA;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  min-width: 36px;
+  text-align: right;
+}
+
+.playCircleDay {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(41, 95, 138, 0.35);
   background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease;
-  margin-top: 4px;
-  align-self: flex-start;
 }
 
-.playCircle:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: #fff;
+.playCircleDay:hover {
+  background: rgba(41, 95, 138, 0.07);
+  border-color: #295F8A;
 }
 
-.playCircle .material-symbols-outlined {
-  font-size: 24px;
+.playCircleDayActive {
+  background: #C6A14A !important;
+  border-color: #C6A14A !important;
+}
+
+.playCircleDay .material-symbols-outlined {
+  font-size: 18px;
+  color: #295F8A;
+}
+
+.playCircleDayActive .material-symbols-outlined {
   color: #fff;
+}
+
+/* ── Animated wave bars (playing indicator) ── */
+.waveBar {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 16px;
+}
+
+.waveBar span {
+  display: block;
+  width: 3px;
+  background: #C6A14A;
+  border-radius: 2px;
+  animation: wave 0.8s ease-in-out infinite;
+}
+
+.waveBar span:nth-child(1) { height: 6px;  animation-delay: 0s; }
+.waveBar span:nth-child(2) { height: 12px; animation-delay: 0.1s; }
+.waveBar span:nth-child(3) { height: 16px; animation-delay: 0.2s; }
+.waveBar span:nth-child(4) { height: 10px; animation-delay: 0.15s; }
+.waveBar span:nth-child(5) { height: 6px;  animation-delay: 0.05s; }
+
+@keyframes wave {
+  0%, 100% { transform: scaleY(1); }
+  50%       { transform: scaleY(0.4); }
+}
+
+.universalMsgInline {
+  font-size: 0.8rem;
+  color: rgba(198, 161, 74, 0.7);
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+  line-height: 1.6;
+  margin: 14px 0 0;
+  text-align: center;
 }
 
 /* ══════════════════════════════
@@ -304,187 +548,6 @@
 
 .accent {
   color: #295F8A;
-}
-
-/* ══════════════════════════════
-   DETAILED STAGE BREAKDOWN
-   ══════════════════════════════ */
-.detailSection {
-  background: #EEE9DF;
-  padding: 72px 20px;
-  border-top: 1px solid rgba(41, 95, 138, 0.1);
-}
-
-.stageDetailList {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.stageDetailRow {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(41, 95, 138, 0.12);
-  background: #FEFCF8;
-  transition: box-shadow 0.25s ease;
-}
-
-.stageDetailRowOpen {
-  box-shadow: 0 4px 20px rgba(41, 95, 138, 0.12);
-}
-
-.stageDetailHeader {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 20px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  font-family: inherit;
-  transition: background 0.2s ease;
-}
-
-.stageDetailHeader:hover {
-  background: rgba(41, 95, 138, 0.03);
-}
-
-.stageNumber {
-  flex-shrink: 0;
-  min-width: 80px;
-  padding: 4px 12px;
-  border-radius: 6px;
-  color: #fff;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  font-family: 'Inter', sans-serif;
-  text-align: center;
-}
-
-.stageDetailName {
-  flex: 1;
-  font-size: 0.97rem;
-  font-weight: 600;
-  color: #1E1E1E;
-  font-family: 'Inter', sans-serif;
-}
-
-.stageDetailDays {
-  font-weight: 400;
-  color: #9A8F8A;
-  font-size: 0.88rem;
-}
-
-.stageDetailTagline {
-  font-size: 0.88rem;
-  color: #C6A14A;
-  font-family: 'Inter', sans-serif;
-  font-style: italic;
-  flex: 0 0 260px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.stageChevron {
-  font-size: 0.7rem;
-  color: #9A8F8A;
-  flex-shrink: 0;
-  width: 16px;
-  text-align: center;
-}
-
-.stageDetailBody {
-  border-top: 1px solid rgba(41, 95, 138, 0.08);
-  padding: 24px 20px 28px;
-  background: rgba(41, 95, 138, 0.02);
-}
-
-.stageDetailGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px;
-}
-
-.stageDetailBlock {
-  padding: 0;
-}
-
-.stageDetailLabel {
-  font-size: 0.72rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: #9A8F8A;
-  font-weight: 600;
-  margin-bottom: 12px;
-  font-family: 'Inter', sans-serif;
-}
-
-.stageDetailUl {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.stageDetailUl li {
-  font-size: 0.9rem;
-  color: #3d4a42;
-  font-family: 'Inter', sans-serif;
-  padding-left: 14px;
-  position: relative;
-  line-height: 1.5;
-}
-
-.stageDetailUl li::before {
-  content: '·';
-  position: absolute;
-  left: 0;
-  color: #295F8A;
-  font-size: 1.2rem;
-  line-height: 1;
-  top: 2px;
-}
-
-.stagePurposeText {
-  font-size: 0.9rem;
-  color: #3d4a42;
-  font-family: 'Inter', sans-serif;
-  line-height: 1.65;
-  margin: 0;
-}
-
-.stageVerseText {
-  font-size: 0.9rem;
-  color: #295F8A;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.stageReflectionText {
-  font-size: 0.9rem;
-  color: #3d4a42;
-  font-family: 'Inter', sans-serif;
-  line-height: 1.65;
-  font-style: italic;
-  margin: 0;
-}
-
-.stageMessageText {
-  font-size: 0.9rem;
-  color: #6A625A;
-  font-family: 'Inter', sans-serif;
-  line-height: 1.65;
-  font-style: italic;
-  font-weight: 500;
-  margin: 0;
 }
 
 /* ══════════════════════════════
