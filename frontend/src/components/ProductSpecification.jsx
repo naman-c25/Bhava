@@ -6,19 +6,19 @@ function ProductSpecification() {
       id: 0,
       title: "Temple Blessed",
       description: "Sourced from authentic temple partnerships with 500+ years of spiritual tradition",
-      image: "/temple.png"
+      image: "/Temple Blessed.png"
     },
     {
       id: 1,
       title: "100% Authentic",
       description: "Pure ingredients, no synthetic additives—crafted with sacred intention",
-      image: "/templeBlessed.png"
+      image: "/Authetic.png"
     },
     {
       id: 2,
       title: "Premium Quality",
       description: "Ultra-premium positioning for the devoted who value excellence",
-      image: "/templeBlessed.png"
+      image: "/Premium Quality.png"
     }
   ];
 
