@@ -5,27 +5,8 @@ const shlokas = [
   {
     text: "You have the right to work, but never to the fruit of work. You should never engage in action for the sake of reward, nor should you long for inaction.",
     ref: "BHAGAVAD GITA 2:47",
-  },
-  {
-    text: "For the soul there is never birth nor death at any time. It has not come into being, does not come into being, and will not come into being. It is unborn, eternal, ever-existing and primeval.",
-    ref: "BHAGAVAD GITA 2:20",
-  },
-  {
-    text: "It is better to live your own destiny imperfectly than to live an imitation of somebody else's life with perfection.",
-    ref: "BHAGAVAD GITA 3:35",
-  },
-  {
-    text: "The mind is restless and difficult to restrain, but it is subdued by practice. For one who has conquered the mind, the mind is the best of friends.",
-    ref: "BHAGAVAD GITA 6:35",
-  },
-  {
-    text: "Whenever there is a decline in righteousness and an increase in unrighteousness, O Arjuna, at that time I manifest Myself on earth.",
-    ref: "BHAGAVAD GITA 4:7",
-  },
-  {
-    text: "Let right deeds be thy motive, not the fruit which comes from them. And live in the action, labour well the act, worship God in thine heart by doing right.",
-    ref: "BHAGAVAD GITA 12:10",
-  },
+  }
+ 
 ];
 
 function GitaSlider() {

@@ -5,7 +5,7 @@
 
 /* Sacred Content Section */
 .sacredContent {
-  background: linear-gradient(135deg, #e89b6d 0%, #e17055 100%);
+  background: #F4EFE6; /* match main app background */
   padding: 80px 240px;
   text-align: center;
 }
@@ -15,16 +15,25 @@
   font-family: 'Canela', Cormorant, serif;
   font-size: 3rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #173927;
   margin-bottom: 30px;
   line-height: 1.3;
+}
+
+/* Colored segments within the title */
+.titleBegin {
+  color: #0b6b3a; /* dark green */
+}
+
+.titleSacred {
+  color: #e17055; /* orange */
 }
 
 /* Sacred Description */
 .sacredDescription {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #ffffff;
+  color: #39493f; /* darker body text on light background */
   margin-bottom: 40px;
   max-width: 900px;
   margin-left: auto;
@@ -37,72 +46,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-}
-
-/* Pre-Order Button */
-.btnPreorder {
-  background: #ffffff;
-  color: #e17055;
-  border: none;
-  padding: 16px 40px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.btnPreorder:hover {
-  background: #f5f5f5;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-}
-
-/* View Collection Button */
-.btnCollection {
-  background: transparent;
-  color: #ffffff;
-  border: 2px solid #ffffff;
-  padding: 14px 40px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-.btnCollection:hover {
-  background: #ffffff;
-  color: #e17055;
-  transform: translateY(-2px);
-}
-
-/* Banner Section */
-.sacredBanner {
-  background: #d63447;
-  padding: 18px 240px;
-  text-align: center;
-}
-
-.bannerText {
-  font-size: 0.95rem;
-  color: #ffffff;
-  font-weight: 500;
-  line-height: 1.5;
-}
-
-.bannerLink {
-  text-decoration: underline;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.bannerLink:hover {
-  opacity: 0.9;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
@@ -110,25 +53,17 @@
   .sacredContent {
     padding: 80px 180px;
   }
-  
-  .sacredBanner {
-    padding: 18px 180px;
-  }
 }
 
 @media (max-width: 1200px) {
   .sacredContent {
     padding: 70px 120px;
   }
-  
-  .sacredBanner {
-    padding: 18px 120px;
-  }
-  
+
   .sacredTitle {
     font-size: 2.5rem;
   }
-  
+
   .sacredDescription {
     font-size: 1rem;
   }
@@ -138,28 +73,27 @@
   .sacredContent {
     padding: 60px 80px;
   }
-  
-  .sacredBanner {
-    padding: 16px 80px;
-  }
-  
+
   .sacredTitle {
     font-size: 2.2rem;
   }
-  
+
   .sacredDescription {
     font-size: 0.95rem;
   }
-  
+
   .sacredButtons {
     flex-direction: column;
     gap: 15px;
   }
-  
-  .btnPreorder,
-  .btnCollection {
+
+  .ctaButton {
     width: 100%;
-    max-width: 350px;
+    max-width: 420px;
+  }
+
+  .reviewCard {
+    flex: 0 0 calc((100% - 20px) / 2);
   }
 }
 
@@ -167,28 +101,24 @@
   .sacredContent {
     padding: 50px 40px;
   }
-  
-  .sacredBanner {
-    padding: 14px 40px;
-  }
-  
+
   .sacredTitle {
     font-size: 1.9rem;
   }
-  
+
   .sacredDescription {
     font-size: 0.9rem;
     margin-bottom: 35px;
   }
-  
-  .btnPreorder,
-  .btnCollection {
+
+  .ctaButton {
     font-size: 1rem;
     padding: 14px 30px;
   }
-  
-  .bannerText {
-    font-size: 0.85rem;
+
+  .reviewCard {
+    flex: 0 0 100%;
+    min-width: 100%;
   }
 }
 
@@ -196,28 +126,50 @@
   .sacredContent {
     padding: 40px 20px;
   }
-  
-  .sacredBanner {
-    padding: 12px 20px;
-  }
-  
+
   .sacredTitle {
     font-size: 1.6rem;
   }
-  
+
   .sacredDescription {
     font-size: 0.85rem;
     line-height: 1.6;
   }
-  
-  .btnPreorder,
-  .btnCollection {
+
+  .ctaButton {
     font-size: 0.95rem;
     padding: 12px 25px;
     width: 100%;
-  }
-  
-  .bannerText {
-    font-size: 0.8rem;
+    border-radius: 50px;
+    background-color: #F4EFE6;
   }
 }
+
+/* Pre-order button styles */
+.preorderBtn {
+  --accent1: #ff8a65;
+  --accent2: #ff3d00;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  color: #fff;
+  font-weight: 700;
+  padding: 0.9rem 1.25rem;
+  border-radius: 999px;
+  border: none;
+  box-shadow: 0 6px 18px rgba(255,93,68,0.22);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .12s ease, opacity .12s;
+}
+.preorderBtn .price {
+  background: rgba(255,255,255,0.12);
+  padding: 0.25rem 0.55rem;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+.preorderBtn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(255,93,68,0.18); }
+.preorderBtn:active { transform: translateY(0); box-shadow: 0 6px 14px rgba(0,0,0,0.12); }
+.preorderBtn:focus { outline: 3px solid rgba(255,140,90,0.22); outline-offset: 3px; }

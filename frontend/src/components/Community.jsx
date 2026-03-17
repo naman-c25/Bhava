@@ -1,3 +1,4 @@
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./Community.module.css";
 
 function Community() {
@@ -15,6 +16,19 @@ function Community() {
       author: "- Anjali Desai, London"
     }
   ];
+  
+  const [current, setCurrent] = useState(0);
+  const hoverRef = useRef(false);
+
+  // autoplay every 1s, pause on hover
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (!hoverRef.current) {
+        setCurrent((c) => (c + 1) % testimonials.length);
+      }
+    }, 1000);
+    return () => clearInterval(id);
+  }, [testimonials.length]);
 
   return (
     <div className={styles.communitySection}>
@@ -23,18 +37,34 @@ function Community() {
           Community <span className={styles.highlight}>Stories</span>
         </h2>
 
-        <div className={styles.row}>
-          {testimonials.map((testimonial, index) => (
-            <div key={index} className={styles.col}>
-              <div className={styles.testimonialCard}>
-                <div className={styles.stars}>
-                  {"★★★★★"}
-                </div>
-                <p className={styles.testimonialText}>{testimonial.text}</p>
-                <p className={styles.testimonialAuthor}>{testimonial.author}</p>
-              </div>
-            </div>
-          ))}
+        <div
+          className={styles.fullWidthSlider}
+          onMouseEnter={() => (hoverRef.current = true)}
+          onMouseLeave={() => (hoverRef.current = false)}
+        >
+          <button
+            aria-label="Previous review"
+            className={`${styles.circleArrow} ${styles.left}`}
+            onClick={() => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length)}
+          >
+            ‹
+          </button>
+
+          <div className={styles.sliderInner}>
+            <article key={current} className={styles.testimonialCardLarge} aria-live="polite">
+              <div className={styles.stars}>{"★★★★★"}</div>
+              <p className={styles.testimonialTextLarge}>{testimonials[current].text}</p>
+              <p className={styles.testimonialAuthor}>{testimonials[current].author}</p>
+            </article>
+          </div>
+
+          <button
+            aria-label="Next review"
+            className={`${styles.circleArrow} ${styles.right}`}
+            onClick={() => setCurrent((c) => (c + 1) % testimonials.length)}
+          >
+            ›
+          </button>
         </div>
       </div>
     </div>
