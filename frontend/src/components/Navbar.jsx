@@ -107,12 +107,12 @@ function Navbar() {
                 </Link>
               </li>
               <li className={styles.navItem}>
-                <Link
+                {/* <Link
                   className={`${styles.navLink} ${isActive("/community") ? styles.navLinkActive : ""}`}
                   to="/community"
                 >
                   Community
-                </Link>
+                </Link> */}
               </li>
 
               {/* Cart Icon — only visible when logged in */}
