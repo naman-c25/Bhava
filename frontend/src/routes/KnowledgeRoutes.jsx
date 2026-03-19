@@ -1,5 +1,12 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+import DaysOfDevotion108 from "../knowledge/DaysOfDevotion108";
+import BhagavadGitaJourney from "../knowledge/BhagavadGitaJourney";
+import UpanishadWisdom from "../knowledge/UpanishadWisdom";
+import YogaPhilosophy from "../knowledge/YogaPhilosophy";
+import VedicChanting from "../knowledge/VedicChanting";
+import DeityWisdom from "../knowledge/DeityWisdom";
+import TantraShakti from "../knowledge/TantraShakti";
 import PujaRituals from "../knowledge/PujaRituals";
 import VedicScriptures from "../knowledge/VedicScriptures";
 import TempleTraditions from "../knowledge/TempleTraditions";
@@ -19,10 +26,25 @@ import MantraChanting from "../knowledge/MantraChanting";
 import SuryaNamaskar from "../knowledge/SuryaNamaskar";
 import GitaReading from "../knowledge/GitaReading";
 import Aarti from "../knowledge/Aarti";
+import KarmaDharma from "../knowledge/KarmaDharma";
+import DivineGrace from "../knowledge/DivineGrace";
+import InnerPeace from "../knowledge/InnerPeace";
+import SacredTraditions from "../knowledge/SacredTraditions";
+import PathOfUnion from "../knowledge/PathOfUnion";
+import NonDualWisdom from "../knowledge/NonDualWisdom";
 
 function KnowledgeRoutes() {
   return (
     <Routes>
+      {/* Learning Path detail pages */}
+      <Route path="/108-days-devotion"    element={<DaysOfDevotion108 />} />
+      <Route path="/bhagavad-gita-journey" element={<BhagavadGitaJourney />} />
+      <Route path="/upanishad-wisdom"     element={<UpanishadWisdom />} />
+      <Route path="/yoga-philosophy"      element={<YogaPhilosophy />} />
+      <Route path="/vedic-chanting"       element={<VedicChanting />} />
+      <Route path="/deity-wisdom"         element={<DeityWisdom />} />
+      <Route path="/tantra-shakti"        element={<TantraShakti />} />
+
       <Route path="/puja-rituals" element={<PujaRituals />} />
       <Route path="/vedic-scriptures" element={<VedicScriptures />} />
       <Route path="/temple-traditions" element={<TempleTraditions />} />
@@ -42,6 +64,12 @@ function KnowledgeRoutes() {
       <Route path="/surya-namaskar" element={<SuryaNamaskar />} />
       <Route path="/gita-reading" element={<GitaReading />} />
       <Route path="/aarti" element={<Aarti />} />
+      <Route path="/karma-dharma" element={<KarmaDharma />} />
+      <Route path="/divine-grace" element={<DivineGrace />} />
+      <Route path="/inner-peace" element={<InnerPeace />} />
+      <Route path="/sacred-traditions" element={<SacredTraditions />} />
+      <Route path="/path-of-union" element={<PathOfUnion />} />
+      <Route path="/non-dual-wisdom" element={<NonDualWisdom />} />
     </Routes>
   );
 }

@@ -1,14 +1,11 @@
-import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, useMotionValue, animate } from "framer-motion";
 import styles from "./SacredCollection.module.css";
 import { useCart } from "../context/CartContext";
 
-const GAP = 20;
-const VISIBLE = 4;
-const STEP = 2;
-const INTERVAL = 3000; // ms between each slide
+const GAP = 12;
 
-const cards = [
+const CARDS = [
   {
     id: 0,
     category: "INCENSE",
@@ -60,11 +57,17 @@ const cards = [
 ];
 
 // Duplicate for seamless infinite loop
-// loopedCards[0..5] = original, loopedCards[6..11] = clone
-// When rawIndex reaches 6, snap back to 0 invisibly (same visual)
-const loopedCards = [...cards, ...cards];
+const LOOPED = [...CARDS, ...CARDS];
 
-function FlipCard({ card, width, onHoverStart, onHoverEnd, onAddToCart }) {
+function getVisibleCount() {
+  if (typeof window === "undefined") return 3;
+  if (window.innerWidth <= 640) return 1;
+  if (window.innerWidth <= 900) return 2;
+  return 3;
+}
+
+// ── Individual flip card ──────────────────────────────────────────────────
+function FlipCard({ card, width, onAddToCart }) {
   const [flipped, setFlipped] = useState(false);
   const [added, setAdded] = useState(false);
 
@@ -79,8 +82,8 @@ function FlipCard({ card, width, onHoverStart, onHoverEnd, onAddToCart }) {
     <div
       className={styles.cardOuter}
       style={width ? { flex: `0 0 ${width}px`, width } : {}}
-      onMouseEnter={() => { setFlipped(true); onHoverStart(); }}
-      onMouseLeave={() => { setFlipped(false); onHoverEnd(); }}
+      onMouseEnter={() => setFlipped(true)}
+      onMouseLeave={() => setFlipped(false)}
     >
       <motion.div
         className={styles.cardInner}
@@ -88,16 +91,20 @@ function FlipCard({ card, width, onHoverStart, onHoverEnd, onAddToCart }) {
         transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
         style={{ transformStyle: "preserve-3d" }}
       >
-        {/* BACK — image face, visible by default */}
+        {/* BACK — image face (default) */}
         <div className={styles.cardBack}>
-          <img src={card.image} alt={card.title} className={styles.cardBackImg} />
+          <img
+            src={card.image}
+            alt={card.title}
+            className={styles.cardBackImg}
+          />
           <div className={styles.cardBackOverlay}>
             <span className={styles.cardBackCategory}>{card.category}</span>
             <p className={styles.cardBackTitle}>{card.title}</p>
           </div>
         </div>
 
-        {/* FRONT — details face, revealed on hover flip */}
+        {/* FRONT — details face (revealed on hover flip) */}
         <div className={styles.cardFront}>
           <div className={styles.cardFrontContent}>
             <div className={styles.frontTop}>
@@ -121,56 +128,112 @@ function FlipCard({ card, width, onHoverStart, onHoverEnd, onAddToCart }) {
   );
 }
 
+// ── Chevron SVGs ──────────────────────────────────────────────────────────
+const ChevronLeft = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="15 18 9 12 15 6" />
+  </svg>
+);
+const ChevronRight = () => (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <polyline points="9 18 15 12 9 6" />
+  </svg>
+);
+
+// ── Main component ────────────────────────────────────────────────────────
 function SacredCollection() {
   const { addToCart } = useCart();
   const [cardWidth, setCardWidth] = useState(0);
-  const [rawIndex, setRawIndex] = useState(0); // increases: 0 → 2 → 4 → 6, then snaps to 0
-  const [animated, setAnimated] = useState(true); // false during instant snap-back
-  const isPaused = useRef(false);
+  const [isHovering, setIsHovering] = useState(false);
+
+  const cardWidthRef = useRef(0);
+  const rawIndexRef = useRef(0);
+  const isPausedRef = useRef(false);
+  const isSnappingRef = useRef(false);
   const wrapperRef = useRef(null);
 
-  const translateX = cardWidth ? -rawIndex * (cardWidth + GAP) : 0;
+  const x = useMotionValue(0);
 
-  // Measure wrapper width → card width
+  const computeX = useCallback(
+    (idx) => -(idx * (cardWidthRef.current + GAP)),
+    []
+  );
+
+  const springTo = useCallback(
+    (idx) => {
+      animate(x, computeX(idx), {
+        type: "spring",
+        stiffness: 260,
+        damping: 36,
+        mass: 1.1,
+      });
+    },
+    [x, computeX]
+  );
+
+  const instantTo = useCallback(
+    (idx) => {
+      x.set(computeX(idx));
+    },
+    [x, computeX]
+  );
+
+  const next = useCallback(() => {
+    if (isSnappingRef.current) return;
+    rawIndexRef.current += 1;
+    springTo(rawIndexRef.current);
+
+    if (rawIndexRef.current >= CARDS.length) {
+      isSnappingRef.current = true;
+      setTimeout(() => {
+        rawIndexRef.current -= CARDS.length;
+        instantTo(rawIndexRef.current);
+        isSnappingRef.current = false;
+      }, 900);
+    }
+  }, [springTo, instantTo]);
+
+  const prev = useCallback(() => {
+    if (isSnappingRef.current) return;
+    if (rawIndexRef.current <= 0) {
+      isSnappingRef.current = true;
+      rawIndexRef.current = CARDS.length;
+      instantTo(rawIndexRef.current);
+      setTimeout(() => {
+        rawIndexRef.current -= 1;
+        springTo(rawIndexRef.current);
+        setTimeout(() => { isSnappingRef.current = false; }, 900);
+      }, 20);
+    } else {
+      rawIndexRef.current -= 1;
+      springTo(rawIndexRef.current);
+    }
+  }, [springTo, instantTo]);
+
+  // Measure card width from wrapper
   useEffect(() => {
     const measure = () => {
-      if (wrapperRef.current) {
-        const w = wrapperRef.current.clientWidth;
-        setCardWidth((w - GAP * (VISIBLE - 1)) / VISIBLE);
-      }
+      if (!wrapperRef.current) return;
+      const w = wrapperRef.current.clientWidth;
+      const v = getVisibleCount();
+      const cw = (w - GAP * (v - 1)) / v;
+      cardWidthRef.current = cw;
+      setCardWidth(cw);
+      instantTo(rawIndexRef.current);
     };
     measure();
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
-  }, []);
+  }, [instantTo]);
 
-  // Auto-advance — skips tick entirely when a card is hovered
+  // Auto-advance
   useEffect(() => {
+    if (!cardWidth) return;
     const timer = setInterval(() => {
-      if (isPaused.current) return;
-      setRawIndex((prev) => prev + STEP);
-    }, INTERVAL);
+      if (!isPausedRef.current) next();
+    }, 3500);
     return () => clearInterval(timer);
-  }, []);
-
-  // When rawIndex reaches cards.length (6), wait for the slide animation to
-  // finish, then instantly snap back to 0 — loopedCards[6..9] visually
-  // matches loopedCards[0..3] so the jump is invisible to the user.
-  useEffect(() => {
-    if (rawIndex < cards.length) return;
-    const snapTimer = setTimeout(() => {
-      setAnimated(false);
-      setRawIndex((prev) => prev - cards.length);
-    }, 700); // slightly longer than the 0.65s slide
-    return () => clearTimeout(snapTimer);
-  }, [rawIndex]);
-
-  // Re-enable animation on the very next frame after the snap
-  useEffect(() => {
-    if (animated) return;
-    const t = setTimeout(() => setAnimated(true), 30);
-    return () => clearTimeout(t);
-  }, [animated]);
+  }, [cardWidth, next]);
 
   return (
     <div className={styles.sacredCollectionSection}>
@@ -179,33 +242,50 @@ function SacredCollection() {
           Our Sacred <span className={styles.highlight}>Collections</span>
         </h1>
 
-        <div className={styles.sliderWrapper} ref={wrapperRef}>
-          <motion.div
-            className={styles.sliderTrack}
-            animate={{ x: translateX }}
-            transition={{
-              duration: animated ? 0.65 : 0,
-              ease: [0.4, 0, 0.2, 1],
-            }}
+        <div
+          className={styles.sliderContainer}
+          onMouseEnter={() => { setIsHovering(true); isPausedRef.current = true; }}
+          onMouseLeave={() => { setIsHovering(false); isPausedRef.current = false; }}
+        >
+          {/* Left arrow */}
+          <button
+            className={`${styles.arrow} ${styles.arrowLeft} ${isHovering ? styles.arrowVisible : ""}`}
+            onClick={prev}
+            aria-label="Previous"
           >
-            {loopedCards.map((card, idx) => (
-              <FlipCard
-                key={`${card.id}-${idx}`}
-                card={card}
-                width={cardWidth}
-                onHoverStart={() => { isPaused.current = true; }}
-                onHoverEnd={() => { isPaused.current = false; }}
-                onAddToCart={(c) => addToCart({
-                  productId: `home-${c.id}`,
-                  title: c.title,
-                  price: c.price,
-                  image: c.image,
-                  category: c.category,
-                  quantity: 1,
-                })}
-              />
-            ))}
-          </motion.div>
+            <ChevronLeft />
+          </button>
+
+          <div className={styles.sliderWrapper} ref={wrapperRef}>
+            <motion.div className={styles.sliderTrack} style={{ x }}>
+              {LOOPED.map((card, idx) => (
+                <FlipCard
+                  key={`${card.id}-${idx}`}
+                  card={card}
+                  width={cardWidth}
+                  onAddToCart={(c) =>
+                    addToCart({
+                      productId: `home-${c.id}`,
+                      title: c.title,
+                      price: c.price,
+                      image: c.image,
+                      category: c.category,
+                      quantity: 1,
+                    })
+                  }
+                />
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Right arrow */}
+          <button
+            className={`${styles.arrow} ${styles.arrowRight} ${isHovering ? styles.arrowVisible : ""}`}
+            onClick={next}
+            aria-label="Next"
+          >
+            <ChevronRight />
+          </button>
         </div>
       </div>
     </div>

@@ -43,7 +43,7 @@ function Footer() {
     },
     {
       heading: "About Bhava:",
-      links: ["Our Mission", "Sustainability", "Partnerships", "Careers", "Contact Us"],
+      links: ["Our Mission", "Sustainability", "Partnerships", "Careers", "Contact Us", "FAQ"],
     },
   ];
 
@@ -82,6 +82,8 @@ function Footer() {
                 <li key={linkIndex}>
                   {link === "Contact Us" ? (
                     <Link to="/contact" className={styles.contactLink}>{link}</Link>
+                  ) : link === "FAQ" ? (
+                    <Link to="/faq" className={styles.contactLink}>{link}</Link>
                   ) : (
                     <a href="#">{link}</a>
                   )}
@@ -90,38 +92,27 @@ function Footer() {
             </ul>
           </div>
         ))}
-      </div>
 
-      <div className={styles.footerSocialSection}>
-        <h3 className={styles.footerSocialHeading}>Connect With Us</h3>
-        <div className={styles.footerSocialIcons}>
-          {socialLinks.map((social, index) => {
-            const Icon = social.icon;
-            return (
-              <a
-                key={index}
-                href={social.href}
-                className={styles.socialIcon}
-                title={social.name}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Icon />
-              </a>
-            );
-          })}
+        <div className={styles.footerColumn}>
+          <h3 className={styles.footerHeading}>Connect With Us</h3>
+          <div className={styles.footerSocialIcons}>
+            {socialLinks.map((social, index) => {
+              const Icon = social.icon;
+              return (
+                <a
+                  key={index}
+                  href={social.href}
+                  className={styles.socialIcon}
+                  title={social.name}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon />
+                </a>
+              );
+            })}
+          </div>
         </div>
-      </div>
-
-      <div className={styles.footerContactRow}>
-        <Link to="/faq" className={styles.footerContactBtn}>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-            <line x1="12" y1="17" x2="12.01" y2="17"/>
-          </svg>
-          FAQ
-        </Link>
       </div>
 
       <div className={styles.footerBottom}>

@@ -114,7 +114,7 @@
 
 .teachingCard {
   flex-shrink: 0;
-  width: 200px;
+  width: 220px;
   scroll-snap-align: start;
   cursor: pointer;
 }
@@ -224,18 +224,22 @@
 }
 
 /* ── Responsive ── */
+@media (max-width: 1024px) {
+  .teachingCard { width: 195px; }
+}
+
 @media (max-width: 768px) {
   .trendingHeader { padding: 0 24px 20px; }
   .trendingWrapper { padding: 0 8px; }
   .trendingTrack { padding: 4px 12px 18px; gap: 12px; }
   .progressBar { margin: 6px 24px 0; }
-  .teachingCard { width: 155px; }
+  .teachingCard { width: 160px; }
   .trendingHeading { font-size: 24px; }
   .arrowBtn { width: 38px; height: 38px; font-size: 24px; }
 }
 
 @media (max-width: 480px) {
-  .teachingCard { width: 135px; }
+  .teachingCard { width: 140px; }
   .teachingTitle { font-size: 13px; }
   .arrowBtn { width: 34px; height: 34px; font-size: 20px; }
 }
