@@ -1,5 +1,5 @@
 .detailPage {
-  background: #faf8f4;
+  background: #F4EFE6;
   min-height: 100vh;
   font-family: 'Neue Haas Grotesk', Inter, sans-serif;
 }
@@ -130,7 +130,7 @@
 /* ── Body ── */
 .detailBody {
   padding: 52px 20px 80px;
-  background: #faf8f4;
+  background: #F4EFE6;
 }
 
 .detailContainer {

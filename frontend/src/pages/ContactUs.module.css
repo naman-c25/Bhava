@@ -140,7 +140,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: #f9f7f4;
+  background: #F4EFE6;
   border: 1.5px dashed rgba(30, 45, 30, 0.2);
   border-radius: 12px;
   padding: 18px 20px;
@@ -150,7 +150,7 @@
 
 .fileDropZone:hover {
   border-color: rgba(224, 123, 57, 0.45);
-  background: #fdf8f3;
+  background: #F4EFE6;
 }
 
 .fileInput {

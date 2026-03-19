@@ -1,5 +1,5 @@
 .page {
-  background: #faf8f5;
+  background: #F4EFE6;
   min-height: 100vh;
 }
 
@@ -297,7 +297,7 @@
 
 /* ── Testimonials ── */
 .testimonialsSection {
-  background: #f0ede6;
+  background: #F4EFE6;
   border-top: 1px solid rgba(198, 161, 74, 0.15);
   padding-bottom: 68px;
 }
@@ -379,7 +379,7 @@
 
 /* ── Events ── */
 .eventsSection {
-  background: #faf8f5;
+  background: #F4EFE6;
   padding-bottom: 68px;
   border-top: 1px solid rgba(198, 161, 74, 0.15);
 }

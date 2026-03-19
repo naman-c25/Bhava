@@ -1,5 +1,5 @@
 .page {
-  background-color: #faf8f5;
+  background-color: #F4EFE6;
   min-height: 100vh;
 }
 
@@ -254,7 +254,7 @@
 
 /* ── How it works ── */
 .howSection {
-  background: #f0ede6;
+  background: #F4EFE6;
   padding: 64px 0;
   border-top: 1px solid rgba(198, 161, 74, 0.15);
 }

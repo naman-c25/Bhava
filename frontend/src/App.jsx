@@ -10,6 +10,7 @@ import Services from "./services/Services";
 import AppPage from "./app/AppPage";
 import CommunityPage from "./community/CommunityPage";
 import ContactUs from "./pages/ContactUs";
+import FAQPage from "./pages/FAQPage";
 import AuthPage from "./auth/AuthPage";
 import CartPage from "./cart/CartPage";
 import ProfilePage from "./account/ProfilePage";
@@ -38,6 +39,7 @@ function App() {
             <Route path="/app"        element={<AppPage />} />
             <Route path="/community"  element={<CommunityPage />} />
             <Route path="/contact"    element={<ContactUs />} />
+            <Route path="/faq"        element={<FAQPage />} />
             <Route path="/knowledge"  element={<Knowledge />} />
             <Route path="/knowledge/*" element={<KnowledgeRoutes />} />
           </Route>

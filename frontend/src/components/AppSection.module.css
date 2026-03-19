@@ -1,305 +1,165 @@
+/* ========================= SECTION ========================= */
 .appSection {
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-  color: #2d3436;
-  background: #faf8f4;
+  background: #F4EFE6;
   width: 100%;
   overflow: hidden;
+  padding: 0;
 }
 
-/* ===== HERO SECTION ===== */
-.appHero {
+.inner {
+  max-width: 1400px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 60px 240px 60px 240px;
-  gap: 80px;
-}
-
-.appHeroContent {
-  flex: 1;
-  max-width: 550px;
-}
-
-.appTitle {
-  font-family: 'Canela', Cormorant, serif;
-  font-size: 2.2rem;
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 20px;
-  color: #2c5f2d;
-  white-space: nowrap;
-}
-
-.appTitleAccent {
-  color: #e17055;
-}
-
-.appTagline {
-  font-family: 'Canela', Cormorant, serif;
-  font-size: 1.8rem;
-  font-weight: 600;
-  line-height: 1.4;
-  margin-bottom: 20px;
-  color: #2c5f2d;
-  white-space: nowrap;
-}
-
-.appDescription {
-  font-size: 0.9rem;
-  line-height: 1.7;
-  color: #636e72;
-  margin-bottom: 30px;
-  font-weight: 400;
-}
-
-.appFeatures {
-  list-style: none;
-  margin-bottom: 35px;
-}
-
-.appFeatures li {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 14px;
-  font-size: 0.9rem;
-  color: #2d3436;
-  line-height: 1.5;
-}
-
-.featureIcon {
-  color: #e17055;
-  font-weight: bold;
-  font-size: 1rem;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.downloadBtn {
-  background: #d35f47;
-  color: #ffffff;
-  border: none;
-  padding: 14px 38px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-  box-shadow: 0 6px 20px rgba(211, 95, 71, 0.4);
-}
-
-.downloadBtn:hover {
-  background: #c05339;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(211, 95, 71, 0.5);
-}
-
-.downloadBtn:active {
-  transform: translateY(0);
-}
-
-.appHeroVisual {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.phoneMockup {
-  width: 100%;
-  max-width: 280px;        /* narrower width */
-  height: 500px;           /* taller height — portrait */
-  background: transparent; /* remove cream background */
-  border-radius: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  padding: 0;
-  box-shadow: none;        /* remove shadow too if desired */
-}
-
-.appMockupImage {
-  width: 100%;
-  height: 100%;
-  max-height: 500px;
-  object-fit: cover;
-  display: block;
-  border-radius: 24px;  /* rounded corners on the image */
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-}
-
-/* ===== STATS SECTION ===== */
-.appStats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  padding: 80px 80px 0 100px;
   gap: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 60px 240px;
-  background: #ffffff;
+  min-height: 580px;
 }
 
-.statItem {
-  text-align: center;
+/* ========================= LEFT CONTENT ========================= */
+.content {
+  flex: 0 0 44%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 80px;
 }
 
-.statNumber {
+.title {
   font-family: 'Canela', Cormorant, serif;
-  font-size: 2.8rem;
+  font-size: 72px;
   font-weight: 700;
-  color: #e17055;
-  margin-bottom: 12px;
+  color: #1f4a2e;
+  line-height: 1.05;
+  margin: 0;
+}
+
+.titleAccent {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: 72px;
+  font-weight: 700;
+  color: #C0671E;
+  line-height: 1.05;
+  margin: 0 0 32px 0;
+}
+
+.description {
+  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+  font-size: 17px;
+  line-height: 1.75;
+  color: #2d2d2d;
+  margin: 0 0 40px 0;
+  max-width: 480px;
+}
+
+/* ========================= STORE BADGES ========================= */
+.badges {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #111111;
+  color: #ffffff;
+  border-radius: 10px;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+  min-width: 148px;
+}
+
+.badge:hover {
+  background: #2a2a2a;
+  transform: translateY(-2px);
+}
+
+.badgeIcon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: #ffffff;
+}
+
+.badgeText {
+  display: flex;
+  flex-direction: column;
+}
+
+.badgeSub {
+  font-size: 9px;
+  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+  letter-spacing: 0.5px;
+  opacity: 0.85;
   line-height: 1;
 }
 
-.statLabel {
-  font-size: 0.85rem;
-  color: #636e72;
-  line-height: 1.5;
-  font-weight: 400;
+.badgeMain {
+  font-size: 16px;
+  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 1400px) {
-  .appHero {
-    padding: 60px 180px;
-  }
-  
-  .appStats {
-    padding: 60px 180px;
-  }
+/* ========================= RIGHT: MOCKUPS ========================= */
+.visual {
+  flex: 0 0 54%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
+.mockupImg {
+  width: 100%;
+  max-width: 660px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* ========================= RESPONSIVE ========================= */
 @media (max-width: 1200px) {
-  .appHero {
-    padding: 60px 120px;
-    gap: 60px;
-  }
-  
-  .appTitle {
-    font-size: 2rem;
-  }
-  
-  .appTagline {
-    font-size: 1.6rem;
-  }
-  
-  .appStats {
-    padding: 60px 120px;
-    gap: 35px;
-  }
+  .inner { padding: 70px 60px 0 60px; }
+  .title, .titleAccent { font-size: 60px; }
 }
 
 @media (max-width: 1024px) {
-  .appHero {
+  .inner {
     flex-direction: column;
-    padding: 50px 80px;
-    gap: 50px;
+    padding: 60px 48px 0 48px;
+    align-items: flex-start;
+    min-height: unset;
   }
-  
-  .appHeroContent {
-    max-width: 100%;
+  .content {
+    flex: none;
+    padding-bottom: 0;
   }
-  
-  .appTitle {
-    white-space: normal;
+  .visual {
+    flex: none;
+    width: 100%;
+    justify-content: center;
   }
-  
-  .appTagline {
-    white-space: normal;
-  }
-  
-  .appStats {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 50px 80px;
-  }
-  
-  .statNumber {
-    font-size: 2.5rem;
-  }
+  .mockupImg { max-width: 500px; }
 }
 
 @media (max-width: 768px) {
-  .appHero {
-    padding: 40px 40px;
-  }
-  
-  .appTitle {
-    font-size: 1.8rem;
-    white-space: normal;
-  }
-  
-  .appTagline {
-    font-size: 1.4rem;
-    white-space: normal;
-  }
-  
-  .appDescription {
-    font-size: 0.85rem;
-  }
-  
-  .appFeatures li {
-    font-size: 0.85rem;
-  }
-  
-  .phoneMockup {
-    max-width: 350px;
-    height: 350px;
-  }
-  
-  .appMockupImage {
-    height: 80%;
-    max-height: 280px;
-  }
-  
-  .appStats {
-    padding: 40px 40px;
-    gap: 30px;
-  }
-  
-  .statNumber {
-    font-size: 2.2rem;
-  }
-  
-  .statLabel {
-    font-size: 0.8rem;
-  }
+  .inner { padding: 48px 28px 0 28px; }
+  .title, .titleAccent { font-size: 48px; }
+  .description { font-size: 15px; }
+  .mockupImg { max-width: 380px; }
 }
 
 @media (max-width: 480px) {
-  .appHero {
-    padding: 30px 20px;
-  }
-  
-  .appTitle {
-    font-size: 1.6rem;
-  }
-  
-  .appTagline {
-    font-size: 1.2rem;
-  }
-  
-  .downloadBtn {
-    width: 100%;
-    padding: 12px 30px;
-  }
-  
-  .phoneMockup {
-    max-width: 300px;
-    height: 300px;
-  }
-  
-  .appMockupImage {
-    height: 75%;
-    max-height: 225px;
-  }
-  
-  .appStats {
-    grid-template-columns: 1fr;
-    padding: 30px 20px;
-  }
+  .inner { padding: 36px 20px 0 20px; }
+  .title, .titleAccent { font-size: 38px; }
+  .description { font-size: 14px; }
+  .badges { gap: 10px; }
+  .badge { min-width: unset; padding: 8px 14px; }
+  .badgeMain { font-size: 14px; }
+  .mockupImg { max-width: 100%; }
 }

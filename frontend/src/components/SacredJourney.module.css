@@ -22,11 +22,11 @@
 
 /* Colored segments within the title */
 .titleBegin {
-  color: #0b6b3a; /* dark green */
+  color: #204130; /* dark green */
 }
 
 .titleSacred {
-  color: #e17055; /* orange */
+  color: #E07B39; /* orange */
 }
 
 /* Sacred Description */
@@ -180,7 +180,7 @@
 
 /* Sacred Content Section */
 .sacredContent {
-  background: #f0ede8;
+  background: #F4EFE6;
   padding: 120px 240px;
   text-align: center;
 }

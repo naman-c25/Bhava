@@ -1,148 +1,60 @@
 import styles from "./AppPage.module.css";
 
-const features = [
-  {
-    icon: "✦",
-    title: "Daily Vedic Horoscope",
-    desc: "Personalised Jyotish readings based on your natal chart — daily, weekly and monthly forecasts.",
-  },
-  {
-    icon: "✦",
-    title: "Ritual Recommendations",
-    desc: "AI-powered suggestions for daily pujas, mantras and remedies tailored to your goals and nakshatra.",
-  },
-  {
-    icon: "✦",
-    title: "Virtual Temple Darshan",
-    desc: "Live and on-demand darshan from 200+ sacred temples. Receive prasad delivery after every visit.",
-  },
-  {
-    icon: "✦",
-    title: "Curated Spiritual Boxes",
-    desc: "Monthly subscription boxes with temple-sourced incense, malas, oils and sacred items.",
-  },
-  {
-    icon: "✦",
-    title: "Devotee Community",
-    desc: "Join 50,000+ seekers, share experiences, attend satsangs and get guidance from teachers.",
-  },
-  {
-    icon: "✦",
-    title: "Pilgrimage Planner",
-    desc: "Plan and book guided spiritual journeys to Char Dham, Kashi, Vrindavan and beyond.",
-  },
-];
-
-const stats = [
-  { number: "500+",   label: "Temple Partnerships" },
-  { number: "50K+",   label: "Active Devotees" },
-  { number: "₹45L+",  label: "Offerings Facilitated" },
-  { number: "4.9", label: "Average App Rating" },
-];
-
-const screenshots = [
-  { label: "Home Feed",       img: "/appimage.jpeg" },
-  { label: "Daily Practice",  img: "/Daily Practices/Meditation.png" },
-  { label: "Temple Darshan",  img: "/templeBlessed.png" },
-];
-
 function AppPage() {
   return (
-    <div className={styles.page}>
+    <section className={styles.appSection}>
+      <div className={styles.inner}>
 
-      {/* ── Hero ── */}
-      <div className={styles.hero}>
-        <div className={styles.heroBg} />
-        <div className={styles.heroContent}>
-          <p className={styles.eyebrow}>BHAVA WELLNESS APP</p>
-          <h1 className={styles.heroTitle}>
-            Spirituality<br />
-            <span className={styles.accent}>In Your Pocket</span>
-          </h1>
-          <p className={styles.heroSub}>
-            Temple wisdom, daily rituals, live darshan and a thriving community
-            — all in one beautifully designed app. Available on iOS & Android.
+        {/* ── Left: text ── */}
+        <div className={styles.content}>
+          <h2 className={styles.title}>Spirituality</h2>
+          <h2 className={styles.titleAccent}>In Your Pocket</h2>
+
+          <p className={styles.description}>
+            Temple wisdom, daily rituals, live darshan and a thriving
+            community — all in one beautifully designed app. Available on
+            iOS &amp; Android.
           </p>
-          <div className={styles.heroBtns}>
-            <button className={styles.downloadBtn}>App Store</button>
-            <button className={styles.downloadBtn}>Google Play</button>
-          </div>
-          <p className={styles.heroNote}>Free to download · 14-day premium trial</p>
-        </div>
-        <div className={styles.heroVisual}>
-          <div className={styles.phoneMockup}>
-            <img src="/appimage.jpeg" alt="Bhava App" className={styles.phoneImg} />
-          </div>
-          <div className={styles.glowOrb} />
-        </div>
-      </div>
 
-      {/* ── Stats ── */}
-      <div className={styles.statsStrip}>
-        {stats.map((s, i) => (
-          <div key={i} className={styles.statItem}>
-            <span className={styles.statNum}>{s.number}</span>
-            <span className={styles.statLabel}>{s.label}</span>
-          </div>
-        ))}
-      </div>
+          <div className={styles.badges}>
+            {/* Google Play */}
+            <a href="#" className={styles.badge} aria-label="Get it on Google Play">
+              <svg className={styles.badgeIcon} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#00C1FF" d="M12.2 4.2 32.6 24 12.2 43.8A4 4 0 0 1 10 40V8a4 4 0 0 1 2.2-3.8z"/>
+                <path fill="#00EF76" d="M12.2 4.2A4 4 0 0 1 16 4l22 12.7-5.4 5.4L12.2 4.2z"/>
+                <path fill="#FF3D44" d="M12.2 43.8 32.6 24l-5.4-5.4L12.2 43.8z" />
+                <path fill="#FFBC00" d="M32.6 24 38 36.7A4 4 0 0 1 16 44l16.6-20z"/>
+              </svg>
+              <span className={styles.badgeText}>
+                <span className={styles.badgeSub}>GET IT ON</span>
+                <span className={styles.badgeMain}>Google Play</span>
+              </span>
+            </a>
 
-      {/* ── Features ── */}
-      <div className={styles.featuresSection}>
-        <div className={styles.container}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Everything You Need</h2>
-            <p className={styles.sectionSub}>Six powerful features for your daily spiritual life</p>
-          </div>
-          <div className={styles.featuresGrid}>
-            {features.map((f, i) => (
-              <div key={i} className={styles.featureCard}>
-                <span className={styles.featureIcon}>{f.icon}</span>
-                <h3 className={styles.featureTitle}>{f.title}</h3>
-                <p className={styles.featureDesc}>{f.desc}</p>
-              </div>
-            ))}
+            {/* App Store */}
+            <a href="#" className={styles.badge} aria-label="Download on the App Store">
+              <svg className={styles.badgeIcon} viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              <span className={styles.badgeText}>
+                <span className={styles.badgeSub}>Download on the</span>
+                <span className={styles.badgeMain}>App Store</span>
+              </span>
+            </a>
           </div>
         </div>
-      </div>
 
-      {/* ── Screenshots ── */}
-      <div className={styles.screensSection}>
-        <div className={styles.container}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>See It In Action</h2>
-            <p className={styles.sectionSub}>A beautiful experience designed for devotion</p>
-          </div>
-          <div className={styles.screensRow}>
-            {screenshots.map((s, i) => (
-              <div key={i} className={styles.screenCard}>
-                <div className={styles.screenImgWrap}>
-                  <img src={s.img} alt={s.label} />
-                </div>
-                <p className={styles.screenLabel}>{s.label}</p>
-              </div>
-            ))}
-          </div>
+        {/* ── Right: phone mockups ── */}
+        <div className={styles.visual}>
+          <img
+            src="/App mockups.png"
+            alt="Bhava App Mockup"
+            className={styles.mockupImg}
+          />
         </div>
-      </div>
 
-      {/* ── Download CTA ── */}
-      <div className={styles.ctaBanner}>
-        <div className={styles.ctaBg} />
-        <div className={styles.ctaInner}>
-          <h2 className={styles.ctaTitle}>Start Your Free Trial Today</h2>
-          <p className={styles.ctaSub}>
-            Join 50,000+ devotees deepening their practice with Bhava.
-            No credit card required for the first 14 days.
-          </p>
-          <div className={styles.ctaBtns}>
-            <button className={styles.ctaPrimary}>Download for iOS</button>
-            <button className={styles.ctaSecondary}>Download for Android</button>
-          </div>
-        </div>
       </div>
-
-    </div>
+    </section>
   );
 }
 
