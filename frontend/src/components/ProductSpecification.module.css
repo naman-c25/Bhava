@@ -1,18 +1,23 @@
 .productSpecificationSection {
   background-color: #faf8f4;
-  padding: 60px 0;
+  padding: 48px 0px;
 }
 
 .container {
-  max-width: 1400px;
-  padding: 0 240px;
+  max-width: 1280px;
+  padding: 0;
   margin: 0 auto;
+}
+
+.inner {
+   /* padding: 0 60px 0 90px;  */
+   padding: 0;
 }
 
 .row {
   display: flex;
   gap: 24px;
-  justify-content: center;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
@@ -24,7 +29,7 @@
 }
 
 .specCard {
-  background: white;
+  background: rgb(251, 242, 242);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -40,7 +45,8 @@
 }
 
 .specImageContainer {
-  width: 100%;
+   width: 100%;
+  /* max-width: 1280px; */
   height: 62%;
   display: flex;
   align-items: center;
@@ -49,7 +55,8 @@
   overflow: hidden;
   flex-shrink: 0;
   background: linear-gradient(135deg, #f5e6d3 0%, #ead5bb 100%);
-  padding: 0;
+  padding: 0; 
+   
 }
 
 .specImageContainer img {
@@ -57,6 +64,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+ 
 }
 
 .specContent {
@@ -89,13 +97,13 @@
 /* Responsive Design */
 @media (max-width: 1400px) {
   .container {
-    padding: 0 180px;
+    padding: 0;
   }
 }
 
 @media (max-width: 1200px) {
   .container {
-    padding: 0 120px;
+    padding: 0;
   }
   
   .row {
@@ -111,9 +119,21 @@
   }
 }
 
+@media (max-width: 991px) {
+  .inner {
+    padding: 0 60px 0 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .inner {
+    padding: 0 28px;
+  }
+}
+
 @media (max-width: 1024px) {
   .container {
-    padding: 0 80px;
+    padding: 0;
   }
   
   .row {
@@ -132,11 +152,11 @@
 
 @media (max-width: 768px) {
   .productSpecificationSection {
-    padding: 40px 0;
+    padding: 40px 16px;
   }
-  
+
   .container {
-    padding: 0 40px;
+    padding: 0 28px;
   }
   
   .row {

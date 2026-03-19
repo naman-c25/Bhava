@@ -25,7 +25,8 @@ function ProductSpecification() {
   return (
     <div className={styles.productSpecificationSection}>
       <div className={styles.container}>
-        <div className={styles.row}>
+        <div className={styles.inner}>
+          <div className={styles.row}>
           {specs.map((spec) => (
             <div key={spec.id} className={styles.col}>
               <div className={styles.specCard}>
@@ -39,6 +40,7 @@ function ProductSpecification() {
               </div>
             </div>
           ))}
+          </div>
         </div>
       </div>
     </div>

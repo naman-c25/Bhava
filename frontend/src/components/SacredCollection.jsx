@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import styles from "./SacredCollection.module.css";
+import { useCart } from "../context/CartContext";
 
 const GAP = 20;
 const VISIBLE = 4;
@@ -63,8 +64,16 @@ const cards = [
 // When rawIndex reaches 6, snap back to 0 invisibly (same visual)
 const loopedCards = [...cards, ...cards];
 
-function FlipCard({ card, width, onHoverStart, onHoverEnd }) {
+function FlipCard({ card, width, onHoverStart, onHoverEnd, onAddToCart }) {
   const [flipped, setFlipped] = useState(false);
+  const [added, setAdded] = useState(false);
+
+  const handleAdd = (e) => {
+    e.stopPropagation();
+    onAddToCart(card);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1800);
+  };
 
   return (
     <div
@@ -98,7 +107,12 @@ function FlipCard({ card, width, onHoverStart, onHoverEnd }) {
             </div>
             <div className={styles.frontBottom}>
               <p className={styles.frontDescription}>{card.description}</p>
-              <button className={styles.frontBtn}>Add to Cart</button>
+              <button
+                className={`${styles.frontBtn} ${added ? styles.frontBtnAdded : ""}`}
+                onClick={handleAdd}
+              >
+                {added ? "✓ Added!" : "Add to Cart"}
+              </button>
             </div>
           </div>
         </div>
@@ -108,6 +122,7 @@ function FlipCard({ card, width, onHoverStart, onHoverEnd }) {
 }
 
 function SacredCollection() {
+  const { addToCart } = useCart();
   const [cardWidth, setCardWidth] = useState(0);
   const [rawIndex, setRawIndex] = useState(0); // increases: 0 → 2 → 4 → 6, then snaps to 0
   const [animated, setAnimated] = useState(true); // false during instant snap-back
@@ -180,6 +195,14 @@ function SacredCollection() {
                 width={cardWidth}
                 onHoverStart={() => { isPaused.current = true; }}
                 onHoverEnd={() => { isPaused.current = false; }}
+                onAddToCart={(c) => addToCart({
+                  productId: `home-${c.id}`,
+                  title: c.title,
+                  price: c.price,
+                  image: c.image,
+                  category: c.category,
+                  quantity: 1,
+                })}
               />
             ))}
           </motion.div>

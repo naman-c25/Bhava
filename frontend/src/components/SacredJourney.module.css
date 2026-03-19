@@ -173,3 +173,150 @@
 .preorderBtn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(255,93,68,0.18); }
 .preorderBtn:active { transform: translateY(0); box-shadow: 0 6px 14px rgba(0,0,0,0.12); }
 .preorderBtn:focus { outline: 3px solid rgba(255,140,90,0.22); outline-offset: 3px; }
+.sacredJourneySection {
+  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+  width: 100%;
+}
+
+/* Sacred Content Section */
+.sacredContent {
+  background: #f0ede8;
+  padding: 120px 240px;
+  text-align: center;
+}
+
+/* Sacred Title */
+.sacredTitle {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  line-height: 1.2;
+}
+
+.titleGreen {
+  color: #1a4a2e;
+}
+
+.titleOrange {
+  color: #c9593a;
+}
+
+/* Sacred Description */
+.sacredDescription {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #2c2c2c;
+  margin-bottom: 40px;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 400;
+}
+
+/* Buttons Container */
+.sacredButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Pre-Order Button */
+.btnPreorder {
+  background: transparent;
+  color: #1a1a1a;
+  border: 2px solid #1a1a1a;
+  padding: 18px 120px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+}
+
+.btnPreorder:hover {
+  background: #1a1a1a;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1400px) {
+  .sacredContent {
+    padding: 100px 180px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .sacredContent {
+    padding: 80px 120px;
+  }
+
+  .sacredTitle {
+    font-size: 3rem;
+  }
+
+  .sacredDescription {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .sacredContent {
+    padding: 70px 80px;
+  }
+
+  .sacredTitle {
+    font-size: 2.5rem;
+  }
+
+  .sacredDescription {
+    font-size: 0.95rem;
+  }
+
+  .btnPreorder {
+    padding: 18px 80px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sacredContent {
+    padding: 60px 40px;
+  }
+
+  .sacredTitle {
+    font-size: 2rem;
+  }
+
+  .sacredDescription {
+    font-size: 0.9rem;
+    margin-bottom: 35px;
+  }
+
+  .btnPreorder {
+    padding: 16px 60px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sacredContent {
+    padding: 50px 20px;
+  }
+
+  .sacredTitle {
+    font-size: 1.7rem;
+  }
+
+  .sacredDescription {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .btnPreorder {
+    padding: 14px 40px;
+    font-size: 0.95rem;
+    width: 100%;
+  }
+}

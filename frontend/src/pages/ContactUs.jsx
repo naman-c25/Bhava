@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./ContactUs.module.css";
 
+const BASE = import.meta.env.VITE_API_URL || "";
+
 function ContactUs() {
   const navigate = useNavigate();
 
@@ -15,6 +17,8 @@ function ContactUs() {
   const [files, setFiles] = useState([]);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [apiError, setApiError] = useState("");
 
   const validate = () => {
     const newErrors = {};
@@ -63,14 +67,40 @@ function ContactUs() {
     setFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    setSubmitted(true);
+
+    setSubmitting(true);
+    setApiError("");
+
+    try {
+      const res = await fetch(`${BASE}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          mobile: form.mobile.trim(),
+          email: form.email.trim(),
+          description: form.description.trim(),
+        }),
+      });
+      const data = await res.json();
+
+      if (!data.success) {
+        setApiError(data.message || "Something went wrong. Please try again.");
+      } else {
+        setSubmitted(true);
+      }
+    } catch {
+      setApiError("Unable to send message. Please check your connection and try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -210,8 +240,10 @@ function ContactUs() {
             )}
           </div>
 
-          <button type="submit" className={styles.sendBtn}>
-            Submit
+          {apiError && <p className={styles.apiError}>{apiError}</p>}
+
+          <button type="submit" className={styles.sendBtn} disabled={submitting}>
+            {submitting ? "Sending..." : "Submit"}
           </button>
 
         </form>

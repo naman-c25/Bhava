@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CartProvider } from "./context/CartContext";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Knowledge from "./pages/Knowledge";
@@ -10,40 +11,38 @@ import AppPage from "./app/AppPage";
 import CommunityPage from "./community/CommunityPage";
 import ContactUs from "./pages/ContactUs";
 import AuthPage from "./auth/AuthPage";
+import CartPage from "./cart/CartPage";
+import ProfilePage from "./account/ProfilePage";
+import OrdersPage from "./account/OrdersPage";
+import AddressesPage from "./account/AddressesPage";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Auth page — outside Layout (no navbar/footer) */}
-        <Route path="/auth" element={<AuthPage />} />
+      <CartProvider>
+        <Routes>
+          {/* Auth page — outside Layout (no navbar/footer) */}
+          <Route path="/auth" element={<AuthPage />} />
 
-        <Route element={<Layout />}>
-          {/* Home/Landing Page */}
-          <Route path="/" element={<Home />} />
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/cart" element={<CartPage />} />
 
-          {/* Products Page */}
-          <Route path="/products" element={<Products />} />
+            {/* Account pages */}
+            <Route path="/account/profile"   element={<ProfilePage />} />
+            <Route path="/account/orders"    element={<OrdersPage />} />
+            <Route path="/account/addresses" element={<AddressesPage />} />
 
-          {/* Services Page */}
-          <Route path="/services" element={<Services />} />
-
-          {/* App Page */}
-          <Route path="/app" element={<AppPage />} />
-
-          {/* Community Page */}
-          <Route path="/community" element={<CommunityPage />} />
-
-          {/* Contact Us Page */}
-          <Route path="/contact" element={<ContactUs />} />
-
-          {/* Knowledge Main Page */}
-          <Route path="/knowledge" element={<Knowledge />} />
-
-          {/* Knowledge Sub-routes */}
-          <Route path="/knowledge/*" element={<KnowledgeRoutes />} />
-        </Route>
-      </Routes>
+            <Route path="/services"   element={<Services />} />
+            <Route path="/app"        element={<AppPage />} />
+            <Route path="/community"  element={<CommunityPage />} />
+            <Route path="/contact"    element={<ContactUs />} />
+            <Route path="/knowledge"  element={<Knowledge />} />
+            <Route path="/knowledge/*" element={<KnowledgeRoutes />} />
+          </Route>
+        </Routes>
+      </CartProvider>
     </BrowserRouter>
   );
 }

@@ -68,10 +68,18 @@ export const login = async (req, res) => {
     }
 
     const user = await User.findOne({ email }).select("+password");
-    if (!user || !(await user.comparePassword(password))) {
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "No account found with this email. Please sign up first.",
+      });
+    }
+
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
       return res.status(401).json({
         success: false,
-        message: "Invalid email or password",
+        message: "Incorrect password. Please try again.",
       });
     }
 
@@ -90,6 +98,47 @@ export const getMe = async (req, res) => {
     }
     res.status(200).json({ success: true, user });
   } catch (err) {
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+// PATCH /api/auth/me  (protected) — update name / avatar
+export const updateMe = async (req, res) => {
+  try {
+    const { name, avatar } = req.body;
+    const updates = {};
+    if (name && name.trim().length >= 2) updates.name = name.trim();
+    if (avatar !== undefined) updates.avatar = avatar;
+
+    if (Object.keys(updates).length === 0) {
+      return res.status(400).json({ success: false, message: "Nothing to update." });
+    }
+
+    const user = await User.findByIdAndUpdate(req.userId, updates, {
+      new: true,
+      runValidators: true,
+    });
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        provider: user.provider,
+        avatar: user.avatar,
+        createdAt: user.createdAt,
+      },
+    });
+  } catch (err) {
+    if (err.name === "ValidationError") {
+      const messages = Object.values(err.errors).map((e) => e.message);
+      return res.status(400).json({ success: false, message: messages[0] });
+    }
     res.status(500).json({ success: false, message: "Server error" });
   }
 };

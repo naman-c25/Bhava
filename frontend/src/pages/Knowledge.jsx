@@ -297,13 +297,6 @@ function Knowledge() {
         </div>
 
         <div className={styles.wisdomSliderWrapper}>
-            <button
-              className={styles.wisdomArrow}
-              onClick={prevWisdom}
-              disabled={wisdomIndex === 0}
-              aria-label="Previous"
-            >‹</button>
-
             <div className={styles.wisdomTrackOuter} ref={wisdomRef}>
               <motion.div
                 className={styles.wisdomTrack}
@@ -322,7 +315,14 @@ function Knowledge() {
             </div>
 
             <button
-              className={styles.wisdomArrow}
+              className={`${styles.wisdomArrow} ${styles.wisdomArrowLeft}`}
+              onClick={prevWisdom}
+              disabled={wisdomIndex === 0}
+              aria-label="Previous"
+            >‹</button>
+
+            <button
+              className={`${styles.wisdomArrow} ${styles.wisdomArrowRight}`}
               onClick={nextWisdom}
               disabled={wisdomIndex >= knowledgeCategories.length - WISDOM_VISIBLE}
               aria-label="Next"

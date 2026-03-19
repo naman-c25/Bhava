@@ -180,6 +180,13 @@
   transform: translateY(-2px);
 }
 
+.frontBtnAdded {
+  background-color: #2e7d52 !important;
+  transform: none !important;
+  cursor: default;
+  pointer-events: none;
+}
+
 /* ── Slide indicator dots ── */
 .dots {
   display: flex;

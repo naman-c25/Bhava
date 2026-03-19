@@ -93,7 +93,41 @@
   max-width: 340px;
 }
 
-/* ─── CHOOSE SECTION ────────────────────────────────────────── */
+/* ─── MAIN FORM ─────────────────────────────────────────────── */
+.mainForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 4px;
+  animation: fadeSlideUp 0.3s ease both;
+}
+
+/* ─── SOCIAL GROUP ───────────────────────────────────────────── */
+.socialGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+/* ─── INFO MESSAGE ───────────────────────────────────────────── */
+.infoMsg {
+  width: 100%;
+  color: #7A5C1E;
+  font-size: 13.5px;
+  text-align: center;
+  margin: 0 0 4px;
+  padding: 10px 14px;
+  background: rgba(192, 103, 30, 0.08);
+  border: 1px solid rgba(192, 103, 30, 0.22);
+  border-radius: 10px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+/* ─── CHOOSE SECTION (legacy, kept for safety) ───────────────── */
 .chooseSection {
   width: 100%;
   display: flex;

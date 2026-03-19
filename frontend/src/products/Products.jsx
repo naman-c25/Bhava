@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./Products.module.css";
+import { useCart } from "../context/CartContext";
 
 const products = [
   {
@@ -176,10 +177,25 @@ const filterMap = {
 };
 
 function Products() {
+  const { addToCart } = useCart();
   const [activeSlide, setActiveSlide] = useState({});
   const [hoveredCard, setHoveredCard] = useState(null);
   const [activeFilter, setActiveFilter] = useState("All");
+  const [addedId, setAddedId] = useState(null);
   const intervalRefs = useRef({});
+
+  const handleAddToCart = (card) => {
+    addToCart({
+      productId: card.id,
+      title: card.title,
+      price: card.price,
+      image: card.images[0] || "",
+      category: card.category,
+      quantity: 1,
+    });
+    setAddedId(card.id);
+    setTimeout(() => setAddedId(null), 1800);
+  };
 
   const filtered =
     activeFilter === "All"
@@ -262,7 +278,12 @@ function Products() {
                 </div>
 
                 {/* Add to Cart */}
-                <button className={styles.addToCart}>Add to Cart</button>
+                <button
+                  className={`${styles.addToCart} ${addedId === card.id ? styles.addedToCart : ""}`}
+                  onClick={(e) => { e.stopPropagation(); handleAddToCart(card); }}
+                >
+                  {addedId === card.id ? "✓ Added!" : "Add to Cart"}
+                </button>
 
                 {/* Dots */}
                 <div className={styles.dots}>

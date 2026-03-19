@@ -194,6 +194,13 @@
   transform: translateX(-50%) translateY(-2px) !important;
 }
 
+.addedToCart {
+  background-color: #2e7d52 !important;
+  transform: translateX(-50%) translateY(0) !important;
+  opacity: 1 !important;
+  pointer-events: none;
+}
+
 /* Carousel dots */
 .dots {
   position: absolute;
