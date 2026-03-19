@@ -197,3 +197,193 @@
     font-size: 22px;
   }
 }
+
+/* Carousel styles for single-review view with arrows and autoplay */
+.carouselWrapper {
+  position: relative;
+  /* full-bleed slider spanning the viewport */
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow: hidden;
+  padding: 0 3%;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.slides {
+  display: flex;
+  width: 100%;
+  transition: transform 0.45s cubic-bezier(.22,.9,.32,1);
+}
+
+.slide {
+  flex: 0 0 calc(100% / 3);
+  padding: 0 12px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.slide .testimonialCard {
+  max-width: 760px;
+  width: 100%;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(45,74,58,0.06);
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  color: #173927;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform .12s ease, background .12s ease;
+}
+
+.arrowLeft { left: 3%; }
+.arrowRight { right: 3%; }
+
+.arrow:hover { transform: translateY(-50%) scale(1.06); background: rgba(224,123,57,0.10); }
+
+@media (max-width: 768px) {
+  .carouselWrapper { max-width: 680px; }
+  .arrow { width: 40px; height: 40px; font-size: 18px; }
+  .slide { flex: 0 0 calc(100% / 2); }
+}
+
+@media (max-width: 480px) {
+  .arrow { display: none; }
+  .slide { flex: 0 0 100%; }
+}
+
+/* Full-width single-card slider */
+.fullWidthSlider {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 48px 3%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+.sliderInner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.testimonialCardLarge {
+  width: 100%;
+  max-width: 1200px;
+  background: #fff;
+  border-radius: 28px;
+  padding: 48px 64px;
+  box-shadow: 0 18px 40px rgba(18, 38, 28, 0.08);
+  transition: transform 0.45s cubic-bezier(.22,.9,.32,1), opacity 0.35s ease;
+  box-sizing: border-box;
+}
+
+.testimonialTextLarge {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #34434a;
+  margin: 18px 0 12px 0;
+  font-style: normal;
+}
+
+.circleArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  color: #173927;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s;
+}
+
+.circleArrow:hover { transform: translateY(-50%) scale(1.05); box-shadow: 0 16px 36px rgba(0,0,0,0.16); }
+
+.circleArrow.left { left: 18px; }
+.circleArrow.right { right: 18px; }
+
+@media (max-width: 1024px) {
+  .testimonialCardLarge { padding: 36px 40px; max-width: 980px; }
+  .circleArrow { width: 52px; height: 52px; }
+}
+
+@media (max-width: 640px) {
+  .testimonialCardLarge { padding: 28px 20px; border-radius: 18px; }
+  .circleArrow { display: none; }
+}
+
+/* Featured layout: large left card + two stacked right cards */
+.featuredLayout {
+  display: flex;
+  gap: 28px;
+  align-items: stretch;
+  padding: 24px 0;
+}
+
+.featuredLeft {
+  flex: 0 0 66%;
+  display: flex;
+  align-items: center;
+  transition: transform .45s ease, opacity .35s ease;
+}
+
+.featuredRight {
+  flex: 0 0 34%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.sideCard {
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+}
+
+/* subtle entrance animation when featured changes */
+.featuredLeft .testimonialCard,
+.sideCard .testimonialCard {
+  transform-origin: center left;
+  transition: transform .45s cubic-bezier(.22,.9,.32,1), opacity .35s ease;
+}
+
+@media (max-width: 1024px) {
+  .featuredLeft { flex: 0 0 60%; }
+  .featuredRight { flex: 0 0 40%; }
+}
+
+@media (max-width: 768px) {
+  /* on smaller screens revert to horizontal slides */
+  .featuredLayout { display: none; }
+}

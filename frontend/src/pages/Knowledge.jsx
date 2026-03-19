@@ -184,7 +184,7 @@ function Knowledge() {
           </div>
         </div>
         <div className={styles.heroesRight}>
-          <img src="/bhakti.png" alt="Bhakti" className={styles.heroesBhaktiImg} />
+          <img src="/Bhakti .png" alt="Bhakti" className={styles.heroesBhaktiImg} />
         </div>
       </div>
 
