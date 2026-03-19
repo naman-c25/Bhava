@@ -134,7 +134,28 @@
   display: block;
 }
 
-.cardBackOverlay {
+/* Overlay when product images are missing */
+.comingSoonOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245, 230, 211, 0.7);
+  z-index: 12;
+}
+
+.comingSoonText {
+  color: #255c3f;
+  background: rgba(255,255,255,0.9);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Add to Cart button — slides up on hover */
+.addToCart {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -295,4 +316,14 @@
   .grid { grid-template-columns: 1fr; gap: 16px; }
   .heroTitle { font-size: 38px; }
   .cardOuter { height: 420px; }
+}
+
+/* Row below grid indicating more products coming */
+.comingSoonRow {
+  text-align: center;
+  margin: 18px 0 48px;
+  color: #255c3f;
+  font-weight: 700;
+  font-size: 16px;
+  background: transparent;
 }

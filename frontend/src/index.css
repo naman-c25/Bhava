@@ -25,3 +25,10 @@ h1, h2, h3, h4, h5, h6 {
 #root {
   background-color: #F4EFE6;
 }
+
+/* Global image border-radius: slightly reduced across the site.
+   No `!important` so component-specific rules (e.g. avatars with
+   `border-radius: 50%`) can override this and keep circular images. */
+img {
+  border-radius: 8px;
+}
