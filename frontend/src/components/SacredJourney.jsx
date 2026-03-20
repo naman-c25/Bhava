@@ -16,7 +16,7 @@ function SacredJourney() {
         </p>
 
         <div className={styles.sacredButtons}>
-          <button className={styles.btnPreorder}>Pre-Order Now (₹1,299)</button>
+          <button className={styles.btnPreorder}>Get Started</button>
         </div>
       </div>
     </section>

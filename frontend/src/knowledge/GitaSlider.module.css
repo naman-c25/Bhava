@@ -12,7 +12,8 @@
 ========================= */
 .gitaSection {
   position: relative;
-  background: linear-gradient(to bottom, #F4EFE6, #E6C19C);
+  /* Use solid cream background for the section; quote card remains white */
+  background: var(--color-bg-soft);
   padding: 60px 0 80px;
   overflow: hidden;
 }
@@ -23,7 +24,8 @@
   background-image: url("/tigerEyeBg.png");
   background-size: cover;
   background-position: center;
-  opacity: 0.08;
+  /* Decorative texture only — keep extremely subtle so section reads as cream */
+  opacity: 0.03;
   z-index: 0;
 }
 
@@ -119,7 +121,8 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: rgba(255, 255, 255, 0.62);
+  /* Use solid white background for the quote card */
+  background: #ffffff;
   border: none;
   border-radius: 22px;
   backdrop-filter: blur(6px);
