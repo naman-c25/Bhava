@@ -1,198 +1,46 @@
 .homeMainHero {
-  background: linear-gradient(to top left, #E6C19C 0%, #EDD9BC 50%, #F4EFE6 100%);
+  background: #F4EFE6;
   min-height: calc(100vh - 80px);
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 60px 20px;
   position: relative;
   overflow: hidden;
 }
 
-/* ── Background image layer ── */
-.homeMainHeroBackground {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  overflow: hidden;
-}
-
+/* ── Right image ── */
 .homeMainHeroBgImage {
   position: absolute;
+  top: 0;
   right: 0;
-  top: 0;              /* anchored to top so flags show, temple base visible */
+  width: 60%;
   height: 100%;
-  width: auto;
   object-fit: cover;
   object-position: top center;
-
-  /* Subtle warmth only — no blur on the image itself */
-  filter: brightness(1.05) saturate(0.92);
-
-  /* Gradual 8-stop left fade + gentle bottom fade */
-  mask-image:
-    linear-gradient(
-      to left,
-      rgba(0, 0, 0, 1)     0%,
-      rgba(0, 0, 0, 1)     28%,
-      rgba(0, 0, 0, 0.92)  36%,
-      rgba(0, 0, 0, 0.76)  44%,
-      rgba(0, 0, 0, 0.55)  52%,
-      rgba(0, 0, 0, 0.30)  60%,
-      rgba(0, 0, 0, 0.10)  68%,
-      rgba(0, 0, 0, 0.02)  74%,
-      rgba(0, 0, 0, 0)     80%
-    ),
-    linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0)     0%,
-      rgba(0, 0, 0, 0.35)  7%,
-      rgba(0, 0, 0, 1)     18%
-    );
-  mask-composite: intersect;
-
-  -webkit-mask-image:
-    linear-gradient(
-      to left,
-      rgba(0, 0, 0, 1)     0%,
-      rgba(0, 0, 0, 1)     28%,
-      rgba(0, 0, 0, 0.92)  36%,
-      rgba(0, 0, 0, 0.76)  44%,
-      rgba(0, 0, 0, 0.55)  52%,
-      rgba(0, 0, 0, 0.30)  60%,
-      rgba(0, 0, 0, 0.10)  68%,
-      rgba(0, 0, 0, 0.02)  74%,
-      rgba(0, 0, 0, 0)     80%
-    ),
-    linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0)     0%,
-      rgba(0, 0, 0, 0.35)  7%,
-      rgba(0, 0, 0, 1)     18%
-    );
-  -webkit-mask-composite: source-in;
 }
 
-/* ── Blur ONLY in the transition zone — left edge of image ── */
-.homeMainHeroBlurEdge {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  background: linear-gradient(
-    to right,
-    rgba(237, 217, 188, 0)    0%,
-    rgba(237, 217, 188, 0)    28%,
-    rgba(230, 193, 156, 0.30) 40%,
-    rgba(230, 193, 156, 0.45) 50%,
-    rgba(237, 217, 188, 0.22) 58%,
-    rgba(237, 217, 188, 0)    66%,
-    rgba(237, 217, 188, 0)    100%
-  );
-
-  /* Blur applies only in the fade band ~30%–65% from left — sharp on both sides */
-  mask-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0)    0%,
-    rgba(0, 0, 0, 0)    28%,
-    rgba(0, 0, 0, 0.5)  40%,
-    rgba(0, 0, 0, 0.75) 50%,
-    rgba(0, 0, 0, 0.4)  58%,
-    rgba(0, 0, 0, 0)    66%,
-    rgba(0, 0, 0, 0)    100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0)    0%,
-    rgba(0, 0, 0, 0)    28%,
-    rgba(0, 0, 0, 0.5)  40%,
-    rgba(0, 0, 0, 0.75) 50%,
-    rgba(0, 0, 0, 0.4)  58%,
-    rgba(0, 0, 0, 0)    66%,
-    rgba(0, 0, 0, 0)    100%
-  );
-}
-
-/* ── Left cream overlay so text stays readable ── */
-.homeMainHero::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 65%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(244, 239, 230, 0.97) 0%,
-    rgba(244, 239, 230, 0.85) 25%,
-    rgba(244, 239, 230, 0.45) 58%,
-    rgba(244, 239, 230, 0.10) 80%,
-    rgba(244, 239, 230, 0)    100%
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* ── Bottom-right vignette ── */
-.homeMainHero::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(ellipse at bottom right, rgba(0, 0, 0, 0.06) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* ── Content container ── */
+/* ── Left content ── */
 .homeMainContainer {
-  max-width: 1400px;
   width: 100%;
-  margin: 0 auto;
-  padding: 0 80px;
+  padding: 60px 80px;
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
 .homeMainTextLeft {
   max-width: 560px;
-  text-align: left;
 }
 
-/* ── Subtitle ── */
-.homeMainHeroSubtitle {
-  color: #e07b39;
-  font-size: 14px;
-  letter-spacing: 2px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-}
-
-/* ── Hero title ── */
 .homeMainHeroTitle {
   font-size: 64px;
   font-weight: 400;
-  margin-bottom: 28px;
-  line-height: 0.6;
+  margin-bottom: 14px;
+  line-height: 1;
 }
 
 .homeMainElevateText {
   color: #1e2d1e;
   font-family: 'Canela', Cormorant, serif;
   font-weight: 900;
-  font-style: normal;
   display: block;
   font-size: 68px;
   letter-spacing: -1px;
@@ -202,25 +50,21 @@
   color: #e07b39;
   font-family: 'Canela', Cormorant, serif;
   font-weight: 700;
-  font-style: normal;
   display: block;
   font-size: 62px;
 }
 
-/* ── Description ── */
 .homeMainHeroDescription {
   font-size: 16px;
   color: #3d4d42;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   line-height: 1.6;
   font-family: 'Neue Haas Grotesk', Inter, sans-serif;
 }
 
-/* ── Buttons row ── */
 .homeMainHeroButtons {
   display: flex;
   gap: 15px;
-  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -236,105 +80,51 @@
   cursor: pointer;
   transition: all 0.3s;
   font-family: 'Neue Haas Grotesk', Inter, sans-serif;
-  box-shadow: 0 3px 10px rgba(224, 123, 57, 0.15);
-  position: relative;
-  overflow: hidden;
-}
-
-.homeMainBtnPrimary::before,
-.homeMainBtnSecondary::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: linear-gradient(135deg, #e07b39 0%, #d06b29 100%);
-  transition: width 0.4s ease;
-  z-index: -1;
-}
-
-.homeMainBtnPrimary:hover::before,
-.homeMainBtnSecondary:hover::before {
-  width: 100%;
 }
 
 .homeMainBtnPrimary:hover,
 .homeMainBtnSecondary:hover {
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(224, 123, 57, 0.3);
+  background: #e07b39;
+  color: #ffffff;
 }
 
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .homeMainContainer {
-    padding: 0 56px;
+    padding: 60px 56px;
   }
-  .homeMainTextLeft {
-    max-width: 480px;
-  }
-  .homeMainHeroTitle {
-    font-size: 44px;
-  }
-  .homeMainHighlight {
-    font-size: 40px;
-  }
+  .homeMainElevateText { font-size: 52px; }
+  .homeMainHighlight   { font-size: 48px; }
 }
 
 @media (max-width: 768px) {
   .homeMainHero {
+    flex-direction: column;
     justify-content: center;
   }
   .homeMainContainer {
-    padding: 0 24px;
+    padding: 60px 24px;
   }
   .homeMainTextLeft {
     max-width: 100%;
     text-align: center;
   }
-  .homeMainHeroTitle {
-    font-size: 36px;
+  .homeMainHeroBgImage {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    top: auto;
+    right: auto;
   }
-  .homeMainHighlight {
-    font-size: 34px;
-  }
+  .homeMainElevateText { font-size: 40px; }
+  .homeMainHighlight   { font-size: 36px; }
   .homeMainHeroButtons {
     justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-  .homeMainBtnPrimary,
-  .homeMainBtnSecondary {
-    width: 250px;
-  }
-  .homeMainHeroBgImage {
-    right: -60px;
-    filter: brightness(1.1) saturate(0.85);
-    opacity: 0.3;
-  }
-  .homeMainHeroBlurEdge {
-    display: none;
-  }
-  .homeMainHero::after {
-    width: 100%;
-    background: linear-gradient(
-      to right,
-      rgba(244, 239, 230, 0.98) 0%,
-      rgba(244, 239, 230, 0.85) 60%,
-      rgba(244, 239, 230, 0.5)  100%
-    );
   }
 }
 
 @media (max-width: 480px) {
-  .homeMainHeroTitle {
-    font-size: 30px;
-  }
-  .homeMainHighlight {
-    font-size: 28px;
-  }
-  .homeMainHeroDescription {
-    font-size: 14px;
-  }
+  .homeMainElevateText { font-size: 34px; }
+  .homeMainHighlight   { font-size: 30px; }
+  .homeMainHeroDescription { font-size: 14px; }
 }

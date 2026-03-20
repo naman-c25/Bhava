@@ -5,27 +5,18 @@ function HomeMain() {
   return (
     <div className={styles.homeMainHero}>
 
-      <div className={styles.homeMainHeroBackground}>
-        <img
-          src="/temple(4).jpeg"
-          alt="Temple Background"
-          className={styles.homeMainHeroBgImage}
-        />
-        {/* Blur overlay — only blurs the left transition zone */}
-        <div className={styles.homeMainHeroBlurEdge} />
-      </div>
+      <img
+        src="./temple(4).png"
+        alt="Temple Background"
+        className={styles.homeMainHeroBgImage}
+      />
 
       <div className={styles.homeMainContainer}>
         <div className={styles.homeMainTextLeft}>
 
           <h1 className={styles.homeMainHeroTitle}>
-            <span className={styles.homeMainElevateText}>
-              Elevate Your
-            </span>
-            <br />
-            <span className={styles.homeMainHighlight}>
-              Spiritual Practice
-            </span>
+            <span className={styles.homeMainElevateText}>Elevate Your</span>
+            <span className={styles.homeMainHighlight}>Spiritual Practice</span>
           </h1>
 
           <p className={styles.homeMainHeroDescription}>

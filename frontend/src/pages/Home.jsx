@@ -3,6 +3,7 @@ import HomeMain from "../components/HomeMain";
 import SacredCollection from "../components/SacredCollection";
 import ProductSpecification from "../components/ProductSpecification";
 import OurMission from "../components/OurMission";
+import FundRaiser from "../components/FundRaiser";
 import Community from "../components/Community";
 import AppSection from "../components/AppSection";
 import FAQ from "../components/FAQ";
@@ -17,6 +18,7 @@ function Home() {
       <GitaSlider />
       <ProductSpecification />
       <OurMission />
+      <FundRaiser />
       <Community />
       {/* <AppSection /> */}
       {/* <FAQ /> */}
