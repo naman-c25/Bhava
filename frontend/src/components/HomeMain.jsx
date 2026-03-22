@@ -15,18 +15,17 @@ function HomeMain() {
         <div className={styles.homeMainTextLeft}>
 
           <h1 className={styles.homeMainHeroTitle}>
-            <span className={styles.homeMainElevateText}>Elevate Your</span>
-            <span className={styles.homeMainHighlight}>Spiritual Practice</span>
+            <span className={styles.homeMainElevateText}> Awaken Bhava Live Divine</span>
+            <span className={styles.homeMainHighlight}>Every Day</span>
           </h1>
 
           <p className={styles.homeMainHeroDescription}>
-            Experience premium Hindu sacred products, wisdom platforms, and pilgrimage
-            experiences—where ancient tradition meets contemporary luxury.
+           A structured ritual system to modern life.
           </p>
 
           <div className={styles.homeMainHeroButtons}>
-            <button className={styles.homeMainBtnPrimary}>Explore Products</button>
-            <button className={styles.homeMainBtnSecondary}>Join Our Community</button>
+            <button className={styles.homeMainBtnPrimary}>Begin Your Practice</button>
+            <button className={styles.homeMainBtnSecondary}>Explore the System</button>
           </div>
 
         </div>
