@@ -7,7 +7,7 @@ const teachings = [
     id: 1,
     title: "Karma Yoga",
     sub: "Path of Action",
-    teacher: "Swami Vivekananda",
+    teacher: "The discipline of selfless action.",
     duration: "12 min",
     sessions: "8 sessions",
     image: "/Timeless%20Wisdom/Karma%20Yoga.png",
@@ -17,7 +17,7 @@ const teachings = [
     id: 2,
     title: "Bhakti Sutras",
     sub: "Science of Devotion",
-    teacher: "Narada Muni",
+    teacher: "The path of devotion and divine love.",
     duration: "8 min",
     sessions: "6 sessions",
     image: "/Timeless%20Wisdom/Bhakti%20Sutra.png",
@@ -25,9 +25,9 @@ const teachings = [
   },
   {
     id: 3,
-    title: "Yoga Philosophy",
+    title: "Yoga Darshana",
     sub: "Patanjali's Path",
-    teacher: "Maharishi Patanjali",
+    teacher: "Union of body, mind and sacred awareness.",
     duration: "15 min",
     sessions: "12 sessions",
     image: "/Timeless%20Wisdom/Yoga%20Philosophy.png",
@@ -35,9 +35,9 @@ const teachings = [
   },
   {
     id: 4,
-    title: "Vedanta Basics",
+    title: "Vedanta Foundations",
     sub: "Ultimate Reality",
-    teacher: "Adi Shankaracharya",
+    teacher: "Understanding the nature of the Self.",
     duration: "10 min",
     sessions: "10 sessions",
     image: "/Timeless%20Wisdom/Vedanta%20Basics.png",
@@ -47,7 +47,7 @@ const teachings = [
     id: 5,
     title: "Meditation Guide",
     sub: "Dhyana Practice",
-    teacher: "Sri Ramana Maharshi",
+    teacher: "The stillness through which truth is seen.",
     duration: "18 min",
     sessions: "14 sessions",
     image: "/Timeless%20Wisdom/Meditation%20Guide.png",
@@ -57,7 +57,7 @@ const teachings = [
     id: 6,
     title: "Dharma Ethics",
     sub: "Righteous Living",
-    teacher: "Chanakya",
+    teacher: "Timeless guidance for righteous living.",
     duration: "14 min",
     sessions: "9 sessions",
     image: "/Timeless%20Wisdom/Dharma%20Ethics.png",
@@ -65,9 +65,9 @@ const teachings = [
   },
   {
     id: 7,
-    title: "Sankhya",
+    title: "Sankhya Philosophy",
     sub: "Cosmic Enumeration",
-    teacher: "Maharishi Kapila",
+    teacher: "The ancient science of consciousness.",
     duration: "20 min",
     sessions: "16 sessions",
     image: "/Timeless Wisdom/Samkhya.png",
@@ -75,9 +75,9 @@ const teachings = [
   },
   {
     id: 8,
-    title: "Anointment Rituals",
+    title: "Sacred Anointment Rituals",
     sub: "Sacred Consecration",
-    teacher: "Temple Tradition",
+    teacher: "The tradition of sanctifying body and space",
     duration: "16 min",
     sessions: "7 sessions",
     image: "/Timeless%20Wisdom/Anoinment%20Rituals.png",
@@ -118,9 +118,9 @@ function TrendingTeachings() {
       {/* Header */}
       <div className={styles.trendingHeader}>
         <div>
-          <h2 className={styles.trendingHeading}>Timeless Wisdom</h2>
+          <h2 className={styles.trendingHeading}>Sacred Wisdom for Daily Living</h2>
           <p className={styles.trendingSubheading}>
-            Sacred philosophy for thoughtful reflection
+            Ancient teaching that illuminate modern devotional life.
           </p>
         </div>
       </div>

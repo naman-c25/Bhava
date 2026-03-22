@@ -15,7 +15,7 @@ function HomeMain() {
         <div className={styles.homeMainTextLeft}>
 
           <h1 className={styles.homeMainHeroTitle}>
-            <span className={styles.homeMainElevateText}> Awaken Bhava Live Divine</span>
+            <span className={styles.homeMainElevateText}> Awaken Bhava : Live Divine</span>
             <span className={styles.homeMainHighlight}>Every Day</span>
           </h1>
 

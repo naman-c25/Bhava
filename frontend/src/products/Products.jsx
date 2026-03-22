@@ -400,10 +400,10 @@ function Products() {
       {/* Hero */}
       <div className={styles.hero}>
         <h1 className={styles.heroTitle}>
-          Sacred <span className={styles.heroAccent}>Products</span>
+         Our Sacred <span className={styles.heroAccent}>Collections</span>
         </h1>
         <p className={styles.heroSub}>
-          Authentic spiritual items curated from temples and artisans across India
+          Everything you need to build a consistent daily ritual
         </p>
       </div>
 

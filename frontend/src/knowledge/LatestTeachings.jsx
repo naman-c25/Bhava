@@ -5,7 +5,7 @@ import styles from "./LatestTeachings.module.css";
 const teachings = [
   {
     title: "Karma & Dharma",
-    category: "Philosophy",
+    category: "Understanding right action and sacred duty.",
     image: "/Latest%20Teachings/Karma%20Dharma.png",
     tagColor: "#3a2a6a",
     color: "#1a1a3a",
@@ -13,15 +13,15 @@ const teachings = [
   },
   {
     title: "Divine Grace",
-    category: "Devotion",
+    category: "The quiet power of devotion and surrender.",
     image: "/Latest%20Teachings/Divine%20Grace.png",
     tagColor: "#6a2a3a",
     color: "#3a1a2a",
     route: "/knowledge/divine-grace",
   },
   {
-    title: "Inner Peace",
-    category: "Meditation",
+    title: "Inner Stillness",
+    category: "Discovering peace beyond the restless mind.",
     image: "/Latest%20Teachings/Inner%20Peace.png",
     tagColor: "#2a3a6a",
     color: "#1a2a3a",
@@ -29,15 +29,15 @@ const teachings = [
   },
   {
     title: "Sacred Traditions",
-    category: "Rituals",
+    category: "Ritual practices that carry timeless meaning.",
     image: "/Latest%20Teachings/Sacred%20Traditions.png",
     tagColor: "#5a3a0a",
     color: "#2a1a0a",
     route: "/knowledge/sacred-traditions",
   },
   {
-    title: "Path of Union",
-    category: "Yoga Sutras",
+    title: "The Path of Union",
+    category: "Yoga as the journey toward wholeness.",
     image: "/Latest%20Teachings/Path%20of%20Union.png",
     tagColor: "#1a4a2a",
     color: "#0a2a1a",
@@ -45,7 +45,7 @@ const teachings = [
   },
   {
     title: "Non-Dual Wisdom",
-    category: "Advaita",
+    category: "Realizing the unity of self and absolute reality.",
     image: "/Latest%20Teachings/Non%20Dual%20Wisdom.png",
     tagColor: "#4a1a6a",
     color: "#2a0a3a",
@@ -81,8 +81,8 @@ function LatestTeachings() {
 
       <div className={styles.header}>
         <div>
-          <h2 className={styles.heading}>Latest Teachings</h2>
-          <p className={styles.subheading}>Fresh insights from ancient wisdom</p>
+          <h2 className={styles.heading}>Living Wisdom</h2>
+          <p className={styles.subheading}>Fresh perspectives drawn from ancient wisdom.</p>
         </div>
       </div>
 

@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import styles from "./LearningPaths.module.css";
 
 const paths = [
-  { title: "108 Days of Devotion",  sub: "Path to Bhakti",         joined: "287K joined", color: "#5a1a3a", image: "/Learning%20Paths/108%20Days%20of%20Devotion.png",  route: "/knowledge/108-days-devotion" },
-  { title: "Bhagavad Gita Journey", sub: "All 18 Chapters",         joined: "456K joined", color: "#5a2a0a", image: "/Learning%20Paths/Bhagvat%20Gita%20Journey.png",   route: "/knowledge/bhagavad-gita-journey" },
-  { title: "Upanishad Wisdom",      sub: "Principal Upanishads",    joined: "198K joined", color: "#2a1a5a", image: "/Learning%20Paths/Upanishad%20Wisdom.png",         route: "/knowledge/upanishad-wisdom" },
-  { title: "Yoga Philosophy",       sub: "Patanjali Sutras",        joined: "342K joined", color: "#1a3a3a", image: "/Learning%20Paths/Yoga%20Philosophy.png",           route: "/knowledge/yoga-philosophy" },
-  { title: "Vedic Chanting",        sub: "Learn Sacred Hymns",      joined: "156K joined", color: "#1a2a4a", image: "/Learning%20Paths/Vedic%20Chanting.png",            route: "/knowledge/vedic-chanting" },
-  { title: "Deity Wisdom",          sub: "Understanding Devatā",    joined: "523K joined", color: "#4a0a0a", image: "/Learning%20Paths/Deity%20Wisdom.png",              route: "/knowledge/deity-wisdom" },
-  { title: "Tantra & Shakti",       sub: "Sacred Energy Practices", joined: "89K joined",  color: "#3a1a0a", image: "/Learning%20Paths/Tantra%20&%20Shakti.png",         route: "/knowledge/tantra-shakti" },
+  { title: "108 Days of Devotion",    sub: "A sacred journey into the path of Bhakti.",         joined: "287K joined", color: "#5a1a3a", image: "/Learning%20Paths/108%20Days%20of%20Devotion.png",  route: "/knowledge/108-days-devotion" },
+  { title: "Bhagavad Gita Journey",   sub: "The timeless dialogue on dharma and inner mastery.",         joined: "456K joined", color: "#5a2a0a", image: "/Learning%20Paths/Bhagvat%20Gita%20Journey.png",   route: "/knowledge/bhagavad-gita-journey" },
+  { title: "Upanishad Wisdom",        sub: "Exploring the nature of the Self and ultimate reality.",    joined: "198K joined", color: "#2a1a5a", image: "/Learning%20Paths/Upanishad%20Wisdom.png",         route: "/knowledge/upanishad-wisdom" },
+  { title: "Yoga Darshana",           sub: "The science of inner discipline and consciousness.",        joined: "342K joined", color: "#1a3a3a", image: "/Learning%20Paths/Yoga%20Philosophy.png",           route: "/knowledge/yoga-philosophy" },
+  { title: "Vedic Chanting",          sub: "Sacred sound that carries the wisdom of the Vedas.",      joined: "156K joined", color: "#1a2a4a", image: "/Learning%20Paths/Vedic%20Chanting.png",            route: "/knowledge/vedic-chanting" },
+  { title: "Understanding the Devata",          sub: "Symbolism and meaning behind sacred forms.",    joined: "523K joined", color: "#4a0a0a", image: "/Learning%20Paths/Deity%20Wisdom.png",              route: "/knowledge/deity-wisdom" },
+  { title: "Shakti Wisdom",           sub: "Ancient teachings on energy and consciousness.", joined: "89K joined",  color: "#3a1a0a", image: "/Learning%20Paths/Tantra%20&%20Shakti.png",         route: "/knowledge/tantra-shakti" },
 ];
 
 function LearningPaths() {
@@ -43,8 +43,8 @@ function LearningPaths() {
       {/* Header — arrows removed from here */}
       <div className={styles.header}>
         <div>
-          <h2 className={styles.heading}>Learning Paths</h2>
-          <p className={styles.subheading}>Structured journeys into Dharmic wisdom</p>
+          <h2 className={styles.heading}>Paths of Dharmic Wisdom</h2>
+          <p className={styles.subheading}>Structured journeys into the teachings that illuminate sacred living.</p>
         </div>
       </div>
 
