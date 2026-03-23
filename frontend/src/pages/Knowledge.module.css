@@ -692,8 +692,7 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: rotateY(180deg);
-  /* Use deep maroon when flipped (RGB(31,0,9)) */
-  background: rgb(31, 0, 9) !important;
+  background: #390A14 !important;
   display: flex;
   align-items: center;
 }
