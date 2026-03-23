@@ -37,8 +37,8 @@
   flex-direction: row;
   align-items: center;
   background: linear-gradient(135deg, var(--temple-ivory) 0%, #f5eee3 55%, var(--warm-beige) 100%);
-  min-height: 81vh; /* fill viewport so hero covers bottom of page */
-   overflow: hidden;
+  min-height: 62vh;
+  overflow: hidden;
   margin-bottom: 50px;
 }  
 
