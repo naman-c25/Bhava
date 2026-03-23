@@ -37,7 +37,7 @@
   flex-direction: row;
   align-items: center;
   background: linear-gradient(135deg, var(--temple-ivory) 0%, #f5eee3 55%, var(--warm-beige) 100%);
-  min-height: 100vh; /* fill viewport so hero covers bottom of page */
+  min-height: 80vh; /* fill viewport so hero covers bottom of page */
    overflow: hidden;
   margin-bottom: 50px;
 }  
@@ -179,7 +179,7 @@
    ══════════════════════════════════════ */
 .commitmentsSection {
   background: #F4EFE6;
-  padding: 56px 0 48px;
+  padding: 56px 20 48px;
   border-top: 1px solid rgba(198, 161, 74, 0.15);
 }
 
