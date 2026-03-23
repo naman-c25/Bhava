@@ -136,7 +136,18 @@ function AuthPage() {
       <div className={styles.card}>
         {/* Bhava Logo */}
         <img src="/logo(3).png" alt="Bhava" className={styles.logoMark} />
-        <div className={styles.logoText}>BHAVA</div>
+        {/* <div className={styles.logoText}>BHAVA  <span className={styles.dotsBhava}>
+                          <span className={styles.dotName}></span>
+                          <span className={styles.dotName}></span>
+                        </span></div> */}
+
+                          <h2 className={styles.heading}>
+                                         BHAVA
+                                         <span className={styles.dotsBhava}>
+                                           <span className={styles.dotName}></span>
+                                           <span className={styles.dotName}></span>
+                                         </span>
+                                       </h2>
 
         <h1 className={styles.title}>
           {mode === "login" ? "Swagatam" : "Create Account"}
