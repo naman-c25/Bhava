@@ -10,10 +10,19 @@ const protect = (req, res, next) => {
     const token = authHeader.split(" ")[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = decoded.id;
+    req.userRole = decoded.role;  // ← ADD THIS
     next();
   } catch (err) {
     res.status(401).json({ success: false, message: "Token invalid or expired" });
   }
+};
+
+// ← ADD THIS
+export const adminOnly = (req, res, next) => {
+  if (req.userRole !== "admin") {
+    return res.status(403).json({ success: false, message: "Admin access only." });
+  }
+  next();
 };
 
 export default protect;

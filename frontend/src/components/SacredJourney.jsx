@@ -11,8 +11,7 @@ function SacredJourney() {
         </h1>
 
         <p className={styles.sacredDescription}>
-          Join 10K+ devotees who've already transformed their spiritual practice. Pre-order our launch
-          collections now and lock in founding member pricing (30% discount). Limited slots available.
+          Join 10K+ devotees who've already transformed their spiritual practice.
         </p>
 
         <div className={styles.sacredButtons}>
