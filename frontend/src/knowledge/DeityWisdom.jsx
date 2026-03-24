@@ -138,7 +138,7 @@ function DeityWisdom() {
 
   return (
     <div className={styles.page}>
-      <section className={styles.hero}>
+      <section className={`${styles.hero} ${styles.heroHalf}`}>
         <div className={styles.heroOverlay} style={{ background: HERO_GRADIENT }} />
         <div className={styles.heroSplit}>
           <div className={styles.heroLeft}>

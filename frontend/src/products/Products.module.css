@@ -6,7 +6,7 @@
 
 /* ── Hero ── */
 .hero {
-  background: linear-gradient(160deg, #173927 0%, #255c3f 60%, #1a4a30 100%);
+  background: linear-gradient(160deg, #4A0B1D 0%, #4A0B1D 60%, #4A0B1D 100%);
   padding: 72px 24px 60px;
   text-align: center;
   position: relative;
@@ -67,7 +67,7 @@
   border-radius: 999px;
   border: 1.5px solid rgba(37, 92, 63, 0.25);
   background: transparent;
-  color: #255c3f;
+  color: #4A0B1D;
   font-size: 15px;
   font-weight: 600;
   font-family: 'Neue Haas Grotesk', Inter, sans-serif;
@@ -79,12 +79,12 @@
 }
 
 .filterBtn:hover {
-  border-color: #255c3f;
+  border-color: #4A0B1D;
   background: rgba(37, 92, 63, 0.06);
 }
 
 .filterActive {
-  background: #255c3f;
+  background: #4A0B1D;
   color: #ffffff;
   border-color: #255c3f;
 }

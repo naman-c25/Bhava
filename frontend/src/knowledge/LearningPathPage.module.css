@@ -26,6 +26,11 @@
   overflow: hidden;
 }
 
+/* Modifier for pages that need a shorter hero (half height) */
+.heroHalf {
+  min-height: 44vh;
+}
+
 .heroOverlay {
   position: absolute;
   inset: 0;

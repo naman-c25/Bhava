@@ -9,7 +9,7 @@ const teachingDetails = {
     teacher: "Swami Vivekananda",
     duration: "12 min",
     sessions: "8 sessions",
-    image: "/karmaYoga.jpeg",
+    image: "/Timeless%20Wisdom/Karma%20Yoga.png",
     description:
       "Karma Yoga is the path of selfless action — doing your duty without attachment to the fruits of your work. Rooted in the Bhagavad Gita, it teaches that every action performed with pure intention becomes a form of worship, purifying the mind and dissolving the ego.",
     lessons: [
@@ -29,7 +29,7 @@ const teachingDetails = {
     teacher: "Narada Muni",
     duration: "8 min",
     sessions: "6 sessions",
-    image: "/bhakti.png",
+    image: "/Timeless%20Wisdom/Bhakti%20Sutra.png",
     description:
       "The Narada Bhakti Sutras are 84 aphorisms on the nature of divine love. Bhakti is not mere sentiment — it is the highest science of the heart, transforming ordinary human love into unconditional devotion to the Divine. This path dissolves the sense of separation between the devotee and the Beloved.",
     lessons: [
@@ -47,7 +47,7 @@ const teachingDetails = {
     teacher: "Maharishi Patanjali",
     duration: "15 min",
     sessions: "12 sessions",
-    image: "/yogaPhilosophy.jpeg",
+    image: "/Timeless%20Wisdom/Yoga%20Philosophy.png",
     description:
       "The Yoga Sutras of Patanjali are 196 terse aphorisms defining the complete science of yoga. Far beyond physical postures, yoga is the cessation of the fluctuations of the mind — Chitta Vritti Nirodha. This series explores all eight limbs, from ethical foundations to the highest states of samadhi.",
     lessons: [
@@ -71,7 +71,7 @@ const teachingDetails = {
     teacher: "Adi Shankaracharya",
     duration: "10 min",
     sessions: "10 sessions",
-    image: "/vedantaBasic.jpeg",
+    image: "/Timeless%20Wisdom/Vedanta%20Basics.png",
     description:
       "Advaita Vedanta proclaims the radical non-dual truth: Brahman alone is real, the world is appearance, and the individual self is none other than the Supreme. This foundational series introduces Viveka (discrimination), Vairagya (detachment), and the Mahavakyas — the great sayings of the Upanishads.",
     lessons: [
@@ -93,7 +93,7 @@ const teachingDetails = {
     teacher: "Sri Ramana Maharshi",
     duration: "18 min",
     sessions: "14 sessions",
-    image: "/meditationGuide.jpeg",
+    image: "/Timeless%20Wisdom/Meditation%20Guide.png",
     description:
       "Dhyana is the seventh limb of Yoga — the unbroken flow of attention toward the Divine. This comprehensive guide moves from breath awareness through mantra meditation to the deepest state of thoughtless awareness. Rooted in ancient Indian tradition, each session builds a sustainable daily practice.",
     lessons: [
@@ -119,7 +119,7 @@ const teachingDetails = {
     teacher: "Chanakya",
     duration: "14 min",
     sessions: "9 sessions",
-    image: "/dharmaEthics.jpeg",
+    image: "/Timeless%20Wisdom/Dharma%20Ethics.png",
     description:
       "Dharma is the cosmic law that sustains life — the right way of living in harmony with nature, family, society, and the Divine. This series draws from the Manusmriti, Arthashastra, and Bhagavad Gita to present a practical framework for ethical decision-making in modern life.",
     lessons: [
@@ -140,7 +140,7 @@ const teachingDetails = {
     teacher: "Maharishi Kapila",
     duration: "20 min",
     sessions: "16 sessions",
-    image: "/sankhaya.jpeg",
+    image: "/Timeless Wisdom/Samkhya.png",
     description:
       "Sankhya is India's oldest systematic philosophy, teaching that reality consists of two principles: Purusha (pure consciousness) and Prakriti (nature). All of creation — from the cosmic to the personal — can be mapped through 25 tattvas. This series offers a complete map of existence.",
     lessons: [
@@ -168,7 +168,7 @@ const teachingDetails = {
     teacher: "Temple Tradition",
     duration: "16 min",
     sessions: "7 sessions",
-    image: "/anionting.jpeg",
+    image: "/Timeless%20Wisdom/Anoinment%20Rituals.png",
     description:
       "Abhisheka — the sacred anointing of the deity — is one of the most powerful and intimate forms of temple worship. Through water, milk, honey, ghee, and rose water, the devotee consecrates the divine image, connecting directly with the sacred presence. This series teaches the complete ritual with meaning.",
     lessons: [

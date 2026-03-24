@@ -42,17 +42,14 @@ function Career() {
         <h2>Why Work With Us?</h2>
         <div className={styles.cards}>
           <div className={styles.card}>
-            <span>🌱</span>
             <h3>Purpose-Driven Work</h3>
             <p>Every role contributes to a greener, better world.</p>
           </div>
           <div className={styles.card}>
-            <span>🤝</span>
             <h3>Inclusive Culture</h3>
             <p>We celebrate diversity and foster belonging.</p>
           </div>
           <div className={styles.card}>
-            <span>📈</span>
             <h3>Growth Opportunities</h3>
             <p>Learn, grow, and lead in your field.</p>
           </div>

@@ -7,15 +7,11 @@ function FundRaiser() {
       <div className={styles.card}>
         {/* Left — 40% description */}
         <div className={styles.content}>
-          <span className={styles.badge}>Fundraiser</span>
-
           <h2 className={styles.title}>
             Pray for Families affected in Middle East amid War
           </h2>
 
           <p className={styles.date}>Apr 01 – 10</p>
-
-          <p className={styles.joined}>20K+ Joined</p>
 
           <div className={styles.buttons}>
             <button className={styles.btnJoin}>Join</button>

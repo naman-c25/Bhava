@@ -133,7 +133,7 @@ function DaysOfDevotion108() {
   return (
     <div className={styles.page}>
       {/* Hero */}
-      <section className={styles.hero}>
+      <section className={`${styles.hero} ${styles.heroHalf}`}>
         <div className={styles.heroOverlay} style={{ background: HERO_GRADIENT }} />
         <div className={styles.heroSplit}>
           <div className={styles.heroLeft}>
