@@ -216,6 +216,8 @@ function Footer() {
                     <Link to="/faq" className={styles.contactLink}>{link}</Link>
                   ) : link === "Careers" ? (
                     <Link to="/career" className={styles.contactLink}>{link}</Link>
+                  ) : link === "Our Mission" ? (
+                    <Link to="/mission" className={styles.contactLink}>{link}</Link>
                   ) : (
                     <a href="#">{link}</a>
                   )}

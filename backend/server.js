@@ -2,11 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import authRoutes    from "./routes/authRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
-import cartRoutes    from "./routes/cartRoutes.js";
-import orderRoutes   from "./routes/orderRoutes.js";
-import careerRoutes  from "./routes/careerRoutes.js";
+import cartRoutes from "./routes/cartRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+import careerRoutes from "./routes/careerRoutes.js";
+import missionRoutes from "./routes/missionRoutes.js";
 
 dotenv.config();
 
@@ -28,11 +29,12 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
 // ── Routes ────────────────────────────────────────────────────
-app.use("/api/auth",    authRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
-app.use("/api/cart",    cartRoutes);
-app.use("/api/orders",  orderRoutes);
-app.use("/api/career",  careerRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/career", careerRoutes);
+app.use("/api/mission", missionRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {
