@@ -8,7 +8,7 @@ const WISDOM_VISIBLE = 4;
 const WISDOM_STEP = 2;
 const WISDOM_GAP = 20;
 
-function WisdomFlipCard({ category, width, navigate }) {
+function WisdomFlipCard({ category, width, navigate, onExploreMore }) {
   const [flipped, setFlipped] = useState(false);
   return (
     <div
@@ -38,7 +38,7 @@ function WisdomFlipCard({ category, width, navigate }) {
             <p className={styles.wisdomFrontDesc}>{category.description}</p>
             <button
               className={styles.wisdomFrontBtn}
-              onClick={() => navigate(category.route)}
+              onClick={onExploreMore}
             >
               Explore More
             </button>
@@ -105,9 +105,6 @@ function Knowledge() {
   const commitments = [
     {
       title: "108-Day Mantra Sādhana",
-      // subtitle: "Starts in 7 days",
-      // devotees: "106,000 Devotees",
-      // description: "Commit to daily mantra and deepen your inner stillness. Chant sacred mantras for 108 consecutive days and experience profound inner transformation through sound and devotion.",
       highlights: ["Daily guided chanting", "Sacred mantra teachings", "Community support"],
       color: "#470017",
       image: "/Sacred%20Commitments%20for%20the%20Disciplined%20Soul/108-Day%20Mantra%20Sadhana.png",
@@ -115,9 +112,6 @@ function Knowledge() {
     },
     {
       title: "40-Day Gita Wisdom Path",
-      // subtitle: "Starts in 2 days",
-      // devotees: "75,000 Devotees",
-      // description: "Study one verse each day with guided reflection. Walk the timeless path of the Bhagavad Gita and let ancient wisdom illuminate your dharma.",
       highlights: ["Chapter-by-chapter study", "Expert satsang sessions", "Daily reflection prompts"],
       color: "#2B6291",
       image: "/Sacred%20Commitments%20for%20the%20Disciplined%20Soul/40%20Day%20Gita%20Wisdom%20Path.png",
@@ -166,7 +160,14 @@ function Knowledge() {
   }, []);
 
   const prevWisdom = () => setWisdomIndex((p) => Math.max(0, p - WISDOM_STEP));
-  const nextWisdom = () => setWisdomIndex((p) => Math.min(knowledgeCategories.length - WISDOM_VISIBLE, p + WISDOM_STEP));
+  const nextWisdom = () =>
+    setWisdomIndex((p) => Math.min(knowledgeCategories.length - WISDOM_VISIBLE, p + WISDOM_STEP));
+
+  // Handler passed to each WisdomFlipCard's "Explore More" button
+  const handleExploreMore = () => {
+    const maxIndex = knowledgeCategories.length - WISDOM_VISIBLE;
+    setWisdomIndex((prev) => Math.min(prev + WISDOM_STEP, maxIndex));
+  };
 
   return (
     <div className={styles.knowledgePagesWrapper}>
@@ -208,49 +209,51 @@ function Knowledge() {
               style={{ transform: `translateX(${-activeSlide * step}px)` }}
             >
               {commitments.map((item, idx) => (
-              <div
-                key={idx}
-                className={styles.commitmentCard}
-                style={{ "--card-color": item.color, width: cardWidth || undefined }}
-              >
-                {/* Left — text content */}
-                <div className={styles.commitCardLeft} style={{ background: item.color }}>
-                  <div className={styles.commitCardLeftInner}>
-                    <span className={styles.commitSubtitle}>{item.subtitle}</span>
-                    <span className={styles.commitDevotees}>{item.devotees}</span>
-                    <h3 className={styles.commitTitle}>{item.title}</h3>
-                    <p className={styles.commitDescription}>{item.description}</p>
-                    <ul className={styles.commitHighlights}>
-                      {item.highlights.map((h, i) => (
-                        <li key={i}>
-                          <span className={styles.commitDot} />
-                          {h}
-                        </li>
-                      ))}
-                    </ul>
-                    <button
-                      className={styles.btnJoinChallenge}
-                      onClick={() => item.route && navigate(item.route)}
-                    >
-                      Join Challenge
-                    </button>
+                <div
+                  key={idx}
+                  className={styles.commitmentCard}
+                  style={{ "--card-color": item.color, width: cardWidth || undefined }}
+                >
+                  {/* Left — text content */}
+                  <div className={styles.commitCardLeft} style={{ background: item.color }}>
+                    <div className={styles.commitCardLeftInner}>
+                      <span className={styles.commitSubtitle}>{item.subtitle}</span>
+                      <span className={styles.commitDevotees}>{item.devotees}</span>
+                      <h3 className={styles.commitTitle}>{item.title}</h3>
+                      <p className={styles.commitDescription}>{item.description}</p>
+                      <ul className={styles.commitHighlights}>
+                        {item.highlights.map((h, i) => (
+                          <li key={i}>
+                            <span className={styles.commitDot} />
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+                      <button
+                        className={styles.btnJoinChallenge}
+                        onClick={() => item.route && navigate(item.route)}
+                      >
+                        Join Challenge
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Right — image */}
+                  <div className={styles.commitCardRight} style={{ backgroundColor: item.color }}>
+                    <img src={item.image} alt={item.title} className={styles.commitCardImage} />
+                    <div
+                      className={styles.commitCardImageOverlay}
+                      style={{
+                        background: `linear-gradient(to right, ${item.color} 0%, ${item.color}99 18%, transparent 50%)`,
+                      }}
+                    />
                   </div>
                 </div>
-
-                {/* Right — image */}
-                <div className={styles.commitCardRight} style={{ backgroundColor: item.color }}>
-                  <img src={item.image} alt={item.title} className={styles.commitCardImage} />
-                  <div
-                    className={styles.commitCardImageOverlay}
-                    style={{ background: `linear-gradient(to right, ${item.color} 0%, ${item.color}99 18%, transparent 50%)` }}
-                  />
-                </div>
-              </div>
-            ))}
+              ))}
             </div>
           </div>
 
-          {/* Prev arrow — left edge, vertically centered, on hover */}
+          {/* Prev arrow */}
           <button
             className={`${styles.commitEdgeArrow} ${styles.commitEdgeArrowLeft} ${
               commitHovered && activeSlide > 0
@@ -259,9 +262,11 @@ function Knowledge() {
             }`}
             onClick={prevSlide}
             aria-label="Previous"
-          >‹</button>
+          >
+            ‹
+          </button>
 
-          {/* Next arrow — right edge, vertically centered, on hover */}
+          {/* Next arrow */}
           <button
             className={`${styles.commitEdgeArrow} ${
               commitHovered && activeSlide < commitments.length - 1
@@ -270,7 +275,9 @@ function Knowledge() {
             }`}
             onClick={nextSlide}
             aria-label="Next"
-          >›</button>
+          >
+            ›
+          </button>
         </div>
 
         {/* Nav: dots only */}
@@ -297,37 +304,42 @@ function Knowledge() {
         </div>
 
         <div className={styles.wisdomSliderWrapper}>
-            <div className={styles.wisdomTrackOuter} ref={wisdomRef}>
-              <motion.div
-                className={styles.wisdomTrack}
-                animate={{ x: -wisdomIndex * (wisdomCardW + WISDOM_GAP) }}
-                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-              >
-                {knowledgeCategories.map((category) => (
-                  <WisdomFlipCard
-                    key={category.id}
-                    category={category}
-                    width={wisdomCardW}
-                    navigate={navigate}
-                  />
-                ))}
-              </motion.div>
-            </div>
-
-            <button
-              className={`${styles.wisdomArrow} ${styles.wisdomArrowLeft}`}
-              onClick={prevWisdom}
-              disabled={wisdomIndex === 0}
-              aria-label="Previous"
-            >‹</button>
-
-            <button
-              className={`${styles.wisdomArrow} ${styles.wisdomArrowRight}`}
-              onClick={nextWisdom}
-              disabled={wisdomIndex >= knowledgeCategories.length - WISDOM_VISIBLE}
-              aria-label="Next"
-            >›</button>
+          <div className={styles.wisdomTrackOuter} ref={wisdomRef}>
+            <motion.div
+              className={styles.wisdomTrack}
+              animate={{ x: -wisdomIndex * (wisdomCardW + WISDOM_GAP) }}
+              transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+            >
+              {knowledgeCategories.map((category) => (
+                <WisdomFlipCard
+                  key={category.id}
+                  category={category}
+                  width={wisdomCardW}
+                  navigate={navigate}
+                  onExploreMore={handleExploreMore}
+                />
+              ))}
+            </motion.div>
           </div>
+
+          <button
+            className={`${styles.wisdomArrow} ${styles.wisdomArrowLeft}`}
+            onClick={prevWisdom}
+            disabled={wisdomIndex === 0}
+            aria-label="Previous"
+          >
+            ‹
+          </button>
+
+          <button
+            className={`${styles.wisdomArrow} ${styles.wisdomArrowRight}`}
+            onClick={nextWisdom}
+            disabled={wisdomIndex >= knowledgeCategories.length - WISDOM_VISIBLE}
+            aria-label="Next"
+          >
+            ›
+          </button>
+        </div>
       </div>
 
       {/* ── 108 & Tiger Eye — Featured Section ── */}
@@ -336,7 +348,9 @@ function Knowledge() {
           <div className={styles.sectionGoldDivider} />
           <h2 className={styles.tigerSummaryHeading}>
             The Civilizational Code:&nbsp;
-            <span style={{ fontWeight: 800, fontSize: "inherit", color: "#C6A14A" }}>108 &amp; Tiger Eye</span>
+            <span style={{ fontWeight: 800, fontSize: "inherit", color: "#C6A14A" }}>
+              108 &amp; Tiger Eye
+            </span>
           </h2>
           <p className={styles.tigerSummaryText}>
             108 is not just a number — it is the universe's blueprint encoded in sacred geometry, planetary cycles,
