@@ -18,6 +18,7 @@ import ProfilePage from "./account/ProfilePage";
 import OrdersPage from "./account/OrdersPage";
 import AddressesPage from "./account/AddressesPage";
 import CareerPage from "./pages/carrerpage";
+import MissionPage from "./pages/Mission";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
             <Route path="/knowledge"  element={<Knowledge />} />
             <Route path="/knowledge/*" element={<KnowledgeRoutes />} />
               <Route path="/career"     element={<CareerPage />} /> 
+              <Route path="/mission"    element={<MissionPage />} />
           </Route>
         </Routes>
       </CartProvider>
