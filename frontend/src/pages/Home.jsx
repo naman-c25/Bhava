@@ -1,7 +1,9 @@
 import React from "react";
 import HomeMain from "../components/HomeMain";
+
 import SacredCollection from "../components/SacredCollection";
 import ProductSpecification from "../components/ProductSpecification";
+import SacredMissionSection from "../components/SacredMissionSection";
 import FundRaiser from "../components/FundRaiser";
 import Community from "../components/Community";
 import AppSection from "../components/AppSection";
@@ -16,6 +18,7 @@ function Home() {
       <SacredCollection />
       <GitaSlider />
       <ProductSpecification />
+      <SacredMissionSection />
       <FundRaiser />
       <Community />
       {/* <AppSection /> */}
