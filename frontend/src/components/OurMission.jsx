@@ -38,10 +38,16 @@ export default function OurMission({ fetchOnMount = false }) {
 
   async function loadMission() {
     if (data || loading) return
+    // Ensure the section becomes visible immediately when loading is triggered
+    // (e.g. user clicked the heading/button) so content doesn't stay hidden
+    // waiting for the IntersectionObserver to fire.
+    if (!visible) setVisible(true)
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch('/api/mission')
+      const base = import.meta.env.VITE_API_URL || ''
+      const res = await fetch(`${base}/api/mission`)
+      // const res = await fetch('/api/mission')
       if (!res.ok) throw new Error('Network response was not ok')
       const json = await res.json()
       if (!json.success) throw new Error('API error')
