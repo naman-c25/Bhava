@@ -15,14 +15,14 @@
   font-family: 'Canela', Cormorant, serif;
   font-size: 3rem;
   font-weight: 700;
-  color: #173927;
+  color: #4A0B1D;
   margin-bottom: 30px;
   line-height: 1.3;
 }
 
 /* Colored segments within the title */
 .titleBegin {
-  color: #204130; /* dark green */
+  color: #4A0B1D; /* dark green */
 }
 
 .titleSacred {
@@ -237,7 +237,7 @@
 }
 
 .btnPreorder:hover {
-  background:#204130;
+  background:#4A0B1D;
   color: #ffffff;
   transform: translateY(-2px);
 }

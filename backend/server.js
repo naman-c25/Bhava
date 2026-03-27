@@ -77,7 +77,6 @@ import contactRoutes from "./routes/contactRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import careerRoutes from "./routes/careerRoutes.js";
-import missionRoutes from "./routes/missionRoutes.js";
 
 dotenv.config();
 
@@ -115,7 +114,6 @@ app.use("/api/contact", contactRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/career", careerRoutes);
-app.use("/api/mission", missionRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {

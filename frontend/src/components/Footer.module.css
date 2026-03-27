@@ -1,5 +1,5 @@
 .footerSection {
-  background: #093C2D;
+  background: #4A0B1D;
   font-family: 'Neue Haas Grotesk', Inter, sans-serif;
   padding: 60px 240px 0;
   color: #b8c5be;
@@ -41,7 +41,7 @@
 }
 
 .footerLinks li a {
-  color: #b8c5be;
+  color: #d5dbd8;
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 400;
@@ -99,18 +99,18 @@
 
 /* ── Contact Us link in columns ── */
 .contactLink {
-  color: #e8b86d !important;
+  color: #d5dbd8;
   text-decoration: none;
   font-size: 0.95rem;
-  font-weight: 500;
-  display: inline-block;
+  font-weight: 400;
   transition: all 0.3s ease;
+  display: inline-block;
 }
 
-.contactLink:hover {
+/* .contactLink:hover {
   color: #ffffff !important;
   transform: translateX(5px);
-}
+} */
 
 /* ── Contact Us button row (above copyright) ── */
 .footerContactRow {

@@ -39,6 +39,46 @@ export default function ScrollManager() {
   const location = useLocation();
   const navType = useNavigationType();
 
+  // If a route was navigated with a scroll target in state, attempt to scroll to it
+  useEffect(() => {
+    const scrollToId = location.state && location.state.scrollToId
+    if (!scrollToId) return
+
+    function scrollElementFully(el) {
+      if (!el) return false
+      const rect = el.getBoundingClientRect()
+      const elHeight = rect.height
+      const winH = window.innerHeight
+      const absoluteTop = window.scrollY + rect.top
+      let target
+      if (elHeight < winH) {
+        target = Math.max(absoluteTop - Math.floor((winH - elHeight) / 2), 0)
+      } else {
+        target = absoluteTop
+      }
+      window.scrollTo({ top: target, behavior: 'smooth' })
+      el.focus && el.focus()
+      return true
+    }
+
+    const tryScroll = () => {
+      const el = document.getElementById(scrollToId)
+      return scrollElementFully(el)
+    }
+
+    if (tryScroll()) return
+
+    // Retry a few times to allow the page to paint images/lazy content
+    const delays = [100, 300, 600, 1200]
+    const timers = delays.map((ms) =>
+      setTimeout(() => {
+        tryScroll()
+      }, ms)
+    )
+
+    return () => timers.forEach(clearTimeout)
+  }, [location.key])
+
   // ── Save scroll on every click (capture phase) ──────────────────
   // Fires BEFORE React handles the event, so scrollY is always correct
   // when the user clicks a link / card / button that triggers navigation.

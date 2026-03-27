@@ -130,7 +130,7 @@
 
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Footer.module.css";
 
 const InstagramIcon = () => (
@@ -163,6 +163,8 @@ const YouTubeIcon = () => (
 );
 
 function Footer() {
+
+
   const footerColumns = [
     {
       heading: "Bhava: Store",
@@ -201,6 +203,37 @@ function Footer() {
     },
   ];
 
+  const navigate = useNavigate()
+
+  function scrollElementFully(el) {
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    const elHeight = rect.height
+    const winH = window.innerHeight
+    const absoluteTop = window.scrollY + rect.top
+    let target
+    if (elHeight < winH) {
+      // center the element vertically in the viewport when possible
+      target = Math.max(absoluteTop - Math.floor((winH - elHeight) / 2), 0)
+    } else {
+      // element taller than viewport — align to top
+      target = absoluteTop
+    }
+    window.scrollTo({ top: target, behavior: 'smooth' })
+    el.focus && el.focus()
+  }
+
+  function handleFooterMissionClick(e) {
+    e.preventDefault()
+    const el = document.getElementById('sacred-mission-title')
+    if (el) {
+      scrollElementFully(el)
+      return
+    }
+    // If not on the page, navigate to home and ask it to scroll after mount
+    navigate('/', { state: { scrollToId: 'sacred-mission-title' } })
+  }
+
   return (
     <footer className={styles.footerSection}>
       <div className={styles.footerContainer}>
@@ -217,7 +250,14 @@ function Footer() {
                   ) : link === "Careers" ? (
                     <Link to="/career" className={styles.contactLink}>{link}</Link>
                   ) : link === "Our Mission" ? (
-                    <Link to="/mission" className={styles.contactLink}>{link}</Link>
+                    <button
+                      type="button"
+                      className={styles.contactLink}
+                      onClick={handleFooterMissionClick}
+                      aria-label="View Sacred Mission"
+                    >
+                      {link}
+                    </button>
                   ) : (
                     <a href="#">{link}</a>
                   )}
