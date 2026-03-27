@@ -252,10 +252,11 @@
 // export default Products;
 
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import styles from "./Products.module.css";
 import { useCart } from "../context/CartContext";
+import { useLocation } from "react-router-dom";
 
 const products = [
   {
@@ -379,6 +380,19 @@ function FlipCard({ card, onAddToCart }) {
 function Products() {
   const { addToCart } = useCart();
   const [activeFilter, setActiveFilter] = useState("All");
+  const location = useLocation();
+
+  useEffect(() => {
+    // If navigated with state asking to scroll to an element, perform smooth scroll
+    const id = location?.state?.scrollToId;
+    if (id) {
+      const el = document.getElementById(id);
+      if (el) {
+        // small timeout to ensure layout has settled
+        setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+      }
+    }
+  }, [location]);
 
   const handleAddToCart = (card) => {
     addToCart({
@@ -399,7 +413,7 @@ function Products() {
   return (
     <div className={styles.page}>
       {/* Hero */}
-      <div className={styles.hero}>
+      <div id="products-hero" className={styles.hero}>
         <h1 className={styles.heroTitle}>
          Our Sacred <span className={styles.heroAccent}>Collections</span>
         </h1>

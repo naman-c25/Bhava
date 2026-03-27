@@ -258,6 +258,17 @@ function Footer() {
                     >
                       {link}
                     </button>
+                  ) : link === "Shop All Products" ? (
+                    <button
+                      type="button"
+                      className={styles.contactLink}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        navigate('/products', { state: { scrollToId: 'products-hero' } })
+                      }}
+                    >
+                      {link}
+                    </button>
                   ) : (
                     <a href="#">{link}</a>
                   )}

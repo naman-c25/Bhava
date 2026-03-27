@@ -31,7 +31,7 @@
   font-size: 24px;
   font-weight: 700;
   text-align: center;
-  color: var(--color-deep-green);
+  color: #4A0B1D;
   margin-bottom: 12px;
   font-family: 'Canela', Cormorant, serif;
 }
@@ -77,7 +77,7 @@
 .tigerKnowledgeTitle {
   font-size: 28px;
   font-weight: 700;
-  color: var(--color-deep-green);
+  color: #4A0B1D;
   margin-bottom: 18px;
   font-family: 'Canela', Cormorant, serif;
 }
@@ -101,7 +101,7 @@
 .tigerKnowledgeCardTitle {
   font-size: 16px;
   font-weight: 700;
-  color: var(--color-deep-green);
+  color: #4A0B1D;
   margin-bottom: 14px;
   letter-spacing: 0.02em;
   font-family: 'Neue Haas Grotesk', Inter, sans-serif;
@@ -125,7 +125,7 @@
 
 .tigerKnowledgeListItem span {
   font-weight: 700;
-  color: var(--color-deep-green);
+  color: #4A0B1D;
 }
 
 /* ── Responsive ── */
