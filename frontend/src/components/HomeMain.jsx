@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./HomeMain.module.css";
+import ScrollDown from "./ScrollDown";
 
 function HomeMain() {
   return (
@@ -7,6 +8,7 @@ function HomeMain() {
 
       <img
         src="./temple(4).png"
+        id="hero-temple-img"
         alt="Temple Background"
         className={styles.homeMainHeroBgImage}
       />
@@ -27,6 +29,8 @@ function HomeMain() {
             <button className={styles.homeMainBtnPrimary}>Begin Your Practice</button>
             <button className={styles.homeMainBtnSecondary}>Explore the System</button>
           </div>
+
+            <ScrollDown />
 
         </div>
       </div>
