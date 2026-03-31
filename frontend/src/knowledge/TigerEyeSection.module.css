@@ -32,7 +32,7 @@
   font-size: 26px;
   font-weight: 400;
   text-align: center;
-  color: var(--deep-sacred-green);
+  color: #E07B39;
   margin-bottom: 14px;
   font-family: 'Canela', Cormorant, serif;
 }
@@ -78,7 +78,7 @@
 .tigerKnowledgeTitle {
   font-size: 30px;
   font-weight: 400;
-  color: var(--deep-sacred-green);
+  color: #E07B39;
   margin-bottom: 20px;
   font-family: 'Canela', Cormorant, serif;
   letter-spacing: -0.2px;
@@ -103,7 +103,7 @@
 .tigerKnowledgeCardTitle {
   font-size: 16px;
   font-weight: 600;
-  color: var(--deep-sacred-green);
+  color: #E07B39;
   margin-bottom: 18px;
   letter-spacing: 0.02em;
   font-family: 'Neue Haas Grotesk', Inter, sans-serif;

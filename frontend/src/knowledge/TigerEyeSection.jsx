@@ -40,7 +40,7 @@ function TigerEyeSection() {
               <p className={styles.tigerKnowledgeEyebrow}>Sacred Strategy</p>
               <h2
                 className={styles.tigerKnowledgeTitle}
-                style={{ fontWeight: 800, fontSize: "2.2rem", color: "#4A0B1D" }}
+                style={{ fontWeight: 800, fontSize: "2.2rem", color: "#E07B39" }}
               >
                 Why 108 and Tiger Eye Are the Ultimate Spiritual Power Pair
               </h2>
