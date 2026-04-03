@@ -15,12 +15,18 @@
   font-size: 40px;
   font-weight: 700;
   margin-bottom: 44px;
-  color: #4A0B1D;
+  color:#4A0B1D ;
   font-family: 'Canela', Cormorant, serif;
 }
 
 .highlight {
   color: #E07B39;
+}
+
+/* Ensure element-level selector has higher specificity than global defaults
+   so the leading text (e.g. "Our Sacred") remains #4A0B1D. */
+h1.sectionTitle {
+  color: #4A0B1D;
 }
 
 /* ── Slider container (holds arrows + wrapper) ── */
