@@ -447,16 +447,9 @@ function Products() {
           ))}
         </div>
         {filtered.length >= 6 && (
-          <div
-            style={{
-              textAlign: "center",
-              margin: "18px 0 48px",
-              fontSize: "60px",
-              color: "rgb(30, 58, 48)",
-              fontFamily: "Canela, Cormorant, serif",
-            }}
-          >
-            Product coming soon
+          <div className={styles.comingSoonRow}>
+            <span className={styles.comingSoonRowProduct}>Product</span>{" "}
+            <span className={styles.comingSoonRowSoon}>coming soon</span>
           </div>
         )}
       </div>

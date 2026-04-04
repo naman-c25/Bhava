@@ -6,7 +6,7 @@ function KnowledgeHero() {
     <div className={styles.knowledgeHeroesSection}>
       <div className={styles.heroesLeft}>
         <h1 className={styles.knowledgeMainTitles}>
-          <span style={{ color: '#E07B39' }}>Enter the Path of</span>
+          <span style={{ color: '#4A0B1D' }}>Enter the Path of</span>
           <br />
           <span style={{ color: "#E07B39" }}>Inner Illumination</span>
         </h1>

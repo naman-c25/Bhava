@@ -186,7 +186,7 @@ function GitaSlider() {
       <div className={styles.gitaBg} />
 
       <div className={styles.gitaHeader}>
-        <h2 className={styles.gitaHeading}>Daily Reflection</h2>
+        <h2 className={styles.gitaHeading}>Daily <span className={styles.gitaHeading12}>Reflection</span></h2>
         <p className={styles.gitaSubheading}>
           Ancient words, experienced in the present moment.
         </p>

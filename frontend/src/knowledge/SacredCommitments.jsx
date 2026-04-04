@@ -64,7 +64,8 @@ function SacredCommitments() {
     <section className={styles.commitmentsSection}>
       <div className={styles.commitmentsHeader}>
         <h2 className={styles.commitmentsHeading}>
-          Sacred Commitments for the Disciplined Soul
+          <span className={styles.commitmentsHeadingAccent}>Sacred Commitments for</span>{" "}
+          <span className={styles.commitmentsHeadingPrimary}>the Disciplined Soul</span>
         </h2>
       </div>
 

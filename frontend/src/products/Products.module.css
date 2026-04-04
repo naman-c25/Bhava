@@ -328,8 +328,34 @@
 .comingSoonRow {
   text-align: center;
   margin: 18px 0 48px;
-  color: #255c3f;
+  color: inherit;
   font-weight: 700;
-  font-size: 16px;
   background: transparent;
+}
+
+/* Large split styling for "Product coming soon" row */
+.comingSoonRowProduct {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: 60px;
+  color: #C0671E; /* product color */
+  font-weight: 700;
+  display: inline-block;
+  line-height: 1.02;
+}
+
+.comingSoonRowSoon {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: 60px;
+  color: #4A0B1D; /* coming soon color */
+  font-weight: 700;
+  display: inline-block;
+  line-height: 1.02;
+}
+
+@media (max-width: 768px) {
+  .comingSoonRowProduct, .comingSoonRowSoon { font-size: 42px; }
+}
+
+@media (max-width: 480px) {
+  .comingSoonRowProduct, .comingSoonRowSoon { font-size: 30px; }
 }

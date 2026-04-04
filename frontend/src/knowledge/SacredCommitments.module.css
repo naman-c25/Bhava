@@ -20,11 +20,22 @@
 .commitmentsHeading {
   font-size: 36px;
   font-weight: 700;
-  color: #E07B39;
+  color: #4A0B1D;
   margin-bottom: 10px;
   font-family: 'Canela', Cormorant, serif;
   line-height: 1.2;
   letter-spacing: -0.3px;
+}
+
+/* Split heading parts: accent (first phrase) + primary (rest) */
+.commitmentsHeadingAccent {
+  color: #E07B39;
+  display: inline-block;
+}
+
+.commitmentsHeadingPrimary {
+  color: #4A0B1D;
+  display: inline-block;
 }
 
 .commitTrackWrapper {

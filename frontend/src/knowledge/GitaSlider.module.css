@@ -43,9 +43,13 @@
 .gitaHeading {
   font-size: 32px;
   font-weight: 700;
-  color: var(--color-saffron);
+  color: #4A0B1D;
   font-family: 'Canela', Cormorant, serif;
   margin-bottom: 8px;
+}
+
+.gitaHeading12{
+  color: #C0671E;
 }
 
 .gitaSubheading {
