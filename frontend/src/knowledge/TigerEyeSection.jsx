@@ -40,9 +40,10 @@ function TigerEyeSection() {
               <p className={styles.tigerKnowledgeEyebrow}>Sacred Strategy</p>
               <h2
                 className={styles.tigerKnowledgeTitle}
-                style={{ fontWeight: 800, fontSize: "2.2rem", color: "#E07B39" }}
+                style={{ fontWeight: 800, fontSize: "2.2rem", color: "#4A0B1D" }}
               >
-                Why 108 and Tiger Eye Are the Ultimate Spiritual Power Pair
+                <span style={{ color: "#D57F45" }}>Why 108 and Tiger Eye Are the</span>
+                {" "}Ultimate Spiritual Power Pair
               </h2>
               <p className={styles.tigerKnowledgeParagraph}>
                 <strong>108</strong> appears in the distance between the Earth and Sun (108× the Sun's diameter),
@@ -98,9 +99,9 @@ function TigerEyeSection() {
 
       {/* ── Personal Dharmic Operating System ── */}
       <section className={styles.tigerSummarySection}>
-        <div className={styles.container}>
+          <div className={styles.container}>
           <h2 className={styles.tigerSummaryHeading}>
-            108 + Tiger Eye: Your Personal Dharmic Operating System
+            108 + Tiger Eye: Your Personal <span style={{ color: "#4A0B1D" }}>Dharmic Operating System</span>
           </h2>
           <p className={styles.tigerSummaryText}>
             108 encodes cosmic order and completion, while Tiger Eye carries grounded courage and protection.
@@ -115,7 +116,9 @@ function TigerEyeSection() {
           <div className={styles.tigerKnowledgeGrid}>
             <div className={styles.tigerKnowledgeTextBlock}>
               <p className={styles.tigerKnowledgeEyebrow}>108 • TIGER EYE • MODERN DHARMA</p>
-              <h2 className={styles.tigerKnowledgeTitle}>From Stones to Symbolic Infrastructure</h2>
+              <h2 className={styles.tigerKnowledgeTitle}>
+                From Stones to <span style={{ color: "#4A0B1D" }}>Symbolic Infrastructure</span>
+              </h2>
               <p className={styles.tigerKnowledgeParagraph}>
                 In Hindu civilization, 108 appears again and again as a signal of wholeness — in malas,
                 temple canons, sacred name-garlands, and cosmic mappings.

@@ -8,7 +8,7 @@ function AppPage() {
         {/* ── Left: text ── */}
         <div className={styles.content}>
           <h2 className={styles.title}>Spirituality</h2>
-          <h2 className={styles.titleAccent}>for inner peace</h2>
+          <h2 className={styles.titleAccent}><span style={{ color: "#4A0B1D" }}>for inner peace</span></h2>
 
           <p className={styles.description}>
             Temple wisdom, daily rituals, live darshan and a thriving
