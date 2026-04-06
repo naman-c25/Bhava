@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
 import Layout from "./components/Layout";
+import ScrollManager from "./components/ScrollManager";
 import Home from "./pages/Home";
 import Knowledge from "./knowledge/Knowledge";
 import KnowledgeRoutes from "./knowledge/KnowledgeRoutes";
@@ -22,7 +23,7 @@ function App() {
   return (
     <BrowserRouter>
       <CartProvider>
-        {/* <ScrollManager /> */}
+        <ScrollManager />
         <Routes>
           {/* Auth page — outside Layout (no navbar/footer) */}
           <Route path="/auth" element={<AuthPage />} />
