@@ -2,16 +2,17 @@
   background: #281534;
   color: #fff;
   border-radius: 28px;
-  padding: 72px 0 0 64px;
-  margin: 64px 105px;
+  padding: 72px 96px 0; /* top right/left padding - extra right space for overflow */
+  margin: 64px auto;    /* center on all viewports */
   overflow: hidden;
   height: auto;
-  width: 85.5%;
+  max-width: 1200px;    /* keep a consistent max width */
+  width: auto;
 }
 
 .container {
   display: grid;
-  grid-template-columns: 1fr 600px;
+  grid-template-columns: 1fr minmax(360px, 560px); /* flexible right column */
   gap: 0;
   align-items: end;
 }
@@ -43,15 +44,17 @@
   justify-content: flex-end;
   align-items: flex-end;
   align-self: stretch;
-  overflow: hidden;
+  overflow: visible; /* allow illustration to overflow to the right */
   position: relative;
 }
 
 .image {
-  width: 120%;
-  height: 115%;           /* ← fill full column height */
-  object-fit: cover;      /* ← cover so it fills without distortion */
-  object-position: top center; /* ← keep head visible at top */
+  width: 120%;            /* intentionally overflow to create the cropped look */
+  max-width: none;
+  height: 115%;           /* fill column height for the cropped look */
+  object-fit: cover;      /* cover so it fills without distortion */
+  object-position: top center; /* keep head visible at top */
+  transform: translateX(8%); /* nudge right so hands sit near center content */
   display: block;
 }
 
