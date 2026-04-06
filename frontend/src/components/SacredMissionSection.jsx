@@ -44,7 +44,9 @@ import styles from './SacredMissionSection.module.css'
 export default function SacredMissionSection() {
   return (
     <section className={styles.sacredMission} aria-labelledby="sacred-mission-title">
-      <div className={styles.container}>
+      <div className={styles.panel}>
+
+        <div className={styles.container}>
 
         <div className={styles.textCol}>
           <h2 id="sacred-mission-title" className={styles.title}>
@@ -74,6 +76,7 @@ export default function SacredMissionSection() {
           />
         </div>
 
+        </div>
       </div>
     </section>
   )
