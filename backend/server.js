@@ -66,19 +66,25 @@
 //     process.exit(1);
 //   });
 
-
-
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 import authRoutes from "./routes/authRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import careerRoutes from "./routes/careerRoutes.js";
+import tilesRoutes from "./routes/tilesRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -87,7 +93,7 @@ const PORT = process.env.PORT || 5000;
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://bhava-fkv3.vercel.app",  // ← hardcoded as backup
+  "https://bhava-fkv3.vercel.app", // ← hardcoded as backup
   process.env.CLIENT_URL,
 ].filter(Boolean);
 
@@ -108,12 +114,23 @@ app.options("*", cors(corsOptions));
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
+// Create uploads directory if it doesn't exist
+const uploadsPath = path.join(__dirname, "uploads");
+if (!fs.existsSync(uploadsPath)) {
+  fs.mkdirSync(uploadsPath, { recursive: true });
+}
+
+// serve uploaded files from backend/uploads
+app.use("/uploads", express.static(uploadsPath));
+
 // ── Routes ────────────────────────────────────────────────────
 app.use("/api/auth", authRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/career", careerRoutes);
+app.use("/api/tiles", tilesRoutes);
+app.use("/api/admin", adminRoutes);
 
 // Health check
 app.get("/api/health", (req, res) => {

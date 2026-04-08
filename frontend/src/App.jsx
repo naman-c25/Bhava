@@ -18,6 +18,8 @@ import ProfilePage from "./account/ProfilePage";
 import OrdersPage from "./account/OrdersPage";
 import AddressesPage from "./account/AddressesPage";
 import CareerPage from "./pages/carrerpage";
+import AdminLogin from "./admin/AdminLogin";
+import AdminPage from "./admin/AdminPage";
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function App() {
             <Route path="/knowledge"  element={<Knowledge />} />
             <Route path="/knowledge/*" element={<KnowledgeRoutes />} />
               <Route path="/career"     element={<CareerPage />} /> 
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
           </Route>
         </Routes>
       </CartProvider>

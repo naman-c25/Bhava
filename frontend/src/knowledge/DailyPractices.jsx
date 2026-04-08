@@ -1,37 +1,24 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./DailyPractices.module.css";
-import DailyPuja from "./DailyPuja";
-import Meditation from "./Meditation";
-import JapaMala from "./JapaMala";
-import VedicHymns from "./VedicHymns";
-import MantraChanting from "./MantraChanting";
-import SuryaNamaskar from "./SuryaNamaskar";
-import GitaReading from "./GitaReading";
-import Aarti from "./Aarti";
-import KarmaDharma from "./KarmaDharma";
-import DivineGrace from "./DivineGrace";
-import InnerPeace from "./InnerPeace";
-import SacredTraditions from "./SacredTraditions";
-import PathOfUnion from "./PathOfUnion";
-import NonDualWisdom from "./NonDualWisdom";
+import { getDisplayTitle, getSubtitle } from "../utils/categoryMapping";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const dailyPracticeRoutes = [
-  { path: "daily-puja",         element: <DailyPuja /> },
-  { path: "meditation",         element: <Meditation /> },
-  { path: "japa-mala",          element: <JapaMala /> },
-  { path: "vedic-hymns",        element: <VedicHymns /> },
-  { path: "mantra-chanting",    element: <MantraChanting /> },
-  { path: "surya-namaskar",     element: <SuryaNamaskar /> },
-  { path: "gita-reading",       element: <GitaReading /> },
-  { path: "aarti",              element: <Aarti /> },
-  { path: "karma-dharma",       element: <KarmaDharma /> },
-  { path: "divine-grace",       element: <DivineGrace /> },
-  { path: "inner-peace",        element: <InnerPeace /> },
-  { path: "sacred-traditions",  element: <SacredTraditions /> },
-  { path: "path-of-union",      element: <PathOfUnion /> },
-  { path: "non-dual-wisdom",    element: <NonDualWisdom /> },
+  { path: "daily-puja",         element: <div>Daily Puja</div> },
+  { path: "meditation",         element: <div>Meditation</div> },
+  { path: "japa-mala",          element: <div>Japa Mala</div> },
+  { path: "vedic-hymns",        element: <div>Vedic Hymns</div> },
+  { path: "mantra-chanting",    element: <div>Mantra Chanting</div> },
+  { path: "surya-namaskar",     element: <div>Surya Namaskar</div> },
+  { path: "gita-reading",       element: <div>Gita Reading</div> },
+  { path: "aarti",              element: <div>Aarti</div> },
+  { path: "karma-dharma",       element: <div>Karma Dharma</div> },
+  { path: "divine-grace",       element: <div>Divine Grace</div> },
+  { path: "inner-peace",        element: <div>Inner Peace</div> },
+  { path: "sacred-traditions",  element: <div>Sacred Traditions</div> },
+  { path: "path-of-union",      element: <div>Path of Union</div> },
+  { path: "non-dual-wisdom",    element: <div>Non-Dual Wisdom</div> },
 ];
 
 const practices = [
@@ -45,11 +32,53 @@ const practices = [
   { img: "/Daily%20Practices/Japa%20Mala.png",       title: "Japa Mala",         sub: "Repetition that deepens devotion.",       detail: "108 beads",       color: "#0a3a3a", route: "/knowledge/japa-mala" },
 ];
 
+const CATEGORY = "Daily Sacred";
+
 function DailyPractices() {
   const navigate = useNavigate();
   const trackRef = useRef(null);
   const [scrollPos, setScrollPos] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [practices, setPractices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetchPractices();
+  }, []);
+
+  const fetchPractices = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const url = `${API_BASE}/api/tiles?category=${encodeURIComponent(CATEGORY)}`;
+      const res = await fetch(url);
+      const json = await res.json();
+      
+      if (res.ok && json.success) {
+        // Map backend tiles to display format
+        const mappedPractices = (json.data || []).map((tile, i) => ({
+          id: tile._id,
+          img: tile.imageUrl ? (tile.imageUrl.startsWith('http') ? tile.imageUrl : `${API_BASE}${tile.imageUrl}`) : "/Daily%20Practices/placeholder.png",
+          title: tile.title,
+          sub: tile.subtitle || tile.summary,
+          detail: tile.duration || "Time varies",
+          color: "#5a2a1a",
+          route: `/knowledge/detail/${tile._id}`,
+        }));
+        setPractices(mappedPractices);
+      } else {
+        console.error("Failed to fetch practices", json);
+        setError(json.message || "Failed to load practices");
+      }
+    } catch (err) {
+      console.error("Error fetching practices:", err);
+      setError(err.message || "Network error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleScroll = () => {
     const el = trackRef.current;
@@ -73,8 +102,8 @@ function DailyPractices() {
 
       <div className={styles.header}>
         <div>
-          <h2 className={styles.heading}>Daily Sacred Rhythm</h2>
-          <p className={styles.subheading}>Ancient disciplines for modern spiritual life.</p>
+          <h2 className={styles.heading}>{getDisplayTitle(CATEGORY)}</h2>
+          <p className={styles.subheading}>{getSubtitle(CATEGORY)}</p>
         </div>
       </div>
 
@@ -97,6 +126,9 @@ function DailyPractices() {
           ref={trackRef}
           onScroll={handleScroll}
         >
+          {loading && <p>Loading practices...</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          {!loading && practices.length === 0 && <p>No practices available</p>}
           {practices.map((p, i) => (
             <div
               key={i}

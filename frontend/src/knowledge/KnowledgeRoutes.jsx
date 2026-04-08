@@ -6,6 +6,7 @@ import { commitmentRoutes } from "./SacredCommitments";
 import { tigerEyeRoutes } from "./TigerEyeSection";
 import { trendingRoutes } from "./TrendingTeachings";
 import { dailyPracticeRoutes } from "./DailyPractices";
+import TileDetail from "./TileDetail";
 
 const allRoutes = [
   ...learningPathRoutes,
@@ -22,6 +23,8 @@ function KnowledgeRoutes() {
       {allRoutes.map((r) => (
         <Route key={r.path} path={r.path} element={r.element} />
       ))}
+      {/* Generic tile detail route for dynamically created tiles */}
+      <Route path="detail/:id" element={<TileDetail />} />
     </Routes>
   );
 }

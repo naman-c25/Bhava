@@ -1,101 +1,62 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./TrendingTeaching.module.css";
 import TrendingDetail from "./TrendingDetail";
+import { getDisplayTitle, getSubtitle } from "../utils/categoryMapping";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const trendingRoutes = [
   { path: "trending/:slug", element: <TrendingDetail /> },
 ];
 
-const teachings = [
-  {
-    id: 1,
-    title: "Karma Yoga",
-    sub: "Path of Action",
-    teacher: "The discipline of selfless action.",
-    duration: "12 min",
-    sessions: "8 sessions",
-    image: "/Timeless%20Wisdom/Karma%20Yoga.png",
-    route: "/knowledge/trending/karma-yoga",
-  },
-  {
-    id: 2,
-    title: "Bhakti Sutras",
-    sub: "Science of Devotion",
-    teacher: "The path of devotion and divine love.",
-    duration: "8 min",
-    sessions: "6 sessions",
-    image: "/Timeless%20Wisdom/Bhakti%20Sutra.png",
-    route: "/knowledge/trending/bhakti-sutras",
-  },
-  {
-    id: 3,
-    title: "Yoga Darshana",
-    sub: "Patanjali's Path",
-    teacher: "Union of body, mind and sacred awareness.",
-    duration: "15 min",
-    sessions: "12 sessions",
-    image: "/Timeless%20Wisdom/Yoga%20Philosophy.png",
-    route: "/knowledge/trending/yoga-philosophy",
-  },
-  {
-    id: 4,
-    title: "Vedanta Foundations",
-    sub: "Ultimate Reality",
-    teacher: "Understanding the nature of the Self.",
-    duration: "10 min",
-    sessions: "10 sessions",
-    image: "/Timeless%20Wisdom/Vedanta%20Basics.png",
-    route: "/knowledge/trending/vedanta-basics",
-  },
-  {
-    id: 5,
-    title: "Meditation Guide",
-    sub: "Dhyana Practice",
-    teacher: "The stillness through which truth is seen.",
-    duration: "18 min",
-    sessions: "14 sessions",
-    image: "/Timeless%20Wisdom/Meditation%20Guide.png",
-    route: "/knowledge/trending/meditation-guide",
-  },
-  {
-    id: 6,
-    title: "Dharma Ethics",
-    sub: "Righteous Living",
-    teacher: "Timeless guidance for righteous living.",
-    duration: "14 min",
-    sessions: "9 sessions",
-    image: "/Timeless%20Wisdom/Dharma%20Ethics.png",
-    route: "/knowledge/trending/dharma-ethics",
-  },
-  {
-    id: 7,
-    title: "Sankhya Philosophy",
-    sub: "Cosmic Enumeration",
-    teacher: "The ancient science of consciousness.",
-    duration: "20 min",
-    sessions: "16 sessions",
-    image: "/Timeless Wisdom/Samkhya.png",
-    route: "/knowledge/trending/sankhya",
-  },
-  {
-    id: 8,
-    title: "Sacred Anointment Rituals",
-    sub: "Sacred Consecration",
-    teacher: "The tradition of sanctifying body and space",
-    duration: "16 min",
-    sessions: "7 sessions",
-    image: "/Timeless%20Wisdom/Anoinment%20Rituals.png",
-    route: "/knowledge/trending/anointment-rituals",
-  },
-];
+const CATEGORY = "Sacred Wisdom";
 
 function TrendingTeachings() {
   const navigate = useNavigate();
   const trackRef = useRef(null);
   const [scrollPos, setScrollPos] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [teachings, setTeachings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetchTeachings();
+  }, []);
+
+  const fetchTeachings = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const url = `${API_BASE}/api/tiles?category=${encodeURIComponent(CATEGORY)}`;
+      const res = await fetch(url);
+      const json = await res.json();
+      
+      if (res.ok && json.success) {
+        // Map backend tiles to display format
+        const mappedTeachings = (json.data || []).map((tile) => ({
+          id: tile._id,
+          title: tile.title,
+          sub: tile.subtitle,
+          teacher: tile.summary,
+          duration: tile.duration || "10 min",
+          sessions: tile.badgeText || "Sessions",
+          image: tile.imageUrl ? (tile.imageUrl.startsWith('http') ? tile.imageUrl : `${API_BASE}${tile.imageUrl}`) : "/Timeless%20Wisdom/placeholder.png",
+          route: `/knowledge/trending/${tile._id}`,
+        }));
+        setTeachings(mappedTeachings);
+      } else {
+        console.error("Failed to fetch teachings", json);
+        setError(json.message || "Failed to load teachings");
+      }
+    } catch (err) {
+      console.error("Error fetching teachings:", err);
+      setError(err.message || "Network error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleScroll = () => {
     const el = trackRef.current;
@@ -124,9 +85,9 @@ function TrendingTeachings() {
       {/* Header */}
       <div className={styles.trendingHeader}>
         <div>
-          <h2 className={styles.trendingHeading}>Sacred Wisdom for Daily Living</h2>
+          <h2 className={styles.trendingHeading}>{getDisplayTitle(CATEGORY)}</h2>
           <p className={styles.trendingSubheading}>
-            Ancient teaching that illuminate modern devotional life.
+            {getSubtitle(CATEGORY)}
           </p>
         </div>
       </div>
@@ -153,6 +114,9 @@ function TrendingTeachings() {
           ref={trackRef}
           onScroll={handleScroll}
         >
+          {loading && <p>Loading teachings...</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          {!loading && teachings.length === 0 && <p>No teachings available</p>}
           {teachings.map((t) => (
             <div
               key={t.id}

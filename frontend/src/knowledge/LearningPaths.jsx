@@ -1,40 +1,65 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./LearningPaths.module.css";
-import DaysOfDevotion108 from "./DaysOfDevotion108";
-import BhagavadGitaJourney from "./BhagavadGitaJourney";
-import UpanishadWisdom from "./UpanishadWisdom";
-import YogaPhilosophy from "./YogaPhilosophy";
-import VedicChanting from "./VedicChanting";
-import DeityWisdom from "./DeityWisdom";
-import TantraShakti from "./TantraShakti";
+import { getDisplayTitle, getSubtitle } from "../utils/categoryMapping";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const learningPathRoutes = [
-  { path: "108-days-devotion",    element: <DaysOfDevotion108 /> },
-  { path: "bhagavad-gita-journey", element: <BhagavadGitaJourney /> },
-  { path: "upanishad-wisdom",     element: <UpanishadWisdom /> },
-  { path: "yoga-philosophy",      element: <YogaPhilosophy /> },
-  { path: "vedic-chanting",       element: <VedicChanting /> },
-  { path: "deity-wisdom",         element: <DeityWisdom /> },
-  { path: "tantra-shakti",        element: <TantraShakti /> },
+  { path: "108-days-devotion",    element: <div>108 Days of Devotion</div> },
+  { path: "bhagavad-gita-journey", element: <div>Bhagavad Gita Journey</div> },
+  { path: "upanishad-wisdom",     element: <div>Upanishad Wisdom</div> },
+  { path: "yoga-philosophy",      element: <div>Yoga Philosophy</div> },
+  { path: "vedic-chanting",       element: <div>Vedic Chanting</div> },
+  { path: "deity-wisdom",         element: <div>Deity Wisdom</div> },
+  { path: "tantra-shakti",        element: <div>Tantra Shakti</div> },
 ];
 
-const paths = [
-  { title: "108 Days of Devotion",    sub: "A sacred journey into the path of Bhakti.",         joined: "287K joined", color: "#5a1a3a", image: "/Learning%20Paths/108%20Days%20of%20Devotion.png",  route: "/knowledge/108-days-devotion" },
-  { title: "Bhagavad Gita Journey",   sub: "The timeless dialogue on dharma and inner mastery.",         joined: "456K joined", color: "#5a2a0a", image: "/Learning%20Paths/Bhagvat%20Gita%20Journey.png",   route: "/knowledge/bhagavad-gita-journey" },
-  { title: "Upanishad Wisdom",        sub: "Exploring the nature of the Self and ultimate reality.",    joined: "198K joined", color: "#2a1a5a", image: "/Learning%20Paths/Upanishad%20Wisdom.png",         route: "/knowledge/upanishad-wisdom" },
-  { title: "Yoga Darshana",           sub: "The science of inner discipline and consciousness.",        joined: "342K joined", color: "#1a3a3a", image: "/Learning%20Paths/Yoga%20Philosophy.png",           route: "/knowledge/yoga-philosophy" },
-  { title: "Vedic Chanting",          sub: "Sacred sound that carries the wisdom of the Vedas.",      joined: "156K joined", color: "#1a2a4a", image: "/Learning%20Paths/Vedic%20Chanting.png",            route: "/knowledge/vedic-chanting" },
-  { title: "Understanding the Devata",          sub: "Symbolism and meaning behind sacred forms.",    joined: "523K joined", color: "#4a0a0a", image: "/Learning%20Paths/Deity%20Wisdom.png",              route: "/knowledge/deity-wisdom" },
-  { title: "Shakti Wisdom",           sub: "Ancient teachings on energy and consciousness.", joined: "89K joined",  color: "#3a1a0a", image: "/Learning%20Paths/Tantra%20&%20Shakti.png",         route: "/knowledge/tantra-shakti" },
-];
+const CATEGORY = "Paths of Dharmic";
 
 function LearningPaths() {
   const navigate = useNavigate();
   const trackRef = useRef(null);
   const [scrollPos, setScrollPos] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [paths, setPaths] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetchPaths();
+  }, []);
+
+  const fetchPaths = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const url = `${API_BASE}/api/tiles?category=${encodeURIComponent(CATEGORY)}`;
+      const res = await fetch(url);
+      const json = await res.json();
+      
+      if (res.ok && json.success) {
+        const mappedPaths = (json.data || []).map((tile) => ({
+          id: tile._id,
+          title: tile.title,
+          sub: tile.subtitle || tile.summary,
+          joined: tile.badgeText || "Learners",
+          color: "#5a1a3a",
+          image: tile.imageUrl ? (tile.imageUrl.startsWith('http') ? tile.imageUrl : `${API_BASE}${tile.imageUrl}`) : "/Learning%20Paths/placeholder.png",
+          route: `/knowledge/detail/${tile._id}`,
+        }));
+        setPaths(mappedPaths);
+      } else {
+        console.error("Failed to fetch paths", json);
+        setError(json.message || "Failed to load paths");
+      }
+    } catch (err) {
+      console.error("Error fetching paths:", err);
+      setError(err.message || "Network error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleScroll = () => {
     const el = trackRef.current;
@@ -61,8 +86,8 @@ function LearningPaths() {
       {/* Header — arrows removed from here */}
       <div className={styles.header}>
         <div>
-          <h2 className={styles.heading}>Paths of Dharmic Wisdom</h2>
-          <p className={styles.subheading}>Structured journeys into the teachings that illuminate sacred living.</p>
+          <h2 className={styles.heading}>{getDisplayTitle(CATEGORY)}</h2>
+          <p className={styles.subheading}>{getSubtitle(CATEGORY)}</p>
         </div>
       </div>
 
@@ -88,6 +113,9 @@ function LearningPaths() {
           ref={trackRef}
           onScroll={handleScroll}
         >
+          {loading && <p>Loading paths...</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          {!loading && paths.length === 0 && <p>No paths available</p>}
           {paths.map((p, i) => (
               <div key={i} data-scroll-id={`path-${i}`} className={styles.card} onClick={() => { navigate(p.route); }} style={{ cursor: 'pointer' }}>
               <div className={styles.cardThumb} style={{ backgroundImage: `url(${p.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>

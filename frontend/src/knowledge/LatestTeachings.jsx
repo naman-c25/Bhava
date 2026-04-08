@@ -1,63 +1,55 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./LatestTeachings.module.css";
+import { getDisplayTitle, getSubtitle } from "../utils/categoryMapping";
 
-const teachings = [
-  {
-    title: "Karma & Dharma",
-    category: "Understanding right action and sacred duty.",
-    image: "/Latest%20Teachings/Karma%20Dharma.png",
-    tagColor: "#3a2a6a",
-    color: "#1a1a3a",
-    route: "/knowledge/karma-dharma",
-  },
-  {
-    title: "Divine Grace",
-    category: "The quiet power of devotion and surrender.",
-    image: "/Latest%20Teachings/Divine%20Grace.png",
-    tagColor: "#6a2a3a",
-    color: "#3a1a2a",
-    route: "/knowledge/divine-grace",
-  },
-  {
-    title: "Inner Stillness",
-    category: "Discovering peace beyond the restless mind.",
-    image: "/Latest%20Teachings/Inner%20Peace.png",
-    tagColor: "#2a3a6a",
-    color: "#1a2a3a",
-    route: "/knowledge/inner-peace",
-  },
-  {
-    title: "Sacred Traditions",
-    category: "Ritual practices that carry timeless meaning.",
-    image: "/Latest%20Teachings/Sacred%20Traditions.png",
-    tagColor: "#5a3a0a",
-    color: "#2a1a0a",
-    route: "/knowledge/sacred-traditions",
-  },
-  {
-    title: "The Path of Union",
-    category: "Yoga as the journey toward wholeness.",
-    image: "/Latest%20Teachings/Path%20of%20Union.png",
-    tagColor: "#1a4a2a",
-    color: "#0a2a1a",
-    route: "/knowledge/path-of-union",
-  },
-  {
-    title: "Non-Dual Wisdom",
-    category: "Realizing the unity of self and absolute reality.",
-    image: "/Latest%20Teachings/Non%20Dual%20Wisdom.png",
-    tagColor: "#4a1a6a",
-    color: "#2a0a3a",
-    route: "/knowledge/non-dual-wisdom",
-  },
-];
+const CATEGORY = "Living Wisdom";
 
+// eslint-disable-next-line react-refresh/only-export-components
 function LatestTeachings() {
   const navigate = useNavigate();
   const trackRef = useRef(null);
   const [scrollPos, setScrollPos] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [teachings, setTeachings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetchTeachings();
+  }, []);
+
+  const fetchTeachings = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const url = `${API_BASE}/api/tiles?category=${encodeURIComponent(CATEGORY)}`;
+      const res = await fetch(url);
+      const json = await res.json();
+      
+      if (res.ok && json.success) {
+        const mappedTeachings = (json.data || []).map((tile) => ({
+          id: tile._id,
+          title: tile.title,
+          category: tile.subtitle || tile.summary,
+          image: tile.imageUrl ? (tile.imageUrl.startsWith('http') ? tile.imageUrl : `${API_BASE}${tile.imageUrl}`) : "/Latest%20Teachings/placeholder.png",
+          tagColor: "#3a2a6a",
+          color: "#1a1a3a",
+          route: `/knowledge/detail/${tile._id}`,
+        }));
+        setTeachings(mappedTeachings);
+      } else {
+        console.error("Failed to fetch teachings", json);
+        setError(json.message || "Failed to load teachings");
+      }
+    } catch (err) {
+      console.error("Error fetching teachings:", err);
+      setError(err.message || "Network error");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleScroll = () => {
     const el = trackRef.current;
@@ -81,8 +73,8 @@ function LatestTeachings() {
 
       <div className={styles.header}>
         <div>
-          <h2 className={styles.heading}>Living Wisdom</h2>
-          <p className={styles.subheading}>Fresh perspectives drawn from ancient wisdom.</p>
+          <h2 className={styles.heading}>{getDisplayTitle(CATEGORY)}</h2>
+          <p className={styles.subheading}>{getSubtitle(CATEGORY)}</p>
         </div>
       </div>
 
@@ -105,6 +97,9 @@ function LatestTeachings() {
           ref={trackRef}
           onScroll={handleScroll}
         >
+          {loading && <p>Loading teachings...</p>}
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          {!loading && teachings.length === 0 && <p>No teachings available</p>}
           {teachings.map((t, i) => (
             <div key={i} data-scroll-id={`latest-${i}`} className={styles.card} onClick={() => { navigate(t.route); }} style={{ cursor: "pointer" }}>
               {/* Image / thumb area */}

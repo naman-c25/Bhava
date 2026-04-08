@@ -154,5 +154,5 @@
 }
 
 @media (max-width: 480px) {
-  .card { width: 220px; height: 170px; }
+  .card { width: 220px; height: 220px; }
 }

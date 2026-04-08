@@ -3,55 +3,34 @@ import { motion, useMotionValue, animate } from "framer-motion";
 import styles from "./SacredCollection.module.css";
 import { useCart } from "../context/CartContext";
 
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const CATEGORY = "Products";
 const GAP = 12;
 
-const CARDS = [
+// Fallback hardcoded products if API fails
+const fallbackCards = [
   {
-    id: 0,
+    _id: 0,
     title: "Vedic Incense Series",
-    price: "₹1,299",
-    description: "Hand-rolled using 16th-century temple recipes, infused with Himalayan herbs and sacred mantras.",
-    image: "./Products/Home Page Incense.png",
+    badgeText: "₹1,299",
+    summary: "Hand-rolled using 16th-century temple recipes, infused with Himalayan herbs and sacred mantras.",
+    imageUrl: "/uploads/Products/Home Page Incense.png",
   },
   {
-    id: 1,
+    _id: 1,
     title: "Sacred Sambrani Cups",
-    price: "₹899",
-    description: "Purified resin sambrani with aromatic woods, perfect for daily pujas and sacred rituals.",
-    image: "./Products/Home Page Sambrani.png",
+    badgeText: "₹899",
+    summary: "Purified resin sambrani with aromatic woods, perfect for daily pujas and sacred rituals.",
+    imageUrl: "/uploads/Products/Home Page Sambrani.png",
   },
   {
-    id: 2,
+    _id: 2,
     title: "Rudraksha Japa Mala",
-    price: "₹749",
-    description: "Crafted from 108 medicinal herbs, each stick carries the blessing of traditional temple practitioners.",
-    image: "./Products/Home Page mala.png",
-  },
-  {
-    id: 3,
-    title: "Pooja Brass Thali set",
-    price: "₹1,599",
-    description: "Ayurvedic blend of coconut and sacred herbs, traditionally used for temple abhishekam.",
-    image: "./Products/Home Page Brass Thali.png",
-  },
-  {
-    id: 4,
-    title: "Sacred Anointing Oil",
-    price: "₹2,499",
-    description: "Complete set for daily sadhana with premium incense, oil, and guided dharma cards.",
-    image: "./Products/Home Page Oil.png",
-  },
-  {
-    id: 5,
-    title: "Platinum Devotion Box",
-    price: "₹4,999",
-    description: "Limited edition curated selection—offerings from 12 sacred temples across India.",
-    image: "./Products/Home Page Devotion Box.png",
+    badgeText: "₹749",
+    summary: "Crafted from 108 medicinal herbs, each stick carries the blessing of traditional temple practitioners.",
+    imageUrl: "/uploads/Products/Home Page mala.png",
   },
 ];
-
-// Duplicate for seamless infinite loop
-const LOOPED = [...CARDS, ...CARDS];
 
 function getVisibleCount() {
   if (typeof window === "undefined") return 3;
@@ -72,6 +51,9 @@ function FlipCard({ card, width, onAddToCart }) {
     setTimeout(() => setAdded(false), 1800);
   };
 
+  // Construct full image URL
+  const imageUrl = card.imageUrl ? (card.imageUrl.startsWith('http') ? card.imageUrl : `${API_BASE}${card.imageUrl}`) : "./Products/Home Page Incense.png";
+
   return (
     <div
       className={styles.cardOuter}
@@ -88,7 +70,7 @@ function FlipCard({ card, width, onAddToCart }) {
         {/* BACK — image face (default) */}
         <div className={styles.cardBack}>
           <img
-            src={card.image}
+            src={imageUrl}
             alt={card.title}
             className={styles.cardBackImg}
           />
@@ -104,10 +86,10 @@ function FlipCard({ card, width, onAddToCart }) {
             <div className={styles.frontTop}>
               <span className={styles.frontCategory}>{card.category}</span>
               <h3 className={styles.frontTitle}>{card.title}</h3>
-              <p className={styles.frontPrice}>{card.price}</p>
+              <p className={styles.frontPrice}>{card.badgeText}</p>
             </div>
             <div className={styles.frontBottom}>
-              <p className={styles.frontDescription}>{card.description}</p>
+              <p className={styles.frontDescription}>{card.summary}</p>
               <button
                 className={`${styles.frontBtn} ${added ? styles.frontBtnAdded : ""}`}
                 onClick={handleAdd}
@@ -137,6 +119,8 @@ const ChevronRight = () => (
 // ── Main component ────────────────────────────────────────────────────────
 function SacredCollection() {
   const { addToCart } = useCart();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [cardWidth, setCardWidth] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
 
@@ -147,6 +131,33 @@ function SacredCollection() {
   const wrapperRef = useRef(null);
 
   const x = useMotionValue(0);
+
+  // Fetch products from API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      try {
+        const url = `${API_BASE}/api/tiles?category=${encodeURIComponent(CATEGORY)}`;
+        const res = await fetch(url);
+        const json = await res.json();
+        if (res.ok && json.success) {
+          setProducts(json.data || fallbackCards);
+        } else {
+          console.error("Failed to load products", res.status, json);
+          setProducts(fallbackCards);
+        }
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        setProducts(fallbackCards);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  // Create looped array from products
+  const LOOPED = [...products, ...products];
 
   const computeX = useCallback(
     (idx) => -(idx * (cardWidthRef.current + GAP)),
@@ -177,21 +188,21 @@ function SacredCollection() {
     rawIndexRef.current += 1;
     springTo(rawIndexRef.current);
 
-    if (rawIndexRef.current >= CARDS.length) {
+    if (rawIndexRef.current >= products.length) {
       isSnappingRef.current = true;
       setTimeout(() => {
-        rawIndexRef.current -= CARDS.length;
+        rawIndexRef.current -= products.length;
         instantTo(rawIndexRef.current);
         isSnappingRef.current = false;
       }, 900);
     }
-  }, [springTo, instantTo]);
+  }, [springTo, instantTo, products.length]);
 
   const prev = useCallback(() => {
     if (isSnappingRef.current) return;
     if (rawIndexRef.current <= 0) {
       isSnappingRef.current = true;
-      rawIndexRef.current = CARDS.length;
+      rawIndexRef.current = products.length;
       instantTo(rawIndexRef.current);
       setTimeout(() => {
         rawIndexRef.current -= 1;
@@ -202,7 +213,7 @@ function SacredCollection() {
       rawIndexRef.current -= 1;
       springTo(rawIndexRef.current);
     }
-  }, [springTo, instantTo]);
+  }, [springTo, instantTo, products.length]);
 
   // Measure card width from wrapper
   useEffect(() => {
@@ -236,6 +247,9 @@ function SacredCollection() {
           Our Sacred <span className={styles.highlight}>Collections</span>
         </h1>
 
+        {loading && <div style={{ padding: 12, background: '#fffbe6', borderRadius: 6, marginBottom: 12 }}>Loading products...</div>}
+
+        {!loading && products.length > 0 && (
         <div
           className={styles.sliderContainer}
           onMouseEnter={() => { setIsHovering(true); isPausedRef.current = true; }}
@@ -254,15 +268,15 @@ function SacredCollection() {
             <motion.div className={styles.sliderTrack} style={{ x }}>
               {LOOPED.map((card, idx) => (
                 <FlipCard
-                  key={`${card.id}-${idx}`}
+                  key={`${card._id}-${idx}`}
                   card={card}
                   width={cardWidth}
                   onAddToCart={(c) =>
                     addToCart({
-                      productId: `home-${c.id}`,
+                      productId: `home-${c._id}`,
                       title: c.title,
-                      price: c.price,
-                      image: c.image,
+                      price: c.badgeText,
+                      image: c.imageUrl,
                       category: c.category,
                       quantity: 1,
                     })
@@ -281,6 +295,7 @@ function SacredCollection() {
             <ChevronRight />
           </button>
         </div>
+        )}
       </div>
     </div>
   );

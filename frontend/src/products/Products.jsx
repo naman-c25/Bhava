@@ -258,54 +258,27 @@ import styles from "./Products.module.css";
 import { useCart } from "../context/CartContext";
 import { useLocation } from "react-router-dom";
 
-const products = [
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+const CATEGORY = "Products";
+
+// Fallback hardcoded products if API fails
+const fallbackProducts = [
   {
-    id: 0,
+    _id: 0,
     category: "INCENSE",
     title: "Vedic Incense Series",
-    price: "₹1,299",
-    description: "Hand-rolled using 16th-century temple recipes, infused with Himalayan herbs and sacred mantras.",
-    image: "/Products/Home Page Incense.png",
+    badgeText: "₹1,299",
+    summary: "Hand-rolled using 16th-century temple recipes, infused with Himalayan herbs and sacred mantras.",
+    imageUrl: "/Products/Home Page Incense.png",
   },
   {
-    id: 1,
+    _id: 1,
     category: "SAMBRANI",
     title: "Sacred Sambrani Cups",
-    price: "₹899",
-    description: "Purified resin sambrani with aromatic woods, perfect for daily pujas and sacred rituals.",
-    image: "/Products/Home Page Sambrani.png",
-  },
-  {
-    id: 2,
-    category: "MALA BEADS",
-    title: "Rudraksha Japa Mala",
-    price: "₹749",
-    description: "Crafted from 108 medicinal herbs, each stick carries the blessing of traditional temple practitioners.",
-    image: "/Products/Home Page mala.png",
-  },
-  {
-    id: 3,
-    category: "POOJA",
-    title: "Pooja Brass Thali Set",
-    price: "₹1,599",
-    description: "Ayurvedic blend of coconut and sacred herbs, traditionally used for temple abhishekam.",
-    image: "/Products/Home Page Brass Thali.png",
-  },
-  {
-    id: 4,
-    category: "FRAGRANCE",
-    title: "Sacred Anointing Oil",
-    price: "₹2,499",
-    description: "Complete set for daily sadhana with premium incense, oil, and guided dharma cards.",
-    image: "/Products/Home Page Oil.png",
-  },
-  {
-    id: 5,
-    category: "WELLNESS",
-    title: "Platinum Devotion Box",
-    price: "₹4,999",
-    description: "Limited edition curated selection—offerings from 12 sacred temples across India.",
-    image: "/Products/Home Page Devotion Box.png",
+    badgeText: "₹899",
+    summary: "Purified resin sambrani with aromatic woods, perfect for daily pujas and sacred rituals.",
+    imageUrl: "/Products/Home Page Sambrani.png",
   },
 ];
 
@@ -332,6 +305,9 @@ function FlipCard({ card, onAddToCart }) {
     setTimeout(() => setAdded(false), 1800);
   };
 
+  // Construct full image URL
+  const imageUrl = card.imageUrl ? (card.imageUrl.startsWith('http') ? card.imageUrl : `${API_BASE}${card.imageUrl}`) : "/placeholder.png";
+
   return (
     <div
       className={styles.cardOuter}
@@ -346,7 +322,7 @@ function FlipCard({ card, onAddToCart }) {
       >
         {/* BACK — image face, visible by default */}
         <div className={styles.cardBack}>
-          <img src={card.image} alt={card.title} className={styles.cardBackImg} />
+          <img src={imageUrl} alt={card.title} className={styles.cardBackImg} />
           <div className={styles.cardBackOverlay}>
             <span className={styles.cardBackCategory}>{card.category}</span>
             <p className={styles.cardBackTitle}>{card.title}</p>
@@ -359,10 +335,10 @@ function FlipCard({ card, onAddToCart }) {
             <div className={styles.frontTop}>
               <span className={styles.frontCategory}>{card.category}</span>
               <h3 className={styles.frontTitle}>{card.title}</h3>
-              <p className={styles.frontPrice}>{card.price}</p>
+              <p className={styles.frontPrice}>{card.badgeText}</p>
             </div>
             <div className={styles.frontBottom}>
-              <p className={styles.frontDescription}>{card.description}</p>
+              <p className={styles.frontDescription}>{card.summary}</p>
               <button
                 className={`${styles.frontBtn} ${added ? styles.frontBtnAdded : ""}`}
                 onClick={handleAdd}
@@ -380,7 +356,36 @@ function FlipCard({ card, onAddToCart }) {
 function Products() {
   const { addToCart } = useCart();
   const [activeFilter, setActiveFilter] = useState("All");
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const location = useLocation();
+
+  // Fetch products from API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const url = `${API_BASE}/api/tiles?category=${encodeURIComponent(CATEGORY)}`;
+        const res = await fetch(url);
+        const json = await res.json();
+        if (res.ok && json.success) {
+          setProducts(json.data || fallbackProducts);
+        } else {
+          console.error("Failed to load products", res.status, json);
+          setProducts(fallbackProducts);
+        }
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        setError(err.message || "Network error");
+        setProducts(fallbackProducts);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   useEffect(() => {
     // If navigated with state asking to scroll to an element, perform smooth scroll
@@ -396,10 +401,10 @@ function Products() {
 
   const handleAddToCart = (card) => {
     addToCart({
-      productId: card.id,
+      productId: card._id,
       title: card.title,
-      price: card.price,
-      image: card.image || "",
+      price: card.badgeText,
+      image: card.imageUrl || "",
       category: card.category,
       quantity: 1,
     });
@@ -412,6 +417,9 @@ function Products() {
 
   return (
     <div className={styles.page}>
+      {loading && <div style={{ padding: 12, background: '#fffbe6', borderRadius: 6, margin: 12 }}>Loading products...</div>}
+      {error && <div style={{ padding: 12, background: '#ffe6e6', color: '#900', borderRadius: 6, margin: 12 }}>{error}</div>}
+
       {/* Hero */}
       <div id="products-hero" className={styles.hero}>
         <h1 className={styles.heroTitle}>
@@ -440,7 +448,7 @@ function Products() {
         <div className={styles.grid}>
           {filtered.slice(0, 6).map((card) => (
             <FlipCard
-              key={card.id}
+              key={card._id}
               card={card}
               onAddToCart={handleAddToCart}
             />
