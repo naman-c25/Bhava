@@ -19,11 +19,29 @@ function AppPage() {
           <div className={styles.badges}>
             {/* Google Play */}
             <a href="#" className={styles.badge} aria-label="Get it on Google Play">
-              <svg className={styles.badgeIcon} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#00C1FF" d="M12.2 4.2 32.6 24 12.2 43.8A4 4 0 0 1 10 40V8a4 4 0 0 1 2.2-3.8z"/>
-                <path fill="#00EF76" d="M12.2 4.2A4 4 0 0 1 16 4l22 12.7-5.4 5.4L12.2 4.2z"/>
-                <path fill="#FF3D44" d="M12.2 43.8 32.6 24l-5.4-5.4L12.2 43.8z" />
-                <path fill="#FFBC00" d="M32.6 24 38 36.7A4 4 0 0 1 16 44l16.6-20z"/>
+              <svg className={styles.badgeIcon} viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="gp-blue" x1="8.4" x2="38.4" y1="24" y2="24" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stopColor="#32BDEF"/><stop offset="1" stopColor="#1EA2D4"/>
+                  </linearGradient>
+                  <linearGradient id="gp-green" x1="20" x2="44" y1="24" y2="24" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stopColor="#6DDC3F"/><stop offset="1" stopColor="#33BA1E"/>
+                  </linearGradient>
+                  <linearGradient id="gp-yellow" x1="8.4" x2="41" y1="36" y2="36" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stopColor="#FFD844"/><stop offset="1" stopColor="#FFC51C"/>
+                  </linearGradient>
+                  <linearGradient id="gp-red" x1="8.4" x2="41" y1="12" y2="12" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stopColor="#F7756E"/><stop offset="1" stopColor="#EC3B3F"/>
+                  </linearGradient>
+                </defs>
+                {/* Body — blue */}
+                <path fill="url(#gp-blue)" d="M9.43 44.15C8.57 44.6 8 45 8 45V3s.53.38 1.41.84L31 24 9.43 44.15z"/>
+                {/* Right tip — green */}
+                <path fill="url(#gp-green)" d="M40.39 29.11C40.95 28.8 44 27 44 24c0-3-3.06-4.8-3.61-5.11L31 24l9.39 5.11z"/>
+                {/* Bottom — yellow */}
+                <path fill="url(#gp-yellow)" d="M40.39 29.11 31 24 9.43 44.15c.87.46 1.87.63 2.98.38L40.39 29.11z"/>
+                {/* Top — red */}
+                <path fill="url(#gp-red)" d="M40.39 18.89 12.41 3.47C11.3 3.22 10.3 3.39 9.43 3.85L31 24l9.39-5.11z"/>
               </svg>
               <span className={styles.badgeText}>
                 <span className={styles.badgeSub}>GET IT ON</span>

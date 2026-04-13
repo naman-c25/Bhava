@@ -8,6 +8,7 @@ const TrendingDetail = () => {
   const [tile, setTile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [expandedLesson, setExpandedLesson] = useState(null);
 
   useEffect(() => {
     fetchTile();
@@ -18,10 +19,8 @@ const TrendingDetail = () => {
       setLoading(true);
       setError("");
       const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
-      const url = `${API_BASE}/api/tiles/${slug}`;
-      const res = await fetch(url);
+      const res = await fetch(`${API_BASE}/api/tiles/${slug}`);
       const json = await res.json();
-
       if (res.ok && json.success) {
         setTile(json.data);
       } else {
@@ -34,6 +33,9 @@ const TrendingDetail = () => {
       setLoading(false);
     }
   };
+
+  const toggleLesson = (idx) =>
+    setExpandedLesson((prev) => (prev === idx ? null : idx));
 
   if (loading) return <div className={styles.notFound}><div>Loading...</div></div>;
   if (error) return (
@@ -49,76 +51,110 @@ const TrendingDetail = () => {
     </div>
   );
 
+  const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+  const imageUrl = tile.imageUrl
+    ? (tile.imageUrl.startsWith("http") ? tile.imageUrl : `${API_BASE}${tile.imageUrl}`)
+    : null;
+
   return (
-    <div className={styles.detailPage}>
-      {/* Hero Section */}
-      <div className={styles.detailHero}>
-        {/* Full-width background image */}
-        {tile.imageUrl && (
-          <div className={styles.heroImageWrap}>
-            <img
-              src={tile.imageUrl.startsWith('http') ? tile.imageUrl : `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${tile.imageUrl}`}
-              alt={tile.title}
-              className={styles.heroImage}
-            />
+    <div className={styles.page}>
+      <div className={styles.layout}>
+
+        {/* ── LEFT PANEL ── */}
+        <div className={styles.leftPanel}>
+          <button className={styles.backBtn} onClick={() => navigate(-1)}>← Back</button>
+
+          {tile.category && <p className={styles.eyebrow}>{tile.category}</p>}
+          <h1 className={styles.title}>{tile.title}</h1>
+          {tile.subtitle && <p className={styles.subtitleText}>{tile.subtitle}</p>}
+
+          <div className={styles.imageCard}>
+            {/* Blurred image bg — picks up card's colour palette naturally */}
+            {imageUrl && (
+              <div
+                className={styles.imageCardBg}
+                style={{ backgroundImage: `url(${imageUrl})` }}
+              />
+            )}
+
+            {/* Progress */}
+            <div className={styles.progressRow}>
+              <span className={styles.progressLabel}>Progress</span>
+              <div className={styles.progressTrack}>
+                <div className={styles.progressFill} />
+              </div>
+            </div>
+
+            {/* Image */}
+            {imageUrl && (
+              <img src={imageUrl} alt={tile.title} className={styles.heroImg} />
+            )}
+
+            {/* Controls */}
+            <div className={styles.controls}>
+              <button className={styles.controlBtn}>
+                <span className={styles.controlIcon}>▶</span>
+                <span className={styles.controlLabel}>Play</span>
+              </button>
+              <button className={styles.controlBtn}>
+                <span className={styles.controlIcon}>♡</span>
+                <span className={styles.controlLabel}>Save</span>
+              </button>
+              <button className={styles.controlBtn}>
+                <span className={styles.controlIcon}>↗</span>
+                <span className={styles.controlLabel}>Share</span>
+              </button>
+            </div>
           </div>
-        )}
 
-        {/* Gradient overlay */}
-        <div className={styles.heroOverlay}></div>
+          {(tile.fullDescription || tile.summary) && (
+            <p className={styles.description}>
+              {tile.fullDescription || tile.summary}
+            </p>
+          )}
+        </div>
 
-        {/* Text overlaid on the left */}
-        <div className={styles.heroContent}>
-          <button className={styles.backBtn} onClick={() => navigate(-1)}>
-            ← Back
-          </button>
+        {/* ── RIGHT PANEL ── */}
+        <div className={styles.rightWrapper}>
+          {(tile.badgeText || tile.duration) && (
+            <p className={styles.sessionsCount}>
+              {[tile.badgeText, tile.duration].filter(Boolean).join(" · ")}
+            </p>
+          )}
 
-          {tile.category && <div className={styles.heroSub}>{tile.category}</div>}
-          <h1 className={styles.heroTitle}>{tile.title}</h1>
-          {tile.subtitle && <p className={styles.heroTeacher}>{tile.subtitle}</p>}
-
-          <div className={styles.heroMeta}>
-            {tile.duration && <span>{tile.duration}</span>}
-            {tile.badgeText && (
-              <>
-                <span className={styles.dot}>•</span>
-                <span>{tile.badgeText}</span>
-              </>
+          <div className={styles.rightPanel}>
+            {tile.lessons && tile.lessons.length > 0 ? (
+              tile.lessons.map((lesson, idx) => (
+                <div key={lesson.num} className={styles.sessionBlock}>
+                  <button
+                    className={styles.stageHeader}
+                    onClick={() => toggleLesson(idx)}
+                  >
+                    <span className={styles.stageBadge}>
+                      Phase {lesson.num}
+                    </span>
+                    <div className={styles.stageHeaderInfo}>
+                      <span className={styles.stageHeaderName}>{lesson.title}</span>
+                      <span className={styles.stageHeaderDays}>{lesson.duration}</span>
+                    </div>
+                    <span className={styles.chevron}>
+                      {expandedLesson === idx ? "▲" : "▼"}
+                    </span>
+                  </button>
+                </div>
+              ))
+            ) : (
+              (tile.fullDescription || tile.summary) && (
+                <div className={styles.sessionBlock}>
+                  <p className={styles.descriptionRight}>
+                    {tile.fullDescription || tile.summary}
+                  </p>
+                </div>
+              )
             )}
           </div>
         </div>
-      </div>
 
-      {/* Body Section */}
-      <div className={styles.detailBody}>
-        <div className={styles.detailContainer}>
-          {tile.fullDescription && (
-            <div className={styles.detailDescription}>
-              {tile.fullDescription}
-            </div>
-          )}
-
-          {tile.lessons && tile.lessons.length > 0 && (
-            <>
-              <h2 className={styles.lessonsHeading}>Sessions</h2>
-              <div className={styles.lessonsList}>
-                {tile.lessons.map((lesson) => (
-                  <div key={lesson.num} className={styles.lessonItem}>
-                    <span className={styles.lessonNum}>{String(lesson.num).padStart(2, "0")}</span>
-                    <span className={styles.lessonTitle}>{lesson.title}</span>
-                    <span className={styles.lessonDuration}>{lesson.duration}</span>
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-
-          {tile.summary && !tile.fullDescription && (
-            <div className={styles.detailDescription}>
-              {tile.summary}
-            </div>
-          )}
-        </div>
       </div>
     </div>
   );
