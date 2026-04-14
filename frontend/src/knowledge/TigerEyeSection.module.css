@@ -25,7 +25,7 @@
 .tigerSummarySection {
   background: var(--temple-ivory);
   padding: 52px 20px 44px;
-  border-top: 1px solid rgba(198, 161, 74, 0.15);
+  /* border-top: 1px solid rgba(198, 161, 74, 0.15); */
 }
 
 .tigerSummaryHeading {
@@ -49,9 +49,10 @@
 
 /* ── Knowledge deep dive sections ── */
 .tigerKnowledgeSection {
-  background-color: var(--temple-ivory);
-  padding: 69px 20px 52px;
-  border-top: 1px solid rgba(198, 161, 74, 0.12);
+   background: linear-gradient(135deg, #4A0B1D 0%, #5D0F25 100%); 
+  padding: 48px 20px 36px;
+   border-radius: 32px; 
+  margin: 40px 20px;
 }
 
 .tigerKnowledgeGrid {
@@ -63,13 +64,14 @@
 
 .tigerKnowledgeTextBlock {
   max-width: 720px;
+  color: #F7F3EC;
 }
 
 .tigerKnowledgeEyebrow {
   font-size: 10px;
   letter-spacing: 3.5px;
   text-transform: uppercase;
-  color: var(--burnished-gold);
+  color: #D4AF37;
   font-weight: 600;
   margin-bottom: 14px;
   font-family: 'Neue Haas Grotesk', Inter, sans-serif;
@@ -78,7 +80,7 @@
 .tigerKnowledgeTitle {
   font-size: 30px;
   font-weight: 400;
-  color: #E07B39;
+  color: #F7F3EC;
   margin-bottom: 20px;
   font-family: 'Canela', Cormorant, serif;
   letter-spacing: -0.2px;
@@ -87,23 +89,23 @@
 .tigerKnowledgeParagraph {
   font-size: 16px;
   line-height: 1.75;
-  color: var(--muted-body);
+  color: rgba(247, 243, 236, 0.85);
   margin-bottom: 14px;
   font-family: 'Canela', Cormorant, serif;
 }
 
 .tigerKnowledgeCard {
-  background: #FEFCF8;
+  background: rgba(247, 243, 236, 0.08);
   border-radius: 20px;
-  border: 1px solid rgba(198, 161, 74, 0.18);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(247, 243, 236, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   padding: 28px 24px 24px;
 }
 
 .tigerKnowledgeCardTitle {
   font-size: 16px;
   font-weight: 600;
-  color: #E07B39;
+  color: #D4AF37;
   margin-bottom: 18px;
   letter-spacing: 0.02em;
   font-family: 'Neue Haas Grotesk', Inter, sans-serif;
@@ -118,13 +120,13 @@
 .tigerKnowledgeListItem {
   font-size: 15px;
   line-height: 1.65;
-  color: var(--muted-body);
+  color: rgba(247, 243, 236, 0.8);
   padding-left: 0;
   position: relative;
   margin-bottom: 12px;
   font-family: 'Canela', Cormorant, serif;
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(198, 161, 74, 0.08);
+  border-bottom: 1px solid rgba(247, 243, 236, 0.12);
 }
 
 .tigerKnowledgeListItem:last-child {
@@ -135,14 +137,14 @@
 
 .tigerKnowledgeListItem span {
   font-weight: 600;
-  color: var(--burnished-gold);
+  color: #D4AF37;
   font-family: 'Neue Haas Grotesk', Inter, sans-serif;
   font-size: 13px;
 }
 
 .btnPrimary {
-  background: #4A0B1D;
-  color: var(--light-on-dark);
+  background: #F7F3EC;
+  color: #4A0B1D;
   border: none;
   padding: 16px 40px;
   border-radius: 999px;
@@ -152,13 +154,13 @@
   transition: all 0.3s ease;
   font-family: 'Neue Haas Grotesk', Inter, sans-serif;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 16px rgba(74, 11, 29, 0.18);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
 .btnPrimary:hover {
-  background: #3a0814;
+  background: #FFFFFF;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(58, 8, 20, 0.18);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 @media (max-width: 1400px) {
