@@ -64,7 +64,6 @@ const TrendingDetail = () => {
         <div className={styles.leftPanel}>
           <button className={styles.backBtn} onClick={() => navigate(-1)}>← Back</button>
 
-          {tile.category && <p className={styles.eyebrow}>{tile.category}</p>}
           <h1 className={styles.title}>{tile.title}</h1>
           {tile.subtitle && <p className={styles.subtitleText}>{tile.subtitle}</p>}
 
@@ -131,7 +130,7 @@ const TrendingDetail = () => {
                     onClick={() => toggleLesson(idx)}
                   >
                     <span className={styles.stageBadge}>
-                      Phase {lesson.num}
+                      Session {lesson.num}
                     </span>
                     <div className={styles.stageHeaderInfo}>
                       <span className={styles.stageHeaderName}>{lesson.title}</span>

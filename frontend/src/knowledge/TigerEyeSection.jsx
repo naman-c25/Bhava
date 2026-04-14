@@ -43,7 +43,7 @@ function TigerEyeSection() {
                 style={{ fontWeight: 800, fontSize: "2.2rem", color: "#4A0B1D" }}
               >
                 <span style={{ color: "#D57F45" }}>Why 108 and Tiger Eye Are the</span>
-                {" "}Ultimate Spiritual Power Pair
+                {" "} <span style={{ color: "#E07B39" }}>Ultimate Spiritual Power Pair</span>
               </h2>
               <p className={styles.tigerKnowledgeParagraph}>
                 <strong>108</strong> appears in the distance between the Earth and Sun (108× the Sun's diameter),
@@ -111,30 +111,30 @@ function TigerEyeSection() {
       </section>
 
       {/* ── From Stones to Symbolic Infrastructure ── */}
-      <section className={styles.tigerKnowledgeSection}>
-        <div className={styles.container}>
+      <section className={styles.tigerKnowledgeSection} style={{ background: "transparent", border: "none" , color:"black"}}>
+        <div className={styles.container} style={{ background: "transparent", border: "none" }}>
           <div className={styles.tigerKnowledgeGrid}>
-            <div className={styles.tigerKnowledgeTextBlock}>
+            <div className={styles.tigerKnowledgeTextBlock} >
               <p className={styles.tigerKnowledgeEyebrow}>108 • TIGER EYE • MODERN DHARMA</p>
               <h2 className={styles.tigerKnowledgeTitle}>
-                From Stones to <span style={{ color: "#4A0B1D" }}>Symbolic Infrastructure</span>
+                <span style={{color:"#E07B39"}}>From Stones to</span> <span style={{color:"#4A0B1D"}}>Symbolic Infrastructure</span>
               </h2>
-              <p className={styles.tigerKnowledgeParagraph}>
+              <p className={styles.tigerKnowledgeParagraph} style={{color:"#6A625A"}}>
                 In Hindu civilization, 108 appears again and again as a signal of wholeness — in malas,
                 temple canons, sacred name-garlands, and cosmic mappings.
               </p>
-              <p className={styles.tigerKnowledgeParagraph}>
+              <p className={styles.tigerKnowledgeParagraph} style={{color:"#6A625A"}}>
                 108 (Order) + Tiger Eye (Power) becomes a daily dharmic operating system — how do I feel
                 spiritually protected and aligned while navigating chaos, money, family, and ambition?
               </p>
             </div>
-            <div className={styles.tigerKnowledgeCard}>
-              <p className={styles.tigerKnowledgeCardTitle}>The 108 Tiger Path in Practice</p>
+            <div className={styles.tigerKnowledgeCard} style={{ background: "#FEFCF8", border: "none", boxShadow:"none" }}>
+              <p className={styles.tigerKnowledgeCardTitle} style={{color:"#E07B39"}}>The 108 Tiger Path in Practice</p>
               <ul className={styles.tigerKnowledgeList}>
-                <li className={styles.tigerKnowledgeListItem}><span>Order (108):</span> structure, completion, and cosmic order.</li>
-                <li className={styles.tigerKnowledgeListItem}><span>Power (Tiger Eye):</span> courage, protection, and grounded focus.</li>
-                <li className={styles.tigerKnowledgeListItem}><span>Daily 108-Second Ritual:</span> stillness, breath, and touch of the anchor stone.</li>
-                <li className={styles.tigerKnowledgeListItem}><span>Tribe and Movement:</span> a 108 Tribe that wears, counts, posts, and lives by 108.</li>
+                <li className={styles.tigerKnowledgeListItem}><span>Order (108):</span> <span style={{color:"#6A625A"}}>structure, completion, and cosmic order.</span></li>
+                <li className={styles.tigerKnowledgeListItem}><span>Power (Tiger Eye):</span> <span style={{color:"#6A625A"}}>courage, protection, and grounded focus.</span></li>
+                <li className={styles.tigerKnowledgeListItem}><span>Daily 108-Second Ritual:</span> <span style={{color:"#6A625A"}}>stillness, breath, and touch of the anchor stone.</span></li>
+                <li className={styles.tigerKnowledgeListItem}><span>Tribe and Movement:</span> <span style={{color:"#6A625A"}}>a 108 Tribe that wears, counts, posts, and lives by 108.</span></li>
               </ul>
             </div>
           </div>

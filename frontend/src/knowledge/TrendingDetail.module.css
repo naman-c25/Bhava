@@ -254,9 +254,12 @@
 /* ── Session / Phase block ── */
 .sessionBlock {
   padding: 0;
-  border-bottom: 1px solid var(--divider);
+  margin-bottom: 16px;
+  background: rgba(245, 239, 230, 0.7);
+  border: 2px solid transparent;
+  border-radius: 32px;
+  transition: background 0.2s, border 0.2s;
 }
-.sessionBlock:last-child { border-bottom: none; }
 
 /* Phase / lesson row button */
 .stageHeader {
@@ -269,12 +272,33 @@
   cursor: pointer;
   text-align: left;
   font-family: 'Inter', system-ui, sans-serif;
-  padding: 18px 4px;
-  transition: background 0.18s;
-  border-radius: 6px;
+  padding: 18px 20px;
+  transition: background 0.2s;
+  border-radius: 24px;
 }
 .stageHeader:hover {
-  background: rgba(109, 15, 26, 0.04);
+  background: rgba(109, 15, 26, 0.08);
+}
+
+.sessionBlock:has(.stageHeader:hover) {
+  background: rgba(245, 239, 230, 1);
+  border: 2px solid var(--maroon);
+}
+
+.sessionBlock:has(.stageHeader:hover) .stageBadge {
+  background-color: #F5EFE6;
+  color: var(--maroon);
+  border: 1px solid #6D0F1A;
+}
+
+.stageHeader:hover .stageHeaderName {
+  color: var(--maroon-deep);
+}
+
+.stageHeader:hover .stageHeaderDays,
+.stageHeader:hover .chevron {
+  color: var(--maroon-deep);
+
 }
 
 /* Phase pill badge */
@@ -292,6 +316,8 @@
   white-space: nowrap;
 }
 
+
+
 /* Title + days stacked */
 .stageHeaderInfo {
   flex: 1;
@@ -306,7 +332,7 @@
 .stageHeaderName {
   font-size: 0.975rem;
   font-weight: 500;
-  color: var(--ink);
+  color: var(--maroon);
   font-family: 'Inter', system-ui, sans-serif;
   white-space: nowrap;
   overflow: hidden;
@@ -316,7 +342,7 @@
 
 .stageHeaderDays {
   font-size: 0.78rem;
-  color: var(--brown-light);
+  color: var(--maroon);
   font-family: 'Inter', system-ui, sans-serif;
   white-space: nowrap;
   flex-shrink: 0;
@@ -325,7 +351,7 @@
 /* Chevron */
 .chevron {
   font-size: 0.6rem;
-  color: var(--brown-light);
+  color: var(--maroon);
   flex-shrink: 0;
 }
 
