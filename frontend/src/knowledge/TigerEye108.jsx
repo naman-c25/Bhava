@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./TigerEye108.module.css";
 
 function TigerEye108() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [selectedTile, setSelectedTile] = useState(null);
   const [activeTab, setActiveTab] = useState(0);
+
+  useEffect(() => {
+    if (location.state?.tile) {
+      setSelectedTile(location.state.tile);
+    }
+  }, [location]);
 
   const pillars = [
     {
@@ -166,6 +174,101 @@ function TigerEye108() {
               The Strategic Core
             </button>
           </div>
+        </div>
+      </section>
+
+      {/* ── Complete Sacred System Content ── */}
+      <section className={styles.completeSystemSection}>
+        <div className={styles.container}>
+          {selectedTile ? (
+            // Show only selected tile content
+            <div className={styles.systemGrid}>
+              <div className={styles.systemLeft}>
+                {selectedTile.eyebrow && (
+                  <p className={styles.systemEyebrow}>{selectedTile.eyebrow}</p>
+                )}
+                <h2 className={styles.systemTitle}>{selectedTile.title}</h2>
+                <div className={styles.systemContent}>
+                  <p>{selectedTile.description}</p>
+                </div>
+              </div>
+
+              <div className={styles.systemRight}>
+                <div className={styles.factsCard}>
+                  <h3 className={styles.factsTitle}>Sacred Facts at a Glance</h3>
+                  <ul className={styles.factsList}>
+                    {selectedTile.highlights?.map((fact, idx) => (
+                      <li key={idx}>{fact}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ) : (
+            // Show all content by default
+            <>
+          {/* Tile 1: Why 108 and Tiger Eye Are the Ultimate Spiritual Power Pair */}
+          <div className={styles.systemGrid}>
+            <div className={styles.systemLeft}>
+              <p className={styles.systemEyebrow}>SACRED STRATEGY</p>
+              <h2 className={styles.systemTitle}>Why 108 and Tiger Eye Are the Ultimate Spiritual Power Pair</h2>
+              <div className={styles.systemContent}>
+                <p>
+                  108 appears in the distance between the Earth and Sun (108 · the Sun's diameter), in the 108 Upanishads, 108 sacred sites, 108 beads of the mala — it is the universe's ordering frequency. When you work with 108, you align yourself with the cosmic rhythm.
+                </p>
+                <p>
+                  Tiger Eye is the stone of the disciplined warrior. Ancient Roman soldiers carried it into battle for protection. In Vedic tradition it harmonises the solar plexus and root chakras, building the unshakeable stability needed for long-term sadhana. It transforms fear into focused action and scattered energy into laser-precision.
+                </p>
+                <p>
+                  Combined, they are the 108·Tiger Eye System — a daily ritual protocol of just 108 seconds that regulates the nervous system, anchors intention, and creates the inner stillness from which all great devotion flows.
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.systemRight}>
+              <div className={styles.factsCard}>
+                <h3 className={styles.factsTitle}>Sacred Facts at a Glance</h3>
+                <ul className={styles.factsList}>
+                  <li>108 Upanishads — The complete library of Vedantic wisdom</li>
+                  <li>108 × Sun Diameter — Earth–Sun distance, cosmic proof</li>
+                  <li>Tiger Eye Chakras — Solar plexus · Root, power & grounding</li>
+                  <li>108-Second Ritual — Nervous system reset protocol</li>
+                  <li>Godin's Tribe — 10,000 · devoted seekers, not mass marketing</li>
+                  <li>6 Pillars — Kotler · Godin · Ries · Trout strategic core</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Tile 4: From Stones to Symbolic Infrastructure */}
+          <div className={styles.systemGrid} style={{ marginTop: "60px" }}>
+            <div className={styles.systemLeft}>
+              <p className={styles.systemEyebrow}>108 · TIGER EYE · MODERN DHARMA</p>
+              <h2 className={styles.systemTitle}>From Stones to Symbolic Infrastructure</h2>
+              <div className={styles.systemContent}>
+                <p>
+                  In Hindu civilization, 108 appears again and again as a signal of wholeness — in malas, temple canons, sacred name-garlands, and cosmic mappings.
+                </p>
+                <p>
+                  108 (Order) · Tiger Eye (Power) becomes a daily dharmic operating system — how do I feel spiritually protected and aligned while navigating chaos, money, family, and ambition?
+                </p>
+              </div>
+            </div>
+
+            <div className={styles.systemRight}>
+              <div className={styles.factsCard}>
+                <h3 className={styles.factsTitle}>The System Components</h3>
+                <ul className={styles.factsList}>
+                  <li>Order (108): structure, completion, and cosmic order.</li>
+                  <li>Power (Tiger Eye): courage, protection, and grounded focus.</li>
+                  <li>Daily 108-Second Ritual: stillness, breath, and touch of the anchor stone.</li>
+                  <li>Tribe and Movement: a 108 Tribe that wears, counts, posts, and lives by 108.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+            </>
+          )}
         </div>
       </section>
 

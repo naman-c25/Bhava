@@ -212,6 +212,99 @@
   color: var(--te-gold-bright);
 }
 
+/* ── Complete System Section ── */
+.completeSystemSection {
+  background: linear-gradient(180deg, #F4EFE6 0%, #FEFCF8 100%);
+  padding: 80px 20px;
+  border-top: 1px solid rgba(198, 161, 74, 0.15);
+}
+
+.systemGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+  margin-bottom: 60px;
+}
+
+.systemLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.systemEyebrow {
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--te-gold);
+  font-weight: 600;
+  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+}
+
+.systemTitle {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--te-dark-green);
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+}
+
+.systemContent {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.systemContent p {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--te-muted);
+  letter-spacing: 0.3px;
+}
+
+.systemRight {
+  display: flex;
+  align-items: flex-start;
+}
+
+.factsCard {
+  background: white;
+  border-radius: 24px;
+  padding: 40px 32px;
+  box-shadow: 0 8px 32px rgba(74, 11, 29, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.15);
+  width: 100%;
+}
+
+.factsTitle {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--te-gold);
+  margin: 0 0 24px;
+  letter-spacing: -0.5px;
+}
+
+.factsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.factsList li {
+  font-family: 'Canela', Cormorant, serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--te-muted);
+  letter-spacing: 0.2px;
+}
+
 /* ── Intro — 108 & Tiger Eye ── */
 .introSection {
   background: var(--te-ivory);
@@ -760,6 +853,10 @@
   .ritualGrid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .systemGrid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -816,6 +913,18 @@
   .sectionTitle {
     font-size: 2rem;
   }
+  .systemGrid {
+    gap: 32px;
+  }
+  .systemTitle {
+    font-size: 1.8rem;
+  }
+  .factsCard {
+    padding: 28px 20px;
+  }
+  .systemContent p {
+    font-size: 15px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -844,5 +953,24 @@
   }
   .tabContent {
     padding: 24px 20px;
+  }
+  .systemTitle {
+    font-size: 1.5rem;
+  }
+  .systemEyebrow {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+  .factsCard {
+    padding: 24px 16px;
+  }
+  .factsTitle {
+    font-size: 16px;
+  }
+  .factsList li {
+    font-size: 13px;
+  }
+  .systemContent p {
+    font-size: 14px;
   }
 }
