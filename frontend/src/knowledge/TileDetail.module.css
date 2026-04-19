@@ -8,10 +8,13 @@
 .detailHero {
   position: relative;
   width: 100%;
-  height: 50vh;
-  min-height: 340px;
+  height: auto;
+  min-height: 480px;
   overflow: hidden;
 }
+
+/* ensure hero has extra bottom space so footer doesn't overlap content */
+.detailHero { padding-bottom: 80px; }
 
 /* Full-width image behind everything */
 .heroImageWrap {
@@ -28,6 +31,7 @@
   object-fit: cover;
   object-position: center;
   display: block;
+ 
 }
 
 /* Dark gradient from left so text stays readable */
@@ -38,24 +42,104 @@
   z-index: 1;
   background: linear-gradient(
     to right,
-    rgba(244, 239, 230, 0.92) 0%,
-    rgba(244, 239, 230, 0.75) 35%,
-    rgba(244, 239, 230, 0.20) 65%,
-    rgba(244, 239, 230, 0)    100%
+    rgba(244, 239, 230, 0.18) 0%,
+    rgba(244, 239, 230, 0.12) 35%,
+    rgba(244, 239, 230, 0.06) 65%,
+    rgba(244, 239, 230, 0) 100%
   );
 }
 
-/* Text panel — overlaid on the left */
-.heroContent {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  width: 50%;
+/* Card progress and footer styles */
+.cardTop { position: absolute; top: 18px; left: 18px; right: 18px; z-index: 8; display:flex; align-items:center; gap:12px; padding:6px 10px; background: transparent; }
+.progressLabel { font-size:13px; color:#fff; font-weight:700; letter-spacing:0.6px; opacity:0.95; }
+.cardProgressWrap { flex:1; height:6px; background: rgba(255,240,242,0.6); border-radius:6px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.6); margin-left:12px; }
+.cardProgress { height:6px; background: linear-gradient(90deg,#D4AF37,#B8922E); border-radius:6px; width:28%; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+
+.cardImage { width: 100%; height: 320px; object-fit: cover; display: block; }
+
+.cardFooterDark { display:flex; align-items:center; justify-content:space-around; padding:18px 20px; background: linear-gradient(180deg,#27140f 0%, rgba(20,10,8,0.9) 60%); color:#fff; border-bottom-left-radius:24px; border-bottom-right-radius:24px; min-height:84px; }
+.cardActionsCol { display:flex; flex-direction:column; align-items:center; gap:8px; }
+.iconBtn { background: transparent; border:none; color:#fff; padding:8px 12px; border-radius:8px; cursor:pointer; font-size:28px; display:flex; align-items:center; justify-content:center; }
+.iconLabel { font-size:13px; color: rgba(255,255,255,0.95); margin-top:6px; }
+
+/* New two-column hero card layout */
+.heroCardWrap {
+  flex: 0 0 360px;
+  max-width: 360px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 0 52px;
+  gap: 8px;
+  padding-left: 32px;
+  padding-top: 8px;
 }
+
+/* wrapper around card and description */
+.heroCardInnerWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.heroCardBox { border-radius: 18px; overflow: hidden; position: relative; }
+
+/* brighten card image slightly */
+.cardImage { filter: saturate(1.05) brightness(1.03); }
+
+.heroCard {
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(14,10,8,0.18);
+  position: relative;
+}
+
+.cardProgress { height: 6px; background: linear-gradient(90deg,#D4AF37,#B8922E); width: 36%; }
+
+.cardImage { width: 100%; height: 320px; object-fit: cover; object-position: center top; display: block; }
+
+/* Ensure the heroSplit uses left column fixed width and right column flexible */
+.heroSplit { display:flex; align-items:flex-start; }
+.heroSessionsPanel { flex: 1 1 auto; max-width: 640px; margin: 140px auto 120px; padding-right: 0; }
+
+.cardFooter { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.04)); }
+.cardActions { display:flex; gap:12px; align-items:center; }
+.iconBtn { background: transparent; border:none; padding:8px 10px; border-radius:8px; cursor:pointer; font-size:16px; }
+.cardCaption { text-align:left; }
+.cardTitle { margin:0; font-family:'Canela', Cormorant, serif; font-size:18px; color:#1e2d1e; }
+.cardSub { margin:0; font-size:13px; color:#8b7355; }
+
+.heroDescription { margin-top: 6px; color:#5b4c3a; font-family:'Canela', Cormorant, serif; line-height:1.7; padding-left: 6px; border-left: 2px solid rgba(224,123,57,0.25); margin-bottom: 0; }
+
+.heroSessionsPanel { flex: 1 1 56%; max-width:56%; padding-right: 80px; }
+.heroTopControls { padding-top: 8px; }
+
+.sessionsHeader { padding: 8px 0 12px; text-align: left; border-bottom: 1px solid rgba(30,45,30,0.08); margin-bottom: 18px; }
+.sessionsCount { font-size: 22px; color: #1e2d1e; font-weight: 400; margin: 0; font-family: 'Canela', Cormorant, serif; }
+
+.sessionsList { display:flex; flex-direction:column; gap:18px; margin-top:64px; }
+.sessionItem { display:flex; align-items:center; gap:18px; padding:18px 22px; border-radius:28px; background:transparent; border:2px solid rgba(110,27,33,0); box-sizing: border-box; transition: background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease, transform 160ms ease; cursor: pointer; }
+.sessionBadge { background:#6E1B21; color:#fff; padding:8px 14px; border-radius:999px; font-size:13px; font-weight:700; }
+.sessionNum { min-width:36px; color:#b8a898; font-weight:700; }
+.sessionTitle { flex:1; color:#4A3A33; font-family:'Neue Haas Grotesk', Inter, sans-serif; padding-left:8px; }
+.sessionBadge { transition: background 200ms ease, color 200ms ease, border 200ms ease; }
+.sessionTitle { transition: color 200ms ease, font-weight 200ms ease; }
+
+.sessionItem:hover { background-color: rgba(242,232,230,0.9); border-color: #6E1B21; box-shadow: 0 6px 18px rgba(35,6,6,0.06); transform: translateY(-3px); }
+.sessionItem:hover .sessionBadge { background: transparent; color: #6E1B21; border: 1px solid #6E1B21; }
+.sessionItem:hover .sessionTitle { color: #6E1B21; font-weight:700; }
+.sessionDuration { color:#9A8F8A; font-size:13px; white-space:nowrap; margin-left:auto; }
+
+.sessionToggle {
+  background: transparent;
+  border: none;
+  color: #6E1B21;
+  font-size: 12px;
+  margin-left: 8px;
+  cursor: pointer;
+  padding: 6px;
+  line-height: 1;
+}
+.sessionToggle:focus { outline: 2px solid rgba(35,86,81,0.12); border-radius: 4px; }
 
 .backBtn {
   background: none;
@@ -89,8 +173,8 @@
   font-weight: 400;
   color: #1e2d1e;
   font-family: 'Canela', Cormorant, serif;
-  line-height: 1.15;
-  margin-bottom: 10px;
+  line-height: 1.12;
+  margin-bottom: 6px;
 }
 
 .heroTeacher {
@@ -106,7 +190,7 @@
   gap: 8px;
   font-size: 13px;
   color: #b8a898;
-  margin-bottom: 28px;
+  margin-bottom: 12px;
   font-family: 'Neue Haas Grotesk', Inter, sans-serif;
 }
 
@@ -116,7 +200,7 @@
 
 /* ── Body ── */
 .detailBody {
-  padding: 52px 20px 80px;
+  padding: 52px 20px 360px;
   background: #F4EFE6;
 }
 
@@ -124,6 +208,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 0 40px;
+ 
 }
 
 .detailDescription {
@@ -132,8 +217,8 @@
   color: #5b4c3a;
   margin-bottom: 48px;
   font-family: 'Canela', Cormorant, serif;
-  border-left: 2px solid rgba(224, 123, 57, 0.3);
-  padding-left: 20px;
+  border-left: none;
+  padding-left: 0;
 }
 
 .lessonsHeading {
@@ -142,8 +227,8 @@
   color: #1e2d1e;
   font-family: 'Canela', Cormorant, serif;
   margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(30, 45, 30, 0.1);
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 /* ── Sessions list ── */
@@ -157,23 +242,19 @@
   display: flex;
   align-items: center;
   gap: 18px;
-  padding: 15px 16px;
-  border-radius: 10px;
+  padding: 12px 0;
+  border-radius: 0;
   cursor: pointer;
-  transition: background 0.2s ease;
-  border-bottom: 1px solid rgba(30, 45, 30, 0.05);
+  transition: none;
+  border-bottom: none;
 }
 
 .lessonItem:hover {
-  background: rgba(224, 123, 57, 0.06);
+  background: transparent;
 }
 
 .lessonNum {
-  font-size: 12px;
-  color: #b8a898;
-  font-weight: 600;
-  min-width: 28px;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+  display: none;
 }
 
 .lessonTitle {
