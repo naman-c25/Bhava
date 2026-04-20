@@ -37,42 +37,49 @@
 //   )
 // }
 
-
-import React from 'react'
-import styles from './SacredMissionSection.module.css'
+import React from "react";
+import styles from "./SacredMissionSection.module.css";
 
 export default function SacredMissionSection() {
   return (
-    <section className={styles.sacredMission} aria-labelledby="sacred-mission-title">
+    <section
+      className={styles.sacredMission}
+      aria-labelledby="sacred-mission-title"
+    >
       <div className={styles.panel}>
-
         <div className={styles.container}>
+          <div className={styles.textCol}>
+            <h2 id="sacred-mission-title" className={styles.title}>
+              Our Sacred Mission
+            </h2>
+            <p className={styles.body}>
+              Devotion has become occasional. Structure brings it back into
+              daily life. This is Bhava. We don’t create products. We design
+              systems for daily ritual. Begin with Bhava. Consistency creates
+              clarity. Small rituals. Daily. Stay with the practice.
+            </p>
+            {/* <p className={styles.body}>
+              Every product carries the energy of intention—sourced from temple
+              partnerships, blessed by traditional practitioners, and designed
+              for modern devotees who refuse to compromise on quality or
+              authenticity.
+            </p>
+            <p className={styles.body}>
+              We are building a movement where faith, commerce, and
+              sustainability align—creating sacred spaces in every home, every
+              heart, and every ritual.
+            </p> */}
+          </div>
 
-        <div className={styles.textCol}>
-          <h2 id="sacred-mission-title" className={styles.title}>
-            Our Sacred Mission
-          </h2>
-          <p className={styles.body}>
-            Devotion has become occasional. Structure brings it back into daily life. This is Bhava.
-          </p>
-          <p className={styles.body}>
-            We don't create products. We design systems for daily ritual. Begin with Bhava.
-          </p>
-          <p className={styles.body}>
-            Consistency creates clarity. Small rituals. Daily. Stay with the practice.
-          </p>
-        </div>
-
-        <div className={styles.imageCol}>
-          <img
-            src="/Sacred Mission.png"
-            className={styles.image}
-            alt="Praying figure illustration"
-          />
-        </div>
-
+          <div className={styles.imageCol}>
+            <img
+              src="/Sacred Mission.png"
+              className={styles.image}
+              alt="Praying figure illustration"
+            />
+          </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

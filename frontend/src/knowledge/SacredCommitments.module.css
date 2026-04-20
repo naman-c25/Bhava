@@ -83,17 +83,17 @@
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: rgba(15, 15, 15, 0.72);
-  border: 1.5px solid rgba(255, 255, 255, 0.18);
-  color: #fff;
-  font-size: 26px;
+  background: #ffffff;
+  border: none;
+  color: #1a1a1a;
+  font-size: 22px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.28);
-  transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   line-height: 1;
 }
 
@@ -110,7 +110,9 @@
 }
 
 .commitEdgeArrow:hover {
-  background: rgba(30, 30, 30, 0.9);
+  background: #470017;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(71, 0, 23, 0.35);
 }
 
 .commitEdgeArrowLeft {

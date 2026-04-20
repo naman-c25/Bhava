@@ -188,7 +188,7 @@ function GitaSlider() {
       <div className={styles.gitaHeader}>
         <h2 className={styles.gitaHeading}>Daily <span className={styles.gitaHeading12}>Reflection</span></h2>
         <p className={styles.gitaSubheading}>
-          Ancient words. Brought into daily practice. Stay with Bhava.
+          Ancient words, experienced in the present moment.
         </p>
       </div>
 

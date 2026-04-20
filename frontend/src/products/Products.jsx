@@ -253,7 +253,7 @@
 
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; // eslint-disable-line no-unused-vars
 import styles from "./Products.module.css";
 import { useCart } from "../context/CartContext";
 import { useLocation } from "react-router-dom";
@@ -426,7 +426,7 @@ function Products() {
          Our Sacred <span className={styles.heroAccent}>Collections</span>
         </h1>
         <p className={styles.heroSub}>
-          Everything you need to build a consistent daily ritual
+          Ritual needs the right elements. Each part has a role. Build your practice with Bhava:
         </p>
       </div>
 

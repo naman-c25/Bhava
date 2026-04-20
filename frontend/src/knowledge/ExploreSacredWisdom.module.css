@@ -78,9 +78,10 @@
 .wisdomArrowRight { right: 20px; }
 
 .wisdomArrow:hover:not(:disabled) {
-  background: #1E3A2F;
+  background: #470017;
   color: #fff;
-  border-color: #1E3A2F;
+  border-color: #470017;
+  box-shadow: 0 4px 20px rgba(71, 0, 23, 0.35);
 }
 
 .wisdomArrow:disabled {

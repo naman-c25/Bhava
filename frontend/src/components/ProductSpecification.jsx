@@ -11,13 +11,13 @@ function ProductSpecification() {
     {
       id: 1,
       title: "100% Authentic",
-      description: "What you use shapes your practice. Pure ingredients. No additives. Use this with intention.",
+      description: "Most rituals feel disconnected today. Sourced from living temple traditions. Bring this into your daily ritual.",
       image: "/Authetic.png"
     },
     {
       id: 2,
       title: "Premium Quality",
-      description: "Ritual deserves consistency. Made with care and precision. Stay with the practice.",
+      description: "Ritual deserves consistency. Made with care and precision. Stay with the practice",
       image: "/Premium Quality.png"
     }
   ];

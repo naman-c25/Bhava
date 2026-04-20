@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, useMotionValue, animate } from "framer-motion";
+import { motion, useMotionValue, animate } from "framer-motion"; // eslint-disable-line no-unused-vars
 import styles from "./SacredCollection.module.css";
 import { useCart } from "../context/CartContext";
 
@@ -244,11 +244,8 @@ function SacredCollection() {
     <div className={styles.sacredCollectionSection}>
       <div className={styles.container}>
         <h1 className={styles.sectionTitle}>
-          Our <span className={styles.highlight}>Collections</span>
+          Our Sacred <span className={styles.highlight}>Collections</span>
         </h1>
-        <p className={styles.sectionSubtitle}>
-          Ritual needs the right elements. Each part has a role. Build your practice with Bhava.
-        </p>
 
         {loading && <div style={{ padding: 12, background: '#fffbe6', borderRadius: 6, marginBottom: 12 }}>Loading products...</div>}
 

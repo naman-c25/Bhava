@@ -17,17 +17,16 @@ function HomeMain() {
         <div className={styles.homeMainTextLeft}>
 
           <h1 className={styles.homeMainHeroTitle}>
-            <span className={styles.homeMainElevateText}>The day often begins in rush.</span>
-            <span className={styles.homeMainElevateText}>A simple ritual brings order.</span>
-            <span className={styles.homeMainHighlight}>Begin with Bhava.</span>
+            <span className={styles.homeMainElevateText}> Awaken Bhava : Live Divine</span>
+            <span className={styles.homeMainHighlight}>Every Day</span>
           </h1>
 
           <p className={styles.homeMainHeroDescription}>
-            A simple, structured daily ritual for modern homes.
+           A structured ritual system to modern life.
           </p>
 
           <div className={styles.homeMainHeroButtons}>
-            <button className={styles.homeMainBtnPrimary}>Begin with Bhava</button>
+            <button className={styles.homeMainBtnPrimary}>Begin With Bhava</button>
             <button className={styles.homeMainBtnSecondary}>Explore the System</button>
           </div>
 

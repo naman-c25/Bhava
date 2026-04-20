@@ -7,8 +7,8 @@ function KnowledgeHero() {
       <div className={styles.heroesLeft}>
         <h1 className={styles.knowledgeMainTitles}>
           <span style={{ color: '#4A0B1D' }}>The mind often feels scattered.</span>
-          <span style={{ color: '#4A0B1D' }}>A simple ritual creates stillness.</span>
-          <span style={{ color: "#E07B39" }}>Begin with Bhava.</span>
+          <br />
+          <span style={{ color: "#E07B39" }}>A simple ritual creates stillness.</span>
         </h1>
         <div className={styles.heroBtns}>
           <button className={styles.btnPrimary}>Begin with Bhava</button>
