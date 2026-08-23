@@ -666,6 +666,15 @@
   letter-spacing: 0.2px;
 }
 
+.dayNote {
+  font-size: 0.76rem;
+  color: #6A625A;
+  font-family: 'Inter', sans-serif;
+  margin: 4px 0 0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
 .audioRight {
   display: flex;
   align-items: center;

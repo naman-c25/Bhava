@@ -30,10 +30,14 @@ export default function AdminPage() {
   const [mantraAudioLoading, setMantraAudioLoading] = useState(true);
   const [mantraAudioError, setMantraAudioError] = useState("");
   const [uploadingDay, setUploadingDay] = useState(null);
+  const [mantraDraft, setMantraDraft] = useState({});
+  const [savingContentDay, setSavingContentDay] = useState(null);
   const [dhyanAudioMap, setDhyanAudioMap] = useState({});
   const [dhyanAudioLoading, setDhyanAudioLoading] = useState(true);
   const [dhyanAudioError, setDhyanAudioError] = useState("");
   const [uploadingDhyanDay, setUploadingDhyanDay] = useState(null);
+  const [dhyanDraft, setDhyanDraft] = useState({});
+  const [savingDhyanContentDay, setSavingDhyanContentDay] = useState(null);
   const [form, setForm] = useState({ 
     title: "", 
     subtitle: "", 
@@ -154,8 +158,13 @@ export default function AdminPage() {
       const json = await res.json();
       if (res.ok && json.success) {
         const map = {};
-        (json.data || []).forEach((item) => { map[item.day] = item; });
+        const drafts = {};
+        (json.data || []).forEach((item) => {
+          map[item.day] = item;
+          drafts[item.day] = { theme: item.theme || "", mantra: item.mantra || "", note: item.note || "" };
+        });
         setMantraAudioMap(map);
+        setMantraDraft((prev) => ({ ...drafts, ...prev }));
       } else if (res.status === 401 || res.status === 403) {
         navigate("/admin/login");
       } else {
@@ -206,6 +215,34 @@ export default function AdminPage() {
     }
   };
 
+  const handleMantraDraftChange = (day, field, value) => {
+    setMantraDraft((prev) => ({ ...prev, [day]: { ...prev[day], [field]: value } }));
+  };
+
+  const handleMantraContentSave = async (day) => {
+    const draft = mantraDraft[day] || { theme: "", mantra: "", note: "" };
+    setSavingContentDay(day);
+    setMantraAudioError("");
+    const token = localStorage.getItem("bhava_token");
+    try {
+      const res = await fetch(`${API_BASE}/api/admin/mantra-audio/${day}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+        body: JSON.stringify({ theme: draft.theme || "", mantra: draft.mantra || "", note: draft.note || "" }),
+      });
+      const json = await res.json();
+      if (res.ok && json.success) {
+        setMantraAudioMap((prev) => ({ ...prev, [day]: json.data }));
+      } else {
+        setMantraAudioError(json.message || `Error ${res.status}`);
+      }
+    } catch (err) {
+      setMantraAudioError(err.message || "Network error");
+    } finally {
+      setSavingContentDay(null);
+    }
+  };
+
   const fetchDhyanAudio = async () => {
     setDhyanAudioLoading(true);
     setDhyanAudioError("");
@@ -215,8 +252,13 @@ export default function AdminPage() {
       const json = await res.json();
       if (res.ok && json.success) {
         const map = {};
-        (json.data || []).forEach((item) => { map[item.day] = item; });
+        const drafts = {};
+        (json.data || []).forEach((item) => {
+          map[item.day] = item;
+          drafts[item.day] = { name: item.name || "", deity: item.deity || "" };
+        });
         setDhyanAudioMap(map);
+        setDhyanDraft((prev) => ({ ...drafts, ...prev }));
       } else if (res.status === 401 || res.status === 403) {
         navigate("/admin/login");
       } else {
@@ -264,6 +306,34 @@ export default function AdminPage() {
       setDhyanAudioMap((prev) => { const next = { ...prev }; delete next[day]; return next; });
     } else {
       alert(json.message || "Error");
+    }
+  };
+
+  const handleDhyanDraftChange = (day, field, value) => {
+    setDhyanDraft((prev) => ({ ...prev, [day]: { ...prev[day], [field]: value } }));
+  };
+
+  const handleDhyanContentSave = async (day) => {
+    const draft = dhyanDraft[day] || { name: "", deity: "" };
+    setSavingDhyanContentDay(day);
+    setDhyanAudioError("");
+    const token = localStorage.getItem("bhava_token");
+    try {
+      const res = await fetch(`${API_BASE}/api/admin/dhyan-audio/${day}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+        body: JSON.stringify({ name: draft.name || "", deity: draft.deity || "" }),
+      });
+      const json = await res.json();
+      if (res.ok && json.success) {
+        setDhyanAudioMap((prev) => ({ ...prev, [day]: json.data }));
+      } else {
+        setDhyanAudioError(json.message || `Error ${res.status}`);
+      }
+    } catch (err) {
+      setDhyanAudioError(err.message || "Network error");
+    } finally {
+      setSavingDhyanContentDay(null);
     }
   };
 
@@ -583,28 +653,62 @@ export default function AdminPage() {
           {Array.from({ length: 108 }, (_, i) => i + 1).map((day) => {
             const entry = mantraAudioMap[day];
             const isUploading = uploadingDay === day;
+            const draft = mantraDraft[day] || { theme: entry?.theme || "", mantra: entry?.mantra || "", note: entry?.note || "" };
+            const isSaving = savingContentDay === day;
             return (
-              <div key={day} style={{ background: "#fff", padding: 14, borderRadius: 8, border: entry ? "1px solid #4CAF50" : "1px solid #ddd", display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
-                <span style={{ minWidth: 60, fontWeight: 700, color: "#4A0B1D", fontSize: 13 }}>Day {day}</span>
+              <div key={day} style={{ background: "#fff", padding: 14, borderRadius: 8, border: entry ? "1px solid #4CAF50" : "1px solid #ddd", display: "flex", flexDirection: "column", gap: 10 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
+                  <span style={{ minWidth: 60, fontWeight: 700, color: "#4A0B1D", fontSize: 13 }}>Day {day}</span>
 
-                {entry ? (
-                  <>
-                    <audio controls src={resolveImageUrl(entry.audioUrl)} style={{ height: 34, flex: "1 1 260px" }} />
-                    <label style={{ padding: "6px 12px", background: "#2196F3", color: "#fff", borderRadius: 4, cursor: "pointer", fontSize: 12, fontWeight: 600 }}>
-                      {isUploading ? "Uploading…" : "Replace"}
-                      <input type="file" accept="audio/*" style={{ display: "none" }} disabled={isUploading} onChange={(e) => handleMantraAudioUpload(day, e.target.files[0])} />
-                    </label>
-                    <button onClick={() => handleMantraAudioDelete(day)} style={{ padding: "6px 12px", background: "#ff6b6b", color: "#fff", border: "none", borderRadius: 4, cursor: "pointer", fontSize: 12 }}>Delete</button>
-                  </>
-                ) : (
-                  <>
-                    <span style={{ flex: "1 1 260px", color: "#999", fontSize: 12 }}>No audio uploaded</span>
-                    <label style={{ padding: "6px 12px", background: "#E07B39", color: "#fff", borderRadius: 4, cursor: "pointer", fontSize: 12, fontWeight: 600 }}>
-                      {isUploading ? "Uploading…" : "Upload"}
-                      <input type="file" accept="audio/*" style={{ display: "none" }} disabled={isUploading} onChange={(e) => handleMantraAudioUpload(day, e.target.files[0])} />
-                    </label>
-                  </>
-                )}
+                  {entry?.audioUrl ? (
+                    <>
+                      <audio controls src={resolveImageUrl(entry.audioUrl)} style={{ height: 34, flex: "1 1 260px" }} />
+                      <label style={{ padding: "6px 12px", background: "#2196F3", color: "#fff", borderRadius: 4, cursor: "pointer", fontSize: 12, fontWeight: 600 }}>
+                        {isUploading ? "Uploading…" : "Replace"}
+                        <input type="file" accept="audio/*" style={{ display: "none" }} disabled={isUploading} onChange={(e) => handleMantraAudioUpload(day, e.target.files[0])} />
+                      </label>
+                      <button onClick={() => handleMantraAudioDelete(day)} style={{ padding: "6px 12px", background: "#ff6b6b", color: "#fff", border: "none", borderRadius: 4, cursor: "pointer", fontSize: 12 }}>Delete</button>
+                    </>
+                  ) : (
+                    <>
+                      <span style={{ flex: "1 1 260px", color: "#999", fontSize: 12 }}>No audio uploaded</span>
+                      <label style={{ padding: "6px 12px", background: "#E07B39", color: "#fff", borderRadius: 4, cursor: "pointer", fontSize: 12, fontWeight: 600 }}>
+                        {isUploading ? "Uploading…" : "Upload"}
+                        <input type="file" accept="audio/*" style={{ display: "none" }} disabled={isUploading} onChange={(e) => handleMantraAudioUpload(day, e.target.files[0])} />
+                      </label>
+                    </>
+                  )}
+                </div>
+
+                <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", paddingTop: 10, borderTop: "1px solid #f0f0f0" }}>
+                  <input
+                    value={draft.theme}
+                    onChange={(e) => handleMantraDraftChange(day, "theme", e.target.value)}
+                    placeholder="Theme (e.g. Shiva · Panchakshari)"
+                    style={{ flex: "1 1 220px", padding: 8, borderRadius: 4, border: "1px solid #ddd", fontSize: 12 }}
+                  />
+                  <input
+                    value={draft.mantra}
+                    onChange={(e) => handleMantraDraftChange(day, "mantra", e.target.value)}
+                    placeholder="Mantra text (e.g. ॐ नमः शिवाय)"
+                    style={{ flex: "1 1 260px", padding: 8, borderRadius: 4, border: "1px solid #ddd", fontSize: 12 }}
+                  />
+                </div>
+                <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
+                  <input
+                    value={draft.note}
+                    onChange={(e) => handleMantraDraftChange(day, "note", e.target.value)}
+                    placeholder="Note / description shown below the mantra (does not change Theme or Mantra text)"
+                    style={{ flex: "1 1 400px", padding: 8, borderRadius: 4, border: "1px solid #ddd", fontSize: 12 }}
+                  />
+                  <button
+                    onClick={() => handleMantraContentSave(day)}
+                    disabled={isSaving}
+                    style={{ padding: "8px 14px", background: "#4CAF50", color: "#fff", border: "none", borderRadius: 4, cursor: "pointer", fontSize: 12, fontWeight: 600 }}
+                  >
+                    {isSaving ? "Saving…" : "Save Content"}
+                  </button>
+                </div>
               </div>
             );
           })}
@@ -623,28 +727,54 @@ export default function AdminPage() {
           {Array.from({ length: 21 }, (_, i) => i + 1).map((day) => {
             const entry = dhyanAudioMap[day];
             const isUploading = uploadingDhyanDay === day;
+            const draft = dhyanDraft[day] || { name: entry?.name || "", deity: entry?.deity || "" };
+            const isSaving = savingDhyanContentDay === day;
             return (
-              <div key={day} style={{ background: "#fff", padding: 14, borderRadius: 8, border: entry ? "1px solid #4CAF50" : "1px solid #ddd", display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
-                <span style={{ minWidth: 60, fontWeight: 700, color: "#4A0B1D", fontSize: 13 }}>Day {day}</span>
+              <div key={day} style={{ background: "#fff", padding: 14, borderRadius: 8, border: entry ? "1px solid #4CAF50" : "1px solid #ddd", display: "flex", flexDirection: "column", gap: 10 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" }}>
+                  <span style={{ minWidth: 60, fontWeight: 700, color: "#4A0B1D", fontSize: 13 }}>Day {day}</span>
 
-                {entry ? (
-                  <>
-                    <audio controls src={resolveImageUrl(entry.audioUrl)} style={{ height: 34, flex: "1 1 260px" }} />
-                    <label style={{ padding: "6px 12px", background: "#2196F3", color: "#fff", borderRadius: 4, cursor: "pointer", fontSize: 12, fontWeight: 600 }}>
-                      {isUploading ? "Uploading…" : "Replace"}
-                      <input type="file" accept="audio/*" style={{ display: "none" }} disabled={isUploading} onChange={(e) => handleDhyanAudioUpload(day, e.target.files[0])} />
-                    </label>
-                    <button onClick={() => handleDhyanAudioDelete(day)} style={{ padding: "6px 12px", background: "#ff6b6b", color: "#fff", border: "none", borderRadius: 4, cursor: "pointer", fontSize: 12 }}>Delete</button>
-                  </>
-                ) : (
-                  <>
-                    <span style={{ flex: "1 1 260px", color: "#999", fontSize: 12 }}>No audio uploaded</span>
-                    <label style={{ padding: "6px 12px", background: "#E07B39", color: "#fff", borderRadius: 4, cursor: "pointer", fontSize: 12, fontWeight: 600 }}>
-                      {isUploading ? "Uploading…" : "Upload"}
-                      <input type="file" accept="audio/*" style={{ display: "none" }} disabled={isUploading} onChange={(e) => handleDhyanAudioUpload(day, e.target.files[0])} />
-                    </label>
-                  </>
-                )}
+                  {entry?.audioUrl ? (
+                    <>
+                      <audio controls src={resolveImageUrl(entry.audioUrl)} style={{ height: 34, flex: "1 1 260px" }} />
+                      <label style={{ padding: "6px 12px", background: "#2196F3", color: "#fff", borderRadius: 4, cursor: "pointer", fontSize: 12, fontWeight: 600 }}>
+                        {isUploading ? "Uploading…" : "Replace"}
+                        <input type="file" accept="audio/*" style={{ display: "none" }} disabled={isUploading} onChange={(e) => handleDhyanAudioUpload(day, e.target.files[0])} />
+                      </label>
+                      <button onClick={() => handleDhyanAudioDelete(day)} style={{ padding: "6px 12px", background: "#ff6b6b", color: "#fff", border: "none", borderRadius: 4, cursor: "pointer", fontSize: 12 }}>Delete</button>
+                    </>
+                  ) : (
+                    <>
+                      <span style={{ flex: "1 1 260px", color: "#999", fontSize: 12 }}>No audio uploaded</span>
+                      <label style={{ padding: "6px 12px", background: "#E07B39", color: "#fff", borderRadius: 4, cursor: "pointer", fontSize: 12, fontWeight: 600 }}>
+                        {isUploading ? "Uploading…" : "Upload"}
+                        <input type="file" accept="audio/*" style={{ display: "none" }} disabled={isUploading} onChange={(e) => handleDhyanAudioUpload(day, e.target.files[0])} />
+                      </label>
+                    </>
+                  )}
+                </div>
+
+                <div style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap", paddingTop: 10, borderTop: "1px solid #f0f0f0" }}>
+                  <input
+                    value={draft.name}
+                    onChange={(e) => handleDhyanDraftChange(day, "name", e.target.value)}
+                    placeholder="Mantra name (e.g. Gayatri Mantra)"
+                    style={{ flex: "1 1 220px", padding: 8, borderRadius: 4, border: "1px solid #ddd", fontSize: 12 }}
+                  />
+                  <input
+                    value={draft.deity}
+                    onChange={(e) => handleDhyanDraftChange(day, "deity", e.target.value)}
+                    placeholder="Deity / Source (e.g. Savitr)"
+                    style={{ flex: "1 1 220px", padding: 8, borderRadius: 4, border: "1px solid #ddd", fontSize: 12 }}
+                  />
+                  <button
+                    onClick={() => handleDhyanContentSave(day)}
+                    disabled={isSaving}
+                    style={{ padding: "8px 14px", background: "#4CAF50", color: "#fff", border: "none", borderRadius: 4, cursor: "pointer", fontSize: 12, fontWeight: 600 }}
+                  >
+                    {isSaving ? "Saving…" : "Save Content"}
+                  </button>
+                </div>
               </div>
             );
           })}

@@ -3,7 +3,10 @@ import mongoose from "mongoose";
 const MantraAudioSchema = new mongoose.Schema(
   {
     day: { type: Number, required: true, unique: true, min: 1, max: 108 },
-    audioUrl: { type: String, required: true },
+    audioUrl: { type: String },
+    theme: { type: String },
+    mantra: { type: String },
+    note: { type: String },
   },
   { timestamps: true },
 );

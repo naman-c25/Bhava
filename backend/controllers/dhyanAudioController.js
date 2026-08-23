@@ -9,16 +9,24 @@ export const upsertDhyanAudio = async (req, res, next) => {
         .status(400)
         .json({ success: false, message: "Day must be between 1 and 21" });
     }
-    if (!req.file) {
+
+    // Each field is independently optional — a request can carry just an
+    // audio file, just the name/deity text, or any combination, without
+    // clobbering fields it didn't touch.
+    const update = {};
+    if (req.file) update.audioUrl = await uploadToBlob(req.file, "dhyan-audio");
+    if (req.body.name !== undefined) update.name = req.body.name;
+    if (req.body.deity !== undefined) update.deity = req.body.deity;
+
+    if (Object.keys(update).length === 0) {
       return res
         .status(400)
-        .json({ success: false, message: "Audio file is required" });
+        .json({ success: false, message: "Nothing to update — provide audio, name, or deity" });
     }
 
-    const audioUrl = await uploadToBlob(req.file, "dhyan-audio");
     const entry = await DhyanAudio.findOneAndUpdate(
       { day },
-      { day, audioUrl },
+      { day, ...update },
       { new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true },
     );
     res.json({ success: true, data: entry });

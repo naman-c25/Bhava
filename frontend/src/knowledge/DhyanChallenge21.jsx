@@ -51,6 +51,7 @@ function DhyanChallenge21() {
   const navigate = useNavigate();
   const [playingDay, setPlayingDay] = useState(null);
   const [audioMap, setAudioMap] = useState({});
+  const [contentMap, setContentMap] = useState({});
   const [durationMap, setDurationMap] = useState({});
   const [currentTime, setCurrentTime] = useState(0);
   const [trackDuration, setTrackDuration] = useState(0);
@@ -105,11 +106,17 @@ function DhyanChallenge21() {
       .then((json) => {
         if (!cancelled && json?.success && Array.isArray(json.data)) {
           const map = {};
-          json.data.forEach((item) => { map[item.day] = item.audioUrl; });
+          const content = {};
+          json.data.forEach((item) => {
+            if (item.audioUrl) map[item.day] = item.audioUrl;
+            if (item.name || item.deity) content[item.day] = { name: item.name, deity: item.deity };
+          });
           setAudioMap(map);
+          setContentMap(content);
 
           // Probe each file's real length so the list shows actual runtime
           json.data.forEach((item) => {
+            if (!item.audioUrl) return;
             const probe = new Audio(resolveAudioUrl(item.audioUrl));
             probe.addEventListener("loadedmetadata", () => {
               if (cancelled) return;
@@ -250,6 +257,9 @@ function DhyanChallenge21() {
               {mantras.map((m) => {
                 const isPlaying = playingDay === m.number;
                 const hasAudio = Boolean(audioMap[m.number]);
+                const override = contentMap[m.number];
+                const name = override?.name || m.name;
+                const deity = override?.deity || m.deity;
                 return (
                   <div
                     key={m.number}
@@ -259,8 +269,8 @@ function DhyanChallenge21() {
                       <span className={styles.dayBadge}>Day {m.number}</span>
 
                       <div className={styles.dayInfo}>
-                        <p className={styles.dayTheme}>{m.name}</p>
-                        <p className={styles.dayVerse}>{m.deity}</p>
+                        <p className={styles.dayTheme}>{name}</p>
+                        <p className={styles.dayVerse}>{deity}</p>
                       </div>
 
                       <div className={styles.audioRight}>

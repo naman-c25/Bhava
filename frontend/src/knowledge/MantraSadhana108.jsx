@@ -258,6 +258,7 @@ function MantraSadhana108() {
   const [expandedPhase, setExpandedPhase] = useState(null);
   const [playingDay, setPlayingDay] = useState(null);
   const [audioMap, setAudioMap] = useState({});
+  const [contentMap, setContentMap] = useState({});
   const [durationMap, setDurationMap] = useState({});
   const [currentTime, setCurrentTime] = useState(0);
   const [trackDuration, setTrackDuration] = useState(0);
@@ -315,11 +316,19 @@ function MantraSadhana108() {
       .then((json) => {
         if (!cancelled && json?.success && Array.isArray(json.data)) {
           const map = {};
-          json.data.forEach((item) => { map[item.day] = item.audioUrl; });
+          const content = {};
+          json.data.forEach((item) => {
+            if (item.audioUrl) map[item.day] = item.audioUrl;
+            if (item.theme || item.mantra || item.note) {
+              content[item.day] = { theme: item.theme, mantra: item.mantra, note: item.note };
+            }
+          });
           setAudioMap(map);
+          setContentMap(content);
 
           // Probe each file's real length so the list shows actual runtime
           json.data.forEach((item) => {
+            if (!item.audioUrl) return;
             const probe = new Audio(resolveAudioUrl(item.audioUrl));
             probe.addEventListener("loadedmetadata", () => {
               if (cancelled) return;
@@ -495,6 +504,10 @@ function MantraSadhana108() {
                       {item.days.map((d) => {
                         const isPlaying = playingDay === d.day;
                         const hasAudio = Boolean(audioMap[d.day]);
+                        const override = contentMap[d.day];
+                        const theme = override?.theme || d.theme;
+                        const mantra = override?.mantra || d.mantra;
+                        const note = override?.note;
                         return (
                           <div
                             key={d.day}
@@ -504,8 +517,9 @@ function MantraSadhana108() {
                               <span className={styles.dayBadge}>Day {d.day}</span>
 
                               <div className={styles.dayInfo}>
-                                <p className={styles.dayTheme}>{d.theme}</p>
-                                <p className={styles.dayVerse}>{d.mantra}</p>
+                                <p className={styles.dayTheme}>{theme}</p>
+                                <p className={styles.dayVerse}>{mantra}</p>
+                                {note && <p className={styles.dayNote}>{note}</p>}
                               </div>
 
                               <div className={styles.audioRight}>
