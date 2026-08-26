@@ -1,285 +1,298 @@
-.wrapper {
+.overlay {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
-  z-index: 950;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(8, 10, 15, 0.85);
+  backdrop-filter: blur(16px);
+  z-index: 9999;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  font-family: 'Neue Haas Grotesk', Inter, sans-serif;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
-.panel {
-  width: min(380px, calc(100vw - 32px));
-  height: min(540px, calc(100vh - 120px));
-  background: #1A050B;
-  color: #FFFFFF;
-  border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(224, 123, 57, 0.25);
+.card {
+  background: rgba(18, 22, 31, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+  width: 100%;
+  max-width: 520px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  position: relative;
   overflow: hidden;
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes slideUp {
-  from { transform: translateY(20px) scale(0.96); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
-}
-
-/* Header */
-.header {
-  background: rgba(74, 11, 29, 0.8);
-  backdrop-filter: blur(10px);
-  padding: 14px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.headerTitle {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.statusDot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #E74C3C;
-}
-
-.statusDot.connected {
-  background: #2ECC71;
-  box-shadow: 0 0 10px #2ECC71;
-}
-
-.headerName {
-  margin: 0;
-  font-weight: 700;
-  font-size: 15px;
-  color: #FFF;
-}
-
-.headerSub {
-  margin: 0;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.65);
 }
 
 .closeBtn {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: #fff;
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .closeBtn:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
 }
 
-/* Avatar Section */
-.avatarSection {
-  padding: 24px 0 16px;
+/* Call Header */
+.header {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle at center, rgba(74, 11, 29, 0.6) 0%, transparent 70%);
+  justify-content: space-between;
 }
 
-.avatarRing {
-  width: 88px;
-  height: 88px;
+.caller {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.avatarOrb {
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4A0B1D, #E07B39);
+  background: linear-gradient(135deg, #7f00ff, #00f2fe);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 30px rgba(224, 123, 57, 0.3);
+  font-size: 1.8rem;
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+}
+
+.callerName {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f0f4f8;
+}
+
+.callerSub {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.timer {
+  font-family: monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #00f2fe;
+  background: rgba(0, 242, 254, 0.1);
+  padding: 0.3rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 242, 254, 0.25);
+}
+
+/* State Instruction Banner */
+.instructionCard {
+  padding: 1.25rem 1.5rem;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   transition: all 0.3s ease;
 }
 
-.pulseSpeaking {
-  animation: avatarPulse 1.4s infinite ease-in-out;
-}
-
-@keyframes avatarPulse {
-  0% { box-shadow: 0 0 0 0 rgba(224, 123, 57, 0.6); transform: scale(1); }
-  50% { box-shadow: 0 0 0 18px rgba(224, 123, 57, 0); transform: scale(1.05); }
-  100% { box-shadow: 0 0 0 0 rgba(224, 123, 57, 0); transform: scale(1); }
-}
-
-.avatarEmoji {
-  font-size: 42px;
-}
-
-.visualizerWave {
+.instructionIcon {
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
-  gap: 4px;
-  height: 24px;
-  margin-top: 14px;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.waveBar {
-  width: 4px;
-  height: 8px;
-  background: #E07B39;
-  border-radius: 4px;
-}
-
-.animBar:nth-child(1) { animation: wave 1.2s infinite ease-in-out; }
-.animBar:nth-child(2) { animation: wave 1.2s infinite ease-in-out 0.2s; }
-.animBar:nth-child(3) { animation: wave 1.2s infinite ease-in-out 0.4s; }
-.animBar:nth-child(4) { animation: wave 1.2s infinite ease-in-out 0.1s; }
-
-@keyframes wave {
-  0%, 100% { height: 6px; opacity: 0.5; }
-  50% { height: 22px; opacity: 1; background: #F39C12; }
-}
-
-/* Transcript Box */
-.transcriptBox {
-  flex: 1;
-  overflow-y: auto;
-  padding: 14px 16px;
+.instructionText {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  background: rgba(0, 0, 0, 0.2);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  gap: 0.2rem;
 }
 
-.userLine {
-  align-self: flex-end;
-  background: rgba(224, 123, 57, 0.2);
-  border: 1px solid rgba(224, 123, 57, 0.3);
-  color: #FFF;
-  padding: 8px 12px;
-  border-radius: 12px 12px 2px 12px;
-  font-size: 13px;
-  line-height: 1.45;
-  max-width: 85%;
-}
-
-.assistantLine {
-  align-self: flex-start;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #FFE6D6;
-  padding: 8px 12px;
-  border-radius: 12px 12px 12px 2px;
-  font-size: 13px;
-  line-height: 1.45;
-  max-width: 85%;
-}
-
-.roleLabel {
-  font-weight: 700;
-  font-size: 11px;
+.instructionBadge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #E07B39;
-  display: block;
-  margin-bottom: 2px;
 }
 
-.errorBanner {
-  background: rgba(231, 76, 60, 0.2);
-  border: 1px solid rgba(231, 76, 60, 0.5);
-  color: #FF6B6B;
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  text-align: center;
+.instructionTitle {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.instructionSub {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* Dynamic State Classes */
+.stateIdle {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f0f4f8;
+}
+.stateIdle .instructionIcon {
+  background: rgba(255, 255, 255, 0.08);
+}
+.stateIdle .instructionBadge {
+  color: #64748b;
+}
+
+.stateSpeak {
+  background: linear-gradient(135deg, rgba(46, 213, 115, 0.2), rgba(0, 242, 254, 0.15));
+  border: 1px solid rgba(46, 213, 115, 0.5);
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(46, 213, 115, 0.25);
+  animation: pulseGlow 1.8s infinite alternate;
+}
+.stateSpeak .instructionIcon {
+  background: #2ed573;
+  color: #000;
+}
+.stateSpeak .instructionBadge {
+  color: #2ed573;
+}
+
+.stateWait {
+  background: linear-gradient(135deg, rgba(255, 171, 0, 0.2), rgba(255, 107, 0, 0.15));
+  border: 1px solid rgba(255, 171, 0, 0.5);
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(255, 171, 0, 0.25);
+}
+.stateWait .instructionIcon {
+  background: #ffab00;
+  color: #000;
+  animation: rotateIcon 2s infinite linear;
+}
+.stateWait .instructionBadge {
+  color: #ffab00;
+}
+
+.stateAiSpeaking {
+  background: linear-gradient(135deg, rgba(127, 0, 255, 0.25), rgba(225, 0, 255, 0.2));
+  border: 1px solid rgba(225, 0, 255, 0.5);
+  color: #ffffff;
+  box-shadow: 0 0 30px rgba(127, 0, 255, 0.35);
+}
+.stateAiSpeaking .instructionIcon {
+  background: linear-gradient(135deg, #7f00ff, #e100ff);
+  color: #fff;
+}
+.stateAiSpeaking .instructionBadge {
+  color: #e100ff;
+}
+
+.stateMuted {
+  background: rgba(255, 71, 87, 0.15);
+  border: 1px solid rgba(255, 71, 87, 0.4);
+  color: #ffffff;
+}
+.stateMuted .instructionIcon {
+  background: #ff4757;
+  color: #fff;
+}
+.stateMuted .instructionBadge {
+  color: #ff4757;
+}
+
+@keyframes pulseGlow {
+  0% { border-color: rgba(46, 213, 115, 0.4); }
+  100% { border-color: rgba(46, 213, 115, 0.8); }
+}
+
+@keyframes rotateIcon {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Sound Wave Canvas */
+.visualizerContainer {
+  width: 100%;
+  height: 140px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  position: relative;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
 }
 
 /* Controls */
 .controls {
-  padding: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  background: rgba(26, 5, 11, 0.95);
+  gap: 1.5rem;
 }
 
-.controlBtn {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.1);
-  color: #FFF;
+.btn {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.controlBtn:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.controlBtn.muted {
-  background: #E74C3C;
-  border-color: #E74C3C;
-}
-
-.sendTurnBtn {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 1px solid rgba(224, 123, 57, 0.4);
-  background: rgba(224, 123, 57, 0.2);
-  color: #FFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.sendTurnBtn:hover:not(:disabled) {
-  background: #E07B39;
-  transform: scale(1.05);
-}
-
-.endCallBtn {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
+  gap: 0.3rem;
+  background: none;
   border: none;
-  background: #C0392B;
-  color: #FFF;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(192, 57, 43, 0.4);
+  color: #94a3b8;
   transition: all 0.2s ease;
 }
 
-.endCallBtn:hover {
-  background: #E74C3C;
-  transform: scale(1.05);
+.btnLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 
-@media (max-width: 480px) {
-  .wrapper {
-    right: 16px;
-    bottom: 16px;
-  }
+.micBtn {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2ed573, #00f2fe);
+  color: #000;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(46, 213, 115, 0.4);
+}
+
+.micBtn:hover {
+  transform: scale(1.06);
+}
+
+.micBtn.muted {
+  background: linear-gradient(135deg, #ff4757, #ff6b81);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(255, 71, 87, 0.4);
+}
+
+.endBtn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff4757, #d63031);
+  color: #fff;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(255, 71, 87, 0.35);
+}
+
+.endBtn:hover {
+  transform: scale(1.06);
 }
