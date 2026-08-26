@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./BhavaVoiceCall.module.css";
 
-const WS_URL = import.meta.env.VITE_BHAVA_VOICE_WS_URL || "ws://localhost:8000/ws/voice";
+const WS_URL = import.meta.env.VITE_BHAVA_VOICE_WS_URL || "https://bhava-voice-agent.onrender.com";
 
 function BhavaVoiceCall() {
   const [open, setOpen] = useState(false);
