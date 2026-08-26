@@ -81,13 +81,31 @@ export default function BhavaVoiceCall({ isOpen: propIsOpen, onClose: propOnClos
     }
   }, [callState]);
 
+  const getFormattedWsUrl = () => {
+    let envUrl = import.meta.env.VITE_BHAVA_VOICE_WS_URL || "wss://bhava-voice-agent.onrender.com/ws/voice";
+    envUrl = envUrl.trim();
+    if (envUrl.startsWith("http://")) {
+      envUrl = envUrl.replace("http://", "ws://");
+    } else if (envUrl.startsWith("https://")) {
+      envUrl = envUrl.replace("https://", "wss://");
+    } else if (!envUrl.startsWith("ws://") && !envUrl.startsWith("wss://")) {
+      envUrl = `wss://${envUrl}`;
+    }
+    if (!envUrl.includes("/ws/voice")) {
+      envUrl = envUrl.replace(/\/+$/, "") + "/ws/voice";
+    }
+    return envUrl;
+  };
+
   const initWebSocket = () => {
     if (wsRef.current && (wsRef.current.readyState === WebSocket.OPEN || wsRef.current.readyState === WebSocket.CONNECTING)) {
       return;
     }
 
     try {
-      const ws = new WebSocket(WS_URL);
+      const targetUrl = getFormattedWsUrl();
+      console.log("[BhavaVoiceCall] Connecting to WebSocket:", targetUrl);
+      const ws = new WebSocket(targetUrl);
       wsRef.current = ws;
 
       ws.onopen = () => {
@@ -100,7 +118,7 @@ export default function BhavaVoiceCall({ isOpen: propIsOpen, onClose: propOnClos
         setStatusNote("Disconnected — retrying...");
         setTimeout(() => {
           if (isOpen) initWebSocket();
-        }, 3000);
+        }, 4000);
       };
 
       ws.onerror = (err) => {
@@ -484,58 +502,86 @@ export default function BhavaVoiceCall({ isOpen: propIsOpen, onClose: propOnClos
 
   return (
     <div className={styles.overlay}>
-      <div className={styles.card}>
-        <button className={styles.closeBtn} onClick={endCall} aria-label="Close Call">
+      {/* ── Realistic Mobile Phone Frame ── */}
+      <div className={styles.phoneFrame}>
+        
+        {/* Dynamic Island / Notch Bar */}
+        <div className={styles.phoneNotch}>
+          <div className={styles.cameraLens} />
+          <div className={styles.speakerGrille} />
+        </div>
+
+        {/* Phone Top Status Bar */}
+        <div className={styles.phoneStatusBar}>
+          <span className={styles.phoneTime}>
+            {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </span>
+          <div className={styles.phoneStatusRight}>
+            <span className={styles.hdBadge}>HD VOICE</span>
+            <span className={styles.signalIcon}>📶</span>
+            <span className={styles.batteryIcon}>🔋</span>
+          </div>
+        </div>
+
+        {/* Close Overlay Button */}
+        <button className={styles.closeBtn} onClick={endCall} aria-label="Close Call Screen">
           ✕
         </button>
 
-        {/* 1. Call Header */}
-        <div className={styles.header}>
-          <div className={styles.caller}>
+        {/* ── 1. Hero Caller Profile Section ── */}
+        <div className={styles.callerHero}>
+          <div className={`${styles.avatarOrbWrapper} ${callState === "SPEAK_NOW" || callState === "AI_SPEAKING" ? styles.avatarPulse : ""}`}>
+            <div className={styles.avatarGlowRing} />
             <div className={styles.avatarOrb}>🕉️</div>
-            <div>
-              <h3 className={styles.callerName}>Bhagwati</h3>
-              <p className={styles.callerSub}>{activeAgent}</p>
-            </div>
           </div>
-          <div className={styles.timer}>{formatTimer(callSeconds)}</div>
+          <h2 className={styles.callerName}>Bhagwati</h2>
+          <p className={styles.callerRole}>{activeAgent}</p>
+          <div className={styles.callTimerBadge}>{formatTimer(callSeconds)}</div>
         </div>
 
-        {/* 2. REAL-TIME INSTRUCTION BANNER (When to speak, when to wait, when AI is speaking) */}
+        {/* ── 2. Real-Time Instruction Banner (When to speak, when to wait, AI speaking) ── */}
         <div className={`${styles.instructionCard} ${instruction.themeClass}`}>
-          <div className={styles.instructionIcon}>{instruction.icon}</div>
+          <div className={styles.instructionIconWrapper}>
+            <span className={styles.instructionIcon}>{instruction.icon}</span>
+          </div>
           <div className={styles.instructionText}>
             <span className={styles.instructionBadge}>{instruction.badge}</span>
-            <h2 className={styles.instructionTitle}>{instruction.title}</h2>
+            <h3 className={styles.instructionTitle}>{instruction.title}</h3>
             <p className={styles.instructionSub}>{instruction.sub}</p>
           </div>
         </div>
 
-        {/* 3. Waveform Visualizer Canvas */}
+        {/* ── 3. Audio Waveform Spectrum Canvas ── */}
         <div className={styles.visualizerContainer}>
-          <canvas ref={canvasRef} className={styles.canvas} width={450} height={140} />
+          <canvas ref={canvasRef} className={styles.canvas} width={380} height={130} />
+          <div className={styles.visualizerLabel}>{statusNote}</div>
         </div>
 
-        {/* 4. Phone Call Controls */}
-        <div className={styles.controls}>
-          <button
-            className={`${styles.btn} ${styles.micBtn} ${callState === "MUTED" ? styles.muted : ""}`}
-            onClick={toggleMic}
-            title="Mute / Unmute Mic"
-          >
-            <span className="material-symbols-outlined">
-              {callState === "SPEAK_NOW" ? "mic" : "mic_off"}
-            </span>
-            <span className={styles.btnLabel}>
+        {/* ── 4. Mobile Call Action Controls Bar (iOS/Android style) ── */}
+        <div className={styles.phoneControlsBar}>
+          <div className={styles.controlItem}>
+            <button
+              className={`${styles.circleBtn} ${styles.micBtn} ${callState === "MUTED" ? styles.isMuted : ""}`}
+              onClick={toggleMic}
+              aria-label="Mute or Unmute Microphone"
+            >
+              <span className="material-symbols-outlined">
+                {callState === "SPEAK_NOW" ? "mic" : "mic_off"}
+              </span>
+            </button>
+            <span className={styles.controlLabel}>
               {callState === "SPEAK_NOW" ? "Mute" : "Speak"}
             </span>
-          </button>
+          </div>
 
-          <button className={`${styles.btn} ${styles.endBtn}`} onClick={endCall} title="End Call">
-            <span className="material-symbols-outlined">call_end</span>
-            <span className={styles.btnLabel}>End</span>
-          </button>
+          <div className={styles.controlItem}>
+            <button className={`${styles.circleBtn} ${styles.endCallBtn}`} onClick={endCall} aria-label="End Call">
+              <span className="material-symbols-outlined">call_end</span>
+            </button>
+            <span className={styles.controlLabel}>End Call</span>
+          </div>
         </div>
+
       </div>
     </div>
   );
