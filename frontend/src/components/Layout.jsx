@@ -1,10 +1,10 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Outlet, useLocation, useNavigationType } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import GuruChat from "./GuruChat";
-import { useEffect } from "react";
-import { useLocation, useNavigationType } from "react-router-dom";
+import BhavaOptionDialog from "./BhavaOptionDialog";
+import BhavaVoiceCall from "./BhavaVoiceCall";
 import styles from "./Layout.module.css";
 
 function ScrollToTopOnPush() {
@@ -50,6 +50,23 @@ function ScrollToTopOnPush() {
 function Layout() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  useEffect(() => {
+    const openDialog = () => setDialogOpen(true);
+    window.addEventListener("bhava:dialog:open", openDialog);
+    return () => window.removeEventListener("bhava:dialog:open", openDialog);
+  }, []);
+
+  const handleSelectChat = () => {
+    setDialogOpen(false);
+    window.dispatchEvent(new Event("guru:open"));
+  };
+
+  const handleSelectCall = () => {
+    setDialogOpen(false);
+    window.dispatchEvent(new Event("bhava:call:open"));
+  };
 
   return (
     <>
@@ -62,7 +79,18 @@ function Layout() {
       <ScrollToTopOnPush />
       <Outlet />
       {!isAdminRoute && <Footer />}
-      {!isAdminRoute && <GuruChat />}
+      {!isAdminRoute && (
+        <>
+          <GuruChat />
+          <BhavaVoiceCall />
+          <BhavaOptionDialog
+            isOpen={dialogOpen}
+            onClose={() => setDialogOpen(false)}
+            onSelectChat={handleSelectChat}
+            onSelectCall={handleSelectCall}
+          />
+        </>
+      )}
     </>
   );
 }

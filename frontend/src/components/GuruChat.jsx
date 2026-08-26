@@ -3,7 +3,7 @@ import styles from "./GuruChat.module.css";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
-const GREETING = "Namaste 🙏 I'm Guru. Ask me anything about Bhava — our rituals, products, or practices.";
+const GREETING = "Namaste 🙏 I'm Bhagwati. Ask me anything about Bhava — our rituals, products, or practices.";
 
 function GuruChat() {
   const [open, setOpen] = useState(false);
@@ -93,7 +93,7 @@ function GuruChat() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask Guru anything about Bhava…"
+              placeholder="Ask Bhagwati anything about Bhava…"
               className={styles.input}
               disabled={loading}
             />
