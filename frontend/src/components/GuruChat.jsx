@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./GuruChat.module.css";
+import BhavaVoiceCall from "./BhavaVoiceCall";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -7,6 +8,7 @@ const GREETING = "Namaste 🙏 I'm Bhagwati. Ask me anything about Bhava — our
 
 function GuruChat() {
   const [open, setOpen] = useState(false);
+  const [voiceCallOpen, setVoiceCallOpen] = useState(false);
   const [messages, setMessages] = useState([{ role: "assistant", content: GREETING }]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,8 +23,13 @@ function GuruChat() {
 
   useEffect(() => {
     const openChat = () => setOpen(true);
+    const openVoice = () => setVoiceCallOpen(true);
     window.addEventListener("guru:open", openChat);
-    return () => window.removeEventListener("guru:open", openChat);
+    window.addEventListener("guru:voice", openVoice);
+    return () => {
+      window.removeEventListener("guru:open", openChat);
+      window.removeEventListener("guru:voice", openVoice);
+    };
   }, []);
 
   const sendMessage = async (e) => {
@@ -67,9 +74,19 @@ function GuruChat() {
                 <p className={styles.headerSub}>Ask about Bhava</p>
               </div>
             </div>
-            <button className={styles.closeBtn} onClick={() => setOpen(false)} aria-label="Close chat">
-              <span className="material-symbols-outlined">close</span>
-            </button>
+            <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+              <button
+                className={styles.closeBtn}
+                onClick={() => setVoiceCallOpen(true)}
+                title="Start Voice Call"
+                aria-label="Start Voice Call"
+              >
+                <span className="material-symbols-outlined">call</span>
+              </button>
+              <button className={styles.closeBtn} onClick={() => setOpen(false)} aria-label="Close chat">
+                <span className="material-symbols-outlined">close</span>
+              </button>
+            </div>
           </div>
 
           <div className={styles.messages} ref={scrollRef}>
@@ -103,6 +120,9 @@ function GuruChat() {
           </form>
         </div>
       )}
+
+      {/* Voice Call UI Modal */}
+      <BhavaVoiceCall isOpen={voiceCallOpen} onClose={() => setVoiceCallOpen(false)} />
     </div>
   );
 }
