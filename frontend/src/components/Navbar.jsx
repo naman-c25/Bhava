@@ -92,7 +92,7 @@ function Navbar() {
                   className={`${styles.navLink} ${styles.askBhava}`}
                   onClick={() => {
                     setMenuOpen(false);
-                    window.dispatchEvent(new Event("guru:open"));
+                    window.dispatchEvent(new Event("bhava:dialog:open"));
                   }}
                 >
                   <span className={styles.askBhavaSparkle}>✨</span>
