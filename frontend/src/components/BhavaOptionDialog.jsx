@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./BhavaOptionDialog.module.css";
+import { warmupVoiceBackend } from "../utils/voiceBackendWarmup";
 
 function BhavaOptionDialog({ isOpen, onClose, onSelectChat, onSelectCall }) {
   useEffect(() => {
@@ -9,6 +10,7 @@ function BhavaOptionDialog({ isOpen, onClose, onSelectChat, onSelectCall }) {
       }
     };
     if (isOpen) {
+      warmupVoiceBackend();
       window.addEventListener("keydown", handleKeyDown);
     }
     return () => window.removeEventListener("keydown", handleKeyDown);
@@ -47,7 +49,14 @@ function BhavaOptionDialog({ isOpen, onClose, onSelectChat, onSelectCall }) {
             </div>
           </button>
 
-          <button className={styles.optionCard} onClick={onSelectCall}>
+          <button
+            className={styles.optionCard}
+            onMouseEnter={warmupVoiceBackend}
+            onClick={() => {
+              warmupVoiceBackend();
+              onSelectCall();
+            }}
+          >
             <div className={styles.cardHeader}>
               <div className={`${styles.cardIcon} ${styles.callIcon}`}>
                 <span className="material-symbols-outlined">call</span>

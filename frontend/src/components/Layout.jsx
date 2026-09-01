@@ -6,6 +6,7 @@ import GuruChat from "./GuruChat";
 import BhavaOptionDialog from "./BhavaOptionDialog";
 import BhavaVoiceCall from "./BhavaVoiceCall";
 import styles from "./Layout.module.css";
+import { warmupVoiceBackend } from "../utils/voiceBackendWarmup";
 
 function ScrollToTopOnPush() {
   const location = useLocation();
@@ -53,7 +54,10 @@ function Layout() {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
-    const openDialog = () => setDialogOpen(true);
+    const openDialog = () => {
+      warmupVoiceBackend();
+      setDialogOpen(true);
+    };
     window.addEventListener("bhava:dialog:open", openDialog);
     return () => window.removeEventListener("bhava:dialog:open", openDialog);
   }, []);
@@ -64,6 +68,7 @@ function Layout() {
   };
 
   const handleSelectCall = () => {
+    warmupVoiceBackend();
     setDialogOpen(false);
     window.dispatchEvent(new Event("bhava:call:open"));
   };
