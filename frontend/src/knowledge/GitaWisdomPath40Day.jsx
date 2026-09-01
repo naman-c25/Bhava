@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./GitaWisdomPath40Day.module.css";
+import { useRitualPlan } from "../hooks/useRitualPlan";
+import { RitualPlanBar, RitualPlanModal, RitualDayTracker, isDayLocked } from "../components/RitualPlanner";
+
+const PLAN_KEY = "bhava_ritual_plan_gita40";
 
 const stages = [
   {
@@ -129,6 +133,7 @@ function GitaWisdomPath40Day() {
   const navigate = useNavigate();
   const [expandedStage, setExpandedStage] = useState(null);
   const [playingDay, setPlayingDay] = useState(null);
+  const ritual = useRitualPlan(PLAN_KEY, "40-Day Gita Wisdom Path");
 
   const toggleStage = (idx) => {
     setExpandedStage(expandedStage === idx ? null : idx);
@@ -188,6 +193,8 @@ function GitaWisdomPath40Day() {
         <div className={styles.rightWrapper}>
           <p className={styles.sessionsCount}>4 Stages · 40 Days</p>
 
+          <RitualPlanBar ritual={ritual} />
+
           <div className={styles.rightPanel}>
             {stages.map((stage, idx) => (
               <div key={stage.id} className={styles.sessionBlock}>
@@ -223,34 +230,42 @@ function GitaWisdomPath40Day() {
                     <div className={styles.dayList}>
                       {stage.days.map((d) => {
                         const isPlaying = playingDay === d.day;
+                        const isLocked = isDayLocked(ritual, d.day);
                         return (
                           <div
                             key={d.day}
                             className={`${styles.dayRow} ${isPlaying ? styles.dayRowActive : ""}`}
                           >
-                            <span className={styles.dayBadge}>Day {d.day}</span>
+                            <div className={styles.dayRowTop}>
+                              <span className={styles.dayBadge}>Day {d.day}</span>
 
-                            <div className={styles.dayInfo}>
-                              <p className={styles.dayTheme}>{d.theme}</p>
-                              <p className={styles.dayVerse}>{d.verse}</p>
+                              <div className={styles.dayInfo}>
+                                <p className={styles.dayTheme}>{d.theme}</p>
+                                <p className={styles.dayVerse}>{d.verse}</p>
+                              </div>
+
+                              <div className={styles.audioRight}>
+                                {isPlaying && (
+                                  <div className={styles.waveBar}>
+                                    <span /><span /><span /><span /><span />
+                                  </div>
+                                )}
+                                <span className={styles.dayDuration}>{d.duration}</span>
+                                <button
+                                  className={`${styles.playCircleDay} ${isPlaying ? styles.playCircleDayActive : ""}`}
+                                  onClick={(e) => togglePlay(d.day, e)}
+                                  disabled={isLocked}
+                                  title={isLocked ? "Complete the previous day to unlock" : ""}
+                                  style={isLocked ? { opacity: 0.35, cursor: "not-allowed" } : undefined}
+                                >
+                                  <span className="material-symbols-outlined">
+                                    {isLocked ? "lock" : isPlaying ? "pause" : "play_arrow"}
+                                  </span>
+                                </button>
+                              </div>
                             </div>
 
-                            <div className={styles.audioRight}>
-                              {isPlaying && (
-                                <div className={styles.waveBar}>
-                                  <span /><span /><span /><span /><span />
-                                </div>
-                              )}
-                              <span className={styles.dayDuration}>{d.duration}</span>
-                              <button
-                                className={`${styles.playCircleDay} ${isPlaying ? styles.playCircleDayActive : ""}`}
-                                onClick={(e) => togglePlay(d.day, e)}
-                              >
-                                <span className="material-symbols-outlined">
-                                  {isPlaying ? "pause" : "play_arrow"}
-                                </span>
-                              </button>
-                            </div>
+                            <RitualDayTracker ritual={ritual} day={d.day} />
                           </div>
                         );
                       })}
@@ -268,6 +283,8 @@ function GitaWisdomPath40Day() {
         </div>
 
       </div>
+
+      <RitualPlanModal ritual={ritual} />
 
       {/* ── Completion Benefits ── */}
       <section className={styles.completionSection}>

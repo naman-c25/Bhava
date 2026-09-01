@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./DhyanChallenge21.module.css";
+import { useRitualPlan } from "../hooks/useRitualPlan";
+import { RitualPlanBar, RitualPlanModal, RitualDayTracker, isDayLocked } from "../components/RitualPlanner";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const resolveAudioUrl = (url) => (url?.startsWith("http") ? url : API_BASE + url);
 
 const SAVED_KEY = "bhava_saved_practices";
 const PRACTICE_SLUG = "dhyan-challenge-21";
+const PLAN_KEY = "bhava_ritual_plan_dhyan21";
 
 const formatDuration = (seconds) => {
   if (!Number.isFinite(seconds)) return "";
@@ -64,6 +67,7 @@ function DhyanChallenge21() {
     }
   });
   const [linkCopied, setLinkCopied] = useState(false);
+  const ritual = useRitualPlan(PLAN_KEY, "21-Day Dhyān Challenge");
   const audioRef = useRef(null);
   const sequentialRef = useRef(false);
   const playingDayRef = useRef(null);
@@ -252,6 +256,8 @@ function DhyanChallenge21() {
         <div className={styles.rightWrapper}>
           <p className={styles.sessionsCount}>21 Sacred Mantras</p>
 
+          <RitualPlanBar ritual={ritual} />
+
           <div className={styles.rightPanel}>
             <div className={styles.dayList}>
               {mantras.map((m) => {
@@ -260,6 +266,7 @@ function DhyanChallenge21() {
                 const override = contentMap[m.number];
                 const name = override?.name || m.name;
                 const deity = override?.deity || m.deity;
+                const isLocked = isDayLocked(ritual, m.number);
                 return (
                   <div
                     key={m.number}
@@ -280,16 +287,18 @@ function DhyanChallenge21() {
                         <button
                           className={`${styles.playCircleDay} ${isPlaying ? styles.playCircleDayActive : ""}`}
                           onClick={(e) => togglePlay(m.number, e)}
-                          disabled={!hasAudio}
-                          title={hasAudio ? "" : "Audio not uploaded yet"}
-                          style={!hasAudio ? { opacity: 0.35, cursor: "not-allowed" } : undefined}
+                          disabled={!hasAudio || isLocked}
+                          title={isLocked ? "Complete the previous day to unlock" : hasAudio ? "" : "Audio not uploaded yet"}
+                          style={!hasAudio || isLocked ? { opacity: 0.35, cursor: "not-allowed" } : undefined}
                         >
                           <span className="material-symbols-outlined">
-                            {isPlaying ? "pause" : "play_arrow"}
+                            {isLocked ? "lock" : isPlaying ? "pause" : "play_arrow"}
                           </span>
                         </button>
                       </div>
                     </div>
+
+                    <RitualDayTracker ritual={ritual} day={m.number} />
 
                     {isPlaying && (
                       <div className={styles.seekRow}>
@@ -314,6 +323,8 @@ function DhyanChallenge21() {
         </div>
 
       </div>
+
+      <RitualPlanModal ritual={ritual} />
 
       {/* ── Completion Benefits ── */}
       <section className={styles.completionSection}>

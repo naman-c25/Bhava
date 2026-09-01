@@ -1,0 +1,441 @@
+/* ══════════════════════════════
+   RITUAL PLANNER & TRACKER
+   Shared across all multi-day practice pages
+   ══════════════════════════════ */
+.planBar {
+  background: #FBF3E6;
+  border: 1px solid rgba(110, 27, 33, 0.15);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+
+.planBarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.planBarEmpty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.planBarTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #4A0B1D;
+}
+
+.planBarTitle .material-symbols-outlined {
+  font-size: 18px;
+  color: #C6A14A;
+}
+
+.planBarTitle em {
+  font-style: normal;
+  font-weight: 500;
+  color: #9A6868;
+  font-size: 0.8rem;
+}
+
+.planEditBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid rgba(110, 27, 33, 0.25);
+  color: #6E1B21;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+}
+
+.planEditBtn .material-symbols-outlined {
+  font-size: 16px;
+}
+
+.planEditBtn:hover {
+  background: #FBF3E6;
+}
+
+.planBarStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.planStat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 90px;
+}
+
+.planStatLabel {
+  font-size: 0.68rem;
+  color: #9A6868;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.planStatValue {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #3D0A10;
+  font-family: 'Canela', 'Work Sans', serif;
+}
+
+/* ── Per-day tracker row ── */
+.trackerRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 66px;
+  flex-wrap: wrap;
+}
+
+.lockedTag,
+.completedTag,
+.inProgressTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+}
+
+.lockedTag {
+  color: #9A6868;
+}
+
+.lockedTag .material-symbols-outlined {
+  font-size: 15px;
+}
+
+.completedTag {
+  color: #16A34A;
+}
+
+.completedTag .material-symbols-outlined {
+  font-size: 15px;
+}
+
+.inProgressTag {
+  color: #C6A14A;
+}
+
+.continueBtn {
+  background: #6E1B21;
+  color: #fff;
+  border: none;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.continueBtn:hover {
+  opacity: 0.9;
+}
+
+/* ── Tap counter ── */
+.counterRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px 10px 66px;
+  background: rgba(198, 161, 74, 0.08);
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+.counterCount {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #3D0A10;
+  font-family: 'Canela', 'Work Sans', serif;
+  min-width: 70px;
+}
+
+.counterTapBtn {
+  background: #C6A14A;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.counterCompleteBtn {
+  background: transparent;
+  border: 1.5px solid #16A34A;
+  color: #16A34A;
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.counterTapBtn:hover,
+.counterCompleteBtn:hover {
+  opacity: 0.85;
+}
+
+/* ── Plan modal ── */
+.planModalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 10, 5, 0.55);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.planModal {
+  background: #FBF6EE;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.planModalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.planModalHeader h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Canela', 'Work Sans', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #4A0B1D;
+  margin: 0;
+}
+
+.planModalHeader h3 .material-symbols-outlined {
+  color: #C6A14A;
+}
+
+.planModalClose {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #8A7F78;
+}
+
+.planModalSub {
+  font-size: 0.82rem;
+  color: #6A625A;
+  font-family: 'Inter', sans-serif;
+  margin: 0 0 18px;
+}
+
+.planFieldLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #4A0B1D;
+  font-family: 'Inter', sans-serif;
+  margin: 16px 0 8px;
+}
+
+.repsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.repsOpt,
+.repsOptActive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 4px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.repsOpt {
+  background: #fff;
+  border: 1px solid #E5DDD3;
+  color: #3D0A10;
+}
+
+.repsOptActive {
+  background: #6E1B21;
+  border: 1px solid #6E1B21;
+  color: #fff;
+}
+
+.repsOptNum {
+  font-size: 1rem;
+  font-weight: 700;
+  color: inherit;
+}
+
+.repsOptLabel {
+  font-size: 0.65rem;
+}
+
+.daysStepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: #fff;
+  border: 1px solid #E5DDD3;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.daysStepper button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #E5DDD3;
+  background: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #6E1B21;
+}
+
+.daysStepper span {
+  font-weight: 700;
+  color: #3D0A10;
+  font-family: 'Inter', sans-serif;
+  min-width: 70px;
+  text-align: center;
+}
+
+.timeSelect {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #E5DDD3;
+  font-size: 0.88rem;
+  font-family: 'Inter', sans-serif;
+  color: #3D0A10;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.reminderToggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4A0B1D;
+  font-family: 'Inter', sans-serif;
+}
+
+.reminderToggleRow span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reminderToggleRow .material-symbols-outlined {
+  font-size: 18px;
+  color: #C6A14A;
+}
+
+.reminderToggleRow input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.reminderNote {
+  font-size: 0.74rem;
+  color: #9A6868;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  margin: 8px 0 0;
+}
+
+.planSummaryBox {
+  background: #fff;
+  border: 1px solid #E5DDD3;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 18px;
+}
+
+.planSummaryTitle {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #9A6868;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  margin: 0 0 8px;
+}
+
+.planSummaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: #3D0A10;
+  font-family: 'Inter', sans-serif;
+  padding: 4px 0;
+}
+
+.savePlanBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #6E1B21;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 18px;
+  font-family: 'Inter', sans-serif;
+}
+
+.savePlanBtn:hover {
+  opacity: 0.9;
+}

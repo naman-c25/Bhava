@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./MantraSadhana108.module.css";
+import { useRitualPlan } from "../hooks/useRitualPlan";
+import { RitualPlanBar, RitualPlanModal, RitualDayTracker, isDayLocked } from "../components/RitualPlanner";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const resolveAudioUrl = (url) => (url?.startsWith("http") ? url : API_BASE + url);
@@ -179,6 +181,7 @@ const allDays = phases.flatMap((p) => p.days.map((d) => ({ ...d, phaseIdx: phase
 
 const SAVED_KEY = "bhava_saved_practices";
 const PRACTICE_SLUG = "mantra-sadhana-108";
+const PLAN_KEY = "bhava_ritual_plan_mantra108";
 
 const completionBenefits = [
   {
@@ -271,6 +274,7 @@ function MantraSadhana108() {
     }
   });
   const [linkCopied, setLinkCopied] = useState(false);
+  const ritual = useRitualPlan(PLAN_KEY, "108-Day Mantra Sādhana");
   const audioRef = useRef(null);
   const sequentialRef = useRef(false);
   const playingDayRef = useRef(null);
@@ -468,6 +472,8 @@ function MantraSadhana108() {
         <div className={styles.rightWrapper}>
           <p className={styles.sessionsCount}>4 Phases · 108 Days</p>
 
+          <RitualPlanBar ritual={ritual} />
+
           <div className={styles.rightPanel}>
             {phases.map((item, idx) => (
               <div key={item.id} className={styles.sessionBlock}>
@@ -508,6 +514,7 @@ function MantraSadhana108() {
                         const theme = override?.theme || d.theme;
                         const mantra = override?.mantra || d.mantra;
                         const note = override?.note;
+                        const isLocked = isDayLocked(ritual, d.day);
                         return (
                           <div
                             key={d.day}
@@ -529,16 +536,18 @@ function MantraSadhana108() {
                                 <button
                                   className={`${styles.playCircleDay} ${isPlaying ? styles.playCircleDayActive : ""}`}
                                   onClick={(e) => togglePlay(d.day, e)}
-                                  disabled={!hasAudio}
-                                  title={hasAudio ? "" : "Audio not uploaded yet"}
-                                  style={!hasAudio ? { opacity: 0.35, cursor: "not-allowed" } : undefined}
+                                  disabled={!hasAudio || isLocked}
+                                  title={isLocked ? "Complete the previous day to unlock" : hasAudio ? "" : "Audio not uploaded yet"}
+                                  style={!hasAudio || isLocked ? { opacity: 0.35, cursor: "not-allowed" } : undefined}
                                 >
                                   <span className="material-symbols-outlined">
-                                    {isPlaying ? "pause" : "play_arrow"}
+                                    {isLocked ? "lock" : isPlaying ? "pause" : "play_arrow"}
                                   </span>
                                 </button>
                               </div>
                             </div>
+
+                            <RitualDayTracker ritual={ritual} day={d.day} />
 
                             {isPlaying && (
                               <div className={styles.seekRow}>
@@ -572,6 +581,8 @@ function MantraSadhana108() {
         </div>
 
       </div>
+
+      <RitualPlanModal ritual={ritual} />
 
       {/* ── Why 108 is Sacred ── */}
       <section className={styles.sacredSection}>

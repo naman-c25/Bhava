@@ -362,13 +362,19 @@
 
 .dayRow {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  flex-direction: column;
+  gap: 8px;
   padding: 10px 12px;
   border-radius: 10px;
   background: rgba(41, 95, 138, 0.04);
   transition: background 0.2s ease;
   cursor: default;
+}
+
+.dayRowTop {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .dayRow:hover {
