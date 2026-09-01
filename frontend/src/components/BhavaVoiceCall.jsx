@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./BhavaVoiceCall.module.css";
+import { warmupVoiceBackend } from "../utils/voiceBackendWarmup";
 
 const WS_URL = import.meta.env.VITE_BHAVA_VOICE_WS_URL || "ws://localhost:5000/ws/voice";
 
@@ -43,6 +44,7 @@ export default function BhavaVoiceCall({ isOpen: propIsOpen, onClose: propOnClos
   // Listen for custom trigger events (e.g. window.dispatchEvent(new CustomEvent("bhava:call:open")))
   useEffect(() => {
     const handleOpenCall = () => {
+      warmupVoiceBackend();
       setInternalOpen(true);
     };
     window.addEventListener("bhava:call:open", handleOpenCall);
@@ -57,6 +59,7 @@ export default function BhavaVoiceCall({ isOpen: propIsOpen, onClose: propOnClos
   useEffect(() => {
     if (!isOpen) return;
 
+    warmupVoiceBackend();
     initWebSocket();
 
     return () => {
