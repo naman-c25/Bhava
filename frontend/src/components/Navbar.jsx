@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { useCart } from "../context/CartContext";
+import { warmupVoiceBackend } from "../utils/voiceBackendWarmup";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -92,6 +93,7 @@ function Navbar() {
                   className={`${styles.navLink} ${styles.askBhava}`}
                   onClick={() => {
                     setMenuOpen(false);
+                    warmupVoiceBackend();
                     window.dispatchEvent(new Event("bhava:dialog:open"));
                   }}
                 >
