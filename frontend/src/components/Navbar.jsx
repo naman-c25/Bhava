@@ -101,6 +101,15 @@ function Navbar() {
               </li>
               <li className={styles.navItem}>
                 <Link
+                  className={`${styles.navLink} ${isActive("/products") ? styles.navLinkActive : ""}`}
+                  to="/products"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Products
+                </Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link
                   className={`${styles.navLink} ${isActive("/explore-services") ? styles.navLinkActive : ""}`}
                   to="/explore-services"
                   onClick={() => setMenuOpen(false)}
@@ -110,11 +119,11 @@ function Navbar() {
               </li>
               <li className={styles.navItem}>
                 <Link
-                  className={`${styles.navLink} ${isActive("/products") ? styles.navLinkActive : ""}`}
-                  to="/products"
+                  className={`${styles.navLink} ${isActive("/daily-horoscope") ? styles.navLinkActive : ""}`}
+                  to="/daily-horoscope"
                   onClick={() => setMenuOpen(false)}
                 >
-                  Products
+                  Horoscope
                 </Link>
               </li>
               <li className={styles.navItem}>
